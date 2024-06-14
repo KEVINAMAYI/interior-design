@@ -2,10 +2,11 @@
 
 namespace Database\Seeders;
 
+use App\Models\Variation;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class Variation extends Seeder
+class VariationSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -49,5 +50,8 @@ class Variation extends Seeder
                 'value' => '50mm'
             ]
         ];
+
+        Variation::insert($variations);
+
     }
 }
