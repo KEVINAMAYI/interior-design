@@ -40,9 +40,10 @@
 
     <livewire:layout.dashboard.sidebar/>
 
-    <!-- ============================================================== -->
     {{ $slot }}
-    <!-- end main content-->
+
+    <livewire:layout.dashboard.rightbar/>
+
 
 </div>
 
