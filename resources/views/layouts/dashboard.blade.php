@@ -10,7 +10,6 @@
 
     <livewire:layout.dashboard.rightbar/>
 
-
 </div>
 
 <!-- Right bar overlay-->

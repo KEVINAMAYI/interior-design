@@ -28,7 +28,7 @@ new class extends Component {
             <!-- Left Menu Start -->
             <ul class="metismenu list-unstyled" id="side-menu">
                 <li>
-                    <a href="index.html">
+                    <a href="{{ route('dashboard.index') }}">
                         <i data-feather="home"></i>
                         <span data-key="t-dashboard">Dashboard</span>
                     </a>
@@ -41,14 +41,14 @@ new class extends Component {
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
                         <li>
-                            <a href="apps-calendar.html">
+                            <a wire:navigate href="{{ route('dashboard.list-categories') }}">
                                 <i data-feather="list"></i>
                                 <span data-key="t-calendar">List Category</span>
                             </a>
                         </li>
 
                         <li>
-                            <a href="apps-chat.html">
+                            <a wire:navigate href="{{ route('dashboard.add-category') }}">
                                 <i data-feather="plus-circle"></i>
                                 <span data-key="t-chat">Add Category</span>
                             </a>
@@ -63,14 +63,14 @@ new class extends Component {
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
                         <li>
-                            <a href="apps-calendar.html">
+                            <a wire:navigate href="{{ route('dashboard.list-products') }}">
                                 <i data-feather="list"></i>
                                 <span data-key="t-calendar">List Products</span>
                             </a>
                         </li>
 
                         <li>
-                            <a href="apps-chat.html">
+                            <a wire:navigate href="{{ route('dashboard.add-product') }}">
                                 <i data-feather="plus-circle"></i>
                                 <span data-key="t-chat">Add Product</span>
                             </a>
@@ -85,14 +85,14 @@ new class extends Component {
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
                         <li>
-                            <a href="apps-calendar.html">
+                            <a wire:navigate href="{{ route('dashboard.list-variations') }}">
                                 <i data-feather="list"></i>
                                 <span data-key="t-calendar">List Variations</span>
                             </a>
                         </li>
 
                         <li>
-                            <a href="apps-chat.html">
+                            <a wire:navigate href="{{ route('dashboard.add-variation') }}">
                                 <i data-feather="plus-circle"></i>
                                 <span data-key="t-chat">Add Variation</span>
                             </a>
@@ -103,20 +103,42 @@ new class extends Component {
                 <li>
                     <a href="javascript: void(0);" class="has-arrow">
                         <i data-feather="users"></i>
-                        <span data-key="t-apps">Users</span>
+                        <span data-key="t-apps">Staff</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
                         <li>
-                            <a href="apps-calendar.html">
+                            <a wire:navigate href="{{ route('dashboard.list-staff') }}">
                                 <i data-feather="list"></i>
-                                <span data-key="t-calendar">List Users</span>
+                                <span data-key="t-calendar">List Staff</span>
                             </a>
                         </li>
 
                         <li>
-                            <a href="apps-chat.html">
+                            <a wire:navigate href="{{ route('dashboard.add-staff') }}">
                                 <i data-feather="plus-circle"></i>
-                                <span data-key="t-chat">Add Users</span>
+                                <span data-key="t-chat">Add Staff</span>
+                            </a>
+                        </li>
+
+                    </ul>
+                </li>
+                <li>
+                    <a href="javascript: void(0);" class="has-arrow">
+                        <i data-feather="user-check"></i>
+                        <span data-key="t-apps">Customers</span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li>
+                            <a wire:navigate href="{{ route('dashboard.list-customers') }}">
+                                <i data-feather="list"></i>
+                                <span data-key="t-calendar">List Customers</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a wire:navigate href="{{ route('dashboard.add-customer') }}">
+                                <i data-feather="plus-circle"></i>
+                                <span data-key="t-chat">Add Customer</span>
                             </a>
                         </li>
 
@@ -129,14 +151,14 @@ new class extends Component {
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
                         <li>
-                            <a href="apps-calendar.html">
+                            <a wire:navigate href="{{ route('dashboard.list-roles') }}">
                                 <i data-feather="list"></i>
                                 <span data-key="t-calendar">List Roles</span>
                             </a>
                         </li>
 
                         <li>
-                            <a href="apps-chat.html">
+                            <a wire:navigate href="{{ route('dashboard.add-role') }}">
                                 <i data-feather="plus-circle"></i>
                                 <span data-key="t-chat">Add Roles</span>
                             </a>
@@ -145,7 +167,35 @@ new class extends Component {
                     </ul>
                 </li>
                 <li>
-                    <a href="javascript: void(0);">
+                    <a href="javascript: void(0);" class="has-arrow">
+                        <i data-feather="shopping-bag"></i>
+                        <span data-key="t-apps">Deals</span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li>
+                            <a wire:navigate href="{{ route('dashboard.list-deals') }}">
+                                <i data-feather="list"></i>
+                                <span data-key="t-calendar">List Deals</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a wire:navigate href="{{ route('dashboard.add-deal') }}">
+                                <i data-feather="plus-circle"></i>
+                                <span data-key="t-chat">Add Deals</span>
+                            </a>
+                        </li>
+
+                    </ul>
+                </li>
+                <li>
+                    <a href="{{ route('dashboard.profile') }}" wire:navigate>
+                        <i data-feather="user"></i>
+                        <span data-key="t-apps">Profile</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" wire:click="logout">
                         <i data-feather="log-out"></i>
                         <span data-key="t-apps">Logout</span>
                     </a>
