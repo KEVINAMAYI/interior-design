@@ -19,7 +19,7 @@ new #[Layout('layouts.guest')] class extends Component {
 
         Session::regenerate();
 
-        $this->redirectIntended(default: route('dashboard.index'), navigate: true);
+        $this->redirectIntended(default: route('dashboard.index'));
     }
 }; ?>
 
@@ -41,7 +41,7 @@ new #[Layout('layouts.guest')] class extends Component {
                 </div>
                 <form wire:submit="login">
                     <div class="mb-3">
-                        <label class="form-label">Emai;</label>
+                        <label class="form-label">Email</label>
                         <input type="email" wire:model="form.email" id="email" autofocus autocomplete="" required
                                class="form-control" placeholder="Enter Email">
                         <x-input-error :messages="$errors->get('form.email')" class="mt-2"/>
