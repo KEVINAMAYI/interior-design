@@ -1,9 +1,22 @@
 
 <?php
 
+use App\Livewire\Actions\Logout;
 use Livewire\Volt\Component;
 
-new class extends Component {}; ?>
+new class extends Component {
+
+    /**
+     * Log the current user out of the application.
+     */
+    public function logout(Logout $logout): void
+    {
+        $logout();
+
+        $this->redirect('/', navigate: true);
+    }
+
+}; ?>
 
 <header id="page-topbar">
     <div class="navbar-header">
@@ -63,10 +76,9 @@ new class extends Component {}; ?>
                 </button>
                 <div class="dropdown-menu dropdown-menu-end">
                     <!-- item-->
-                    <a class="dropdown-item" href="apps-contacts-profile.html"><i class="mdi mdi mdi-face-man font-size-16 align-middle me-1"></i> Profile</a>
-                    <a class="dropdown-item" href="auth-lock-screen.html"><i class="mdi mdi-lock font-size-16 align-middle me-1"></i> Lock Screen</a>
+                    <a class="dropdown-item" :href="route('dashboard.profile')" wire:navigate><i class="mdi mdi mdi-face-man font-size-16 align-middle me-1"></i> Profile</a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="auth-logout.html"><i class="mdi mdi-logout font-size-16 align-middle me-1"></i> Logout</a>
+                    <a class="dropdown-item" wire:click="logout" href="#"><i class="mdi mdi-logout font-size-16 align-middle me-1"></i> Logout</a>
                 </div>
             </div>
 

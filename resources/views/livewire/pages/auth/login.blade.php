@@ -5,8 +5,7 @@ use Illuminate\Support\Facades\Session;
 use Livewire\Attributes\Layout;
 use Livewire\Volt\Component;
 
-new #[Layout('layouts.guest')] class extends Component
-{
+new #[Layout('layouts.guest')] class extends Component {
     public LoginForm $form;
 
     /**
@@ -20,52 +19,83 @@ new #[Layout('layouts.guest')] class extends Component
 
         Session::regenerate();
 
-        $this->redirectIntended(default: route('dashboard', absolute: false), navigate: true);
+        $this->redirectIntended(default: route('dashboard.index'), navigate: true);
     }
 }; ?>
 
-<div>
-    <!-- Session Status -->
-    <x-auth-session-status class="mb-4" :status="session('status')" />
+<div class="auth-full-page-content d-flex p-sm-5 p-4">
 
-    <form wire:submit="login">
-        <!-- Email Address -->
-        <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input wire:model="form.email" id="email" class="block mt-1 w-full" type="email" name="email" required autofocus autocomplete="username" />
-            <x-input-error :messages="$errors->get('form.email')" class="mt-2" />
-        </div>
+    <x-auth-session-status class="mb-4" :status="session('status')"/>
 
-        <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
-
-            <x-text-input wire:model="form.password" id="password" class="block mt-1 w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="current-password" />
-
-            <x-input-error :messages="$errors->get('form.password')" class="mt-2" />
-        </div>
-
-        <!-- Remember Me -->
-        <div class="block mt-4">
-            <label for="remember" class="inline-flex items-center">
-                <input wire:model="form.remember" id="remember" type="checkbox" class="rounded dark:bg-gray-900 border-gray-300 dark:border-gray-700 text-indigo-600 shadow-sm focus:ring-indigo-500 dark:focus:ring-indigo-600 dark:focus:ring-offset-gray-800" name="remember">
-                <span class="ms-2 text-sm text-gray-600 dark:text-gray-400">{{ __('Remember me') }}</span>
-            </label>
-        </div>
-
-        <div class="flex items-center justify-end mt-4">
-            @if (Route::has('password.request'))
-                <a class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800" href="{{ route('password.request') }}" wire:navigate>
-                    {{ __('Forgot your password?') }}
+    <div class="w-100">
+        <div class="d-flex flex-column h-100">
+            <div class="mb-4 mb-md-5 text-center">
+                <a href="index.html" class="d-block auth-logo">
+                    <img src="assets/images/logo-sm.svg" alt="" height="28"> <span class="logo-txt">Minia</span>
                 </a>
-            @endif
+            </div>
+            <div class="auth-content my-auto">
+                <div class="text-center">
+                    <h5 class="mb-0">Welcome Back !</h5>
+                    <p class="text-muted mt-2">Sign in to continue to Minia.</p>
+                </div>
+                <form wire:submit="login">
+                    <div class="mb-3">
+                        <label class="form-label">Emai;</label>
+                        <input type="email" wire:model="form.email" id="email" autofocus autocomplete="" required
+                               class="form-control" placeholder="Enter Email">
+                        <x-input-error :messages="$errors->get('form.email')" class="mt-2"/>
+                    </div>
+                    <div class="mb-3">
+                        <div class="d-flex align-items-start">
+                            <div class="flex-grow-1">
+                                <label class="form-label">Password</label>
+                            </div>
+                            <div class="flex-shrink-0">
+                                <div class="">
+                                    <a href="auth-recoverpw.html" class="text-muted">Forgot password?</a>
+                                </div>
+                            </div>
+                        </div>
 
-            <x-primary-button class="ms-3">
-                {{ __('Log in') }}
-            </x-primary-button>
+                        <div class="input-group auth-pass-inputgroup">
+                            <input type="password" wire:model="form.password" id="password" class="form-control" placeholder="Enter password"
+                                   aria-label="Password" aria-describedby="password-addon" required autocomplete="current-password">
+                            <button class="btn btn-light shadow-none ms-0" type="button" id="password-addon"><i
+                                    class="mdi mdi-eye-outline"></i></button>
+                            <x-input-error :messages="$errors->get('form.password')" class="mt-2"/>
+
+                        </div>
+                    </div>
+                    <div class="row mb-4">
+                        <div class="col">
+                            <div class="form-check">
+                                <input wire:model="form.remember" class="form-check-input" type="checkbox"
+                                       id="remember-check">
+                                <label class="form-check-label" for="remember-check">
+                                    Remember me
+                                </label>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="mb-3">
+                        <button class="btn btn-primary w-100 waves-effect waves-light" type="submit">Log In</button>
+                    </div>
+                </form>
+
+                <div class="mt-5 text-center">
+                    <p class="text-muted mb-0">Don't have an account ? <a href="auth-register.html"
+                                                                          class="text-primary fw-semibold"> Signup
+                            now </a></p>
+                </div>
+            </div>
+            <div class="mt-4 mt-md-5 text-center">
+                <p class="mb-0">©
+                    <script>document.write(new Date().getFullYear())</script>
+                    Minia . Crafted with <i class="mdi mdi-heart text-danger"></i> by Themesbrand
+                </p>
+            </div>
         </div>
-    </form>
+    </div>
 </div>
