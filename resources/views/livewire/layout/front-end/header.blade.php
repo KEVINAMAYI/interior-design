@@ -20,7 +20,7 @@ new class extends Component {}; ?>
             <div class="offcanvas-body primary-menu">
                 <ul class="navbar-nav justify-content-start flex-grow-1 gap-1">
                     <li class="nav-item">
-                        <a class="nav-link" wire:navigate href="{{ route('front-end.index') }}">Home</a>
+                        <a class="nav-link"  href="{{ route('front-end.index') }}">Home</a>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle dropdown-toggle-nocaret" href="tv-shows.html"
