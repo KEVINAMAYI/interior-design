@@ -5,20 +5,18 @@
     <base href="{{ URL::to('/') }}">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
     <!--favicon-->
     <link rel="icon" href="front-end-assets/images/favicon-32x32.webp" type="image/webp" />
 
+    <!-- Scripts -->
+    @vite('resources/css/front-end.css')
+
     <!-- CSS files -->
-    <link data-navigate-once href="front-end-assets/css/bootstrap.min.css" rel="stylesheet">
+    <link data-navigate-once href="front-end-assets/plugins/slick/slick-theme.css" rel="stylesheet">
     <link data-navigate-once href="https://fonts.googleapis.com/css2?family=Raleway:wght@500;600&display=swap" rel="stylesheet">
     <link data-navigate-once rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
 
-    <!-- Plugins -->
-    <link data-navigate-once rel="stylesheet" type="text/css" href="front-end-assets/plugins/slick/slick.css" />
-    <link data-navigate-once rel="stylesheet" type="text/css" href="front-end-assets/plugins/slick/slick-theme.css" />
-
-    <link data-navigate-once href="front-end-assets/css/style.css" rel="stylesheet">
-    <link data-navigate-once href="front-end-assets/css/dark-theme.css" rel="stylesheet">
 
     <title>Shopingo - eCommerce HTML Template</title>
 </head>

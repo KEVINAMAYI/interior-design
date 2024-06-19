@@ -1,5 +1,3 @@
-
-<!-- JAVASCRIPT -->
 <script src="dashboard/libs/jquery/jquery.min.js"></script>
 <script data-navigate-once src="dashboard/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src="dashboard/libs/metismenu/metisMenu.min.js"></script>
@@ -19,7 +17,3 @@
 <script src="dashboard/js/pages/dashboard.init.js"></script>
 
 <script src="dashboard/js/app.js"></script>
-
-</body>
-
-</html>
