@@ -25,6 +25,8 @@
     <!-- App Css-->
     <link href="dashboard/css/app.min.css" id="app-style" rel="stylesheet" type="text/css"/>
 
+    <link href="dashboard/libs/dropzone/min/dropzone.min.css" id="app-style" rel="stylesheet" type="text/css"/>
+
 </head>
 
 <body>
