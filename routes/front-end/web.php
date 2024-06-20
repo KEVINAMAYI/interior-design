@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use Livewire\Volt\Volt;
 
-Route::middleware('guest')->name('front-end.')->group(function () {
+Route::name('front-end.')->group(function () {
     Volt::route('/', 'pages.front-end.index')
         ->name('index');
 
