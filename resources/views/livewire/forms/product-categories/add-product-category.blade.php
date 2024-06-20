@@ -2,9 +2,12 @@
 
 use App\Models\Category;
 use Illuminate\Support\Facades\DB;
+use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Volt\Component;
 
 new class extends Component {
+
+    use LivewireAlert;
 
     public $name;
     public $description;
@@ -35,9 +38,11 @@ new class extends Component {
 
             DB::commit();
             $this->reset();
+            $this->alert('success','Category created successfully');
 
         } catch (Exception $exception) {
             DB::rollBack();
+            $this->alert('error',$exception->getMessage());
         }
 
     }

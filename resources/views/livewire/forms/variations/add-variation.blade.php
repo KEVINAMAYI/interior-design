@@ -6,9 +6,12 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Validation\Rule;
+use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Volt\Component;
 
 new class extends Component {
+
+    use LivewireAlert;
 
     public $name;
     public $type;
@@ -41,9 +44,11 @@ new class extends Component {
 
             DB::commit();
             $this->reset();
+            $this->alert('success','Variation created successfully');
 
         } catch (Exception $exception) {
             DB::rollBack();
+            $this->alert('error',$exception->getMessage());
         }
     }
 
