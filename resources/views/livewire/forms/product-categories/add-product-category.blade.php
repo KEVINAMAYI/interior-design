@@ -33,18 +33,24 @@ new class extends Component {
 
             Category::create([
                 'name' => $this->name,
-                'description' => $this->description
+                'description' => $this->description,
+                'slug' => $this->generateSlug()
             ]);
 
             DB::commit();
             $this->reset();
-            $this->alert('success','Category created successfully');
+            $this->alert('success', 'Category created successfully');
 
         } catch (Exception $exception) {
             DB::rollBack();
-            $this->alert('error',$exception->getMessage());
+            $this->alert('error', $exception->getMessage());
         }
 
+    }
+
+    public function generateSlug()
+    {
+        return str_replace(' ', '_', strtolower($this->name));
     }
 
 
