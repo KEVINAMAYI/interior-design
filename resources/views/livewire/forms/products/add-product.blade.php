@@ -136,7 +136,7 @@ new class extends Component {
 
 
     /**
-     * Returns Variations Based on Category
+     * Gets Variations Based on Category
      */
     public function getCategoryVariations()
     {
