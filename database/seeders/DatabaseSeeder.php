@@ -16,7 +16,8 @@ class DatabaseSeeder extends Seeder
         $this->call([
             CategorySeeder::class,
             VariationSeeder::class,
-            StaffSeeder::class
+            StaffSeeder::class,
+            TagSeeder::class
         ]);
     }
 }

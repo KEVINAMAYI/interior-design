@@ -18,4 +18,8 @@ class Product extends Model
     public function product_variations(){
         return $this->hasMany(ProductVariation::class);
     }
+
+    public function tags(){
+        return $this->hasMany(Tag::class);
+    }
 }

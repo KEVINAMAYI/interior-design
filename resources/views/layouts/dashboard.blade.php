@@ -48,12 +48,22 @@
 <!-- Plugins js-->
 <script src="dashboard/libs/admin-resources/jquery.vectormap/jquery-jvectormap-1.2.2.min.js"></script>
 <script src="dashboard/libs/admin-resources/jquery.vectormap/maps/jquery-jvectormap-world-mill-en.js"></script>
+
 <!-- dashboard init -->
 <script src="dashboard/js/pages/dashboard.init.js"></script>
 
+<script src="dashboard/libs/dropzone/min/dropzone.min.js"></script>
+
+<!-- choices js -->
+<script src="dashboard/libs/choices.js/public/assets/scripts/choices.min.js"></script>
+
+<!-- sweet alert js -->
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 <script src="dashboard/js/app.js"></script>
 
-<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<!-- init js -->
+@stack('js')
 
 <x-livewire-alert::scripts />
 
