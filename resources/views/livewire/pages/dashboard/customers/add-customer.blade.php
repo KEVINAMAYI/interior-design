@@ -27,7 +27,4 @@ new #[Layout('layouts.dashboard')] class extends Component {
     </div><!-- end row-->
 
 </div><!-- end row -->
-</div>
-<!-- container-fluid -->
-</div>
-</div>
+

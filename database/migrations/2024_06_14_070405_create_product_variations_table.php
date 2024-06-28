@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('product_variations', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('variation_id')->constrained();
+            $table->foreignId('variation_id')->nullable()->constrained();
             $table->foreignId('product_id')->constrained()->cascadeOnDelete();
             $table->float('price')->nullable();
             $table->timestamps();

@@ -14,4 +14,8 @@ class ProductVariation extends Model
     public function images(){
         return $this->hasMany(ProductVariationImage::class);
     }
+
+    public function variation(){
+        return Variation::where('id',$this->variation_id)->first();
+    }
 }

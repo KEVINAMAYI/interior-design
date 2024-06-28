@@ -2,7 +2,8 @@
 @import "/public/dashboard/css/bootstrap.min.css";
 @import "/public/dashboard/css/icons.min.css";
 @import "/public/dashboard/css/app.min.css";
-@import "/public/dashboard/libs/dropzone/min/dropzone.min.css";
 @import "/public/dashboard/libs/choices.js/public/assets/styles/choices.min.css";
+@import "/public/dashboard/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css";
+@import "/public/dashboard/libs/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css";
 
 
