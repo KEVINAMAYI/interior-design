@@ -89,7 +89,7 @@ new class extends Component {
             }
 
             DB::commit();
-            $this->reset(['category_id', 'name', 'description', 'variation_id', 'price', 'image_url']);
+            $this->reset(['category_id', 'name', 'description', 'variation_id', 'price', 'images']);
             $this->alert('success', 'Product created successfully');
 
         } catch (Exception $exception) {
@@ -107,15 +107,15 @@ new class extends Component {
     {
         $product = Product::where(trim(strtolower('name')), $this->name)->first();
 
-            if (!$product) {
-                $product = Product::create([
-                    'category_id' => $this->category_id,
-                    'name' => $this->name,
-                    'description' => $this->description,
-                ]);
-            }
+        if (!$product) {
+            $product = Product::create([
+                'category_id' => $this->category_id,
+                'name' => $this->name,
+                'description' => $this->description,
+            ]);
+        }
 
-            return $product;
+        return $product;
     }
 
 
