@@ -45,7 +45,7 @@ new #[Layout('layouts.dashboard')] class extends Component {
                                         <tbody>
                                         @foreach($categories as $category)
                                             <tr>
-                                                <td>{{ $category->name }}n</td>
+                                                <td>{{ $category->name }}</td>
                                                 <td>{{ $category->description }}</td>
                                                 <td>
                                                     <div class="btn-group">

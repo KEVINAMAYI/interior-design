@@ -18,7 +18,7 @@ new class extends Component {
 
     public $name;
     public $discount_off;
-    public $discounted_products_ids;
+    public $discounted_products_ids = [];
     public $banner;
 
     public function rules()

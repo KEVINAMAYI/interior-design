@@ -7,29 +7,40 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!--favicon-->
-    <link rel="icon" href="front-end-assets/images/favicon-32x32.webp" type="image/webp" />
+    <link rel="icon" href="front-end-assets/images/favicon-32x32.webp" type="image/webp"/>
 
     <!-- Scripts -->
     @vite('resources/css/front-end.css')
 
     <!-- CSS files -->
     <link data-navigate-once href="front-end-assets/plugins/slick/slick-theme.css" rel="stylesheet">
-    <link data-navigate-once href="https://fonts.googleapis.com/css2?family=Raleway:wght@500;600&display=swap" rel="stylesheet">
-    <link data-navigate-once rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+    <link data-navigate-once href="https://fonts.googleapis.com/css2?family=Raleway:wght@500;600&display=swap"
+          rel="stylesheet">
+    <link data-navigate-once rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
 
+    <style>
+        .btn{
+            border-radius:0 !important;
+        }
+
+    </style>
+
+    <!-- init js -->
+    @stack('css')
 
     <title>Shopingo - eCommerce HTML Template</title>
 </head>
 
 <body>
 
-<livewire:layout.front-end.header />
+<livewire:layout.front-end.header/>
 
 {{ $slot }}
 
-<livewire:layout.front-end.footer />
+<livewire:layout.front-end.footer/>
 
-<livewire:layout.front-end.copyright />
+<livewire:layout.front-end.copyright/>
 
 <!--Start Back To Top Button-->
 <a href="javaScript:;" class="back-to-top"><i class="bi bi-arrow-up"></i></a>
@@ -42,6 +53,10 @@
 <script data-navigate-once src="front-end-assets/js/main.js"></script>
 <script data-navigate-once src="front-end-assets/js/index.js"></script>
 <script data-navigate-once src="front-end-assets/js/loader.js"></script>
+
+
+<!-- init js -->
+@stack('js')
 
 </body>
 

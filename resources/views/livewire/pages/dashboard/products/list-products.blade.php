@@ -47,10 +47,10 @@ new #[Layout('layouts.dashboard')] class extends Component {
                                         @foreach($products as $product)
                                             @foreach($product->product_variations as $product_variation)
                                                 <tr>
-                                                    <td>{{ $product->name }}</td>
+                                                    <td>{{ strtoupper($product->name) }}</td>
                                                     <td>{{ $product->description }}</td>
                                                     <td>{{ $product->category->name }}</td>
-                                                    <td>{{ $product_variation->variation()->name.'-'.$product_variation->variation()->value }}</td>
+                                                    <td>{{ empty($product_variation->variation()) ? 'None' :  $product_variation->variation()->name.'-'.$product_variation->variation()->value }}</td>
                                                     <td>{{ $product_variation->price }}</td>
                                                     <td>
                                                         <div class="btn-group">

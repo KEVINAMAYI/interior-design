@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Validation\Rule;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
+use Livewire\Attributes\On;
 use Livewire\Volt\Component;
 use Livewire\WithFileUploads;
 
@@ -27,7 +28,7 @@ new class extends Component {
     public $category_id;
     public $description;
     public $selling_tags;
-    public $selling_tags_ids;
+    public $selling_tags_ids = [];
     public $variation_id;
 
 
@@ -89,7 +90,7 @@ new class extends Component {
             }
 
             DB::commit();
-            $this->reset(['category_id', 'name', 'description', 'variation_id', 'price', 'images']);
+            $this->reset(['category_id', 'name', 'description', 'variation_id', 'price']);
             $this->alert('success', 'Product created successfully');
 
         } catch (Exception $exception) {
@@ -148,6 +149,13 @@ new class extends Component {
             $this->variations = Variation::where('name', 'height')->get();
         }
 
+    }
+
+
+    #[On('update-selling-tag-ids')]
+    public function updateSellingTagIds($selling_tags_ids)
+    {
+        $this->selling_tags_ids = $selling_tags_ids;
     }
 
 
@@ -250,7 +258,7 @@ new class extends Component {
             const sellingTags = new Choices(".selling_tags", {removeItemButton: !0});
             sellingTags.passedElement.element.addEventListener('change', function (event) {
                 const result = $('.selling_tags').val();
-            @this.set('selling_tags_ids', result);
+                Livewire.dispatch('update-selling-tag-ids', {selling_tags_ids: result});
             })
         })
     </script>

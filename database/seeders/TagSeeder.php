@@ -18,18 +18,35 @@ class TagSeeder extends Seeder
             [
                 'name' => 'Featured Products',
                 'description' => 'featured products',
+                'slug' => 'featured_products',
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()
             ],
             [
                 'name' => 'Latest Products',
                 'description' => 'latest products',
+                'slug' => 'latest_products',
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()
             ],
             [
                 'name' => 'Discounted Products',
                 'description' => 'discounted products',
+                'slug' => 'discounted_products',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ],
+            [
+                'name' => 'Best Seller',
+                'description' => 'best seller',
+                'slug' => 'best_seller',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ],
+            [
+                'name' => 'Trending',
+                'description' => 'trending',
+                'slug' => 'trending',
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()
             ]

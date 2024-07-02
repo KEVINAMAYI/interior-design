@@ -53,7 +53,7 @@ class PermissionSeeder extends Seeder
             ['name' => 'update-roles', 'description' => 'Can update roles'],
             ['name' => 'delete-roles', 'description' => 'Can delete roles'],
 
-            //roles permissions
+            //deals permissions
             ['name' => 'create-deals', 'description' => 'Can create deals'],
             ['name' => 'view-deals', 'description' => 'Can view deals'],
             ['name' => 'update-deals', 'description' => 'Can update deals'],

@@ -12,6 +12,9 @@
     <!-- App favicon -->
     <link rel="shortcut icon" href="dashboard/images/favicon.ico">
 
+    <link href="https://fonts.googleapis.com/css2?family=Albert+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+
     <!-- Scripts -->
     @vite('resources/css/dashboard.css')
 

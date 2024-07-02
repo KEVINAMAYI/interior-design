@@ -1,9 +1,20 @@
 <?php
 
+use App\Models\Product;
 use Livewire\Attributes\Layout;
 use Livewire\Volt\Component;
 
-new #[Layout('layouts.front-end')] class extends Component {}; ?>
+new #[Layout('layouts.front-end')] class extends Component {
+
+    public function with()
+    {
+        return [
+            'products' => Product::all()
+        ];
+    }
+
+
+}; ?>
 
 <!--start page content-->
 <div class="page-content">
@@ -29,12 +40,21 @@ new #[Layout('layouts.front-end')] class extends Component {}; ?>
             <div class="row g-4">
                 <div class="col-12 col-xl-6">
                     <h3 class="fw-bold">Our Story</h3>
-                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</p>
-                    <p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure.</p>
-                    <p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College.</p>
+                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been
+                        the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley
+                        of type and scrambled it to make a type specimen book. It has survived not only five centuries,
+                        but also the leap into electronic typesetting, remaining essentially unchanged.</p>
+                    <p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of
+                        classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a
+                        Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure.</p>
+                    <p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of
+                        classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a
+                        Latin professor at Hampden-Sydney College.</p>
                 </div>
                 <div class="col-12 col-xl-6">
-                    <img src="https://images.pexels.com/photos/7679877/pexels-photo-7679877.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" class="img-fluid" alt="">
+                    <img
+                        src="https://images.pexels.com/photos/7679877/pexels-photo-7679877.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                        class="img-fluid" alt="">
                 </div>
             </div><!--end row-->
 
@@ -50,7 +70,8 @@ new #[Layout('layouts.front-end')] class extends Component {}; ?>
                         <div class="card-body">
                             <img src="front-end-assets/images/icons/delivery.webp" width="60" alt="">
                             <h5 class="my-3 fw-bold">Free Shipping</h5>
-                            <p class="mb-0">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industr in some form.</p>
+                            <p class="mb-0">Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+                                Lorem Ipsum has been the industr in some form.</p>
                         </div>
                     </div>
                 </div>
@@ -59,7 +80,8 @@ new #[Layout('layouts.front-end')] class extends Component {}; ?>
                         <div class="card-body">
                             <img src="front-end-assets/images/icons/money-bag.webp" width="60" alt="">
                             <h5 class="my-3 fw-bold">100% Back Gaurantee</h5>
-                            <p class="mb-0">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industr in some form.</p>
+                            <p class="mb-0">Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+                                Lorem Ipsum has been the industr in some form.</p>
                         </div>
                     </div>
                 </div>
@@ -68,7 +90,8 @@ new #[Layout('layouts.front-end')] class extends Component {}; ?>
                         <div class="card-body">
                             <img src="front-end-assets/images/icons/support.webp" width="60" alt="">
                             <h5 class="my-3 fw-bold">Online Support 24/7</h5>
-                            <p class="mb-0">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industr in some form.</p>
+                            <p class="mb-0">Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+                                Lorem Ipsum has been the industr in some form.</p>
                         </div>
                     </div>
                 </div>

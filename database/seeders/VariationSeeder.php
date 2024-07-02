@@ -63,6 +63,62 @@ class VariationSeeder extends Seeder
                 'value' => '50mm',
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()
+            ],
+            [
+                'name' => 'color_shade',
+                'type' => 'color',
+                'value' => 'blue',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ],
+            [
+                'name' => 'color_shade',
+                'type' => 'color',
+                'value' => 'red',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ],
+            [
+                'name' => 'color_shade',
+                'type' => 'color',
+                'value' => 'green',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ],
+            [
+                'name' => 'origin',
+                'type' => 'origin',
+                'value' => 'locally fabricated',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ],
+            [
+                'name' => 'origin',
+                'type' => 'origin',
+                'value' => 'imported',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ],
+            [
+                'name' => 'durability',
+                'type' => 'structure',
+                'value' => 'bendable',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ],
+            [
+                'name' => 'durability',
+                'type' => 'structure',
+                'value' => 'truck',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ],
+            [
+                'name' => 'durability',
+                'type' => 'structure',
+                'value' => 'double',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
             ]
         ];
 

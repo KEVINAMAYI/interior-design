@@ -10,4 +10,9 @@ class ProductVariationImage extends Model
     use HasFactory;
 
     protected $guarded = [];
+
+    public function product_variation()
+    {
+        return $this->belongsTo(ProductVariation::class);
+    }
 }
