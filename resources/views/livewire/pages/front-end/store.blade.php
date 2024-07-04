@@ -46,7 +46,7 @@ new #[Layout('layouts.front-end')] class extends Component {
                         <div class="col">
                             <div class="card">
                                 <a href="javascript:;">
-                                    <img src="front-end-assets/images/sliders/s_2.webp"
+                                    <img src="{{ $category->image_url }}"
                                          class="card-img-top border-bottom bg-dark-1" alt="...">
                                 </a>
                                 <div class="list-group list-group-flush">

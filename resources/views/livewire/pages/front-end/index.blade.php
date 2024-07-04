@@ -216,56 +216,23 @@ new #[Layout('layouts.front-end')] class extends Component {
     <section class="py-4">
         <div class="container">
             <div class="row row-cols-1 row-cols-lg-2 row-cols-xl-3 g-4">
+                @foreach($categories as $category)
                 <div class="col">
-                    <div class="card rounded-0 shadow-none bg-info bg-opacity-25">
+                    <div class="card rounded-0 shadow-none {{ $category->id % 2 == 0 ? 'bg-primary' : 'bg-warning' }} bg-opacity-25">
                         <div class="row g-0 align-items-center">
                             <div class="col">
-                                <img src="front-end-assets/images/promo/01.png" class="img-fluid" alt=""/>
+                                <img src="{{ $category->image_url }}" class="img-fluid" alt=""/>
                             </div>
                             <div class="col">
                                 <div class="card-body">
-                                    <h5 class="card-title text-uppercase fw-bold">Men Wear</h5>
-                                    <p class="card-text text-uppercase">Starting at $9</p>
+                                    <h5 class="card-title text-uppercase fw-bold">{{ $category->name }}</h5>
                                     <a href="javascript:;" class="btn btn-outline-dark btn-ecomm">SHOP NOW</a>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col">
-                    <div class="card rounded-0 shadow-none bg-danger bg-opacity-25">
-                        <div class="row g-0 align-items-center">
-                            <div class="col">
-                                <img src="front-end-assets/images/promo/02.png" class="img-fluid" alt=""/>
-                            </div>
-                            <div class="col">
-                                <div class="card-body">
-                                    <h5 class="card-title text-uppercase fw-bold">Women Wear</h5>
-                                    <p class="card-text text-uppercase">Starting at $9</p>    <a href="javascript:;"
-                                                                                                 class="btn btn-outline-dark btn-ecomm">SHOP
-                                        NOW</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card rounded-0 shadow-none bg-warning bg-opacity-25">
-                        <div class="row g-0 align-items-center">
-                            <div class="col">
-                                <img src="front-end-assets/images/promo/03.png" class="img-fluid" alt=""/>
-                            </div>
-                            <div class="col">
-                                <div class="card-body">
-                                    <h5 class="card-title text-uppercase fw-bold">Kids Wear</h5>
-                                    <p class="card-text text-uppercase">Starting at $9</p><a href="javascript:;"
-                                                                                             class="btn btn-outline-dark btn-ecomm">SHOP
-                                        NOW</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                @endforeach
             </div>
             <!--end row-->
         </div>
