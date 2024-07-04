@@ -1427,7 +1427,7 @@ new #[Layout('layouts.front-end')] class extends Component {
                         <div class="card">
                             <div class="position-relative overflow-hidden">
                                 <a href="{{ route('front-end.shop-grid',['category_id' => $category->id,'product_id' => 0]) }}">
-                                    <img src="front-end-assets/images/new-arrival/05.webp" class="card-img-top"
+                                    <img src="{{ $category->image_url }}" class="card-img-top"
                                          alt="...">
                                 </a>
                             </div>
