@@ -80,44 +80,31 @@ new #[Layout('layouts.front-end')] class extends Component {
                     <div class="row d-flex align-items-center">
                         <div class="col d-none d-lg-flex justify-content-center">
                             <div class="">
-                                <h3 class="h3 fw-light text-white fw-bold">New Arrival</h3>
-                                <h1 class="h1 text-white fw-bold">Women Fashion</h1>
-                                <div class=""><a class="btn btn-dark btn-ecomm" href="shop-grid.html">Shop Now</a>
+                                <h1 class="h1 text-white fw-bold">GSM Interior LTD</h1>
+                                <h3 class="h3 fw-light text-white fw-bold">Quality and Perfection</h3>
+                                <div class=""><a style="background-color: rgb(237,126,39); font-weight:bold;"
+                                                 class="btn btn-lg text-white  mt-3 btn-ecomm" href="shop-grid.html">Shop
+                                        Now</a>
                                 </div>
                             </div>
                         </div>
                         <div class="col">
-                            <img src="front-end-assets/images/sliders/s_1.webp" class="img-fluid" alt="...">
-                        </div>
-                    </div>
-                </div>
-                <div class="carousel-item bg-red">
-                    <div class="row d-flex align-items-center">
-                        <div class="col d-none d-lg-flex justify-content-center">
-                            <div class="">
-                                <h3 class="h3 fw-light text-white fw-bold">Latest Trending</h3>
-                                <h1 class="h1 text-white fw-bold">Fashion Wear</h1>
-                                <div class=""><a class="btn btn-dark btn-ecomm" href="shop-grid.html">Shop Now</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <img src="front-end-assets/images/sliders/s_2.webp" class="img-fluid" alt="...">
+                            <img src="front-end-assets/images/sliders/s_1.png" class="img-fluid" alt="...">
                         </div>
                     </div>
                 </div>
                 <div class="carousel-item bg-purple">
                     <div class="row d-flex align-items-center">
                         <div class="col d-none d-lg-flex justify-content-center">
-                            <div class="">
-                                <h3 class="h3 fw-light text-white fw-bold">New Trending</h3>
-                                <h1 class="h1 text-white fw-bold">Kids Fashion</h1>
-                                <div class=""><a class="btn btn-dark btn-ecomm" href="shop-grid.html">Shop Now</a>
-                                </div>
+                            <div class="px-3">
+                                <h1 class="h1 text-white fw-bold">Carpets</h1>
+                                <h3 class="h3 text-white fw-bold">Wall to Wall & Artificial</h3>
+                                <a style="background-color: rgb(237,126,39); font-weight:bold;"
+                                   class="btn btn-lg text-white   mt-2 btn-ecomm" href="shop-grid.html">Shop Now</a>
                             </div>
                         </div>
                         <div class="col">
-                            <img src="front-end-assets/images/sliders/s_3.webp" class="img-fluid" alt="...">
+                            <img src="front-end-assets/images/sliders/s_5.png" class="img-fluid" alt="...">
                         </div>
                     </div>
                 </div>
@@ -125,31 +112,13 @@ new #[Layout('layouts.front-end')] class extends Component {
                     <div class="row d-flex align-items-center">
                         <div class="col d-none d-lg-flex justify-content-center">
                             <div class="">
-                                <h3 class="h3 fw-light text-dark fw-bold">Latest Trending</h3>
-                                <h1 class="h1 text-dark fw-bold">Electronics Items</h1>
-                                <p class="text-dark fw-bold"><i>Last call for upto 45%</i></p>
-                                <div class=""><a class="btn btn-dark btn-ecomm" href="shop-grid.html">Shop Now</a>
-                                </div>
+                                <h1 class="h1 text-white fw-bold">Curtain Rods</h1>
+                                <a style="background-color: rgb(237,126,39); font-weight:bold;"
+                                   class="btn btn-lg text-white  mt-2 btn-ecomm" href="shop-grid.html">Shop Now</a>
                             </div>
                         </div>
                         <div class="col">
-                            <img src="front-end-assets/images/sliders/s_4.webp" class="img-fluid" alt="...">
-                        </div>
-                    </div>
-                </div>
-                <div class="carousel-item bg-green">
-                    <div class="row d-flex align-items-center">
-                        <div class="col d-none d-lg-flex justify-content-center">
-                            <div class="">
-                                <h3 class="h3 fw-light text-white fw-bold">Super Deals</h3>
-                                <h1 class="h1 text-white fw-bold">Home Furniture</h1>
-                                <p class="text-white fw-bold"><i>Last call for upto 24%</i></p>
-                                <div class=""><a class="btn btn-dark btn-ecomm" href="shop-grid.html">Shop Now</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <img src="front-end-assets/images/sliders/s_5.webp" class="img-fluid" alt="...">
+                            <img src="front-end-assets/images/sliders/s_3.png" class="img-fluid" alt="...">
                         </div>
                     </div>
                 </div>
@@ -214,21 +183,22 @@ new #[Layout('layouts.front-end')] class extends Component {
         <div class="container">
             <div class="row row-cols-1 row-cols-lg-2 row-cols-xl-3 g-4">
                 @foreach($categories as $category)
-                <div class="col">
-                    <div class="card rounded-0 shadow-none {{ $category->id % 2 == 0 ? 'bg-primary' : 'bg-warning' }} bg-opacity-25">
-                        <div class="row g-0 align-items-center">
-                            <div class="col">
-                                <img src="{{ $category->image_url }}" class="img-fluid" alt=""/>
-                            </div>
-                            <div class="col">
-                                <div class="card-body">
-                                    <h5 class="card-title text-uppercase fw-bold">{{ $category->name }}</h5>
-                                    <a href="javascript:;" class="btn btn-outline-dark btn-ecomm">SHOP NOW</a>
+                    <div class="col">
+                        <div
+                            class="card rounded-0 shadow-none {{ $category->id % 2 == 0 ? 'bg-primary' : 'bg-warning' }} bg-opacity-25">
+                            <div class="row g-0 align-items-center">
+                                <div class="col">
+                                    <img src="{{ $category->image_url }}" class="img-fluid" alt=""/>
+                                </div>
+                                <div class="col">
+                                    <div class="card-body">
+                                        <h5 class="card-title text-uppercase fw-bold">{{ $category->name }}</h5>
+                                        <a href="javascript:;" class="btn btn-outline-dark btn-ecomm">SHOP NOW</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
                 @endforeach
             </div>
             <!--end row-->
