@@ -24,9 +24,9 @@ new #[Layout('layouts.front-end')] class extends Component {
         <div class="container">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb mb-0">
-                    <li class="breadcrumb-item"><a href="javascript:;">Home</a></li>
-                    <li class="breadcrumb-item"><a href="javascript:;">Pages</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">About Us</li>
+                    <li class=""><a class="text-decoration-none" href="javascript:;">Home<i class="mx-1 bi bi-chevron-right"></i></a></li>
+                    <li class=""><a class="text-decoration-none" href="javascript:;">Pages<i class="mx-1 bi bi-chevron-right"></i></a></li>
+                    <li class="text-decoration-none mx-1 active" aria-current="page">About Us</li>
                 </ol>
             </nav>
         </div>

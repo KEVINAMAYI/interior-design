@@ -2,6 +2,7 @@
 
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\ProductVariation;
 use App\Models\Variation;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\On;
@@ -11,12 +12,15 @@ new #[Layout('layouts.front-end')] class extends Component {
 
     public $category_id = 'all';
     public $sub_category_id = 'all';
+    public $variation_id = 'all';
     public $subcategories = [];
     public $variations = [];
     public $products;
     public $categories;
     public $lower_price;
     public $upper_price;
+    public $useSpecificVariations = false;
+    public $specific_variations;
 
     /**
      * On Mount initialize categories and products,
@@ -26,7 +30,7 @@ new #[Layout('layouts.front-end')] class extends Component {
     public function mount($category_id, $product_id)
     {
         $this->categories = Category::all();
-        $this->products = Product::all();
+        $this->products = Product::with('product_variations')->get();
 
         if ($category_id != 0) {
             $this->category_id = $category_id;
@@ -99,6 +103,17 @@ new #[Layout('layouts.front-end')] class extends Component {
             $products->where('id', $this->sub_category_id);
         }
 
+        if (!empty($this->variation_id) && $this->variation_id != 'all') {
+
+            $this->useSpecificVariations = true;
+
+            $products->WhereHas('product_variations', function ($q) {
+                $q->where('variation_id', $this->variation_id);
+            })->get();
+
+            $this->specific_variations = ProductVariation::where('id', $this->variation_id)->get();
+        }
+
         if (!empty($this->lower_price)) {
             $products->WhereHas('product_variations', function ($q) {
                 $q->where('price', '>=', $this->lower_price);
@@ -117,9 +132,7 @@ new #[Layout('layouts.front-end')] class extends Component {
                     ->where('price', '<=', $this->upper_price);
             })->get();
         }
-
         $this->products = $products->get();
-
     }
 
     #[On('update-category-id')]
@@ -127,6 +140,21 @@ new #[Layout('layouts.front-end')] class extends Component {
     {
         $this->category_id = $category_id;
         $this->getSubCategories();
+    }
+
+    #[On('update-sub-category-id')]
+    public function updateSubCategoryId($sub_category_id)
+    {
+        $this->reset('variation_id');
+        $this->sub_category_id = $sub_category_id;
+        $this->filter();
+    }
+
+    #[On('update-variation-id')]
+    public function updateVariationId($variation_id)
+    {
+        $this->variation_id = $variation_id;
+        $this->filter();
     }
 
 
@@ -257,7 +285,7 @@ new #[Layout('layouts.front-end')] class extends Component {
                                                         <div wire:loading.remove class="form-check">
                                                             <input
                                                                 class="form-check-input subcategory" type="checkbox"
-                                                                value=""
+                                                                value="{{ $subcategory->id }}"
                                                                 id="">
                                                             <label class="form-check-label"
                                                                    for="">
@@ -300,7 +328,7 @@ new #[Layout('layouts.front-end')] class extends Component {
                                                     @forelse($variations as $variation)
                                                         <div wire:loading.remove class="form-check">
                                                             <input class="form-check-input variation" type="checkbox"
-                                                                   value=""
+                                                                   value="{{ $variation->id }}"
                                                                    id="chekColor1">
                                                             <label class="form-check-label" for="chekColor1">
                                                                 <span>{{ $variation->value }}</span><span
@@ -312,68 +340,6 @@ new #[Layout('layouts.front-end')] class extends Component {
                                                             <p>No Variation</p>
                                                         </div>
                                                     @endforelse
-                                                </div>
-                                            </div>
-                                            <hr>
-                                            <div class="discount">
-                                                <h6 class="p-1 fw-bold bg-light">Discount Range</h6>
-                                                <div class="discount-wrapper p-1">
-                                                    <div class="form-check">
-                                                        <input class="form-check-input" name="exampleRadios"
-                                                               type="radio" value="option1" id="chekDisc1">
-                                                        <label class="form-check-label" for="chekDisc1">
-                                                            10% and Above
-                                                        </label>
-                                                    </div>
-                                                    <div class="form-check">
-                                                        <input class="form-check-input" name="exampleRadios"
-                                                               type="radio" value="option2" id="chekDisc2">
-                                                        <label class="form-check-label" for="chekDisc2">
-                                                            20% and Above
-                                                        </label>
-                                                    </div>
-                                                    <div class="form-check">
-                                                        <input class="form-check-input" name="exampleRadios"
-                                                               type="radio" value="option3" id="chekDisc3">
-                                                        <label class="form-check-label" for="chekDisc3">
-                                                            30% and Above
-                                                        </label>
-                                                    </div>
-                                                    <div class="form-check">
-                                                        <input class="form-check-input" name="exampleRadios"
-                                                               type="radio" value="option4" id="chekDisc4">
-                                                        <label class="form-check-label" for="chekDisc4">
-                                                            40% and Above
-                                                        </label>
-                                                    </div>
-                                                    <div class="form-check">
-                                                        <input class="form-check-input" name="exampleRadios"
-                                                               type="radio" value="option5" id="chekDisc5">
-                                                        <label class="form-check-label" for="chekDisc5">
-                                                            50% and Above
-                                                        </label>
-                                                    </div>
-                                                    <div class="form-check">
-                                                        <input class="form-check-input" name="exampleRadios"
-                                                               type="radio" value="option6" id="chekDisc6">
-                                                        <label class="form-check-label" for="chekDisc6">
-                                                            60% and Above
-                                                        </label>
-                                                    </div>
-                                                    <div class="form-check">
-                                                        <input class="form-check-input" name="exampleRadios"
-                                                               type="radio" value="option7" id="chekDisc7">
-                                                        <label class="form-check-label" for="chekDisc7">
-                                                            70% and Above
-                                                        </label>
-                                                    </div>
-                                                    <div class="form-check">
-                                                        <input class="form-check-input" name="exampleRadios"
-                                                               type="radio" value="option8" id="chekDisc8">
-                                                        <label class="form-check-label" for="chekDisc8">
-                                                            80% and Above
-                                                        </label>
-                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -420,38 +386,73 @@ new #[Layout('layouts.front-end')] class extends Component {
                         <div class="product-grid mt-4">
                             <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
                                 @forelse($products as $product)
-                                    @foreach($product->product_variations as $product_variation)
-                                        <div class="col">
-                                            <div class="card border shadow-none">
-                                                <div class="position-relative overflow-hidden">
-                                                    <div
-                                                        class="product-options d-flex align-items-center justify-content-center gap-2 mx-auto position-absolute bottom-0 start-0 end-0">
-                                                        <a href="javascript:;"><i class="bi bi-heart"></i></a>
-                                                        <a href="javascript:;"><i class="bi bi-basket3"></i></a>
-                                                        <a href="javascript:;"><i class="bi bi-zoom-in"></i></a>
-                                                    </div>
-                                                    <a href="{{ route('front-end.product-details') }}">
-                                                        <img src="front-end-assets/images/trending-product/01.webp"
-                                                             class="card-img-top" alt="...">
-                                                    </a>
-                                                </div>
-                                                <div class="card-body border-top">
-                                                    <h5 class="mb-0 fw-bold product-short-title">{{ $product->name }} </h5>
-                                                    <h6 class="mb-1"> {{ empty($product_variation->variation()) ? '' :  str_replace('_',' ',$product_variation->variation()->name).'-'.$product_variation->variation()->value }}</h6>
-                                                    {{--                                                    <p class="mb-0 product-short-name">{{ $product->description }}</p>--}}
-                                                    <div class="product-price d-flex align-items-center gap-2 mt-2">
-                                                        <div class="h6 fw-bold">
-                                                            KES {{ $product_variation->price }}</div>
+                                    @if($useSpecificVariations)
+                                        @foreach($specific_variations as $product_variation)
+                                            <div class="col">
+                                                <div class="card border shadow-none">
+                                                    <div class="position-relative overflow-hidden">
                                                         <div
-                                                            class="h6 fw-light text-muted text-decoration-line-through">
-                                                            $2089
+                                                            class="product-options d-flex align-items-center justify-content-center gap-2 mx-auto position-absolute bottom-0 start-0 end-0">
+                                                            <a href="javascript:;"><i class="bi bi-heart"></i></a>
+                                                            <a href="javascript:;"><i class="bi bi-basket3"></i></a>
+                                                            <a href="javascript:;"><i class="bi bi-zoom-in"></i></a>
                                                         </div>
-                                                        <div class="h6 fw-bold text-danger">(70% off)</div>
+                                                        <a href="{{ route('front-end.product-details') }}">
+                                                            <img src="front-end-assets/images/trending-product/01.webp"
+                                                                 class="card-img-top" alt="...">
+                                                        </a>
+                                                    </div>
+                                                    <div class="card-body border-top">
+                                                        <h5 class="mb-0 fw-bold product-short-title">{{ $product->name }} </h5>
+                                                        <h6 class="mb-1"> {{ empty($product_variation->variation()) ? '' :  str_replace('_',' ',$product_variation->variation()->name).'-'.$product_variation->variation()->value }}</h6>
+                                                        {{--                                                    <p class="mb-0 product-short-name">{{ $product->description }}</p>--}}
+                                                        <div class="product-price d-flex align-items-center gap-2 mt-2">
+                                                            <div class="h6 fw-bold">
+                                                                KES {{ $product_variation->price }}</div>
+                                                            <div
+                                                                class="h6 fw-light text-muted text-decoration-line-through">
+                                                                $2089
+                                                            </div>
+                                                            <div class="h6 fw-bold text-danger">(70% off)</div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    @endforeach
+                                        @endforeach
+                                    @else
+                                        @foreach($product->product_variations as $product_variation)
+                                            <div class="col">
+                                                <div class="card border shadow-none">
+                                                    <div class="position-relative overflow-hidden">
+                                                        <div
+                                                            class="product-options d-flex align-items-center justify-content-center gap-2 mx-auto position-absolute bottom-0 start-0 end-0">
+                                                            <a href="javascript:;"><i class="bi bi-heart"></i></a>
+                                                            <a href="javascript:;"><i class="bi bi-basket3"></i></a>
+                                                            <a href="javascript:;"><i class="bi bi-zoom-in"></i></a>
+                                                        </div>
+                                                        <a href="{{ route('front-end.product-details') }}">
+                                                            <img src="front-end-assets/images/trending-product/01.webp"
+                                                                 class="card-img-top" alt="...">
+                                                        </a>
+                                                    </div>
+                                                    <div class="card-body border-top">
+                                                        <h5 class="mb-0 fw-bold product-short-title">{{ $product->name }} </h5>
+                                                        <h6 class="mb-1"> {{ empty($product_variation->variation()) ? '' :  str_replace('_',' ',$product_variation->variation()->name).'-'.$product_variation->variation()->value }}</h6>
+                                                        {{--                                                    <p class="mb-0 product-short-name">{{ $product->description }}</p>--}}
+                                                        <div class="product-price d-flex align-items-center gap-2 mt-2">
+                                                            <div class="h6 fw-bold">
+                                                                KES {{ $product_variation->price }}</div>
+                                                            <div
+                                                                class="h6 fw-light text-muted text-decoration-line-through">
+                                                                $2089
+                                                            </div>
+                                                            <div class="h6 fw-bold text-danger">(70% off)</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        @endforeach
+                                    @endif
                                 @empty
                                     <div class="col-lg-12">
                                         <p> No Available Products</p>
@@ -459,9 +460,7 @@ new #[Layout('layouts.front-end')] class extends Component {
                                 @endforelse
                             </div><!--end row-->
                         </div>
-
                         <hr class="my-4">
-
                         <div class="product-pagination">
                             <nav>
                                 <ul class="pagination justify-content-center">
@@ -493,13 +492,24 @@ new #[Layout('layouts.front-end')] class extends Component {
     <script data-navigate-once>
         $(document).ready(function () {
             document.addEventListener("livewire:navigated", function () {
-                console.log('test');
                 $('.category').on('click', function () {
                     if ($(this).prop('checked')) {
                         $('.category').not(this).prop('checked', false);
                         Livewire.dispatch('update-category-id', {category_id: $(this).val()});
                     }
                 });
+
+                $(document).on('click', '.subcategory', function () {
+                    $('.subcategory').not(this).prop('checked', false);
+                    Livewire.dispatch('update-sub-category-id', {sub_category_id: $(this).val()});
+                });
+
+                $(document).on('click', '.variation', function () {
+                    console.log($(this).val());
+                    $('.variation').not(this).prop('checked', false);
+                    Livewire.dispatch('update-variation-id', {variation_id: $(this).val()});
+                });
+
             });
         });
     </script>

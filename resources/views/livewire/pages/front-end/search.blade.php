@@ -33,7 +33,7 @@ new #[Layout('layouts.front-end')] class extends Component {}; ?>
                         <div class="card-body p-4">
                             <div class="d-flex align-items-center">
                                 <div>
-                                    <h5 class="mb-0 fw-bold text-white">Men Fashion</h5>
+                                    <h5 class="mb-0 fw-bold text-white">Artificial Grass Carpet</h5>
                                 </div>
                                 <div class="ms-auto fs-1 text-white">
                                     <i class="bi bi-cast"></i>
@@ -47,10 +47,10 @@ new #[Layout('layouts.front-end')] class extends Component {}; ?>
                         <div class="card-body p-4">
                             <div class="d-flex align-items-center">
                                 <div>
-                                    <h5 class="mb-0 fw-bold text-white">Kids Wear</h5>
+                                    <h5 class="mb-0 fw-bold text-white">Wall to Wall Carpets</h5>
                                 </div>
                                 <div class="ms-auto fs-1 text-white">
-                                    <i class="bi bi-boombox"></i>
+                                    <i class="bi bi-bricks"></i>
                                 </div>
                             </div>
                         </div>
@@ -61,7 +61,7 @@ new #[Layout('layouts.front-end')] class extends Component {}; ?>
                         <div class="card-body p-4">
                             <div class="d-flex align-items-center">
                                 <div>
-                                    <h5 class="mb-0 fw-bold text-white">Electronics</h5>
+                                    <h5 class="mb-0 fw-bold text-white">Curtain Rods and Rails</h5>
                                 </div>
                                 <div class="ms-auto fs-1 text-white">
                                     <i class="bi bi-film"></i>
@@ -75,10 +75,10 @@ new #[Layout('layouts.front-end')] class extends Component {}; ?>
                         <div class="card-body p-4">
                             <div class="d-flex align-items-center">
                                 <div>
-                                    <h5 class="mb-0 fw-bold text-white">Furniture</h5>
+                                    <h5 class="mb-0 fw-bold text-white">Wall Decor </h5>
                                 </div>
-                                <div class="ms-auto fs-1 text-white">
-                                    <i class="bi bi-music-note-beamed"></i>
+                                <div class="ms-auto  fs-1 text-white">
+                                    <i class="bi bi-border-bottom"></i>
                                 </div>
                             </div>
                         </div>
@@ -89,10 +89,38 @@ new #[Layout('layouts.front-end')] class extends Component {}; ?>
                         <div class="card-body p-4">
                             <div class="d-flex align-items-center">
                                 <div>
-                                    <h5 class="mb-0 fw-bold text-white">Sports</h5>
+                                    <h5 class="mb-0 fw-bold text-white">Artificial Flowers</h5>
                                 </div>
                                 <div class="ms-auto fs-1 text-white">
-                                    <i class="bi bi-person-lines-fill"></i>
+                                    <i class="bi bi-flower1"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div style="background-color: rgb(40,50,60);" class="card border-0 rounded-0 shadow">
+                        <div class="card-body p-4">
+                            <div class="d-flex align-items-center">
+                                <div>
+                                    <h5 class="mb-0 fw-bold text-white">Office Blinds</h5>
+                                </div>
+                                <div class="ms-auto fs-1 text-white">
+                                    <i class="bi bi-border-width"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div style="background-color: rgb(60,50,40);" class="card border-0 rounded-0 shadow">
+                        <div class="card-body p-4">
+                            <div class="d-flex align-items-center">
+                                <div>
+                                    <h5 class="mb-0 fw-bold text-white">PVC Antislip mats</h5>
+                                </div>
+                                <div class="ms-auto fs-1 text-white">
+                                    <i class="bi bi-hypnotize"></i>
                                 </div>
                             </div>
                         </div>

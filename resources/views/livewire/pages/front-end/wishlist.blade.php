@@ -3,7 +3,8 @@
 use Livewire\Attributes\Layout;
 use Livewire\Volt\Component;
 
-new #[Layout('layouts.front-end')] class extends Component {}; ?>
+new #[Layout('layouts.front-end')] class extends Component {
+}; ?>
 
 <!--start page content-->
 <div class="page-content">
@@ -13,9 +14,11 @@ new #[Layout('layouts.front-end')] class extends Component {}; ?>
         <div class="container">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb mb-0">
-                    <li class="breadcrumb-item"><a href="javascript:;">Home</a></li>
-                    <li class="breadcrumb-item"><a href="javascript:;">Shop</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Wishlist </li>
+                    <li class=""><a class="text-decoration-none" href="javascript:;">Home <i
+                                class="mx-1 bi bi-chevron-right"></i></a></li>
+                    <li class=""><a class="text-decoration-none" href="javascript:;">Shop <i
+                                class="mx-1 bi bi-chevron-right"></i></a></li>
+                    <li class="text-decoration-none active" aria-current="page">Wishlist</li>
                 </ol>
             </nav>
         </div>
@@ -31,7 +34,8 @@ new #[Layout('layouts.front-end')] class extends Component {}; ?>
                     <h4 class="mb-0 h4 fw-bold">Wishlist (10 Items)</h4>
                 </div>
                 <div class="ms-auto">
-                    <button type="button" class="btn btn-light btn-ecomm">Continue Shopping</button>
+                    <a href="{{ route('front-end.shop-grid',['category_id'=>0,'product_id'=>0]) }}"
+                       class="btn btn-light btn-ecomm">Continue Shopping</a>
                 </div>
             </div>
 
@@ -41,7 +45,8 @@ new #[Layout('layouts.front-end')] class extends Component {}; ?>
                         <div class="card rounded-0">
                             <div class="btn-close wishlist-close position-absolute end-0 top-0"></div>
                             <a href="javascript:;">
-                                <img src="front-end-assets/images/best-sellar/01.webp" alt="" class="card-img-top rounded-0">
+                                <img src="front-end-assets/images/best-sellar/01.webp" alt=""
+                                     class="card-img-top rounded-0">
                             </a>
                             <div class="card-body border-top text-center">
                                 <p class="mb-0 product-short-name">Color Printed Kurta</p>
@@ -60,7 +65,8 @@ new #[Layout('layouts.front-end')] class extends Component {}; ?>
                         <div class="card rounded-0">
                             <div class="btn-close wishlist-close position-absolute end-0 top-0"></div>
                             <a href="javascript:;">
-                                <img src="front-end-assets/images/new-arrival/01.webp" alt="" class="card-img-top rounded-0">
+                                <img src="front-end-assets/images/new-arrival/01.webp" alt=""
+                                     class="card-img-top rounded-0">
                             </a>
                             <div class="card-body border-top text-center">
                                 <p class="mb-0 product-short-name">Color Printed Kurta</p>
@@ -79,7 +85,8 @@ new #[Layout('layouts.front-end')] class extends Component {}; ?>
                         <div class="card rounded-0">
                             <div class="btn-close wishlist-close position-absolute end-0 top-0"></div>
                             <a href="javascript:;">
-                                <img src="front-end-assets/images/trending-product/01.webp" alt="" class="card-img-top rounded-0">
+                                <img src="front-end-assets/images/trending-product/01.webp" alt=""
+                                     class="card-img-top rounded-0">
                             </a>
                             <div class="card-body border-top text-center">
                                 <p class="mb-0 product-short-name">Color Printed Kurta</p>
@@ -98,7 +105,8 @@ new #[Layout('layouts.front-end')] class extends Component {}; ?>
                         <div class="card rounded-0">
                             <div class="btn-close wishlist-close position-absolute end-0 top-0"></div>
                             <a href="javascript:;">
-                                <img src="front-end-assets/images/best-sellar/02.webp" alt="" class="card-img-top rounded-0">
+                                <img src="front-end-assets/images/best-sellar/02.webp" alt=""
+                                     class="card-img-top rounded-0">
                             </a>
                             <div class="card-body border-top text-center">
                                 <p class="mb-0 product-short-name">Color Printed Kurta</p>
@@ -117,7 +125,8 @@ new #[Layout('layouts.front-end')] class extends Component {}; ?>
                         <div class="card rounded-0">
                             <div class="btn-close wishlist-close position-absolute end-0 top-0"></div>
                             <a href="javascript:;">
-                                <img src="front-end-assets/images/new-arrival/02.webp" alt="" class="card-img-top rounded-0">
+                                <img src="front-end-assets/images/new-arrival/02.webp" alt=""
+                                     class="card-img-top rounded-0">
                             </a>
                             <div class="card-body border-top text-center">
                                 <p class="mb-0 product-short-name">Color Printed Kurta</p>
@@ -136,7 +145,8 @@ new #[Layout('layouts.front-end')] class extends Component {}; ?>
                         <div class="card rounded-0">
                             <div class="btn-close wishlist-close position-absolute end-0 top-0"></div>
                             <a href="javascript:;">
-                                <img src="front-end-assets/images/featured-products/05.webp" alt="" class="card-img-top rounded-0">
+                                <img src="front-end-assets/images/featured-products/05.webp" alt=""
+                                     class="card-img-top rounded-0">
                             </a>
                             <div class="card-body border-top text-center">
                                 <p class="mb-0 product-short-name">Color Printed Kurta</p>
@@ -155,7 +165,8 @@ new #[Layout('layouts.front-end')] class extends Component {}; ?>
                         <div class="card rounded-0">
                             <div class="btn-close wishlist-close position-absolute end-0 top-0"></div>
                             <a href="javascript:;">
-                                <img src="front-end-assets/images/special-offer/03.webp" alt="" class="card-img-top rounded-0">
+                                <img src="front-end-assets/images/special-offer/03.webp" alt=""
+                                     class="card-img-top rounded-0">
                             </a>
                             <div class="card-body border-top text-center">
                                 <p class="mb-0 product-short-name">Color Printed Kurta</p>
@@ -174,7 +185,8 @@ new #[Layout('layouts.front-end')] class extends Component {}; ?>
                         <div class="card rounded-0">
                             <div class="btn-close wishlist-close position-absolute end-0 top-0"></div>
                             <a href="javascript:;">
-                                <img src="front-end-assets/images/new-arrival/05.webp" alt="" class="card-img-top rounded-0">
+                                <img src="front-end-assets/images/new-arrival/05.webp" alt=""
+                                     class="card-img-top rounded-0">
                             </a>
                             <div class="card-body border-top text-center">
                                 <p class="mb-0 product-short-name">Color Printed Kurta</p>
@@ -193,7 +205,8 @@ new #[Layout('layouts.front-end')] class extends Component {}; ?>
                         <div class="card rounded-0">
                             <div class="btn-close wishlist-close position-absolute end-0 top-0"></div>
                             <a href="javascript:;">
-                                <img src="front-end-assets/images/trending-product/04.webp" alt="" class="card-img-top rounded-0">
+                                <img src="front-end-assets/images/trending-product/04.webp" alt=""
+                                     class="card-img-top rounded-0">
                             </a>
                             <div class="card-body border-top text-center">
                                 <p class="mb-0 product-short-name">Color Printed Kurta</p>
@@ -212,7 +225,8 @@ new #[Layout('layouts.front-end')] class extends Component {}; ?>
                         <div class="card rounded-0">
                             <div class="btn-close wishlist-close position-absolute end-0 top-0"></div>
                             <a href="javascript:;">
-                                <img src="front-end-assets/images/special-offer/04.webp" alt="" class="card-img-top rounded-0">
+                                <img src="front-end-assets/images/special-offer/04.webp" alt=""
+                                     class="card-img-top rounded-0">
                             </a>
                             <div class="card-body border-top text-center">
                                 <p class="mb-0 product-short-name">Color Printed Kurta</p>

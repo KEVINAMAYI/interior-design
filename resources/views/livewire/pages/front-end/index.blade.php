@@ -1351,7 +1351,7 @@ new #[Layout('layouts.front-end')] class extends Component {
     <!--end Advertise banners-->
 
     <!--start features-->
-    <section class="product-thumb-slider section-padding">
+    <section class="product-thumb-slider my-5 section-padding">
         <div class="container">
             <div class="text-center pb-3">
                 <h3 class="mb-0 h3 fw-bold">What We Offer!</h3>
@@ -1414,28 +1414,32 @@ new #[Layout('layouts.front-end')] class extends Component {
 
 
     <!--start cartegory slider-->
-    <section class="cartegory-slider section-padding bg-section-2">
+    <section class="cartegory-slider my-5 py-4 bg-section-2">
         <div class="container">
-            <div class="separator pb-4">
+            <div class="separator pb-2">
                 <div class="line"></div>
-                <h5 class="mb-0 fw-bold separator-title mx-4">BROWSE CATEGORY</h5>
+                <h3 class="my-4 h3 fw-bold">Browse Categories</h3>
                 <div class="line"></div>
             </div>
-            <div class="cartegory-box">
+            <div class="row row-cols-2 py-3 row-cols-md-3 row-cols-lg-4 row-cols-xl-4 row-cols-xxl-5 g-4">
                 @foreach($categories as $category)
-                    <a class="text-decoration-none"
-                       href="{{ route('front-end.shop-grid',['category_id' => $category->id,'product_id' => 0]) }}">
-                        <div class="item">
-                            <div class="card rounded-1">
-                                <div class="card-body p-0">
-                                    <img src="front-end-assets/images/categories/01.webp" class="img-fluid" alt="...">
-                                </div>
-                                <div class="card-footer text-center bg-transparent border">
-                                    <h6 class="mb-0 text-uppercase">{{ $category->name }}</h6>
+                    <div class="col">
+                        <div class="card">
+                            <div class="position-relative overflow-hidden">
+                                <a href="{{ route('front-end.shop-grid',['category_id' => $category->id,'product_id' => 0]) }}">
+                                    <img src="front-end-assets/images/new-arrival/05.webp" class="card-img-top"
+                                         alt="...">
+                                </a>
+                            </div>
+                            <div class="card-body">
+                                <div class="d-flex align-items-center justify-content-between">
+                                    <div class="">
+                                        <p class="mb-1 product-short-name">{{ $category->name }}</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </a>
+                    </div>
                 @endforeach
             </div>
         </div>
@@ -1444,7 +1448,7 @@ new #[Layout('layouts.front-end')] class extends Component {
 
 
     <!--start blog-->
-    <section class="section-padding">
+    <section class="section-padding mb-4">
         <div class="container">
             <div class="text-center pb-3">
                 <h3 class="mb-0 fw-bold">Latest Blog</h3>
@@ -1470,43 +1474,6 @@ new #[Layout('layouts.front-end')] class extends Component {
                             </div>
                         </div>
                     </div>
-                    <div class="col">
-                        <div class="card">
-                            <img src="front-end-assets/images/blog/02.webp" class="card-img-top rounded-0" alt="...">
-                            <div class="card-body">
-                                <div class="d-flex align-items-center gap-4">
-                                    <div class="posted-by">
-                                        <p class="mb-0"><i class="bi bi-person me-2"></i>Virendra</p>
-                                    </div>
-                                    <div class="posted-date">
-                                        <p class="mb-0"><i class="bi bi-calendar me-2"></i>15 Aug, 2022</p>
-                                    </div>
-                                </div>
-                                <h5 class="card-title fw-bold mt-3">Blog title here</h5>
-                                <p class="mb-0">Some quick example text to build on the card title and make.</p>
-                                <a href="blog-read.html" class="btn btn-outline-dark btn-ecomm mt-3">Read More</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="card">
-                            <img src="front-end-assets/images/blog/03.webp" class="card-img-top rounded-0" alt="...">
-                            <div class="card-body">
-                                <div class="d-flex align-items-center gap-4">
-                                    <div class="posted-by">
-                                        <p class="mb-0"><i class="bi bi-person me-2"></i>Virendra</p>
-                                    </div>
-                                    <div class="posted-date">
-                                        <p class="mb-0"><i class="bi bi-calendar me-2"></i>15 Aug, 2022</p>
-                                    </div>
-                                </div>
-                                <h5 class="card-title fw-bold mt-3">Blog title here</h5>
-                                <p class="mb-0">Some quick example text to build on the card title and make.</p>
-                                <a href="blog-read.html" class="btn btn-outline-dark btn-ecomm mt-3">Read More</a>
-                            </div>
-                        </div>
-                    </div>
-
                 </div>
                 <!--end row-->
             </div>

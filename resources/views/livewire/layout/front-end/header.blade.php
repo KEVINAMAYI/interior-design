@@ -47,7 +47,11 @@ new class extends Component {
                                     <ul class="list-unstyled">
                                         @foreach($categories as $category)
                                             <li>
-                                                <a href="javascript:;">{{ $category->name }}</a>
+                                                <a style="font-weight:bold;"
+                                                   href="{{ route('front-end.shop-grid',['category_id' => $category->id,'product_id' => 0]) }}">
+                                                    <i class="bi {{ $category->icon  }}"></i>
+                                                    <span class="mx-2">{{ $category->name }}</span>
+                                                </a>
                                             </li>
                                         @endforeach
                                     </ul>

@@ -25,11 +25,11 @@ new #[Layout('layouts.front-end')] class extends Component {
                 <div class="ms-auto">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb mb-0 p-0">
-                            <li class="breadcrumb-item"><a href="javascript:;"><i class="bx bx-home-alt"></i> Home</a>
+                            <li class=""><a class="text-decoration-none" href="javascript:;">Home <i class="mx-1 bi bi-chevron-right"></i></a>
                             </li>
-                            <li class="breadcrumb-item"><a href="javascript:;">Shop</a>
+                            <li class=""><a class="text-decoration-none" href="javascript:;">Shop <i class="mx-1 bi bi-chevron-right"></i></a>
                             </li>
-                            <li class="breadcrumb-item active" aria-current="page">Shop Categories</li>
+                            <li class=" text-decoration-none mx-1 active" aria-current="page">Shop Categories</li>
                         </ol>
                     </nav>
                 </div>
@@ -57,7 +57,7 @@ new #[Layout('layouts.front-end')] class extends Component {
                                         <a  href="{{ route('front-end.shop-grid',[$category->id, $product->id]) }}"
                                            class="list-group-item d-flex justify-content-between align-items-center">
                                             {{ $product->name }}
-                                            <span style="font-family: 'Helvetica Neue', Arial, Helvetica, sans-serif" class="badge bg-success rounded-pill">Available</span>
+                                            <span style="font-size:10px;" class="badge bg-success rounded-pill">Available</span>
                                         </a>
                                     @endforeach
                                 </div>

@@ -14,12 +14,15 @@
 
     <!-- CSS files -->
     <link data-navigate-once href="front-end-assets/plugins/slick/slick-theme.css" rel="stylesheet">
-    <link data-navigate-once href="https://fonts.googleapis.com/css2?family=Raleway:wght@500;600&display=swap"
-          rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet">
+
     <link data-navigate-once rel="stylesheet"
           href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
 
     <style>
+        *{
+            font-family: Poppins, serif;
+        }
         .btn{
             border-radius:0 !important;
         }
