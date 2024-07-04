@@ -18,15 +18,14 @@ new class extends Component {
 
 <header class="top-header">
     <nav class="navbar navbar-expand-xl w-100 navbar-dark container gap-3">
-        <a class="navbar-brand d-none d-xl-inline" href="index.html"><img src="front-end-assets/images/logo.webp"
-                                                                          class="logo-img" alt=""></a>
+        <a class="navbar-brand d-none d-xl-inline" href="/"><img height="60" src="front-end-assets/images/gsm_logo_transparent.png"></a>
         <a class="mobile-menu-btn d-inline d-xl-none" href="javascript:;" data-bs-toggle="offcanvas"
            data-bs-target="#offcanvasNavbar">
             <i class="bi bi-list"></i>
         </a>
         <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar">
             <div class="offcanvas-header">
-                <div class="offcanvas-logo"><img src="front-end-assets/images/logo.webp" class="logo-img" alt="">
+                <div class="offcanvas-logo"><img height="60"  src="front-end-assets/images/gsm_logo_transparent.png" alt="">
                 </div>
                 <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
                         aria-label="Close"></button>

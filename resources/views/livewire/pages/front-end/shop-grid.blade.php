@@ -214,9 +214,9 @@ new #[Layout('layouts.front-end')] class extends Component {
         <div class="container">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb mb-0">
-                    <li class="breadcrumb-item"><a href="javascript:;">Home</a></li>
-                    <li class="breadcrumb-item"><a href="javascript:;">Shop</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Shop With Grid</li>
+                    <li class=""><a class="text-decoration-none" href="javascript:;">Home <i class="mx-1 bi bi-chevron-right"></i></a></li>
+                    <li class=""><a class="text-decoration-none" href="javascript:;">Shop <i class="mx-1 bi bi-chevron-right"></i></a></li>
+                    <li class="text-decoration-none active" aria-current="page">Shop With Grid</li>
                 </ol>
             </nav>
         </div>
@@ -257,8 +257,7 @@ new #[Layout('layouts.front-end')] class extends Component {
                                                                value="all"
                                                                id="all">
                                                         <label class="form-check-label" for="all}">
-                                                            <span>All</span><span
-                                                                class="product-number">(1548)</span>
+                                                            <span>All</span>
                                                         </label>
                                                     </div>
                                                     @foreach($categories as $category)
@@ -267,8 +266,7 @@ new #[Layout('layouts.front-end')] class extends Component {
                                                                    value="{{ $category->id }}"
                                                                    id="{{ $category->slug }}">
                                                             <label class="form-check-label" for="{{ $category->slug }}">
-                                                                <span>{{ $category->name }}</span><span
-                                                                    class="product-number">(1548)</span>
+                                                                <span>{{ $category->name }}</span>
                                                             </label>
                                                         </div>
                                                     @endforeach
@@ -289,8 +287,7 @@ new #[Layout('layouts.front-end')] class extends Component {
                                                                 id="">
                                                             <label class="form-check-label"
                                                                    for="">
-                                                                <span>{{ $subcategory->name }}</span><span
-                                                                    class="product-number">(1548)</span>
+                                                                <span>{{ $subcategory->name }}</span>
                                                             </label>
                                                         </div>
                                                     @empty
@@ -331,8 +328,7 @@ new #[Layout('layouts.front-end')] class extends Component {
                                                                    value="{{ $variation->id }}"
                                                                    id="chekColor1">
                                                             <label class="form-check-label" for="chekColor1">
-                                                                <span>{{ $variation->value }}</span><span
-                                                                    class="product-number">(1548)</span>
+                                                                <span>{{ $variation->value }}</span>
                                                             </label>
                                                         </div>
                                                     @empty

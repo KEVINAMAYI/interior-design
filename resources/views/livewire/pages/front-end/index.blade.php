@@ -82,7 +82,6 @@ new #[Layout('layouts.front-end')] class extends Component {
                             <div class="">
                                 <h3 class="h3 fw-light text-white fw-bold">New Arrival</h3>
                                 <h1 class="h1 text-white fw-bold">Women Fashion</h1>
-                                <p class="text-white fw-bold"><i>Last call for upto 25%</i></p>
                                 <div class=""><a class="btn btn-dark btn-ecomm" href="shop-grid.html">Shop Now</a>
                                 </div>
                             </div>
@@ -98,7 +97,6 @@ new #[Layout('layouts.front-end')] class extends Component {
                             <div class="">
                                 <h3 class="h3 fw-light text-white fw-bold">Latest Trending</h3>
                                 <h1 class="h1 text-white fw-bold">Fashion Wear</h1>
-                                <p class="text-white fw-bold"><i>Last call for upto 35%</i></p>
                                 <div class=""><a class="btn btn-dark btn-ecomm" href="shop-grid.html">Shop Now</a>
                                 </div>
                             </div>
@@ -114,7 +112,6 @@ new #[Layout('layouts.front-end')] class extends Component {
                             <div class="">
                                 <h3 class="h3 fw-light text-white fw-bold">New Trending</h3>
                                 <h1 class="h1 text-white fw-bold">Kids Fashion</h1>
-                                <p class="text-white fw-bold"><i>Last call for upto 15%</i></p>
                                 <div class=""><a class="btn btn-dark btn-ecomm" href="shop-grid.html">Shop Now</a>
                                 </div>
                             </div>
