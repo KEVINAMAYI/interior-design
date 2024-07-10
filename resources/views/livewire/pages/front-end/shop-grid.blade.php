@@ -23,9 +23,8 @@ new #[Layout('layouts.front-end')] class extends Component {
     public $specific_variations;
 
     /**
-     * On Mount initialize categories and products,
-     * if a specific category and product are set
-     * filter the products using the category_id and product_id
+     * On mount, initialize categories and products,
+     * and filter products using the category_id and product_id if set.
      */
     public function mount($category_id, $product_id)
     {
@@ -41,100 +40,124 @@ new #[Layout('layouts.front-end')] class extends Component {
         }
     }
 
-
     /**
-     * Gets Subcategories for the selected category  if any
-     * and filters products
+     * Gets subcategories for the selected category, if any,
+     * and filters products.
      */
     public function getSubCategories()
     {
         $this->reset('subcategories', 'variations', 'sub_category_id');
 
         if ($this->category_id != 'all') {
-
-            $category = Category::where('id', $this->category_id)->first();
+            $category = Category::find($this->category_id);
             $subcategories = Product::where('category_id', $category->id);
 
-            $subcategories->count() < 2 ?
-                $this->reset('subcategories') :
-                $this->subcategories = $subcategories->get();
-
+            $this->subcategories = $subcategories->count() < 2 ? [] : $subcategories->get();
             $this->getVariations($category->slug);
         }
 
         $this->filter();
     }
 
-
     /**
-     * Get Variations for the products if  any
+     * Get variations for the products if any.
      */
     public function getVariations($slug)
     {
         $this->reset('variations');
 
-        if ($slug == 'wall_carpet') {
-            $this->variations = Variation::where('name', 'color_shade')->get();
-        }
-
-        if ($slug == 'grass_carpet') {
-            $this->variations = Variation::where('name', 'height')->get();
-        }
-
-        if ($slug == 'curtain_rods') {
-            $this->variations = Variation::where('name', 'durability')->orWhere('name', 'origin')->get();
+        switch ($slug) {
+            case 'wall_carpet':
+                $this->variations = Variation::where('name', 'color_shade')->get();
+                break;
+            case 'grass_carpet':
+                $this->variations = Variation::where('name', 'height')->get();
+                break;
+            case 'curtain_rods':
+                $this->variations = Variation::whereIn('name', ['durability', 'origin'])->get();
+                break;
         }
     }
 
-
     /**
-     * Filters displayed products base on category
-     * subcategory, color, price etc...
+     * Filters displayed products based on category, subcategory, variation, price, etc.
      */
     public function filter()
     {
         $products = Product::orderBy('created_at', 'desc');
 
-        if (!empty($this->category_id) && $this->category_id != 'all') {
-            $products->where('category_id', $this->category_id);
+        $products = $this->applyCategoryFilter($products);
+        $products = $this->applySubCategoryFilter($products);
+        $products = $this->applyVariationFilter($products);
+        $products = $this->applyPriceFilter($products);
+
+        $this->products = $products->get();
+    }
+
+    /**
+     * Apply category filter.
+     */
+    private function applyCategoryFilter($query)
+    {
+        if ($this->category_id != 'all') {
+            $query->where('category_id', $this->category_id);
         }
 
-        if (!empty($this->sub_category_id) && $this->sub_category_id != 'all') {
-            $products->where('id', $this->sub_category_id);
+        return $query;
+    }
+
+    /**
+     * Apply subcategory filter.
+     */
+    private function applySubCategoryFilter($query)
+    {
+        if ($this->sub_category_id != 'all') {
+            $query->where('id', $this->sub_category_id);
         }
 
-        if (!empty($this->variation_id) && $this->variation_id != 'all') {
+        return $query;
+    }
 
+    /**
+     * Apply variation filter.
+     */
+    private function applyVariationFilter($query)
+    {
+        if ($this->variation_id != 'all') {
             $this->useSpecificVariations = true;
 
-            $products->WhereHas('product_variations', function ($q) {
+            $query->whereHas('product_variations', function ($q) {
                 $q->where('variation_id', $this->variation_id);
-            })->get();
+            });
 
             $this->specific_variations = ProductVariation::where('id', $this->variation_id)->get();
         }
 
-        if (!empty($this->lower_price)) {
-            $products->WhereHas('product_variations', function ($q) {
-                $q->where('price', '>=', $this->lower_price);
-            })->get();
-        }
-
-        if (!empty($this->upper_price)) {
-            $products->WhereHas('product_variations', function ($q) {
-                $q->where('price', '<=', $this->upper_price);
-            })->get();
-        }
-
-        if (!empty($this->lower_price) && !empty($this->upper_price)) {
-            $products->WhereHas('product_variations', function ($q) {
-                $q->where('price', '>=', $this->lower_price)
-                    ->where('price', '<=', $this->upper_price);
-            })->get();
-        }
-        $this->products = $products->get();
+        return $query;
     }
 
+    /**
+     * Apply price filter.
+     */
+    private function applyPriceFilter($query)
+    {
+        if ($this->lower_price || $this->upper_price) {
+            $query->whereHas('product_variations', function ($q) {
+                if ($this->lower_price) {
+                    $q->where('price', '>=', $this->lower_price);
+                }
+                if ($this->upper_price) {
+                    $q->where('price', '<=', $this->upper_price);
+                }
+            });
+        }
+
+        return $query;
+    }
+
+    /**
+     * Update category ID and get subcategories.
+     */
     #[On('update-category-id')]
     public function updateCategoryId($category_id)
     {
@@ -142,6 +165,9 @@ new #[Layout('layouts.front-end')] class extends Component {
         $this->getSubCategories();
     }
 
+    /**
+     * Update subcategory ID and filter products.
+     */
     #[On('update-sub-category-id')]
     public function updateSubCategoryId($sub_category_id)
     {
@@ -150,6 +176,9 @@ new #[Layout('layouts.front-end')] class extends Component {
         $this->filter();
     }
 
+    /**
+     * Update variation ID and filter products.
+     */
     #[On('update-variation-id')]
     public function updateVariationId($variation_id)
     {

@@ -20,11 +20,12 @@
           href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
 
     <style>
-        *{
+        * {
             font-family: Poppins, serif;
         }
-        .btn{
-            border-radius:0 !important;
+
+        .btn {
+            border-radius: 0 !important;
         }
 
     </style>
@@ -56,6 +57,24 @@
 <script data-navigate-once src="front-end-assets/js/main.js"></script>
 <script data-navigate-once src="front-end-assets/js/index.js"></script>
 <script data-navigate-once src="front-end-assets/js/loader.js"></script>
+
+<!--Start of Tawk.to Script-->
+<script data-navigate-once>
+    $(document).ready(function () {
+        document.addEventListener("livewire:navigated", function () {
+            var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
+            (function () {
+                var s1 = document.createElement("script"), s0 = document.getElementsByTagName("script")[0];
+                s1.async = true;
+                s1.src = 'https://embed.tawk.to/668a4a5ce1e4f70f24ee55ea/1i2634v9g';
+                s1.charset = 'UTF-8';
+                s1.setAttribute('crossorigin', '*');
+                s0.parentNode.insertBefore(s1, s0);
+            })();
+        })
+    });
+</script>
+<!--End of Tawk.to Script-->
 
 
 <!-- init js -->

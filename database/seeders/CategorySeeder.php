@@ -20,6 +20,7 @@ class CategorySeeder extends Seeder
                 'description' => 'artificial grass carpets',
                 'slug' => 'grass_carpet',
                 'icon' => 'bi-cast',
+                'color' => 'green',
                 'image_url' => 'front-end-assets/images/categories/artificial_grass_carpets.png',
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()
@@ -30,6 +31,7 @@ class CategorySeeder extends Seeder
                 'description' => 'wall to wall carpets',
                 'slug' => 'wall_carpet',
                 'icon' => 'bi-bricks',
+                'color' => 'pink',
                 'image_url' => 'front-end-assets/images/categories/wall_to_wall_carpets.png',
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()
@@ -39,6 +41,7 @@ class CategorySeeder extends Seeder
                 'description' => 'curtain rods & rails',
                 'slug' => 'curtain_rods',
                 'icon' => 'bi-film',
+                'color' => 'skyblue',
                 'image_url' => 'front-end-assets/images/categories/curtain_rods_and_rails.png',
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()
@@ -48,6 +51,7 @@ class CategorySeeder extends Seeder
                 'description' => 'wall decor',
                 'slug' => 'wall_decor',
                 'icon' => 'bi-border-bottom',
+                'color' => 'purple',
                 'image_url' => 'front-end-assets/images/categories/wall_decor.png',
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()
@@ -57,6 +61,7 @@ class CategorySeeder extends Seeder
                 'description' => 'artificial flowers',
                 'slug' => 'artificial_flowers',
                 'icon' => 'bi-flower1',
+                'color' => 'yellow',
                 'image_url' => 'front-end-assets/images/categories/artificial_flowers.png',
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()
@@ -66,6 +71,7 @@ class CategorySeeder extends Seeder
                 'description' => 'office blinds',
                 'slug' => 'office_blinds',
                 'icon' => 'bi-border-width',
+                'color' => 'danger',
                 'image_url' => 'front-end-assets/images/categories/office_blinds.png',
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()
@@ -75,6 +81,7 @@ class CategorySeeder extends Seeder
                 'description' => 'pvc antislip mats',
                 'slug' => 'anti_slip_mats',
                 'icon' => 'bi-hypnotize',
+                'color' => 'dark',
                 'image_url' => 'front-end-assets/images/categories/anti_slip_mats.png',
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()
