@@ -16,7 +16,7 @@ Route::name('front-end.')->group(function () {
     Volt::route('contact', 'pages.front-end.contact')
         ->name('contact');
 
-    Volt::route('product-details', 'pages.front-end.product-details')
+    Volt::route('product-details/{product_variation}', 'pages.front-end.product-details')
         ->name('product-details');
 
     Volt::route('shop-grid/{category_id}/{product_id}', 'pages.front-end.shop-grid')

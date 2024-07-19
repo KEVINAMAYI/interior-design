@@ -243,8 +243,10 @@ new #[Layout('layouts.front-end')] class extends Component {
         <div class="container">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb mb-0">
-                    <li class=""><a class="text-decoration-none" href="javascript:;">Home <i class="mx-1 bi bi-chevron-right"></i></a></li>
-                    <li class=""><a class="text-decoration-none" href="javascript:;">Shop <i class="mx-1 bi bi-chevron-right"></i></a></li>
+                    <li class=""><a class="text-decoration-none" href="javascript:;">Home <i
+                                class="mx-1 bi bi-chevron-right"></i></a></li>
+                    <li class=""><a class="text-decoration-none" href="javascript:;">Shop <i
+                                class="mx-1 bi bi-chevron-right"></i></a></li>
                     <li class="text-decoration-none active" aria-current="page">Shop With Grid</li>
                 </ol>
             </nav>
@@ -416,13 +418,7 @@ new #[Layout('layouts.front-end')] class extends Component {
                                             <div class="col">
                                                 <div class="card border shadow-none">
                                                     <div class="position-relative overflow-hidden">
-                                                        <div
-                                                            class="product-options d-flex align-items-center justify-content-center gap-2 mx-auto position-absolute bottom-0 start-0 end-0">
-                                                            <a href="javascript:;"><i class="bi bi-heart"></i></a>
-                                                            <a href="javascript:;"><i class="bi bi-basket3"></i></a>
-                                                            <a href="javascript:;"><i class="bi bi-zoom-in"></i></a>
-                                                        </div>
-                                                        <a href="{{ route('front-end.product-details') }}">
+                                                        <a href="{{ route('front-end.product-details',$product_variation->id) }}">
                                                             <img src="front-end-assets/images/trending-product/01.webp"
                                                                  class="card-img-top" alt="...">
                                                         </a>
@@ -449,13 +445,7 @@ new #[Layout('layouts.front-end')] class extends Component {
                                             <div class="col">
                                                 <div class="card border shadow-none">
                                                     <div class="position-relative overflow-hidden">
-                                                        <div
-                                                            class="product-options d-flex align-items-center justify-content-center gap-2 mx-auto position-absolute bottom-0 start-0 end-0">
-                                                            <a href="javascript:;"><i class="bi bi-heart"></i></a>
-                                                            <a href="javascript:;"><i class="bi bi-basket3"></i></a>
-                                                            <a href="javascript:;"><i class="bi bi-zoom-in"></i></a>
-                                                        </div>
-                                                        <a href="{{ route('front-end.product-details') }}">
+                                                        <a href="{{ route('front-end.product-details', $product_variation->id) }}">
                                                             <img src="front-end-assets/images/trending-product/01.webp"
                                                                  class="card-img-top" alt="...">
                                                         </a>

@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\ProductVariation;
+use App\Models\ProductVariationImage;
 use App\Models\Variation;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -274,7 +275,8 @@ class ProductSeeder extends Seeder
         ]);
 
         foreach ($images as $image) {
-            $product_variation->images()->create([
+            ProductVariationImage::create([
+                'product_variation_id' => $product_variation->id,
                 'image_url' => $image
             ]);
         }

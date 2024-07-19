@@ -1,11 +1,76 @@
 <?php
 
+use App\Models\CallBack;
+use App\Models\ProductVariation;
+use App\Models\Rating;
+use Illuminate\Support\Facades\DB;
 use Livewire\Attributes\Layout;
+use Livewire\Attributes\On;
 use Livewire\Volt\Component;
+use Illuminate\Validation\Rule;
+
 
 new #[Layout('layouts.front-end')] class extends Component {
+
+    public $productVariation;
+    public $first_name;
+    public $last_name;
+    public $phone_number;
+    public $product_ratings;
+
+
+    public function rules()
+    {
+        return [
+            'first_name' => 'required',
+            'last_name' => 'required',
+            'phone_number' => 'required',
+        ];
+    }
+
+    public function mount(ProductVariation $product_variation)
+    {
+        $this->productVariation = $product_variation;
+        $this->getRatings();
+    }
+
+    #[On('get-ratings')]
+    public function getRatings()
+    {
+        $this->product_ratings = Rating::all();
+
+    }
+
+
+    public function createCallBack()
+    {
+        $this->validate();
+
+        DB::beginTransaction();
+        try {
+            CallBack::create([
+                'first_name' => $this->first_name,
+                'last_name' => $this->first_name,
+                'phone_number' => $this->first_name
+            ]);
+
+            $this->reset(['first_name', 'last_name', 'phone_number']);
+            $this->dispatch('close-modal');
+            DB::commit();
+
+        } catch (Exception $exception) {
+            DB::rollBack();
+        }
+
+    }
+
+
 }; ?>
 
+@push('css')
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+@endpush
 <!--start page content-->
 <div class="page-content">
 
@@ -34,46 +99,34 @@ new #[Layout('layouts.front-end')] class extends Component {
                     <div class="product-images">
                         <div class="product-zoom-images">
                             <div class="row row-cols-2 g-3">
-                                <div class="col">
-                                    <div class="img-thumb-container overflow-hidden position-relative"
-                                         data-fancybox="gallery"
-                                         data-src="front-end-assets/images/product-images/01.jpg">
-                                        <img src="front-end-assets/images/product-images/01.jpg" class="img-fluid"
-                                             alt="">
-                                    </div>
-                                </div>
-                                <div class="col">
-                                    <div class="img-thumb-container overflow-hidden position-relative"
-                                         data-fancybox="gallery"
-                                         data-src="front-end-assets/images/product-images/02.jpg">
-                                        <img src="front-end-assets/images/product-images/02.jpg" class="img-fluid"
-                                             alt="">
-                                    </div>
-                                </div>
-                                <div class="col">
-                                    <div class="img-thumb-container overflow-hidden position-relative"
-                                         data-fancybox="gallery"
-                                         data-src="front-end-assets/images/product-images/03.jpg">
-                                        <img src="front-end-assets/images/product-images/03.jpg" class="img-fluid"
-                                             alt="">
-                                    </div>
-                                </div>
-                                <div class="col">
-                                    <div class="img-thumb-container overflow-hidden position-relative"
-                                         data-fancybox="gallery"
-                                         data-src="front-end-assets/images/product-images/04.jpg">
-                                        <img src="front-end-assets/images/product-images/04.jpg" class="img-fluid"
-                                             alt="">
-                                    </div>
-                                </div>
+                                @if(count($productVariation->images()) > 1)
+                                    @foreach($productVariation->images() as $image)
+                                        <div class="col">
+                                            <div class="img-thumb-container overflow-hidden position-relative"
+                                                 data-fancybox="gallery">
+                                                <img src="{{ $image->image_url }}" class="img-fluid"
+                                                     alt="">
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                @else
+                                    @foreach($productVariation->images() as $image)
+                                        <div class="col-12">
+                                            <div class="img-thumb-container overflow-hidden position-relative"
+                                                 data-fancybox="gallery">
+                                                <img src="{{ $image->image_url }}" class="img-fluid"
+                                                     alt="">
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                @endif
                             </div><!--end row-->
                         </div>
                     </div>
                 </div>
                 <div class="col-12 col-xl-5">
                     <div class="product-info">
-                        <h4 class="product-title fw-bold mb-1">Check Pink Kurta</h4>
-                        <p class="mb-0">Women Pink & Off-White Printed Kurta with Palazzos</p>
+                        <h4 class="product-title fw-bold mb-1">{{ $productVariation->product->name }}</h4>
                         <div class="product-rating">
                             <div class="hstack gap-2 border p-1 mt-3 width-content">
                                 <div><span class="rating-number">4.8</span><i
@@ -84,16 +137,15 @@ new #[Layout('layouts.front-end')] class extends Component {
                         </div>
                         <hr>
                         <div class="product-price d-flex align-items-center gap-3">
-                            <div class="h4 fw-bold">$458</div>
-                            <div class="h5 fw-light text-muted text-decoration-line-through">$2089</div>
-                            <div class="h4 fw-bold text-danger">(70% off)</div>
+                            <div class="h4 fw-bold">KES {{ $productVariation->price }}</div>
+                            {{--                            <div class="h5 fw-light text-muted text-decoration-line-through">$2089</div>--}}
+                            {{--                            <div class="h4 fw-bold text-danger">(70% off)</div>--}}
                         </div>
-                        <p class="fw-bold mb-0 mt-1 text-success">inclusive of all taxes</p>
+                        {{--                        <p class="fw-bold mb-0 mt-1 text-success">inclusive of all taxes</p>--}}
                         <hr class="my-3">
                         <div class="product-info">
                             <h6 class="fw-bold mb-3">Product Details</h6>
-                            <p style="font-size:14px;" class="mb-1">There are many variations of passages of Lorem
-                                Ipsum</p>
+                            <p style="font-size:14px;" class="mb-1">{{ $productVariation->product->description }}</p>
                         </div>
                         <hr class="my-3">
                         <div class="customer-ratings">
@@ -158,19 +210,23 @@ new #[Layout('layouts.front-end')] class extends Component {
                     <div class="card mt-5 shadow-none mb-3 mb-lg-0 border-3 border-success">
                         <div class="card-body">
                             <div class="list-group list-group-flush">
-                                <a style="font-weight:bold;" href="account-dashboard.html"
+                                <a target="_blank" style="font-weight:bold;"
+                                   href="https://api.whatsapp.com/send?phone=254798692688"
                                    class="list-group-item d-flex  text-success  justify-content-between align-items-center bg-orange">WhatsApp
                                     <i class='bx bxl-whatsapp fs-5'></i></a>
-                                <a style="font-weight:bold;" href="account-orders.html"
+                                <a style="font-weight:bold;" href="#"
                                    class="list-group-item text-success d-flex justify-content-between align-items-center bg-transparent">Call
                                     - 0798692688 <i class='bx bx-phone-call fs-5'></i></a>
-                                <a style="font-weight:bold;" href="account-downloads.html"
-                                   class="list-group-item d-flex text-success justify-content-between align-items-center bg-transparent">Request
-                                    CallBack
-                                    <i class='bx bx-phone-incoming fs-5'></i></a>
-                                <a style="font-weight:bold;" href="account-downloads.html"
-                                   class="list-group-item d-flex text-success justify-content-between align-items-center bg-transparent">Send Email<i
-                                        class='bx bx-mail-send fs-5'></i></a>
+                                <button style="font-weight:bold;" type="button"
+                                        class=" list-group-item d-flex text-success justify-content-between align-items-center bg-transparent "
+                                        data-bs-toggle="modal" data-bs-target="#callBackModal">
+                                    Request CallBack <i class='bx bx-phone-incoming fs-5'></i>
+                                </button>
+                                <button style="font-weight:bold;" type="button"
+                                        class=" list-group-item d-flex text-success justify-content-between align-items-center bg-transparent "
+                                        data-bs-toggle="modal" data-bs-target="#sendEmailModal">
+                                    Send Email <i class='bx bx-mail-send fs-5'></i>
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -188,13 +244,6 @@ new #[Layout('layouts.front-end')] class extends Component {
                         <a class="nav-link" data-bs-toggle="tab" href="#discription">
                             <div class="d-flex align-items-center">
                                 <div class="tab-title text-uppercase fw-500">Description</div>
-                            </div>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" data-bs-toggle="tab" href="#more-info">
-                            <div class="d-flex align-items-center">
-                                <div class="tab-title text-uppercase fw-500">More Info</div>
                             </div>
                         </a>
                     </li>
@@ -230,16 +279,6 @@ new #[Layout('layouts.front-end')] class extends Component {
                             salvia cillum iphone.</p>
                         <p class="mb-1">Seitan aliquip quis cardigan american apparel, butcher voluptate nisi.</p>
                     </div>
-                    <div class="tab-pane fade" id="more-info">
-                        <p>Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid.
-                            Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan
-                            four loko farm-to-table craft beer twee. Qui photo booth letterpress, commodo enim craft
-                            beer mlkshk aliquip jean shorts ullamco ad vinyl cillum PBR. Homo nostrud organic, assumenda
-                            labore aesthetic magna delectus mollit. Keytar helvetica VHS salvia yr, vero magna velit
-                            sapiente labore stumptown. Vegan fanny pack odio cillum wes anderson 8-bit, sustainable jean
-                            shorts beard ut DIY ethical culpa terry richardson biodiesel. Art party scenester stumptown,
-                            tumblr butcher vero sint qui sapiente accusamus tattooed echo park.</p>
-                    </div>
                     <div class="tab-pane fade" id="tags">
                         <div class="tags-box d-flex flex-wrap gap-2">
                             <a href="javascript:;" class="btn btn-ecomm btn-outline-dark">Cloths</a>
@@ -264,117 +303,54 @@ new #[Layout('layouts.front-end')] class extends Component {
                                 <div class="product-review">
                                     <h5 class="mb-4">3 Reviews For The Product</h5>
                                     <div class="review-list">
-                                        <div class="d-flex align-items-start">
-                                            <div class="review-user">
-                                                <img src="assets/images/avatars/avatar-1.png" width="65" height="65"
-                                                     class="rounded-circle" alt=""/>
-                                            </div>
-                                            <div class="review-content ms-3">
-                                                <div class="rates cursor-pointer fs-6">
-                                                    <i class="bx bxs-star text-warning"></i>
-                                                    <i class="bx bxs-star text-warning"></i>
-                                                    <i class="bx bxs-star text-warning"></i>
-                                                    <i class="bx bxs-star text-warning"></i>
-                                                    <i class="bx bxs-star text-warning"></i>
+                                        @foreach($product_ratings as $product_rating)
+                                            <div class="d-flex align-items-start">
+                                                <div class="review-user">
+                                                    <div
+                                                        style="padding-top:5px; background-color:{{ $product_rating->generateRandomColor() }}; width:65px; height:65px; font-size: 35px; font-weight:bold;"
+                                                        class="rounded-circle text-white  text-center">
+                                                        {{ ucfirst(substr($product_rating->name, 0, 1)) }}
+                                                    </div>
                                                 </div>
-                                                <div class="d-flex align-items-center mb-2">
-                                                    <h6 class="mb-0">James Caviness</h6>
-                                                    <p class="mb-0 ms-auto">February 16, 2021</p>
+                                                <div class="review-content ms-3">
+                                                    <div class="rates cursor-pointer fs-6">
+                                                        @if($product_rating->ratings == '1')
+                                                            <i class="bx bxs-star text-warning"></i>
+                                                        @elseif($product_rating->ratings == '2')
+                                                            <i class="bx bxs-star text-warning"></i>
+                                                            <i class="bx bxs-star text-warning"></i>
+                                                        @elseif($product_rating->ratings == '3')
+                                                            <i class="bx bxs-star text-warning"></i>
+                                                            <i class="bx bxs-star text-warning"></i>
+                                                            <i class="bx bxs-star text-warning"></i>
+                                                        @elseif($product_rating->ratings == '4')
+                                                            <i class="bx bxs-star text-warning"></i>
+                                                            <i class="bx bxs-star text-warning"></i>
+                                                            <i class="bx bxs-star text-warning"></i>
+                                                            <i class="bx bxs-star text-warning"></i>
+                                                        @elseif($product_rating->ratings == '5')
+                                                            <i class="bx bxs-star text-warning"></i>
+                                                            <i class="bx bxs-star text-warning"></i>
+                                                            <i class="bx bxs-star text-warning"></i>
+                                                            <i class="bx bxs-star text-warning"></i>
+                                                            <i class="bx bxs-star text-warning"></i>
+                                                        @endif
+                                                    </div>
+                                                    <div style="min-width: 200px"
+                                                         class="d-flex  justify-content-between mb-2">
+                                                        <h6 style="font-weight:bold;"
+                                                            class="mb-0">{{ ucfirst($product_rating->name) }}</h6>
+                                                        <h6 class="mb-0">{{ $product_rating->created_at->format('d-m-Y')}}</h6>
+                                                    </div>
+                                                    <p>{{ $product_rating->comments }}</p>
                                                 </div>
-                                                <p>Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache
-                                                    cliche tempor, williamsburg carles vegan helvetica. Reprehenderit
-                                                    butcher retro keffiyeh dreamcatcher synth. Cosby sweater eu banh mi,
-                                                    qui irure terry richardson ex squid. Aliquip placeat salvia cillum
-                                                    iphone. Seitan aliquip quis cardigan</p>
                                             </div>
-                                        </div>
-                                        <hr/>
-                                        <div class="d-flex align-items-start">
-                                            <div class="review-user">
-                                                <img src="assets/images/avatars/avatar-2.png" width="65" height="65"
-                                                     class="rounded-circle" alt=""/>
-                                            </div>
-                                            <div class="review-content ms-3">
-                                                <div class="rates cursor-pointer fs-6">
-                                                    <i class="bx bxs-star text-warning"></i>
-                                                    <i class="bx bxs-star text-warning"></i>
-                                                    <i class="bx bxs-star text-warning"></i>
-                                                    <i class="bx bxs-star text-warning"></i>
-                                                    <i class="bx bxs-star text-warning"></i>
-                                                </div>
-                                                <div class="d-flex align-items-center mb-2">
-                                                    <h6 class="mb-0">David Buckley</h6>
-                                                    <p class="mb-0 ms-auto">February 22, 2021</p>
-                                                </div>
-                                                <p>Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache
-                                                    cliche tempor, williamsburg carles vegan helvetica. Reprehenderit
-                                                    butcher retro keffiyeh dreamcatcher synth. Cosby sweater eu banh mi,
-                                                    qui irure terry richardson ex squid. Aliquip placeat salvia cillum
-                                                    iphone. Seitan aliquip quis cardigan</p>
-                                            </div>
-                                        </div>
-                                        <hr/>
-                                        <div class="d-flex align-items-start">
-                                            <div class="review-user">
-                                                <img src="assets/images/avatars/avatar-3.png" width="65" height="65"
-                                                     class="rounded-circle" alt=""/>
-                                            </div>
-                                            <div class="review-content ms-3">
-                                                <div class="rates cursor-pointer fs-6">
-                                                    <i class="bx bxs-star text-warning"></i>
-                                                    <i class="bx bxs-star text-warning"></i>
-                                                    <i class="bx bxs-star text-warning"></i>
-                                                    <i class="bx bxs-star text-warning"></i>
-                                                    <i class="bx bxs-star text-warning"></i>
-                                                </div>
-                                                <div class="d-flex align-items-center mb-2">
-                                                    <h6 class="mb-0">Peter Costanzo</h6>
-                                                    <p class="mb-0 ms-auto">February 26, 2021</p>
-                                                </div>
-                                                <p>Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache
-                                                    cliche tempor, williamsburg carles vegan helvetica. Reprehenderit
-                                                    butcher retro keffiyeh dreamcatcher synth. Cosby sweater eu banh mi,
-                                                    qui irure terry richardson ex squid. Aliquip placeat salvia cillum
-                                                    iphone. Seitan aliquip quis cardigan</p>
-                                            </div>
-                                        </div>
+                                            <hr/>
+                                        @endforeach
                                     </div>
                                 </div>
                             </div>
-                            <div class="col col-lg-4">
-                                <div class="add-review border">
-                                    <div class="form-body p-3">
-                                        <h4 class="mb-4">Write a Review</h4>
-                                        <div class="mb-3">
-                                            <label class="form-label">Your Name</label>
-                                            <input type="text" class="form-control rounded-0">
-                                        </div>
-                                        <div class="mb-3">
-                                            <label class="form-label">Your Email</label>
-                                            <input type="text" class="form-control rounded-0">
-                                        </div>
-                                        <div class="mb-3">
-                                            <label class="form-label">Rating</label>
-                                            <select class="form-select rounded-0">
-                                                <option selected>Choose Rating</option>
-                                                <option value="1">1</option>
-                                                <option value="2">2</option>
-                                                <option value="3">3</option>
-                                                <option value="3">4</option>
-                                                <option value="3">5</option>
-                                            </select>
-                                        </div>
-                                        <div class="mb-3">
-                                            <label class="form-label">Example textarea</label>
-                                            <textarea class="form-control rounded-0" rows="3"></textarea>
-                                        </div>
-                                        <div class="d-grid">
-                                            <button type="button" class="btn btn-dark btn-ecomm">Submit a Review
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            <livewire:pages.front-end.components.create-rating :productVariation="$productVariation"/>
                         </div>
                         <!--end row-->
                     </div>
@@ -568,10 +544,122 @@ new #[Layout('layouts.front-end')] class extends Component {
                 </div>
                 <!--end row-->
             </div>
+
+
+            <!-- sendEmail-->
+            <div class="modal fade" id="sendEmailModal" tabindex="-1" aria-labelledby="sendEmailModalLabel"
+                 aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="sendEmailModalLabel">Send Email</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form>
+                                <div class="row">
+                                    <div class="col-md-6 col-sm-12">
+                                        <div class="mb-3">
+                                            <label for="first_name" class="form-label">First Name</label>
+                                            <input type="email" class="form-control" id="exampleInputEmail1"
+                                                   aria-describedby="emailHelp">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-sm-12">
+                                        <div class="mb-3">
+                                            <label for="last_name" class="form-label">Last Name</label>
+                                            <input type="email" class="form-control" id="exampleInputEmail1"
+                                                   aria-describedby="emailHelp">
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="mb-3">
+                                            <label for="phone_number" class="form-label">Email</label>
+                                            <input type="email" class="form-control" id="exampleInputEmail1"
+                                                   aria-describedby="emailHelp">
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="mb-3">
+                                            <label for="phone_number" class="form-label">Message</label>
+                                            <textarea rows="4" class="form-control" id="exampleInputEmail1"
+                                                      aria-describedby="emailHelp"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </section>
     <!--end product details-->
 
-
+    <!-- callBackModal -->
+    <div wire:ignore.self class="modal fade" id="callBackModal" tabindex="-1" aria-labelledby="callBackModalLabel"
+         aria-hidden="true">
+        <form wire:submit="createCallBack">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="callBackModalLabel">Request CallBack</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-6 col-sm-12">
+                                <div class="mb-3">
+                                    <label for="first_name" class="form-label">First Name</label>
+                                    <input type="text" id="first_name" class="form-control" wire:model="first_name">
+                                    @error('first_name')
+                                    <p class="text-danger text-xs pt-1"> {{ $message }} </p>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-12">
+                                <div class="mb-3">
+                                    <label for="last_name" class="form-label">Last Name</label>
+                                    <input type="text" id="last_name" class="form-control" wire:model="last_name">
+                                    @error('last_name')
+                                    <p class="text-danger text-xs pt-1"> {{ $message }} </p>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="mb-3">
+                                    <label for="phone_number" class="form-label">Phone Number</label>
+                                    <input type="text" id="phone_number" class="form-control" wire:model="phone_number">
+                                    @error('phone_number')
+                                    <p class="text-danger text-xs pt-1"> {{ $message }} </p>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save changes</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
 </div>
+@push('js')
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"></script>
+    <script>
+        window.addEventListener('close-modal', event => {
+            $('#callBackModal').modal('hide');
+            location.reload();
+        });
+    </script>
+@endpush
 <!--end page content-->
