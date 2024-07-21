@@ -17,6 +17,8 @@ new #[Layout('layouts.front-end')] class extends Component {
     public $last_name;
     public $phone_number;
     public $product_ratings;
+    public $product_avg_rating;
+    public $product_count_rating;
 
 
     public function rules()
@@ -31,13 +33,16 @@ new #[Layout('layouts.front-end')] class extends Component {
     public function mount(ProductVariation $product_variation)
     {
         $this->productVariation = $product_variation;
-        $this->getRatings();
+        $this->getRatings($product_variation);
+        $this->product_avg_rating = Rating::where('product_variation_id', $product_variation->id)->avg('ratings');
+        $this->product_count_rating = Rating::where('product_variation_id', $product_variation->id)->count();
+
     }
 
     #[On('get-ratings')]
-    public function getRatings()
+    public function getRatings($product_variation)
     {
-        $this->product_ratings = Rating::all();
+        $this->product_ratings = Rating::where('product_variation_id', $product_variation->id)->get();
 
     }
 
@@ -129,10 +134,10 @@ new #[Layout('layouts.front-end')] class extends Component {
                         <h4 class="product-title fw-bold mb-1">{{ $productVariation->product->name }}</h4>
                         <div class="product-rating">
                             <div class="hstack gap-2 border p-1 mt-3 width-content">
-                                <div><span class="rating-number">4.8</span><i
+                                <div><span class="rating-number">{{ $product_avg_rating }}</span><i
                                         class="bi bi-star-fill ms-1 text-warning"></i></div>
                                 <div class="vr"></div>
-                                <div>162 Ratings</div>
+                                <div>{{ $product_count_rating }} Ratings</div>
                             </div>
                         </div>
                         <hr>
@@ -152,9 +157,32 @@ new #[Layout('layouts.front-end')] class extends Component {
                             <h6 class="fw-bold mb-3">Customer Ratings</h6>
                             <div class="d-flex align-items-center gap-4 gap-lg-5 flex-wrap flex-lg-nowrap">
                                 <div class="">
-                                    <h1 class="mb-2 fw-bold">4.8<span class="fs-5 ms-2 text-warning"><i
-                                                class="bi bi-star-fill"></i></span></h1>
-                                    <p class="mb-0">3.8k Verified Buyers</p>
+                                    <h1 class="mb-2 fw-bold">{{ $product_avg_rating }}<span
+                                            class="fs-5 ms-2 text-warning">
+                                            @if(($product_avg_rating >= 1) && ($product_avg_rating < 2))
+                                                <i class="bi bi-star-fill"></i>
+                                            @elseif(($product_avg_rating >= 2) && ($product_avg_rating < 3))
+                                                <i class="bi bi-star-fill"></i>
+                                                <i class="bi bi-star-fill"></i>
+                                            @elseif(($product_avg_rating >= 3) && ($product_avg_rating < 4))
+                                                <i class="bi bi-star-fill"></i>
+                                                <i class="bi bi-star-fill"></i>
+                                                <i class="bi bi-star-fill"></i>
+                                            @elseif(($product_avg_rating >= 4) && ($product_avg_rating < 5))
+                                                <i class="bi bi-star-fill"></i>
+                                                <i class="bi bi-star-fill"></i>
+                                                <i class="bi bi-star-fill"></i>
+                                                <i class="bi bi-star-fill"></i>
+                                            @elseif($product_avg_rating == 5)
+                                                <i class="bi bi-star-fill"></i>
+                                                <i class="bi bi-star-fill"></i>
+                                                <i class="bi bi-star-fill"></i>
+                                                <i class="bi bi-star-fill"></i>
+                                                <i class="bi bi-star-fill"></i>
+                                            @endif
+                                        </span>
+                                    </h1>
+
                                 </div>
                                 <div class="vr d-none d-lg-block"></div>
                                 <div class="w-100">
@@ -257,7 +285,8 @@ new #[Layout('layouts.front-end')] class extends Component {
                     <li class="nav-item">
                         <a class="nav-link active" data-bs-toggle="tab" href="#reviews">
                             <div class="d-flex align-items-center">
-                                <div class="tab-title text-uppercase fw-500">(3) Reviews</div>
+                                <div class="tab-title text-uppercase fw-500">({{ count($product_ratings) }}) Reviews
+                                </div>
                             </div>
                         </a>
                     </li>
@@ -301,18 +330,18 @@ new #[Layout('layouts.front-end')] class extends Component {
                         <div class="row">
                             <div class="col col-lg-8">
                                 <div class="product-review">
-                                    <h5 class="mb-4">3 Reviews For The Product</h5>
+                                    <h5 class="mb-4">{{ count($product_ratings) }} Reviews For The Product</h5>
                                     <div class="review-list">
                                         @foreach($product_ratings as $product_rating)
-                                            <div class="d-flex align-items-start">
-                                                <div class="review-user">
+                                            <div class="row">
+                                                <div class="col-md-1">
                                                     <div
                                                         style="padding-top:5px; background-color:{{ $product_rating->generateRandomColor() }}; width:65px; height:65px; font-size: 35px; font-weight:bold;"
                                                         class="rounded-circle text-white  text-center">
                                                         {{ ucfirst(substr($product_rating->name, 0, 1)) }}
                                                     </div>
                                                 </div>
-                                                <div class="review-content ms-3">
+                                                <div class="col-md-11 px-4">
                                                     <div class="rates cursor-pointer fs-6">
                                                         @if($product_rating->ratings == '1')
                                                             <i class="bx bxs-star text-warning"></i>
@@ -336,8 +365,8 @@ new #[Layout('layouts.front-end')] class extends Component {
                                                             <i class="bx bxs-star text-warning"></i>
                                                         @endif
                                                     </div>
-                                                    <div style="min-width: 200px"
-                                                         class="d-flex  justify-content-between mb-2">
+                                                    <div
+                                                        class="d-flex w-100 justify-content-between  mb-2">
                                                         <h6 style="font-weight:bold;"
                                                             class="mb-0">{{ ucfirst($product_rating->name) }}</h6>
                                                         <h6 class="mb-0">{{ $product_rating->created_at->format('d-m-Y')}}</h6>

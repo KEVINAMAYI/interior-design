@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Rating;
+use Illuminate\Support\Facades\DB;
 use Livewire\Volt\Component;
 
 new class extends Component {
@@ -31,15 +32,27 @@ new class extends Component {
 
         $this->validate();
 
-        Rating::create([
-            'product_variation_id' => $this->product_variation_id,
-            'name' => $this->name,
-            'email' => $this->email,
-            'ratings' => $this->ratings,
-            'comments' => $this->comments
-        ]);
+        DB::beginTransaction();
+        try {
 
-        $this->dispatch('get-ratings');
+            Rating::create([
+                'product_variation_id' => $this->product_variation_id,
+                'name' => $this->name,
+                'email' => $this->email,
+                'ratings' => $this->ratings,
+                'comments' => $this->comments
+            ]);
+            DB::commit();
+
+            $this->reset();
+            $this->dispatch('get-ratings');
+
+        } catch (Exception $exception) {
+
+            DB::rollBack();
+
+        }
+
     }
 
 }; ?>
@@ -72,8 +85,8 @@ new class extends Component {
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
-                        <option value="3">4</option>
-                        <option value="3">5</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
                     </select>
                     @error('ratings')
                     <p class="text-danger text-xs pt-1"> {{ $message }} </p>
