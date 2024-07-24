@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\ProductVariation;
 use App\Models\Rating;
 use Illuminate\Support\Facades\DB;
 use Livewire\Volt\Component;
@@ -12,9 +13,9 @@ new class extends Component {
     public $comments;
     public $product_variation_id;
 
-    public function mount($productVariation)
+    public function mount($product_variation_id)
     {
-        $this->product_variation_id = $productVariation->id;
+        $this->product_variation_id = $product_variation_id;
     }
 
     public function rules()
@@ -23,7 +24,8 @@ new class extends Component {
             'name' => 'required',
             'email' => 'required',
             'ratings' => 'required',
-            'comments' => 'required'
+            'comments' => 'required',
+            'product_variation_id' => 'required'
         ];
     }
 
@@ -44,8 +46,8 @@ new class extends Component {
             ]);
             DB::commit();
 
-            $this->reset();
-            $this->dispatch('get-ratings');
+            $this->resetExcept('product_variation_id');
+            $this->dispatch('get-ratings',  $this->product_variation_id);
 
         } catch (Exception $exception) {
 

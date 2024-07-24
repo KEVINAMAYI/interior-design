@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('email');
             $table->string('ratings');
             $table->longText('comments');
-            $table->unsignedBigInteger('product_variation_id');
+            $table->foreignId('product_variation_id')->constrained()->cascadeOnDelete();
             $table->timestamps();
         });
     }
