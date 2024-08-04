@@ -28,12 +28,12 @@ new class extends Component {
 
         $validated = $this->validate([
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', Rule::unique(User::class)->ignore($user->id)],
+            'send-email.blade.php' => ['required', 'string', 'lowercase', 'send-email.blade.php', 'max:255', Rule::unique(User::class)->ignore($user->id)],
         ]);
 
         $user->fill($validated);
 
-        if ($user->isDirty('email')) {
+        if ($user->isDirty('send-email.blade.php')) {
             $user->email_verified_at = null;
         }
 
@@ -43,7 +43,7 @@ new class extends Component {
     }
 
     /**
-     * Send an email verification notification to the current user.
+     * Send an send-email.blade.php verification notification to the current user.
      */
     public function sendVerification(): void
     {
@@ -68,7 +68,7 @@ new class extends Component {
                 {{ __('Profile Information') }}
             </h2>
             <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">
-                {{ __("Update your account's profile information and email address.") }}
+                {{ __("Update your account's profile information and send-email.blade.php address.") }}
             </p>
         </div>
         <div class="card-body p-4">
@@ -93,17 +93,17 @@ new class extends Component {
                     @if (auth()->user() instanceof \Illuminate\Contracts\Auth\MustVerifyEmail && ! auth()->user()->hasVerifiedEmail())
                         <div>
                             <p class="text-sm mt-2 text-gray-800 dark:text-gray-200">
-                                {{ __('Your email address is unverified.') }}
+                                {{ __('Your send-email.blade.php address is unverified.') }}
 
                                 <button wire:click.prevent="sendVerification"
                                         class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800">
-                                    {{ __('Click here to re-send the verification email.') }}
+                                    {{ __('Click here to re-send the verification send-email.blade.php.') }}
                                 </button>
                             </p>
 
                             @if (session('status') === 'verification-link-sent')
                                 <p class="mt-2 font-medium text-sm text-green-600 dark:text-green-400">
-                                    {{ __('A new verification link has been sent to your email address.') }}
+                                    {{ __('A new verification link has been sent to your send-email.blade.php address.') }}
                                 </p>
                             @endif
                         </div>

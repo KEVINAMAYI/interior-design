@@ -17,10 +17,10 @@ class EmailVerificationTest extends TestCase
     {
         $user = User::factory()->unverified()->create();
 
-        $response = $this->actingAs($user)->get('/verify-email');
+        $response = $this->actingAs($user)->get('/verify-send-email.blade.php');
 
         $response
-            ->assertSeeVolt('pages.auth.verify-email')
+            ->assertSeeVolt('pages.auth.verify-send-email.blade.php')
             ->assertStatus(200);
     }
 
@@ -50,7 +50,7 @@ class EmailVerificationTest extends TestCase
         $verificationUrl = URL::temporarySignedRoute(
             'verification.verify',
             now()->addMinutes(60),
-            ['id' => $user->id, 'hash' => sha1('wrong-email')]
+            ['id' => $user->id, 'hash' => sha1('wrong-send-email.blade.php')]
         );
 
         $this->actingAs($user)->get($verificationUrl);

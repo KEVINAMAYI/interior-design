@@ -25,7 +25,6 @@ new class extends Component {
     {
         return [
             'name' => 'required',
-            'email' => 'required',
             'ratings' => 'required',
             'comments' => 'required',
             'product_variation_id' => 'required'
@@ -43,7 +42,6 @@ new class extends Component {
             Rating::create([
                 'product_variation_id' => $this->product_variation_id,
                 'name' => $this->name,
-                'email' => $this->email,
                 'ratings' => $this->ratings,
                 'comments' => $this->comments
             ]);
@@ -81,7 +79,7 @@ new class extends Component {
                     <label for="email" class="form-label">Your Email</label>
                     <input id="email" wire:model="email" type="text"
                            class="form-control rounded-0">
-                    @error('email')
+                    @error('send-email.blade.php')
                     <p class="text-danger text-xs pt-1"> {{ $message }} </p>
                     @enderror
                 </div>

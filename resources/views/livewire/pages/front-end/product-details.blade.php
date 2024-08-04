@@ -581,57 +581,8 @@ new #[Layout('layouts.front-end')] class extends Component {
                 <!--end row-->
             </div>
 
-
-            <!-- sendEmail-->
-            <div class="modal fade" id="sendEmailModal" tabindex="-1" aria-labelledby="sendEmailModalLabel"
-                 aria-hidden="true">
-                <div class="modal-dialog modal-lg">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="sendEmailModalLabel">Send Email</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <form>
-                                <div class="row">
-                                    <div class="col-md-6 col-sm-12">
-                                        <div class="mb-3">
-                                            <label for="first_name" class="form-label">First Name</label>
-                                            <input type="email" class="form-control" id="exampleInputEmail1"
-                                                   aria-describedby="emailHelp">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6 col-sm-12">
-                                        <div class="mb-3">
-                                            <label for="last_name" class="form-label">Last Name</label>
-                                            <input type="email" class="form-control" id="exampleInputEmail1"
-                                                   aria-describedby="emailHelp">
-                                        </div>
-                                    </div>
-                                    <div class="col-12">
-                                        <div class="mb-3">
-                                            <label for="phone_number" class="form-label">Email</label>
-                                            <input type="email" class="form-control" id="exampleInputEmail1"
-                                                   aria-describedby="emailHelp">
-                                        </div>
-                                    </div>
-                                    <div class="col-12">
-                                        <div class="mb-3">
-                                            <label for="phone_number" class="form-label">Message</label>
-                                            <textarea rows="4" class="form-control" id="exampleInputEmail1"
-                                                      aria-describedby="emailHelp"></textarea>
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">Save changes</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            {{--Email Modal--}}
+            <livewire:pages.front-end.components.send-email/>
 
         </div>
     </section>
@@ -694,8 +645,11 @@ new #[Layout('layouts.front-end')] class extends Component {
     <script>
         window.addEventListener('close-modal', event => {
             $('#callBackModal').modal('hide');
+            $('#sendEmailModal').modal('hide');
             location.reload();
         });
+
+
     </script>
 @endpush
 <!--end page content-->

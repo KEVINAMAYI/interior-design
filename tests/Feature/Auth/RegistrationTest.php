@@ -23,7 +23,7 @@ class RegistrationTest extends TestCase
     {
         $component = Volt::test('pages.auth.register')
             ->set('name', 'Test User')
-            ->set('email', 'test@example.com')
+            ->set('send-email.blade.php', 'test@example.com')
             ->set('password', 'password')
             ->set('password_confirmation', 'password');
 

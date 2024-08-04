@@ -57,6 +57,13 @@ Route::middleware(['auth', 'verified'])->prefix('dashboard')->name('dashboard.')
         ->name('add-customer');
 
     /**
+     * CallBacks Routes
+     */
+    Volt::route('list-callbacks', 'pages.dashboard.callbacks.list-callbacks')
+        ->name('list-callbacks');
+
+
+    /**
      * Roles Routes
      */
     Volt::route('list-roles', 'pages.dashboard.roles.list-roles')

@@ -19,7 +19,7 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'user_name',
-        'email',
+        'send-email.blade.php',
         'password',
     ];
 

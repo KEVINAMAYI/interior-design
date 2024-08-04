@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('rates', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('email');
+            $table->string('send-email.blade.php');
             $table->string('ratings');
             $table->longText('comments');
             $table->foreignId('product_variation_id')->constrained()->cascadeOnDelete();
