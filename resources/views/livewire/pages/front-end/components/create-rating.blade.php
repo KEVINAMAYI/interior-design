@@ -3,9 +3,12 @@
 use App\Models\ProductVariation;
 use App\Models\Rating;
 use Illuminate\Support\Facades\DB;
+use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Volt\Component;
 
 new class extends Component {
+
+    use LivewireAlert;
 
     public $name;
     public $email;
@@ -48,10 +51,12 @@ new class extends Component {
 
             $this->resetExcept('product_variation_id');
             $this->dispatch('get-ratings',  $this->product_variation_id);
+            $this->alert('success','Ratings added successfully');
 
         } catch (Exception $exception) {
 
             DB::rollBack();
+            $this->alert('error','There was an error while adding product rating');
 
         }
 

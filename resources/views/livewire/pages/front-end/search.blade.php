@@ -161,7 +161,8 @@ new #[Layout('layouts.front-end')] class extends Component {
                     class="the-dropdown-list clients-list shadow-sm">
                     @if(!empty($products))
                         @foreach($products as $product)
-                            <a style="text-decoration:none; " href="{{ route('front-end.product-details') }}">
+                            <a style="text-decoration:none; "
+                               href="{{ route('front-end.shop-grid',['category_id' => $product['category_id'],'product_id' => $product['id']]) }}">
                                 <li wire:key="{{ $product['id'] }}"
                                     class="the-dropdown-item">
                                     {{ $product['name'] }}
@@ -209,7 +210,7 @@ new #[Layout('layouts.front-end')] class extends Component {
                     @foreach($search_products as $product)
                         <div class="col-lg-3 col-sm-6 col-md-6">
                             <div class="list-group list-group-flush search-categories">
-                                <a href="{{ route('front-end.product-details') }}"
+                                <a href="{{ route('front-end.shop-grid',['category_id' => $product->category->id,'product_id' => 0]) }}"
                                    class="list-group-item list-group-item-action py-3"><i
                                         class="bi bi-arrow-up-right me-2"></i>{{ $product->name }}</a>
                             </div>

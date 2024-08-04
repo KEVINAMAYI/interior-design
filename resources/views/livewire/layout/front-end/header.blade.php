@@ -60,7 +60,7 @@ new class extends Component {
                         </div>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" wire:navigate
+                        <a class="nav-link"
                            href="{{ route('front-end.shop-grid',['category_id' => 0,'product_id' => 0]) }}">
                             Shop
                         </a>

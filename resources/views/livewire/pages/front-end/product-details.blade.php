@@ -4,6 +4,7 @@ use App\Models\CallBack;
 use App\Models\ProductVariation;
 use App\Models\Rating;
 use Illuminate\Support\Facades\DB;
+use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\On;
 use Livewire\Volt\Component;
@@ -11,6 +12,8 @@ use Illuminate\Validation\Rule;
 
 
 new #[Layout('layouts.front-end')] class extends Component {
+
+    use LivewireAlert;
 
     public $productVariation;
     public $first_name;
@@ -33,17 +36,16 @@ new #[Layout('layouts.front-end')] class extends Component {
     public function mount(ProductVariation $product_variation)
     {
         $this->productVariation = $product_variation;
-        $this->getRatings($product_variation->id);
-        $this->product_avg_rating = Rating::where('product_variation_id', $product_variation->id)->avg('ratings');
-        $this->product_count_rating = Rating::where('product_variation_id', $product_variation->id)->count();
-
+        $this->getRatingsData($product_variation->id);
     }
 
-    #[On('get-ratings')]
-    public function getRatings($product_variation)
-    {
-        $this->product_ratings = Rating::where('product_variation_id', $product_variation)->get();
 
+    #[On('get-ratings')]
+    public function getRatingsData($product_variation_id)
+    {
+        $this->product_avg_rating = Rating::where('product_variation_id', $product_variation_id)->avg('ratings');
+        $this->product_count_rating = Rating::where('product_variation_id', $product_variation_id)->count();
+        $this->product_ratings = Rating::where('product_variation_id', $product_variation_id)->get();
     }
 
 
@@ -55,16 +57,19 @@ new #[Layout('layouts.front-end')] class extends Component {
         try {
             CallBack::create([
                 'first_name' => $this->first_name,
-                'last_name' => $this->first_name,
-                'phone_number' => $this->first_name
+                'last_name' => $this->last_name,
+                'phone_number' => $this->phone_number
             ]);
 
             $this->reset(['first_name', 'last_name', 'phone_number']);
             $this->dispatch('close-modal');
+
             DB::commit();
+            $this->alert('success', 'CallBack was requested Successfully');
 
         } catch (Exception $exception) {
             DB::rollBack();
+            $this->alert('error', 'CallBack request failed');
         }
 
     }
@@ -76,6 +81,7 @@ new #[Layout('layouts.front-end')] class extends Component {
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 @endpush
+
 <!--start page content-->
 <div class="page-content">
 
@@ -143,10 +149,10 @@ new #[Layout('layouts.front-end')] class extends Component {
                         <hr>
                         <div class="product-price d-flex align-items-center gap-3">
                             <div class="h4 fw-bold">KES {{ $productVariation->price }}</div>
-                            {{--                            <div class="h5 fw-light text-muted text-decoration-line-through">$2089</div>--}}
-                            {{--                            <div class="h4 fw-bold text-danger">(70% off)</div>--}}
+                            <div class="h5 fw-light text-muted text-decoration-line-through">$2089</div>
+                            <div class="h4 fw-bold text-danger">(70% off)</div>
                         </div>
-                        {{--                        <p class="fw-bold mb-0 mt-1 text-success">inclusive of all taxes</p>--}}
+                        <p class="fw-bold mb-0 mt-1 text-success">inclusive of all taxes</p>
                         <hr class="my-3">
                         <div class="product-info">
                             <h6 class="fw-bold mb-3">Product Details</h6>
@@ -191,46 +197,46 @@ new #[Layout('layouts.front-end')] class extends Component {
                                         <div class=""><i class="bi bi-star"></i></div>
                                         <div class="progress flex-grow-1 mb-0 rounded-0" style="height: 4px;">
                                             <div class="progress-bar bg-success" role="progressbar"
-                                                 style="width: {{ \App\Models\Rating::where('product_variation_id', $productVariation->id)->where('ratings',5)->count() / \App\Models\Rating::where('product_variation_id', $productVariation->id)->count() * 100   }}%"></div>
+                                                 style="width: {{ \App\Models\Rating::where('product_variation_id', $productVariation->id)->where('ratings',5)->count() ?? 0 / \App\Models\Rating::where('product_variation_id', $productVariation->id)->count() * 100   }}%"></div>
                                         </div>
-                                        <p class="mb-0">{{ \App\Models\Rating::where('product_variation_id', $productVariation->id)->where('ratings',5)->count() }}</p>
+                                        <p class="mb-0">{{ \App\Models\Rating::where('product_variation_id', $productVariation->id)->where('ratings',5)->count() ?? 0 }}</p>
                                     </div>
                                     <div class="rating-wrrap hstack gap-2 align-items-center">
                                         <p class="mb-0">4</p>
                                         <div class=""><i class="bi bi-star"></i></div>
                                         <div class="progress flex-grow-1 mb-0 rounded-0" style="height: 4px;">
                                             <div class="progress-bar bg-success" role="progressbar"
-                                                 style="width: {{ \App\Models\Rating::where('product_variation_id', $productVariation->id)->where('ratings',4)->count() / \App\Models\Rating::where('product_variation_id', $productVariation->id)->count() * 100   }}%"></div>
+                                                 style="width: {{ \App\Models\Rating::where('product_variation_id', $productVariation->id)->where('ratings',4)->count() ?? 0 / \App\Models\Rating::where('product_variation_id', $productVariation->id)->count() * 100   }}%"></div>
                                         </div>
-                                        <p class="mb-0">{{ \App\Models\Rating::where('product_variation_id', $productVariation->id)->where('ratings',4)->count() }}</p>
+                                        <p class="mb-0">{{ \App\Models\Rating::where('product_variation_id', $productVariation->id)->where('ratings',4)->count() ?? 0 }}</p>
                                     </div>
                                     <div class="rating-wrrap hstack gap-2 align-items-center">
                                         <p class="mb-0">3</p>
                                         <div class=""><i class="bi bi-star"></i></div>
                                         <div class="progress flex-grow-1 mb-0 rounded-0" style="height: 4px;">
                                             <div class="progress-bar bg-info" role="progressbar"
-                                                 style="width: {{ \App\Models\Rating::where('product_variation_id', $productVariation->id)->where('ratings',3)->count() / \App\Models\Rating::where('product_variation_id', $productVariation->id)->count() * 100   }}%"></div>
+                                                 style="width: {{ \App\Models\Rating::where('product_variation_id', $productVariation->id)->where('ratings',3)->count() ?? 0 /  \App\Models\Rating::where('product_variation_id', $productVariation->id)->count() * 100   }}%"></div>
                                         </div>
-                                        <p class="mb-0">{{ \App\Models\Rating::where('product_variation_id', $productVariation->id)->where('ratings',3)->count() }}</p>
+                                        <p class="mb-0">{{ \App\Models\Rating::where('product_variation_id', $productVariation->id)->where('ratings',3)->count() ?? 0 }}</p>
                                     </div>
-                                    <div class="rating-wrrap hstack gap-2 align-items-center">
-                                        <p class="mb-0">2</p>
-                                        <div class=""><i class="bi bi-star"></i></div>
-                                        <div class="progress flex-grow-1 mb-0 rounded-0" style="height: 4px;">
-                                            <div class="progress-bar bg-warning" role="progressbar"
-                                                 style="width: {{ \App\Models\Rating::where('product_variation_id', $productVariation->id)->where('ratings',2)->count() / \App\Models\Rating::where('product_variation_id', $productVariation->id)->count() * 100   }}%"></div>
-                                        </div>
-                                        <p class="mb-0">{{ \App\Models\Rating::where('product_variation_id', $productVariation->id)->where('ratings',2)->count() }}</p>
-                                    </div>
-                                    <div class="rating-wrrap hstack gap-2 align-items-center">
-                                        <p class="mb-0">1</p>
-                                        <div class=""><i class="bi bi-star"></i></div>
-                                        <div class="progress flex-grow-1 mb-0 rounded-0" style="height: 4px;">
-                                            <div class="progress-bar bg-danger" role="progressbar"
-                                                 style="width: {{ \App\Models\Rating::where('product_variation_id', $productVariation->id)->where('ratings',1)->count() / \App\Models\Rating::where('product_variation_id', $productVariation->id)->count() * 100   }}%"></div>
-                                        </div>
-                                        <p class="mb-0">{{ \App\Models\Rating::where('product_variation_id', $productVariation->id)->where('ratings',1)->count() }}</p>
-                                    </div>
+                                    {{--                                    <div class="rating-wrrap hstack gap-2 align-items-center">--}}
+                                    {{--                                        <p class="mb-0">2</p>--}}
+                                    {{--                                        <div class=""><i class="bi bi-star"></i></div>--}}
+                                    {{--                                        <div class="progress flex-grow-1 mb-0 rounded-0" style="height: 4px;">--}}
+                                    {{--                                            <div class="progress-bar bg-warning" role="progressbar"--}}
+                                    {{--                                                 style="width: {{ \App\Models\Rating::where('product_variation_id', $productVariation->id)->where('ratings',2)->count() ?? 0 / \App\Models\Rating::where('product_variation_id', $productVariation->id)->count() * 100   }}%"></div>--}}
+                                    {{--                                        </div>--}}
+                                    {{--                                        <p class="mb-0">{{ \App\Models\Rating::where('product_variation_id', $productVariation->id)->where('ratings',2)->count() ?? 0 }}</p>--}}
+                                    {{--                                    </div>--}}
+                                    {{--                                    <div class="rating-wrrap hstack gap-2 align-items-center">--}}
+                                    {{--                                        <p class="mb-0">1</p>--}}
+                                    {{--                                        <div class=""><i class="bi bi-star"></i></div>--}}
+                                    {{--                                        <div class="progress flex-grow-1 mb-0 rounded-0" style="height: 4px;">--}}
+                                    {{--                                            <div class="progress-bar bg-danger" role="progressbar"--}}
+                                    {{--                                                 style="width: {{ \App\Models\Rating::where('product_variation_id', $productVariation->id)->where('ratings',1)->count() ?? 0 / \App\Models\Rating::where('product_variation_id', $productVariation->id)->count() * 100   }}%"></div>--}}
+                                    {{--                                        </div>--}}
+                                    {{--                                        <p class="mb-0">{{ \App\Models\Rating::where('product_variation_id', $productVariation->id)->where('ratings',1)->count() ?? 0 }}</p>--}}
+                                    {{--                                    </div>--}}
                                 </div>
                             </div>
                         </div>
@@ -379,7 +385,8 @@ new #[Layout('layouts.front-end')] class extends Component {
                                     </div>
                                 </div>
                             </div>
-                            @livewire('pages.front-end.components.create-rating', ['product_variation_id' => $productVariation->id])
+                            @livewire('pages.front-end.components.create-rating', ['product_variation_id' =>
+                            $productVariation->id])
                         </div>
                         <!--end row-->
                     </div>

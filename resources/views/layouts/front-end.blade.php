@@ -58,6 +58,10 @@
 <script data-navigate-once src="front-end-assets/js/index.js"></script>
 <script data-navigate-once src="front-end-assets/js/loader.js"></script>
 
+<!-- sweet alert js -->
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
 <!--Start of Tawk.to Script-->
 <script data-navigate-once>
     $(document).ready(function () {
@@ -79,6 +83,8 @@
 
 <!-- init js -->
 @stack('js')
+
+<x-livewire-alert::scripts/>
 
 </body>
 
