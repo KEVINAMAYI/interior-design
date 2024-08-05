@@ -12,7 +12,7 @@ use Livewire\Form;
 
 class LoginForm extends Form
 {
-    #[Validate('required|string|send-email.blade.php')]
+    #[Validate('required|string|email')]
     public string $email = '';
 
     #[Validate('required|string')]
@@ -30,11 +30,11 @@ class LoginForm extends Form
     {
         $this->ensureIsNotRateLimited();
 
-        if (! Auth::attempt($this->only(['send-email.blade.php', 'password']), $this->remember)) {
+        if (! Auth::attempt($this->only(['email', 'password']), $this->remember)) {
             RateLimiter::hit($this->throttleKey());
 
             throw ValidationException::withMessages([
-                'form.send-email.blade.php' => trans('auth.failed'),
+                'form.email' => trans('auth.failed'),
             ]);
         }
 
@@ -55,7 +55,7 @@ class LoginForm extends Form
         $seconds = RateLimiter::availableIn($this->throttleKey());
 
         throw ValidationException::withMessages([
-            'form.send-email.blade.php' => trans('auth.throttle', [
+            'form.email' => trans('auth.throttle', [
                 'seconds' => $seconds,
                 'minutes' => ceil($seconds / 60),
             ]),

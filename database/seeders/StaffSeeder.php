@@ -17,7 +17,7 @@ class StaffSeeder extends Seeder
     {
         User::insert([[
             'user_name' => 'Admin',
-            'send-email.blade.php' => 'admin@admin.com',
+            'email' => 'admin@admin.com',
             'password' => Hash::make('password'),
             'email_verified_at' => Carbon::now()
         ]]);

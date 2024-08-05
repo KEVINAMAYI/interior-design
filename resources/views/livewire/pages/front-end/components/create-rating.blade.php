@@ -79,7 +79,7 @@ new class extends Component {
                     <label for="email" class="form-label">Your Email</label>
                     <input id="email" wire:model="email" type="text"
                            class="form-control rounded-0">
-                    @error('send-email.blade.php')
+                    @error('email')
                     <p class="text-danger text-xs pt-1"> {{ $message }} </p>
                     @enderror
                 </div>

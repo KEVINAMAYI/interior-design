@@ -25,7 +25,7 @@ new #[Layout('layouts.guest')] class extends Component
     {
         $this->token = $token;
 
-        $this->email = request()->string('send-email.blade.php');
+        $this->email = request()->string('email');
     }
 
     /**
@@ -35,7 +35,7 @@ new #[Layout('layouts.guest')] class extends Component
     {
         $this->validate([
             'token' => ['required'],
-            'send-email.blade.php' => ['required', 'string', 'send-email.blade.php'],
+            'email' => ['required', 'string', 'email'],
             'password' => ['required', 'string', 'confirmed', Rules\Password::defaults()],
         ]);
 
@@ -43,7 +43,7 @@ new #[Layout('layouts.guest')] class extends Component
         // will update the password on an actual user model and persist it to the
         // database. Otherwise we will parse the error and return the response.
         $status = Password::reset(
-            $this->only('send-email.blade.php', 'password', 'password_confirmation', 'token'),
+            $this->only('email', 'password', 'password_confirmation', 'token'),
             function ($user) {
                 $user->forceFill([
                     'password' => Hash::make($this->password),
@@ -58,7 +58,7 @@ new #[Layout('layouts.guest')] class extends Component
         // the application's home authenticated view. If there is an error we can
         // redirect them back to where they came from with their error message.
         if ($status != Password::PASSWORD_RESET) {
-            $this->addError('send-email.blade.php', __($status));
+            $this->addError('email', __($status));
 
             return;
         }

@@ -86,7 +86,7 @@
 
         .container {
             max-width: 600px;
-            /* Set a max-width for the send-email.blade.php container */
+            /* Set a max-width for the email container */
         }
 
         .card {
@@ -222,7 +222,7 @@
 
         @media (max-width: 600px) {
 
-            /* Use media queries to make the send-email.blade.php responsive */
+            /* Use media queries to make the email responsive */
             .container {
                 width: 100%;
                 /* Use the full width on small screens */

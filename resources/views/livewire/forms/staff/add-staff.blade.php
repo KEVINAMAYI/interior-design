@@ -26,7 +26,7 @@ new class extends Component {
         return [
             'first_name' => 'required',
             'last_name' => 'required',
-            'send-email.blade.php' => 'required|unique:staff',
+            'email' => 'required|unique:staff',
             'phone_number' => 'required|unique:staff',
             'user_name' => 'required',
             'password' => 'required',
@@ -44,7 +44,7 @@ new class extends Component {
 
             User::create([
                 'user_name' => $this->user_name,
-                'send-email.blade.php' => $this->email,
+                'email' => $this->email,
                 'password' => $this->password,
             ])->staff()->create([
                 'first_name' => $this->first_name,
@@ -102,7 +102,7 @@ new class extends Component {
                             <label for="email" class="form-label">Email</label>
                             <input wire:model="email" id="email" class="form-control" type="text"
                                     autofocus autocomplete="email">
-                            @error('send-email.blade.php')
+                            @error('email')
                             <p class="text-danger text-xs pt-1"> {{ $message }} </p>
                             @enderror
 

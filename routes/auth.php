@@ -19,10 +19,10 @@ Route::middleware('guest')->group(function () {
 });
 
 Route::middleware('auth')->group(function () {
-    Volt::route('verify-send-email.blade.php', 'pages.auth.verify-send-email.blade.php')
+    Volt::route('verify-email', 'pages.auth.verify-email')
         ->name('verification.notice');
 
-    Route::get('verify-send-email.blade.php/{id}/{hash}', VerifyEmailController::class)
+    Route::get('verify-email/{id}/{hash}', VerifyEmailController::class)
         ->middleware(['signed', 'throttle:6,1'])
         ->name('verification.verify');
 

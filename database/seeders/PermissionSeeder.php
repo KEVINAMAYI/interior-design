@@ -77,7 +77,7 @@ class PermissionSeeder extends Seeder
 
         $adminRole->syncPermissions(Permission::all());
 
-        $admin = User::where('send-email.blade.php', 'admin@admin.com')->first();
+        $admin = User::where('email', 'admin@admin.com')->first();
 
         if ($admin && !$admin->hasRole($adminRole)) {
             $admin->assignRole($adminRole);

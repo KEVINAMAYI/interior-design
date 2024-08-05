@@ -9,7 +9,7 @@ use Livewire\Volt\Component;
 new #[Layout('layouts.guest')] class extends Component
 {
     /**
-     * Send an send-email.blade.php verification notification to the user.
+     * Send an email verification notification to the user.
      */
     public function sendVerification(): void
     {
@@ -37,12 +37,12 @@ new #[Layout('layouts.guest')] class extends Component
 
 <div>
     <div class="mb-4 text-sm text-gray-600 dark:text-gray-400">
-        {{ __('Thanks for signing up! Before getting started, could you verify your send-email.blade.php address by clicking on the link we just emailed to you? If you didn\'t receive the send-email.blade.php, we will gladly send you another.') }}
+        {{ __('Thanks for signing up! Before getting started, could you verify your email address by clicking on the link we just emailed to you? If you didn\'t receive the email, we will gladly send you another.') }}
     </div>
 
     @if (session('status') == 'verification-link-sent')
         <div class="mb-4 font-medium text-sm text-green-600 dark:text-green-400">
-            {{ __('A new verification link has been sent to the send-email.blade.php address you provided during registration.') }}
+            {{ __('A new verification link has been sent to the email address you provided during registration.') }}
         </div>
     @endif
 
