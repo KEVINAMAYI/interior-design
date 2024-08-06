@@ -49,6 +49,20 @@ class TagSeeder extends Seeder
                 'slug' => 'trending',
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()
+            ],
+            [
+                'name' => 'Special Offer',
+                'description' => 'special offer',
+                'slug' => 'special_offer',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ],
+            [
+                'name' => 'New Arrivals',
+                'description' => 'new arrivals',
+                'slug' => 'new_arrivals',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
             ]
         ];
 

@@ -18,9 +18,9 @@ class DatabaseSeeder extends Seeder
         /*
          * uncomment only for testing
          */
-        User::factory()->count(5)->create();
-        Staff::factory()->count(5)->create();
-        Customer::factory()->count(5)->create();
+//        User::factory()->count(5)->create();
+//        Staff::factory()->count(5)->create();
+//        Customer::factory()->count(5)->create();
 
         $this->call([
             CategorySeeder::class,
