@@ -27,6 +27,7 @@ new class extends Component {
             'name' => 'required',
             'ratings' => 'required',
             'comments' => 'required',
+            'email' => 'required',
             'product_variation_id' => 'required'
         ];
     }
@@ -43,6 +44,7 @@ new class extends Component {
                 'product_variation_id' => $this->product_variation_id,
                 'name' => $this->name,
                 'ratings' => $this->ratings,
+                'email' => $this->email,
                 'comments' => $this->comments
             ]);
             DB::commit();
