@@ -419,8 +419,9 @@ new #[Layout('layouts.front-end')] class extends Component {
                                                 <div class="card border shadow-none">
                                                     <div class="position-relative overflow-hidden">
                                                         <a href="{{ route('front-end.product-details',$product_variation->id) }}">
-                                                            <img src="front-end-assets/images/trending-product/01.webp"
-                                                                 class="card-img-top" alt="...">
+                                                            <img
+                                                                src="{{ asset('storage/'.$product_variation->images()[0]->image_url) }}"
+                                                                class="card-img-top" alt="...">
                                                         </a>
                                                     </div>
                                                     <div class="card-body border-top">
@@ -429,12 +430,13 @@ new #[Layout('layouts.front-end')] class extends Component {
                                                         {{--                                                    <p class="mb-0 product-short-name">{{ $product->description }}</p>--}}
                                                         <div class="product-price d-flex align-items-center gap-2 mt-2">
                                                             <div class="h6 fw-bold">
-                                                                KES {{ $product_variation->price }}</div>
-                                                            <div
-                                                                class="h6 fw-light text-muted text-decoration-line-through">
-                                                                $2089
+                                                                KES {{ $product_variation->price }}
                                                             </div>
-                                                            <div class="h6 fw-bold text-danger">(70% off)</div>
+{{--                                                            <div--}}
+{{--                                                                class="h6 fw-light text-muted text-decoration-line-through">--}}
+{{--                                                                $2089--}}
+{{--                                                            </div>--}}
+{{--                                                            <div class="h6 fw-bold text-danger">(70% off)</div>--}}
                                                         </div>
                                                     </div>
                                                 </div>
@@ -446,7 +448,7 @@ new #[Layout('layouts.front-end')] class extends Component {
                                                 <div class="card border shadow-none">
                                                     <div class="position-relative overflow-hidden">
                                                         <a href="{{ route('front-end.product-details', $product_variation->id) }}">
-                                                            <img src="front-end-assets/images/trending-product/01.webp"
+                                                            <img  src="{{ asset('storage/'.$product_variation->images()[0]->image_url) }}"
                                                                  class="card-img-top" alt="...">
                                                         </a>
                                                     </div>
@@ -456,12 +458,13 @@ new #[Layout('layouts.front-end')] class extends Component {
                                                         {{--                                                    <p class="mb-0 product-short-name">{{ $product->description }}</p>--}}
                                                         <div class="product-price d-flex align-items-center gap-2 mt-2">
                                                             <div class="h6 fw-bold">
-                                                                KES {{ $product_variation->price }}</div>
-                                                            <div
-                                                                class="h6 fw-light text-muted text-decoration-line-through">
-                                                                $2089
+                                                                KES {{ $product_variation->price }}
                                                             </div>
-                                                            <div class="h6 fw-bold text-danger">(70% off)</div>
+{{--                                                            <div--}}
+{{--                                                                class="h6 fw-light text-muted text-decoration-line-through">--}}
+{{--                                                                $2089--}}
+{{--                                                            </div>--}}
+{{--                                                            <div class="h6 fw-bold text-danger">(70% off)</div>--}}
                                                         </div>
                                                     </div>
                                                 </div>

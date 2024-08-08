@@ -53,7 +53,7 @@ class ProductSeeder extends Seeder
 
         //insert the variation prices and images
         foreach ($artificial_grass_carpet_variations as $variation) {
-            $this->createProductVariation($artificial_grass_carpet_product->id, ['test.jpg'], $variation->id);
+            $this->createProductVariation($artificial_grass_carpet_product->id, ['product_variation_images/artificial_grass_carpets.png'], $variation->id);
         }
     }
 
@@ -113,7 +113,7 @@ class ProductSeeder extends Seeder
             ]);
 
             foreach ($wall_to_wall_carpets_variations as $variation) {
-                $this->createProductVariation($product->id, ['test.jpg'], $variation->id);
+                $this->createProductVariation($product->id,['product_variation_images/wall_to_wall_carpets.png'], $variation->id);
             }
         }
     }
@@ -157,11 +157,11 @@ class ProductSeeder extends Seeder
         $curtain_rails_variations = Variation::where('name', 'durability')->get();
 
         foreach ($curtain_rod_variations as $variation) {
-            $this->createProductVariation($curtain_rod_product->id, ['test.jpg'], $variation->id);
+            $this->createProductVariation($curtain_rod_product->id, ['product_variation_images/curtain_rods_and_rails.png'], $variation->id);
         }
 
         foreach ($curtain_rails_variations as $variation) {
-            $this->createProductVariation($curtain_rail_product->id, ['test.jpg'], $variation->id);
+            $this->createProductVariation($curtain_rail_product->id, ['product_variation_images/curtain_rods_and_rails.png'], $variation->id);
         }
 
     }
@@ -210,7 +210,7 @@ class ProductSeeder extends Seeder
                 'tag_id' => Tag::where('slug', 'featured_products')->first()->id
             ]);
 
-            $this->createProductVariation($product->id, ['test.jpg']);
+            $this->createProductVariation($product->id, ['product_variation_images/wall_decor.png']);
         }
     }
 
@@ -234,7 +234,7 @@ class ProductSeeder extends Seeder
             'tag_id' => Tag::where('slug', 'featured_products')->first()->id
         ]);
 
-        $this->createProductVariation($product->id, ['test.jpg']);
+        $this->createProductVariation($product->id, ['product_variation_images/artificial_flowers.png']);
     }
 
     /**
@@ -275,7 +275,7 @@ class ProductSeeder extends Seeder
                 'tag_id' => Tag::where('slug', 'featured_products')->first()->id
             ]);
 
-            $this->createProductVariation($product->id, ['test.jpg']);
+            $this->createProductVariation($product->id, ['product_variation_images/office_blinds.png']);
         }
     }
 
@@ -317,7 +317,7 @@ class ProductSeeder extends Seeder
                 'tag_id' => Tag::where('slug', 'featured_products')->first()->id
             ]);
 
-            $this->createProductVariation($product->id, ['test.jpg']);
+            $this->createProductVariation($product->id, ['product_variation_images/anti_slip_mats.png']);
 
         }
     }

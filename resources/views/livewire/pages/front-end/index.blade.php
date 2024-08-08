@@ -236,7 +236,7 @@ new #[Layout('layouts.front-end')] class extends Component {
                                     <div class="card">
                                         <div class="position-relative overflow-hidden">
                                             <a href="{{ route('front-end.product-details',$product_variation->id) }}">
-                                                <img src="front-end-assets/images/new-arrival/01.webp"
+                                                <img src="{{ asset('storage/' . $product_variation->images()[0]->image_url) }}"
                                                      class="card-img-top"
                                                      alt="...">
                                             </a>
@@ -248,7 +248,8 @@ new #[Layout('layouts.front-end')] class extends Component {
                                                     <h6 class="mb-1"> {{ empty($product_variation->variation()) ? '' :  str_replace('_',' ',$product_variation->variation()->name).'-'.$product_variation->variation()->value }}</h6>
                                                 </div>
                                                 <div class="icon-wishlist">
-                                                    <a href="{{ route('front-end.product-details',$product_variation->id) }}"><i class="bx bx-heart"></i></a>
+                                                    <a href="{{ route('front-end.product-details',$product_variation->id) }}"><i
+                                                            class="bx bx-heart"></i></a>
                                                 </div>
                                             </div>
                                             <div class="cursor-pointer rating mt-2">
@@ -289,7 +290,8 @@ new #[Layout('layouts.front-end')] class extends Component {
                                                     <h6 class="mb-1"> {{ empty($product_variation->variation()) ? '' :  str_replace('_',' ',$product_variation->variation()->name).'-'.$product_variation->variation()->value }}</h6>
                                                 </div>
                                                 <div class="icon-wishlist">
-                                                    <a href="{{ route('front-end.product-details',$product_variation->id) }}"><i class="bx bx-heart"></i></a>
+                                                    <a href="{{ route('front-end.product-details',$product_variation->id) }}"><i
+                                                            class="bx bx-heart"></i></a>
                                                 </div>
                                             </div>
                                             <div class="cursor-pointer rating mt-2">
@@ -330,7 +332,8 @@ new #[Layout('layouts.front-end')] class extends Component {
                                                     <h6 class="mb-1"> {{ empty($product_variation->variation()) ? '' :  str_replace('_',' ',$product_variation->variation()->name).'-'.$product_variation->variation()->value }}</h6>
                                                 </div>
                                                 <div class="icon-wishlist">
-                                                    <a href="{{ route('front-end.product-details',$product_variation->id) }}"><i class="bx bx-heart"></i></a>
+                                                    <a href="{{ route('front-end.product-details',$product_variation->id) }}"><i
+                                                            class="bx bx-heart"></i></a>
                                                 </div>
                                             </div>
                                             <div class="cursor-pointer rating mt-2">
@@ -371,7 +374,8 @@ new #[Layout('layouts.front-end')] class extends Component {
                                                     <h6 class="mb-1"> {{ empty($product_variation->variation()) ? '' :  str_replace('_',' ',$product_variation->variation()->name).'-'.$product_variation->variation()->value }}</h6>
                                                 </div>
                                                 <div class="icon-wishlist">
-                                                    <a href="{{ route('front-end.product-details',$product_variation->id) }}"><i class="bx bx-heart"></i></a>
+                                                    <a href="{{ route('front-end.product-details',$product_variation->id) }}"><i
+                                                            class="bx bx-heart"></i></a>
                                                 </div>
                                             </div>
                                             <div class="cursor-pointer rating mt-2">
@@ -412,7 +416,8 @@ new #[Layout('layouts.front-end')] class extends Component {
                                                     <h6 class="mb-1"> {{ empty($product_variation->variation()) ? '' :  str_replace('_',' ',$product_variation->variation()->name).'-'.$product_variation->variation()->value }}</h6>
                                                 </div>
                                                 <div class="icon-wishlist">
-                                                    <a href="{{ route('front-end.product-details',$product_variation->id) }}"><i class="bx bx-heart"></i></a>
+                                                    <a href="{{ route('front-end.product-details',$product_variation->id) }}"><i
+                                                            class="bx bx-heart"></i></a>
                                                 </div>
                                             </div>
                                             <div class="cursor-pointer rating mt-2">
