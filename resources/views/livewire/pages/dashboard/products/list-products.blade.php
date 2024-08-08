@@ -1,16 +1,36 @@
 <?php
 
 use App\Models\Product;
+use App\Models\ProductVariation;
+use Illuminate\Support\Facades\DB;
+use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Attributes\Layout;
 use Livewire\Volt\Component;
 
 new #[Layout('layouts.dashboard')] class extends Component {
+
+    use LivewireAlert;
 
     public function with()
     {
         return [
             'products' => Product::with('product_variations')->get()
         ];
+    }
+
+    public function deleteProduct($product_id)
+    {
+        try {
+            DB::beginTransaction();
+            Product::where('id', $product_id)->delete();
+            DB::commit();
+            $this->alert('success', 'Product Deleted Successfully');
+
+        } catch (Exception $exception) {
+            DB::rollBack();
+            $this->alert('error', $exception->getMessage());
+        }
+
     }
 
 }; ?>
@@ -48,17 +68,27 @@ new #[Layout('layouts.dashboard')] class extends Component {
                                             @foreach($product->product_variations as $product_variation)
                                                 <tr>
                                                     <td>{{ strtoupper($product->name) }}</td>
-                                                    <td>{{ $product->description }}</td>
+                                                    <td style="word-wrap: break-word; white-space: normal;">{{ $product->description }}</td>
                                                     <td>{{ $product->category->name }}</td>
                                                     <td>{{ empty($product_variation->variation()) ? 'None' :  $product_variation->variation()->name.'-'.$product_variation->variation()->value }}</td>
                                                     <td>{{ $product_variation->price }}</td>
                                                     <td>
                                                         <div class="btn-group">
-                                                            <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Action <i class="mdi mdi-chevron-down"></i></button>
+                                                            <button type="button"
+                                                                    class="btn btn-primary dropdown-toggle"
+                                                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                                                Action <i class="mdi mdi-chevron-down"></i></button>
                                                             <div class="dropdown-menu">
-                                                                <a class="dropdown-item" href="#"> <i class="mdi mdi-eye font-size-16"></i> View</a>
-                                                                <a class="dropdown-item" href="#"> <i class="mdi mdi-pencil font-size-16"></i> Edit </a>
-                                                                <a class="dropdown-item" href="#"> <i class="mdi mdi-trash-can font-size-16"></i> Delete</a>
+                                                                <a class="dropdown-item" href="#"> <i
+                                                                        class="mdi mdi-eye font-size-16"></i> View</a>
+                                                                <a class="dropdown-item" href="#"> <i
+                                                                        class="mdi mdi-pencil font-size-16"></i> Edit
+                                                                </a>
+                                                                <button class="dropdown-item"
+                                                                        wire:click="deleteProduct({{ $product->id }})">
+                                                                    <i class="mdi mdi-trash-can font-size-16"></i>
+                                                                    Delete
+                                                                </button>
                                                             </div>
                                                         </div>
                                                     </td>

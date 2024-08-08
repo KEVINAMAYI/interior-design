@@ -4,8 +4,10 @@ namespace Database\Seeders;
 
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\ProductTag;
 use App\Models\ProductVariation;
 use App\Models\ProductVariationImage;
+use App\Models\Tag;
 use App\Models\Variation;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -38,6 +40,12 @@ class ProductSeeder extends Seeder
             'name' => 'Artificial Grass Carpet',
             'description' => 'artificial grass carpet',
             'category_id' => $this->getCategoryId('grass_carpet')
+        ]);
+
+        //insert initial product tag
+        ProductTag::create([
+            'product_id' => $artificial_grass_carpet_product->id,
+            'tag_id' => Tag::where('slug', 'featured_products')->first()->id
         ]);
 
         //get variations for the artificial grass carpet
@@ -98,6 +106,12 @@ class ProductSeeder extends Seeder
         foreach ($wall_to_wall_carpets_products as $wall_to_wall_carpets_product) {
             $product = Product::create($wall_to_wall_carpets_product);
 
+            //insert initial product tag
+            ProductTag::create([
+                'product_id' => $product->id,
+                'tag_id' => Tag::where('slug', 'featured_products')->first()->id
+            ]);
+
             foreach ($wall_to_wall_carpets_variations as $variation) {
                 $this->createProductVariation($product->id, ['test.jpg'], $variation->id);
             }
@@ -119,10 +133,22 @@ class ProductSeeder extends Seeder
             'category_id' => $curtain_rod_category_id
         ]);
 
+        //insert initial product tag
+        ProductTag::create([
+            'product_id' => $curtain_rod_product->id,
+            'tag_id' => Tag::where('slug', 'featured_products')->first()->id
+        ]);
+
         $curtain_rail_product = Product::create([
             'name' => 'Curtain Rail',
             'description' => 'curtain rail',
             'category_id' => $curtain_rod_category_id
+        ]);
+
+        //insert initial product tag
+        ProductTag::create([
+            'product_id' => $curtain_rail_product->id,
+            'tag_id' => Tag::where('slug', 'featured_products')->first()->id
         ]);
 
         //get variations for the curtain rods and rails
@@ -175,7 +201,15 @@ class ProductSeeder extends Seeder
         ];
 
         foreach ($wall_decor_products as $wall_decor_product) {
+
             $product = Product::create($wall_decor_product);
+
+            //insert initial product tag
+            ProductTag::create([
+                'product_id' => $product->id,
+                'tag_id' => Tag::where('slug', 'featured_products')->first()->id
+            ]);
+
             $this->createProductVariation($product->id, ['test.jpg']);
         }
     }
@@ -192,6 +226,12 @@ class ProductSeeder extends Seeder
             'name' => 'Artificial Flowers',
             'description' => 'artificial flowers',
             'category_id' => $artificial_flowers_category_id
+        ]);
+
+        //insert initial product tag
+        ProductTag::create([
+            'product_id' => $product->id,
+            'tag_id' => Tag::where('slug', 'featured_products')->first()->id
         ]);
 
         $this->createProductVariation($product->id, ['test.jpg']);
@@ -226,7 +266,15 @@ class ProductSeeder extends Seeder
         ];
 
         foreach ($office_blinds_products as $office_blinds_product) {
+
             $product = Product::create($office_blinds_product);
+
+            //insert initial product tag
+            ProductTag::create([
+                'product_id' => $product->id,
+                'tag_id' => Tag::where('slug', 'featured_products')->first()->id
+            ]);
+
             $this->createProductVariation($product->id, ['test.jpg']);
         }
     }
@@ -260,7 +308,15 @@ class ProductSeeder extends Seeder
         ];
 
         foreach ($anti_slips_mats_products as $anti_slips_mats_product) {
+
             $product = Product::create($anti_slips_mats_product);
+
+            //insert initial product tag
+            ProductTag::create([
+                'product_id' => $product->id,
+                'tag_id' => Tag::where('slug', 'featured_products')->first()->id
+            ]);
+
             $this->createProductVariation($product->id, ['test.jpg']);
 
         }

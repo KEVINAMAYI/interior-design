@@ -248,7 +248,7 @@ new #[Layout('layouts.front-end')] class extends Component {
                                    href="https://api.whatsapp.com/send?phone=254798692688"
                                    class="list-group-item d-flex  text-success  justify-content-between align-items-center bg-orange">WhatsApp
                                     <i class='bx bxl-whatsapp fs-5'></i></a>
-                                <a style="font-weight:bold;" href="#"
+                                <a style="font-weight:bold;" href="tel:+254798692688"
                                    class="list-group-item text-success d-flex justify-content-between align-items-center bg-transparent">Call
                                     - 0798692688 <i class='bx bx-phone-call fs-5'></i></a>
                                 <button style="font-weight:bold;" type="button"

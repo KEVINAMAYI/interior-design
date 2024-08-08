@@ -30,6 +30,7 @@ new #[Layout('layouts.front-end')] class extends Component {
 
     public function getProductsByTag($products, $tag)
     {
+
         return $products->whereHas('tags', function ($q) use ($tag) {
             $q->where('slug', 'like', $tag);
         })->get();
@@ -183,7 +184,6 @@ new #[Layout('layouts.front-end')] class extends Component {
     </section>
     <!--end promotion-->
 
-
     <!--start tabular product-->
     <section class="product-tab-section section-padding bg-light">
         <div class="container">
@@ -235,15 +235,7 @@ new #[Layout('layouts.front-end')] class extends Component {
                                 <div class="col">
                                     <div class="card">
                                         <div class="position-relative overflow-hidden">
-                                            <div
-                                                class="product-options d-flex align-items-center justify-content-center gap-2 mx-auto position-absolute bottom-0 start-0 end-0">
-                                                <a href="javascript:;"><i class="bi bi-heart"></i></a>
-                                                <a href="javascript:;"><i class="bi bi-basket3"></i></a>
-                                                <a href="javascript:;" data-bs-toggle="modal"
-                                                   data-bs-target="#QuickViewModal"><i
-                                                        class="bi bi-zoom-in"></i></a>
-                                            </div>
-                                            <a href="product-details.html">
+                                            <a href="{{ route('front-end.product-details',$product_variation->id) }}">
                                                 <img src="front-end-assets/images/new-arrival/01.webp"
                                                      class="card-img-top"
                                                      alt="...">
@@ -253,10 +245,10 @@ new #[Layout('layouts.front-end')] class extends Component {
                                             <div class="d-flex align-items-center justify-content-between">
                                                 <div class="">
                                                     <p class="mb-1 product-short-name">{{ strtoupper( $product->name) }}</p>
-                                                    <h6 class="mb-0 fw-bold product-short-title">{{ strtoupper( $product_variation->variation()->name.'-'.$product_variation->variation()->value) }}</h6>
+                                                    <h6 class="mb-1"> {{ empty($product_variation->variation()) ? '' :  str_replace('_',' ',$product_variation->variation()->name).'-'.$product_variation->variation()->value }}</h6>
                                                 </div>
                                                 <div class="icon-wishlist">
-                                                    <a href="javascript:;"><i class="bx bx-heart"></i></a>
+                                                    <a href="{{ route('front-end.product-details',$product_variation->id) }}"><i class="bx bx-heart"></i></a>
                                                 </div>
                                             </div>
                                             <div class="cursor-pointer rating mt-2">
@@ -284,15 +276,7 @@ new #[Layout('layouts.front-end')] class extends Component {
                                 <div class="col">
                                     <div class="card">
                                         <div class="position-relative overflow-hidden">
-                                            <div
-                                                class="product-options d-flex align-items-center justify-content-center gap-2 mx-auto position-absolute bottom-0 start-0 end-0">
-                                                <a href="javascript:;"><i class="bi bi-heart"></i></a>
-                                                <a href="javascript:;"><i class="bi bi-basket3"></i></a>
-                                                <a href="javascript:;" data-bs-toggle="modal"
-                                                   data-bs-target="#QuickViewModal"><i
-                                                        class="bi bi-zoom-in"></i></a>
-                                            </div>
-                                            <a href="product-details.html">
+                                            <a href="{{ route('front-end.product-details',$product_variation->id) }}">
                                                 <img src="front-end-assets/images/new-arrival/01.webp"
                                                      class="card-img-top"
                                                      alt="...">
@@ -302,10 +286,10 @@ new #[Layout('layouts.front-end')] class extends Component {
                                             <div class="d-flex align-items-center justify-content-between">
                                                 <div class="">
                                                     <p class="mb-1 product-short-name">{{ strtoupper( $product->name) }}</p>
-                                                    <h6 class="mb-0 fw-bold product-short-title">{{ strtoupper( $product_variation->variation()->name.'-'.$product_variation->variation()->value) }}</h6>
+                                                    <h6 class="mb-1"> {{ empty($product_variation->variation()) ? '' :  str_replace('_',' ',$product_variation->variation()->name).'-'.$product_variation->variation()->value }}</h6>
                                                 </div>
                                                 <div class="icon-wishlist">
-                                                    <a href="javascript:;"><i class="bx bx-heart"></i></a>
+                                                    <a href="{{ route('front-end.product-details',$product_variation->id) }}"><i class="bx bx-heart"></i></a>
                                                 </div>
                                             </div>
                                             <div class="cursor-pointer rating mt-2">
@@ -333,15 +317,7 @@ new #[Layout('layouts.front-end')] class extends Component {
                                 <div class="col">
                                     <div class="card">
                                         <div class="position-relative overflow-hidden">
-                                            <div
-                                                class="product-options d-flex align-items-center justify-content-center gap-2 mx-auto position-absolute bottom-0 start-0 end-0">
-                                                <a href="javascript:;"><i class="bi bi-heart"></i></a>
-                                                <a href="javascript:;"><i class="bi bi-basket3"></i></a>
-                                                <a href="javascript:;" data-bs-toggle="modal"
-                                                   data-bs-target="#QuickViewModal"><i
-                                                        class="bi bi-zoom-in"></i></a>
-                                            </div>
-                                            <a href="product-details.html">
+                                            <a href="{{ route('front-end.product-details',$product_variation->id) }}">
                                                 <img src="front-end-assets/images/new-arrival/01.webp"
                                                      class="card-img-top"
                                                      alt="...">
@@ -351,10 +327,10 @@ new #[Layout('layouts.front-end')] class extends Component {
                                             <div class="d-flex align-items-center justify-content-between">
                                                 <div class="">
                                                     <p class="mb-1 product-short-name">{{ strtoupper( $product->name) }}</p>
-                                                    <h6 class="mb-0 fw-bold product-short-title">{{ strtoupper( $product_variation->variation()->name.'-'.$product_variation->variation()->value) }}</h6>
+                                                    <h6 class="mb-1"> {{ empty($product_variation->variation()) ? '' :  str_replace('_',' ',$product_variation->variation()->name).'-'.$product_variation->variation()->value }}</h6>
                                                 </div>
                                                 <div class="icon-wishlist">
-                                                    <a href="javascript:;"><i class="bx bx-heart"></i></a>
+                                                    <a href="{{ route('front-end.product-details',$product_variation->id) }}"><i class="bx bx-heart"></i></a>
                                                 </div>
                                             </div>
                                             <div class="cursor-pointer rating mt-2">
@@ -382,15 +358,7 @@ new #[Layout('layouts.front-end')] class extends Component {
                                 <div class="col">
                                     <div class="card">
                                         <div class="position-relative overflow-hidden">
-                                            <div
-                                                class="product-options d-flex align-items-center justify-content-center gap-2 mx-auto position-absolute bottom-0 start-0 end-0">
-                                                <a href="javascript:;"><i class="bi bi-heart"></i></a>
-                                                <a href="javascript:;"><i class="bi bi-basket3"></i></a>
-                                                <a href="javascript:;" data-bs-toggle="modal"
-                                                   data-bs-target="#QuickViewModal"><i
-                                                        class="bi bi-zoom-in"></i></a>
-                                            </div>
-                                            <a href="product-details.html">
+                                            <a href="{{ route('front-end.product-details',$product_variation->id) }}">
                                                 <img src="front-end-assets/images/new-arrival/01.webp"
                                                      class="card-img-top"
                                                      alt="...">
@@ -400,10 +368,10 @@ new #[Layout('layouts.front-end')] class extends Component {
                                             <div class="d-flex align-items-center justify-content-between">
                                                 <div class="">
                                                     <p class="mb-1 product-short-name">{{ strtoupper( $product->name) }}</p>
-                                                    <h6 class="mb-0 fw-bold product-short-title">{{ strtoupper( $product_variation->variation()->name.'-'.$product_variation->variation()->value) }}</h6>
+                                                    <h6 class="mb-1"> {{ empty($product_variation->variation()) ? '' :  str_replace('_',' ',$product_variation->variation()->name).'-'.$product_variation->variation()->value }}</h6>
                                                 </div>
                                                 <div class="icon-wishlist">
-                                                    <a href="javascript:;"><i class="bx bx-heart"></i></a>
+                                                    <a href="{{ route('front-end.product-details',$product_variation->id) }}"><i class="bx bx-heart"></i></a>
                                                 </div>
                                             </div>
                                             <div class="cursor-pointer rating mt-2">
@@ -431,15 +399,7 @@ new #[Layout('layouts.front-end')] class extends Component {
                                 <div class="col">
                                     <div class="card">
                                         <div class="position-relative overflow-hidden">
-                                            <div
-                                                class="product-options d-flex align-items-center justify-content-center gap-2 mx-auto position-absolute bottom-0 start-0 end-0">
-                                                <a href="javascript:;"><i class="bi bi-heart"></i></a>
-                                                <a href="javascript:;"><i class="bi bi-basket3"></i></a>
-                                                <a href="javascript:;" data-bs-toggle="modal"
-                                                   data-bs-target="#QuickViewModal"><i
-                                                        class="bi bi-zoom-in"></i></a>
-                                            </div>
-                                            <a href="product-details.html">
+                                            <a href="{{ route('front-end.product-details',$product_variation->id) }}">
                                                 <img src="front-end-assets/images/new-arrival/01.webp"
                                                      class="card-img-top"
                                                      alt="...">
@@ -449,10 +409,10 @@ new #[Layout('layouts.front-end')] class extends Component {
                                             <div class="d-flex align-items-center justify-content-between">
                                                 <div class="">
                                                     <p class="mb-1 product-short-name">{{ strtoupper( $product->name) }}</p>
-                                                    <h6 class="mb-0 fw-bold product-short-title">{{ strtoupper( $product_variation->variation()->name.'-'.$product_variation->variation()->value) }}</h6>
+                                                    <h6 class="mb-1"> {{ empty($product_variation->variation()) ? '' :  str_replace('_',' ',$product_variation->variation()->name).'-'.$product_variation->variation()->value }}</h6>
                                                 </div>
                                                 <div class="icon-wishlist">
-                                                    <a href="javascript:;"><i class="bx bx-heart"></i></a>
+                                                    <a href="{{ route('front-end.product-details',$product_variation->id) }}"><i class="bx bx-heart"></i></a>
                                                 </div>
                                             </div>
                                             <div class="cursor-pointer rating mt-2">
@@ -500,7 +460,8 @@ new #[Layout('layouts.front-end')] class extends Component {
                             <img src="front-end-assets/images/sliders/s_5.png" class="img-fluid" alt="...">
                             <div class="card-body text-center">
                                 <h5 class="card-title">Carpets</h5>
-                                <p class="card-text">Wall to Wall Carpets and Artifical Carpets at wonderful prices on sale</p>
+                                <p class="card-text">Wall to Wall Carpets and Artifical Carpets at wonderful prices on
+                                    sale</p>
                                 <a href="javascript:;" class="btn btn-dark btn-ecomm">SHOP NOW</a>
                             </div>
                         </div>
@@ -512,7 +473,8 @@ new #[Layout('layouts.front-end')] class extends Component {
                                     <h5 class="card-title text-white">Summer Sale</h5>
                                     <p class="card-text text-uppercase fs-1 lh-1 mt-3 mb-2 text-white">Up to 30% off</p>
                                     <p class="card-text fs-5 text-white">On Top Interior Design Brands</p><a
-                                        href="javascript:;" style="color:white;" class="btn btn-white btn-ecomm">SHOP BY CATEGORY</a>
+                                        href="javascript:;" style="color:white;" class="btn btn-white btn-ecomm">SHOP BY
+                                        CATEGORY</a>
                                 </div>
                             </div>
                         </div>
@@ -522,7 +484,7 @@ new #[Layout('layouts.front-end')] class extends Component {
                             <img src="front-end-assets/images/categories/wall_decor.png" class="img-fluid" alt="...">
                             <div style="padding-top:40px;" class="card-body text-center">
                                 <h5 class="card-title fs-2 fw-bold text-uppercase">Wall Decor</h5>
-                                 <a href="javascript:;" class="btn btn-dark btn-ecomm">HURRY UP!</a>
+                                <a href="javascript:;" class="btn btn-dark btn-ecomm">HURRY UP!</a>
                             </div>
                         </div>
                     </div>
