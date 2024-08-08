@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\CallBack;
+use App\Models\Product;
 use App\Models\ProductVariation;
 use App\Models\Rating;
 use Illuminate\Support\Facades\DB;
@@ -22,6 +23,7 @@ new #[Layout('layouts.front-end')] class extends Component {
     public $product_ratings;
     public $product_avg_rating;
     public $product_count_rating;
+    public $similar_product;
 
 
     public function rules()
@@ -35,6 +37,7 @@ new #[Layout('layouts.front-end')] class extends Component {
 
     public function mount(ProductVariation $product_variation)
     {
+        $this->similar_product = Product::where('id',$product_variation->product->id)->first();
         $this->productVariation = $product_variation;
         $this->getRatingsData($product_variation->id);
     }
@@ -405,179 +408,43 @@ new #[Layout('layouts.front-end')] class extends Component {
             </div>
             <div class="similar-products">
                 <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4 row-cols-xxl-5 g-4">
-                    <div class="col">
-                        <a href="javascript:;">
-                            <div class="card rounded-0">
-                                <img src="front-end-assets/images/best-sellar/03.webp" alt=""
-                                     class="card-img-top rounded-0">
-                                <div class="card-body border-top">
-                                    <h5 class="mb-0 fw-bold product-short-title">Syndrona</h5>
-                                    <p class="mb-0 product-short-name">Color Printed Kurta</p>
-                                    <div class="product-price d-flex align-items-center gap-3 mt-2">
-                                        <div class="h6 fw-bold">$458</div>
-                                        <div class="h6 fw-light text-muted text-decoration-line-through">$2089</div>
-                                        <div class="h6 fw-bold text-danger">(70% off)</div>
+                    @foreach($similar_product->product_variations as $product_variation)
+                        <div class="col">
+                            <div class="card">
+                                <div class="position-relative overflow-hidden">
+                                    <a href="{{ route('front-end.product-details',$product_variation->id) }}">
+                                        <img src="{{ asset('storage/' . $product_variation->images()[0]->image_url) }}"
+                                             class="card-img-top"
+                                             alt="...">
+                                    </a>
+                                </div>
+                                <div class="card-body">
+                                    <div class="d-flex align-items-center justify-content-between">
+                                        <div class="">
+                                            <p class="mb-1 product-short-name">{{ strtoupper( $similar_product->name) }}</p>
+                                            <h6 class="mb-1"> {{ empty($product_variation->variation()) ? '' :  str_replace('_',' ',$product_variation->variation()->name).'-'.$product_variation->variation()->value }}</h6>
+                                        </div>
+                                        <div class="icon-wishlist">
+                                            <a href="{{ route('front-end.product-details',$product_variation->id) }}"><i
+                                                    class="bx bx-heart"></i></a>
+                                        </div>
+                                    </div>
+                                    <div class="cursor-pointer rating mt-2">
+                                        <i class="bx bxs-star text-warning"></i>
+                                        <i class="bx bxs-star text-warning"></i>
+                                        <i class="bx bxs-star text-warning"></i>
+                                        <i class="bx bxs-star text-warning"></i>
+                                        <i class="bx bxs-star text-warning"></i>
+                                    </div>
+                                    <div
+                                        class="product-price d-flex align-items-center justify-content-start gap-2 mt-2">
+                                        <div class="h6 fw-bold">KES {{ $product_variation->price }}</div>
                                     </div>
                                 </div>
                             </div>
-                        </a>
-                    </div>
-                    <div class="col">
-                        <a href="javascript:;">
-                            <div class="card rounded-0">
-                                <img src="front-end-assets/images/new-arrival/02.webp" alt=""
-                                     class="card-img-top rounded-0">
-                                <div class="card-body border-top">
-                                    <h5 class="mb-0 fw-bold product-short-title">Syndrona</h5>
-                                    <p class="mb-0 product-short-name">Color Printed Kurta</p>
-                                    <div class="product-price d-flex align-items-center gap-3 mt-2">
-                                        <div class="h6 fw-bold">$458</div>
-                                        <div class="h6 fw-light text-muted text-decoration-line-through">$2089</div>
-                                        <div class="h6 fw-bold text-danger">(70% off)</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col">
-                        <a href="javascript:;">
-                            <div class="card rounded-0">
-                                <img src="front-end-assets/images/best-sellar/02.webp" alt=""
-                                     class="card-img-top rounded-0">
-                                <div class="card-body border-top">
-                                    <h5 class="mb-0 fw-bold product-short-title">Syndrona</h5>
-                                    <p class="mb-0 product-short-name">Color Printed Kurta</p>
-                                    <div class="product-price d-flex align-items-center gap-3 mt-2">
-                                        <div class="h6 fw-bold">$458</div>
-                                        <div class="h6 fw-light text-muted text-decoration-line-through">$2089</div>
-                                        <div class="h6 fw-bold text-danger">(70% off)</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col">
-                        <a href="javascript:;">
-                            <div class="card rounded-0">
-                                <img src="front-end-assets/images/new-arrival/04.webp" alt=""
-                                     class="card-img-top rounded-0">
-                                <div class="card-body border-top">
-                                    <h5 class="mb-0 fw-bold product-short-title">Syndrona</h5>
-                                    <p class="mb-0 product-short-name">Color Printed Kurta</p>
-                                    <div class="product-price d-flex align-items-center gap-3 mt-2">
-                                        <div class="h6 fw-bold">$458</div>
-                                        <div class="h6 fw-light text-muted text-decoration-line-through">$2089</div>
-                                        <div class="h6 fw-bold text-danger">(70% off)</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col">
-                        <a href="javascript:;">
-                            <div class="card rounded-0">
-                                <img src="front-end-assets/images/new-arrival/05.webp" alt=""
-                                     class="card-img-top rounded-0">
-                                <div class="card-body border-top">
-                                    <h5 class="mb-0 fw-bold product-short-title">Syndrona</h5>
-                                    <p class="mb-0 product-short-name">Color Printed Kurta</p>
-                                    <div class="product-price d-flex align-items-center gap-3 mt-2">
-                                        <div class="h6 fw-bold">$458</div>
-                                        <div class="h6 fw-light text-muted text-decoration-line-through">$2089</div>
-                                        <div class="h6 fw-bold text-danger">(70% off)</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col">
-                        <a href="javascript:;">
-                            <div class="card rounded-0">
-                                <img src="front-end-assets/images/trending-product/03.webp" alt=""
-                                     class="card-img-top rounded-0">
-                                <div class="card-body border-top">
-                                    <h5 class="mb-0 fw-bold product-short-title">Syndrona</h5>
-                                    <p class="mb-0 product-short-name">Color Printed Kurta</p>
-                                    <div class="product-price d-flex align-items-center gap-3 mt-2">
-                                        <div class="h6 fw-bold">$458</div>
-                                        <div class="h6 fw-light text-muted text-decoration-line-through">$2089</div>
-                                        <div class="h6 fw-bold text-danger">(70% off)</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col">
-                        <a href="javascript:;">
-                            <div class="card rounded-0">
-                                <img src="front-end-assets/images/featured-products/05.webp" alt=""
-                                     class="card-img-top rounded-0">
-                                <div class="card-body border-top">
-                                    <h5 class="mb-0 fw-bold product-short-title">Syndrona</h5>
-                                    <p class="mb-0 product-short-name">Color Printed Kurta</p>
-                                    <div class="product-price d-flex align-items-center gap-3 mt-2">
-                                        <div class="h6 fw-bold">$458</div>
-                                        <div class="h6 fw-light text-muted text-decoration-line-through">$2089</div>
-                                        <div class="h6 fw-bold text-danger">(70% off)</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col">
-                        <a href="javascript:;">
-                            <div class="card rounded-0">
-                                <img src="front-end-assets/images/trending-product/05.webp" alt=""
-                                     class="card-img-top rounded-0">
-                                <div class="card-body border-top">
-                                    <h5 class="mb-0 fw-bold product-short-title">Syndrona</h5>
-                                    <p class="mb-0 product-short-name">Color Printed Kurta</p>
-                                    <div class="product-price d-flex align-items-center gap-3 mt-2">
-                                        <div class="h6 fw-bold">$458</div>
-                                        <div class="h6 fw-light text-muted text-decoration-line-through">$2089</div>
-                                        <div class="h6 fw-bold text-danger">(70% off)</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col">
-                        <a href="javascript:;">
-                            <div class="card rounded-0">
-                                <img src="front-end-assets/images/trending-product/01.webp" alt=""
-                                     class="card-img-top rounded-0">
-                                <div class="card-body border-top">
-                                    <h5 class="mb-0 fw-bold product-short-title">Syndrona</h5>
-                                    <p class="mb-0 product-short-name">Color Printed Kurta</p>
-                                    <div class="product-price d-flex align-items-center gap-3 mt-2">
-                                        <div class="h6 fw-bold">$458</div>
-                                        <div class="h6 fw-light text-muted text-decoration-line-through">$2089</div>
-                                        <div class="h6 fw-bold text-danger">(70% off)</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col">
-                        <a href="javascript:;">
-                            <div class="card rounded-0">
-                                <img src="front-end-assets/images/trending-product/02.webp" alt=""
-                                     class="card-img-top rounded-0">
-                                <div class="card-body border-top">
-                                    <h5 class="mb-0 fw-bold product-short-title">Syndrona</h5>
-                                    <p class="mb-0 product-short-name">Color Printed Kurta</p>
-                                    <div class="product-price d-flex align-items-center gap-3 mt-2">
-                                        <div class="h6 fw-bold">$458</div>
-                                        <div class="h6 fw-light text-muted text-decoration-line-through">$2089</div>
-                                        <div class="h6 fw-bold text-danger">(70% off)</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-
-
-                </div>
+                        </div>
+                    @endforeach
+                 </div>
                 <!--end row-->
             </div>
 
@@ -648,8 +515,6 @@ new #[Layout('layouts.front-end')] class extends Component {
             $('#sendEmailModal').modal('hide');
             location.reload();
         });
-
-
     </script>
 @endpush
 <!--end page content-->
