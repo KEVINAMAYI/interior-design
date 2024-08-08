@@ -64,12 +64,12 @@ new class extends Component {
                         <a href="javascript:;"><i class="bi bi-instagram"></i></a>
                     </div>
                     <div class="mb-3 mt-3">
-                        <h5 class="mb-0 fw-bold">Support</h5>
-                        <p class="mb-0 text-muted">support@example.com</p>
+                        <h5 class="mb-0 fw-bold">Email</h5>
+                        <p class="mb-0 text-muted">gsminterior08@gmail.com</p>
                     </div>
                     <div class="">
-                        <h5 class="mb-0 fw-bold">Toll Free</h5>
-                        <p class="mb-0 text-muted">1800- 8xx 2xx</p>
+                        <h5 class="mb-0 fw-bold">Phone</h5>
+                        <p class="mb-0 font-13">0798692688</p>
                     </div>
                 </div>
             </div>

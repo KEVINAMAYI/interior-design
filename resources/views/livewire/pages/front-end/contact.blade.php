@@ -83,10 +83,7 @@ new #[Layout('layouts.front-end')] class extends Component {
             </div>
 
             <div class="border p-3">
-                <iframe class="w-100"
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d805184.6320105711!2d144.49269039866502!3d-37.971237001538135!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad646b5d2ba4df7%3A0x4045675218ccd90!2sMelbourne%20VIC%2C%20Australia!5e0!3m2!1sen!2sin!4v1654250375825!5m2!1sen!2sin"
-                        height="450" allowfullscreen="" loading="lazy"
-                        referrerpolicy="no-referrer-when-downgrade"></iframe>
+                <iframe class="w-100" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3988.817857299221!2d36.82293997358516!3d-1.2831300356197837!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x182f112a045dad53%3A0xdb8d1c72f1ec4f4a!2sTaveta%20Court!5e0!3m2!1sen!2ske!4v1723110427984!5m2!1sen!2ske"  height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>
 
             <div class="separator my-3">
@@ -135,23 +132,22 @@ new #[Layout('layouts.front-end')] class extends Component {
                     <div class="p-3 border">
                         <div class="address mb-3">
                             <h5 class="mb-0 fw-bold">Address</h5>
-                            <p class="mb-0 font-12">123 Street Name, City, Australia</p>
+                            <p class="mb-0 font-12">Nairobi CBD Odeon, along Taveta Road, Taveta Court Building shop 305/306</p>
                         </div>
                         <hr>
                         <div class="phone mb-3">
                             <h5 class="mb-0 fw-bold">Phone</h5>
-                            <p class="mb-0 font-13">Toll Free (123) 472-796</p>
-                            <p class="mb-0 font-13">Mobile : +91-9910XXXX</p>
+                            <p class="mb-0 font-13">0798692688</p>
                         </div>
                         <hr>
                         <div class="email mb-3">
                             <h5 class="mb-0 fw-bold">Email</h5>
-                            <p class="mb-0 font-13">mail@example.com</p>
+                            <p class="mb-0 font-13">gsminterior08@gmail.com</p>
                         </div>
                         <hr>
                         <div class="working-days mb-0">
                             <h5 class="mb-0 fw-bold">Working Days</h5>
-                            <p class="mb-0 font-13">Mon - FRI / 9:30 AM - 6:30 PM</p>
+                            <p class="mb-0 font-13">Mon - FRI / 8:00 AM - 7:00 PM</p>
                         </div>
                     </div>
                 </div>
