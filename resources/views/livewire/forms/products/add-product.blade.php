@@ -232,7 +232,7 @@ new class extends Component {
                     <div class="row">
                         <div wire:ignore class="mb-4 col-lg-12">
                             <label for="selling_tags" class="form-label">Shopping Tags</label>
-                            <select id="tags" class="form-control selling_tags" wire:model="selling_tags_ids" multiple>
+                            <select  id="tags" class="form-control selling_tags" wire:model="selling_tags_ids" multiple>
                                 @foreach($selling_tags as $selling_tag)
                                     <option value="{{ $selling_tag->id }}">{{ $selling_tag->name }}</option>
                                 @endforeach
@@ -245,7 +245,7 @@ new class extends Component {
                     <div class="row">
                         <div class="mb-4 col-lg-12">
                             <label for="images" class="form-label">Images</label>
-                            <input class="form-control" wire:model="images" id="images" type="file"
+                            <input accept="image/*" required class="form-control" wire:model="images" id="images" type="file"
                                    autocomplete="images" multiple>
                             @error('images.*')
                             <p class="text-danger text-xs pt-1">{{ $message }}</p>
