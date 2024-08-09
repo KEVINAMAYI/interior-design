@@ -89,11 +89,8 @@ new class extends Component {
                 ]);
             }
 
-            // Reset the images property after processing
-            $this->reset('images');
-
             DB::commit();
-            $this->reset(['category_id', 'name', 'description', 'variation_id', 'price']);
+            $this->reset(['category_id', 'name', 'description', 'variation_id', 'price','images']);
             $this->alert('success', 'Product created successfully');
 
         } catch (Exception $exception) {
