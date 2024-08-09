@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('variations', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->enum('type',['color','measurements','origin','structure'])->nullable();
+            $table->enum('type',['color','measurements','origin','structure','other'])->nullable();
             $table->string('value')->nullable();
             $table->timestamps();
         });

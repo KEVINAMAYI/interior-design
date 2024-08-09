@@ -152,10 +152,8 @@ new #[Layout('layouts.front-end')] class extends Component {
                         <hr>
                         <div class="product-price d-flex align-items-center gap-3">
                             <div class="h4 fw-bold">KES {{ $productVariation->price }}</div>
-                            <div class="h5 fw-light text-muted text-decoration-line-through">$2089</div>
-                            <div class="h4 fw-bold text-danger">(70% off)</div>
                         </div>
-                        <p class="fw-bold mb-0 mt-1 text-success">inclusive of all taxes</p>
+                        <p class="fw-bold mb-0 mt-1 text-success">exclusive of all taxes</p>
                         <hr class="my-3">
                         <div class="product-info">
                             <h6 class="fw-bold mb-3">Product Details</h6>

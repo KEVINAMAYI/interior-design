@@ -119,6 +119,13 @@ class VariationSeeder extends Seeder
                 'value' => 'double',
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()
+            ],
+            [
+                'name' => 'other',
+                'type' => 'other',
+                'value' => 'other',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
             ]
         ];
 

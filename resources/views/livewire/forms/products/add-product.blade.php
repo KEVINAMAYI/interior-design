@@ -23,7 +23,7 @@ new class extends Component {
 
     public $name;
     public $price;
-    public $images;
+    public $images = [];
     public $variations;
     public $category_id;
     public $description;
@@ -81,7 +81,7 @@ new class extends Component {
             //save product variation images
             foreach ($this->images as $image) {
                 $name = time() . '-' . $image->hashName();
-                $path = $image->storeAs('product_variation_images', $name);
+                $path = $image->storeAs('product_variation_images', $name,'public');
 
                 ProductVariationImage::create([
                     'product_variation_id' => $productVariation->id,
@@ -89,11 +89,15 @@ new class extends Component {
                 ]);
             }
 
+            // Reset the images property after processing
+            $this->reset('images');
+
             DB::commit();
             $this->reset(['category_id', 'name', 'description', 'variation_id', 'price']);
             $this->alert('success', 'Product created successfully');
 
         } catch (Exception $exception) {
+            dd($exception->getMessage());
             DB::rollBack();
             $this->alert('error', $exception->getMessage());
         }
