@@ -23,13 +23,13 @@ new class extends Component {
 
     public $name;
     public $price;
-    public $images = [];
     public $variations;
     public $category_id;
     public $description;
     public $selling_tags;
     public $selling_tags_ids = [];
     public $variation_id;
+    public $images = [];
 
 
     public function mount()
@@ -38,16 +38,18 @@ new class extends Component {
         $this->selling_tags = Tag::all();
     }
 
+
     public function rules()
     {
         return [
             'name' => 'required',
             'description' => 'required',
-            'selling_tags' => 'required',
+            'selling_tags_ids' => 'required',
             'price' => 'required',
             'variation_id' => 'required',
             'category_id' => 'required',
-            'images.*' => 'image|max:2048',
+            'images.*' => 'required|image|max:2048',
+
         ];
     }
 
@@ -80,18 +82,22 @@ new class extends Component {
 
             //save product variation images
             foreach ($this->images as $image) {
-                $name = time() . '-' . $image->hashName();
-                $path = $image->storeAs('product_variation_images', $name,'public');
+                // Generate a unique name for the image
+                $name = time() . '-' . $image->getClientOriginalName();
+                $path = $image->storeAs('product_variation_images', $name, 'public');
 
+                // Store the image path in the database
                 ProductVariationImage::create([
                     'product_variation_id' => $productVariation->id,
-                    'image_url' => $path
+                    'image_url' => $path,
                 ]);
             }
 
+
             DB::commit();
-            $this->reset(['category_id', 'name', 'description', 'variation_id', 'price','images']);
+            $this->reset(['category_id', 'name', 'description', 'variation_id', 'price', 'images']);
             $this->alert('success', 'Product created successfully');
+            $this->dispatch('productCreated');
 
         } catch (Exception $exception) {
             dd($exception->getMessage());
@@ -226,12 +232,12 @@ new class extends Component {
                     <div class="row">
                         <div wire:ignore class="mb-4 col-lg-12">
                             <label for="selling_tags" class="form-label">Shopping Tags</label>
-                            <select class="form-control selling_tags" wire:model="selling_tags_ids" multiple>
+                            <select id="tags" class="form-control selling_tags" wire:model="selling_tags_ids" multiple>
                                 @foreach($selling_tags as $selling_tag)
                                     <option value="{{ $selling_tag->id }}">{{ $selling_tag->name }}</option>
                                 @endforeach
                             </select>
-                            @error('selling_tags')
+                            @error('selling_tags_id')
                             <p class="text-danger text-xs pt-1"> {{ $message }} </p>
                             @enderror
                         </div>
@@ -242,7 +248,7 @@ new class extends Component {
                             <input class="form-control" wire:model="images" id="images" type="file"
                                    autocomplete="images" multiple>
                             @error('images.*')
-                            <p class="text-danger text-xs pt-1"> {{ $message }} </p>
+                            <p class="text-danger text-xs pt-1">{{ $message }}</p>
                             @enderror
                         </div>
                     </div>
@@ -261,7 +267,14 @@ new class extends Component {
                 const result = $('.selling_tags').val();
                 Livewire.dispatch('update-selling-tag-ids', {selling_tags_ids: result});
             })
+
+            Livewire.on('productCreated', () => {
+                document.getElementById('images').value = ''; // Clear file input
+                document.getElementById('tags').value = ''; // Clear file input
+            });
+
         })
+
     </script>
 @endpush
 
