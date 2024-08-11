@@ -37,7 +37,7 @@ new #[Layout('layouts.front-end')] class extends Component {
 
     public function mount(ProductVariation $product_variation)
     {
-        $this->similar_product = Product::where('id',$product_variation->product->id)->first();
+        $this->similar_product = Product::where('id', $product_variation->product->id)->first();
         $this->productVariation = $product_variation;
         $this->getRatingsData($product_variation->id);
     }
@@ -118,8 +118,15 @@ new #[Layout('layouts.front-end')] class extends Component {
                                         <div class="col">
                                             <div class="img-thumb-container overflow-hidden position-relative"
                                                  data-fancybox="gallery">
-                                                <img src="{{ asset('storage/' . $image->image_url) }}" class="img-fluid"
-                                                     alt="">
+                                                @if(!empty($image->image_url))
+                                                    <img src="{{ asset('storage/' . $image->image_url) }}"
+                                                         class="img-fluid"
+                                                         alt="">
+                                                @else
+                                                    <img
+                                                        src="{{ asset('images/front-end-assets/categories/wall_to_wall_carpets.png') }}"
+                                                        class="img-fluid card-img-top" alt="No image available">
+                                                @endif
                                             </div>
                                         </div>
                                     @endforeach
@@ -128,8 +135,15 @@ new #[Layout('layouts.front-end')] class extends Component {
                                         <div class="col-12">
                                             <div class="img-thumb-container overflow-hidden position-relative"
                                                  data-fancybox="gallery">
-                                                <img src="{{ asset('storage/' . $image->image_url) }}" class="img-fluid"
-                                                     alt="">
+                                                @if(!empty($image->image_url))
+                                                    <img src="{{ asset('storage/' . $image->image_url) }}"
+                                                         class="img-fluid"
+                                                         alt="">
+                                                @else
+                                                    <img
+                                                        src="{{ asset('images/front-end-assets/categories/wall_to_wall_carpets.png') }}"
+                                                        class="img-fluid card-img-top" alt="No image available">
+                                                @endif
                                             </div>
                                         </div>
                                     @endforeach
@@ -442,7 +456,7 @@ new #[Layout('layouts.front-end')] class extends Component {
                             </div>
                         </div>
                     @endforeach
-                 </div>
+                </div>
                 <!--end row-->
             </div>
 
