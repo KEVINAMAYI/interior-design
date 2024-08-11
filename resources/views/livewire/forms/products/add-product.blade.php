@@ -100,7 +100,6 @@ new class extends Component {
             $this->dispatch('productCreated');
 
         } catch (Exception $exception) {
-            dd($exception->getMessage());
             DB::rollBack();
             $this->alert('error', $exception->getMessage());
         }
