@@ -9,7 +9,7 @@ require __DIR__ . '/front-end/web.php';
 require __DIR__ . '/dashboard/web.php';
 
 //create symbolic link
-Route::get('/symbolic-link', function () {
-    Artisan::call('symbolic:link');
-})->name('symbolic-link');
+Route::get('/storage-link', function () {
+    Artisan::call('storage:link');
+})->name('storage-link');
 
