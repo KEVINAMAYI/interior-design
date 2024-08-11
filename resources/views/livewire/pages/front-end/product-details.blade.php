@@ -123,9 +123,7 @@ new #[Layout('layouts.front-end')] class extends Component {
                                                          class="img-fluid"
                                                          alt="">
                                                 @else
-                                                    <img
-                                                        src="{{ asset('images/front-end-assets/categories/wall_to_wall_carpets.png') }}"
-                                                        class="img-fluid card-img-top" alt="No image available">
+                                                    <img src="{{ asset('front-end-assets/images/categories/wall_to_wall_carpets.png') }}" class="img-fluid card-img-top" alt="No image available">
                                                 @endif
                                             </div>
                                         </div>
@@ -141,8 +139,7 @@ new #[Layout('layouts.front-end')] class extends Component {
                                                          alt="">
                                                 @else
                                                     <img
-                                                        src="{{ asset('images/front-end-assets/categories/wall_to_wall_carpets.png') }}"
-                                                        class="img-fluid card-img-top" alt="No image available">
+                                                    <img src="{{ asset('front-end-assets/images/categories/wall_to_wall_carpets.png') }}" class="img-fluid card-img-top" alt="No image available">
                                                 @endif
                                             </div>
                                         </div>

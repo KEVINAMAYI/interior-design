@@ -424,7 +424,7 @@ new #[Layout('layouts.front-end')] class extends Component {
                                                                      class="card-img-top"
                                                                      alt="{{ $product_variation->name }}">
                                                             @else
-                                                                <img src="{{ asset('images/front-end-assets/categories/wall_to_wall_carpets.png') }}" class="card-img-top" alt="No image available">
+                                                                <img src="{{ asset('front-end-assets/images/categories/wall_to_wall_carpets.png') }}" class="card-img-top" alt="No image available">
                                                             @endif
                                                         </a>
                                                     </div>
@@ -457,7 +457,7 @@ new #[Layout('layouts.front-end')] class extends Component {
                                                                      class="card-img-top"
                                                                      alt="{{ $product_variation->name }}">
                                                             @else
-                                                                <img src="{{ asset('images/front-end-assets/categories/wall_to_wall_carpets.png') }}" class="card-img-top" alt="No image available">
+                                                                <img src="{{ asset('front-end-assets/images/categories/wall_to_wall_carpets.png') }}" class="card-img-top" alt="No image available">
                                                             @endif
                                                         </a>
                                                     </div>
