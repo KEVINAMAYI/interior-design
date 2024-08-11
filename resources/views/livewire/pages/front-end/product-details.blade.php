@@ -113,172 +113,186 @@ new #[Layout('layouts.front-end')] class extends Component {
                     <div class="product-images">
                         <div class="product-zoom-images">
                             <div class="row row-cols-2 g-3">
-                                @if(count($productVariation->images()) > 1)
-                                    @foreach($productVariation->images() as $image)
-                                        <div class="col">
-                                            <div class="img-thumb-container overflow-hidden position-relative"
-                                                 data-fancybox="gallery">
-                                                @if(!empty($image->image_url))
-                                                    <img src="{{ asset('storage/' . $image->image_url) }}"
-                                                         class="img-fluid"
-                                                         alt="">
-                                                @else
-                                                    <img src="{{ asset('front-end-assets/images/categories/wall_to_wall_carpets.png') }}" class="img-fluid card-img-top" alt="No image available">
-                                                @endif
+                                @if($productVariation->images()->isNotEmpty())
+                                    @if(count($productVariation->images()) > 1)
+                                        @foreach($productVariation->images() as $image)
+                                            <div class="col">
+                                                <div class="img-thumb-container overflow-hidden position-relative"
+                                                     data-fancybox="gallery">
+                                                    @if(!empty($image->image_url))
+                                                        <img src="{{ asset('storage/' . $image->image_url) }}"
+                                                             class="img-fluid"
+                                                             alt="">
+                                                    @else
+                                                        <img
+                                                            src="{{ asset('front-end-assets/images/categories/wall_to_wall_carpets.png') }}"
+                                                            class="img-fluid card-img-top" alt="No image available">
+                                                    @endif
+                                                </div>
                                             </div>
-                                        </div>
-                                    @endforeach
+                                        @endforeach
+                                    @else
+                                        @foreach($productVariation->images() as $image)
+                                            <div class="col-12">
+                                                <div class="img-thumb-container overflow-hidden position-relative"
+                                                     data-fancybox="gallery">
+                                                    @if(!empty($image->image_url))
+                                                        <img src="{{ asset('storage/' . $image->image_url) }}"
+                                                             class="img-fluid"
+                                                             alt="">
+                                                    @else
+                                                        <img
+                                                            src="{{ asset('front-end-assets/images/categories/wall_to_wall_carpets.png') }}"
+                                                            class="img-fluid card-img-top" alt="No image available">
+                                                    @endif
+                                                </div>
+                                            </div>
+                                        @endforeach
+                                    @endif
                                 @else
-                                    @foreach($productVariation->images() as $image)
-                                        <div class="col-12">
-                                            <div class="img-thumb-container overflow-hidden position-relative"
-                                                 data-fancybox="gallery">
-                                                @if(!empty($image->image_url))
-                                                    <img src="{{ asset('storage/' . $image->image_url) }}"
-                                                         class="img-fluid"
-                                                         alt="">
-                                                @else
-                                                    <img
-                                                    <img src="{{ asset('front-end-assets/images/categories/wall_to_wall_carpets.png') }}" class="img-fluid card-img-top" alt="No image available">
-                                                @endif
-                                            </div>
+                                    <div class="col-12">
+                                        <div class="img-thumb-container overflow-hidden position-relative"
+                                             data-fancybox="gallery">
+                                            <img
+                                                src="{{ asset('front-end-assets/images/categories/wall_to_wall_carpets.png') }}"
+                                                class="img-fluid card-img-top" alt="No image available">
                                         </div>
-                                    @endforeach
+                                    </div><!--end row-->
                                 @endif
-                            </div><!--end row-->
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12 col-xl-5">
-                    <div class="product-info">
-                        <h4 class="product-title fw-bold mb-1">{{ $productVariation->product->name }}</h4>
-                        <div class="product-rating">
-                            <div class="hstack gap-2 border p-1 mt-3 width-content">
-                                <div><span class="rating-number">{{ $product_avg_rating }}</span><i
-                                        class="bi bi-star-fill ms-1 text-warning"></i></div>
-                                <div class="vr"></div>
-                                <div>{{ $product_count_rating }} Ratings</div>
                             </div>
                         </div>
-                        <hr>
-                        <div class="product-price d-flex align-items-center gap-3">
-                            <div class="h4 fw-bold">KES {{ $productVariation->price }}</div>
-                        </div>
-                        <p class="fw-bold mb-0 mt-1 text-success">exclusive of all taxes</p>
-                        <hr class="my-3">
+                    </div>
+                    <div class="col-12 col-xl-5">
                         <div class="product-info">
-                            <h6 class="fw-bold mb-3">Product Details</h6>
-                            <p style="font-size:14px;" class="mb-1">{{ $productVariation->product->description }}</p>
-                        </div>
-                        <hr class="my-3">
-                        <div class="customer-ratings">
-                            <h6 class="fw-bold mb-3">Customer Ratings</h6>
-                            <div class="d-flex align-items-center gap-4 gap-lg-5 flex-wrap flex-lg-nowrap">
-                                <div class="">
-                                    <h1 class="mb-2 fw-bold">{{ round($product_avg_rating,1) }}<span
-                                            class="fs-5 ms-2 text-warning">
+                            <h4 class="product-title fw-bold mb-1">{{ $productVariation->product->name }}</h4>
+                            <div class="product-rating">
+                                <div class="hstack gap-2 border p-1 mt-3 width-content">
+                                    <div><span class="rating-number">{{ $product_avg_rating }}</span><i
+                                            class="bi bi-star-fill ms-1 text-warning"></i></div>
+                                    <div class="vr"></div>
+                                    <div>{{ $product_count_rating }} Ratings</div>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="product-price d-flex align-items-center gap-3">
+                                <div class="h4 fw-bold">KES {{ $productVariation->price }}</div>
+                            </div>
+                            <p class="fw-bold mb-0 mt-1 text-success">exclusive of all taxes</p>
+                            <hr class="my-3">
+                            <div class="product-info">
+                                <h6 class="fw-bold mb-3">Product Details</h6>
+                                <p style="font-size:14px;"
+                                   class="mb-1">{{ $productVariation->product->description }}</p>
+                            </div>
+                            <hr class="my-3">
+                            <div class="customer-ratings">
+                                <h6 class="fw-bold mb-3">Customer Ratings</h6>
+                                <div class="d-flex align-items-center gap-4 gap-lg-5 flex-wrap flex-lg-nowrap">
+                                    <div class="">
+                                        <h1 class="mb-2 fw-bold">{{ round($product_avg_rating,1) }}<span
+                                                class="fs-5 ms-2 text-warning">
                                             @if(($product_avg_rating >= 1) && ($product_avg_rating < 2))
-                                                <i class="bi bi-star-fill"></i>
-                                            @elseif(($product_avg_rating >= 2) && ($product_avg_rating < 3))
-                                                <i class="bi bi-star-fill"></i>
-                                                <i class="bi bi-star-fill"></i>
-                                            @elseif(($product_avg_rating >= 3) && ($product_avg_rating < 4))
-                                                <i class="bi bi-star-fill"></i>
-                                                <i class="bi bi-star-fill"></i>
-                                                <i class="bi bi-star-fill"></i>
-                                            @elseif(($product_avg_rating >= 4) && ($product_avg_rating < 5))
-                                                <i class="bi bi-star-fill"></i>
-                                                <i class="bi bi-star-fill"></i>
-                                                <i class="bi bi-star-fill"></i>
-                                                <i class="bi bi-star-fill"></i>
-                                            @elseif($product_avg_rating == 5)
-                                                <i class="bi bi-star-fill"></i>
-                                                <i class="bi bi-star-fill"></i>
-                                                <i class="bi bi-star-fill"></i>
-                                                <i class="bi bi-star-fill"></i>
-                                                <i class="bi bi-star-fill"></i>
-                                            @endif
+                                                    <i class="bi bi-star-fill"></i>
+                                                @elseif(($product_avg_rating >= 2) && ($product_avg_rating < 3))
+                                                    <i class="bi bi-star-fill"></i>
+                                                    <i class="bi bi-star-fill"></i>
+                                                @elseif(($product_avg_rating >= 3) && ($product_avg_rating < 4))
+                                                    <i class="bi bi-star-fill"></i>
+                                                    <i class="bi bi-star-fill"></i>
+                                                    <i class="bi bi-star-fill"></i>
+                                                @elseif(($product_avg_rating >= 4) && ($product_avg_rating < 5))
+                                                    <i class="bi bi-star-fill"></i>
+                                                    <i class="bi bi-star-fill"></i>
+                                                    <i class="bi bi-star-fill"></i>
+                                                    <i class="bi bi-star-fill"></i>
+                                                @elseif($product_avg_rating == 5)
+                                                    <i class="bi bi-star-fill"></i>
+                                                    <i class="bi bi-star-fill"></i>
+                                                    <i class="bi bi-star-fill"></i>
+                                                    <i class="bi bi-star-fill"></i>
+                                                    <i class="bi bi-star-fill"></i>
+                                                @endif
                                         </span>
-                                    </h1>
+                                        </h1>
 
-                                </div>
-                                <div class="vr d-none d-lg-block"></div>
-                                <div class="w-100">
-                                    <div class="rating-wrrap hstack gap-2 align-items-center">
-                                        <p class="mb-0">5</p>
-                                        <div class=""><i class="bi bi-star"></i></div>
-                                        <div class="progress flex-grow-1 mb-0 rounded-0" style="height: 4px;">
-                                            <div class="progress-bar bg-success" role="progressbar"
-                                                 style="width: {{ \App\Models\Rating::where('product_variation_id', $productVariation->id)->where('ratings',5)->count() ?? 0 / \App\Models\Rating::where('product_variation_id', $productVariation->id)->count() * 100   }}%"></div>
-                                        </div>
-                                        <p class="mb-0">{{ \App\Models\Rating::where('product_variation_id', $productVariation->id)->where('ratings',5)->count() ?? 0 }}</p>
                                     </div>
-                                    <div class="rating-wrrap hstack gap-2 align-items-center">
-                                        <p class="mb-0">4</p>
-                                        <div class=""><i class="bi bi-star"></i></div>
-                                        <div class="progress flex-grow-1 mb-0 rounded-0" style="height: 4px;">
-                                            <div class="progress-bar bg-success" role="progressbar"
-                                                 style="width: {{ \App\Models\Rating::where('product_variation_id', $productVariation->id)->where('ratings',4)->count() ?? 0 / \App\Models\Rating::where('product_variation_id', $productVariation->id)->count() * 100   }}%"></div>
+                                    <div class="vr d-none d-lg-block"></div>
+                                    <div class="w-100">
+                                        <div class="rating-wrrap hstack gap-2 align-items-center">
+                                            <p class="mb-0">5</p>
+                                            <div class=""><i class="bi bi-star"></i></div>
+                                            <div class="progress flex-grow-1 mb-0 rounded-0" style="height: 4px;">
+                                                <div class="progress-bar bg-success" role="progressbar"
+                                                     style="width: {{ \App\Models\Rating::where('product_variation_id', $productVariation->id)->where('ratings',5)->count() ?? 0 / \App\Models\Rating::where('product_variation_id', $productVariation->id)->count() * 100   }}%"></div>
+                                            </div>
+                                            <p class="mb-0">{{ \App\Models\Rating::where('product_variation_id', $productVariation->id)->where('ratings',5)->count() ?? 0 }}</p>
                                         </div>
-                                        <p class="mb-0">{{ \App\Models\Rating::where('product_variation_id', $productVariation->id)->where('ratings',4)->count() ?? 0 }}</p>
-                                    </div>
-                                    <div class="rating-wrrap hstack gap-2 align-items-center">
-                                        <p class="mb-0">3</p>
-                                        <div class=""><i class="bi bi-star"></i></div>
-                                        <div class="progress flex-grow-1 mb-0 rounded-0" style="height: 4px;">
-                                            <div class="progress-bar bg-info" role="progressbar"
-                                                 style="width: {{ \App\Models\Rating::where('product_variation_id', $productVariation->id)->where('ratings',3)->count() ?? 0 /  \App\Models\Rating::where('product_variation_id', $productVariation->id)->count() * 100   }}%"></div>
+                                        <div class="rating-wrrap hstack gap-2 align-items-center">
+                                            <p class="mb-0">4</p>
+                                            <div class=""><i class="bi bi-star"></i></div>
+                                            <div class="progress flex-grow-1 mb-0 rounded-0" style="height: 4px;">
+                                                <div class="progress-bar bg-success" role="progressbar"
+                                                     style="width: {{ \App\Models\Rating::where('product_variation_id', $productVariation->id)->where('ratings',4)->count() ?? 0 / \App\Models\Rating::where('product_variation_id', $productVariation->id)->count() * 100   }}%"></div>
+                                            </div>
+                                            <p class="mb-0">{{ \App\Models\Rating::where('product_variation_id', $productVariation->id)->where('ratings',4)->count() ?? 0 }}</p>
                                         </div>
-                                        <p class="mb-0">{{ \App\Models\Rating::where('product_variation_id', $productVariation->id)->where('ratings',3)->count() ?? 0 }}</p>
-                                    </div>
-                                    <div class="rating-wrrap hstack gap-2 align-items-center">
-                                        <p class="mb-0">2</p>
-                                        <div class=""><i class="bi bi-star"></i></div>
-                                        <div class="progress flex-grow-1 mb-0 rounded-0" style="height: 4px;">
-                                            <div class="progress-bar bg-warning" role="progressbar"
-                                                 style="width: {{ \App\Models\Rating::where('product_variation_id', $productVariation->id)->where('ratings',2)->count() ?? 0 / \App\Models\Rating::where('product_variation_id', $productVariation->id)->count() * 100   }}%"></div>
+                                        <div class="rating-wrrap hstack gap-2 align-items-center">
+                                            <p class="mb-0">3</p>
+                                            <div class=""><i class="bi bi-star"></i></div>
+                                            <div class="progress flex-grow-1 mb-0 rounded-0" style="height: 4px;">
+                                                <div class="progress-bar bg-info" role="progressbar"
+                                                     style="width: {{ \App\Models\Rating::where('product_variation_id', $productVariation->id)->where('ratings',3)->count() ?? 0 /  \App\Models\Rating::where('product_variation_id', $productVariation->id)->count() * 100   }}%"></div>
+                                            </div>
+                                            <p class="mb-0">{{ \App\Models\Rating::where('product_variation_id', $productVariation->id)->where('ratings',3)->count() ?? 0 }}</p>
                                         </div>
-                                        <p class="mb-0">{{ \App\Models\Rating::where('product_variation_id', $productVariation->id)->where('ratings',2)->count() ?? 0 }}</p>
-                                    </div>
-                                    <div class="rating-wrrap hstack gap-2 align-items-center">
-                                        <p class="mb-0">1</p>
-                                        <div class=""><i class="bi bi-star"></i></div>
-                                        <div class="progress flex-grow-1 mb-0 rounded-0" style="height: 4px;">
-                                            <div class="progress-bar bg-danger" role="progressbar"
-                                                 style="width: {{ \App\Models\Rating::where('product_variation_id', $productVariation->id)->where('ratings',1)->count() ?? 0 / \App\Models\Rating::where('product_variation_id', $productVariation->id)->count() * 100   }}%"></div>
+                                        <div class="rating-wrrap hstack gap-2 align-items-center">
+                                            <p class="mb-0">2</p>
+                                            <div class=""><i class="bi bi-star"></i></div>
+                                            <div class="progress flex-grow-1 mb-0 rounded-0" style="height: 4px;">
+                                                <div class="progress-bar bg-warning" role="progressbar"
+                                                     style="width: {{ \App\Models\Rating::where('product_variation_id', $productVariation->id)->where('ratings',2)->count() ?? 0 / \App\Models\Rating::where('product_variation_id', $productVariation->id)->count() * 100   }}%"></div>
+                                            </div>
+                                            <p class="mb-0">{{ \App\Models\Rating::where('product_variation_id', $productVariation->id)->where('ratings',2)->count() ?? 0 }}</p>
                                         </div>
-                                        <p class="mb-0">{{ \App\Models\Rating::where('product_variation_id', $productVariation->id)->where('ratings',1)->count() ?? 0 }}</p>
+                                        <div class="rating-wrrap hstack gap-2 align-items-center">
+                                            <p class="mb-0">1</p>
+                                            <div class=""><i class="bi bi-star"></i></div>
+                                            <div class="progress flex-grow-1 mb-0 rounded-0" style="height: 4px;">
+                                                <div class="progress-bar bg-danger" role="progressbar"
+                                                     style="width: {{ \App\Models\Rating::where('product_variation_id', $productVariation->id)->where('ratings',1)->count() ?? 0 / \App\Models\Rating::where('product_variation_id', $productVariation->id)->count() * 100   }}%"></div>
+                                            </div>
+                                            <p class="mb-0">{{ \App\Models\Rating::where('product_variation_id', $productVariation->id)->where('ratings',1)->count() ?? 0 }}</p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="card mt-5 shadow-none mb-3 mb-lg-0 border-3 border-success">
-                        <div class="card-body">
-                            <div class="list-group list-group-flush">
-                                <a target="_blank" style="font-weight:bold;"
-                                   href="https://api.whatsapp.com/send?phone=254798692688"
-                                   class="list-group-item d-flex  text-success  justify-content-between align-items-center bg-orange">WhatsApp
-                                    <i class='bx bxl-whatsapp fs-5'></i></a>
-                                <a style="font-weight:bold;" href="tel:+254798692688"
-                                   class="list-group-item text-success d-flex justify-content-between align-items-center bg-transparent">Call
-                                    - 0798692688 <i class='bx bx-phone-call fs-5'></i></a>
-                                <button style="font-weight:bold;" type="button"
-                                        class=" list-group-item d-flex text-success justify-content-between align-items-center bg-transparent "
-                                        data-bs-toggle="modal" data-bs-target="#callBackModal">
-                                    Request CallBack <i class='bx bx-phone-incoming fs-5'></i>
-                                </button>
-                                <button style="font-weight:bold;" type="button"
-                                        class=" list-group-item d-flex text-success justify-content-between align-items-center bg-transparent "
-                                        data-bs-toggle="modal" data-bs-target="#sendEmailModal">
-                                    Send Email <i class='bx bx-mail-send fs-5'></i>
-                                </button>
+                        <div class="card mt-5 shadow-none mb-3 mb-lg-0 border-3 border-success">
+                            <div class="card-body">
+                                <div class="list-group list-group-flush">
+                                    <a target="_blank" style="font-weight:bold;"
+                                       href="https://api.whatsapp.com/send?phone=254798692688"
+                                       class="list-group-item d-flex  text-success  justify-content-between align-items-center bg-orange">WhatsApp
+                                        <i class='bx bxl-whatsapp fs-5'></i></a>
+                                    <a style="font-weight:bold;" href="tel:+254798692688"
+                                       class="list-group-item text-success d-flex justify-content-between align-items-center bg-transparent">Call
+                                        - 0798692688 <i class='bx bx-phone-call fs-5'></i></a>
+                                    <button style="font-weight:bold;" type="button"
+                                            class=" list-group-item d-flex text-success justify-content-between align-items-center bg-transparent "
+                                            data-bs-toggle="modal" data-bs-target="#callBackModal">
+                                        Request CallBack <i class='bx bx-phone-incoming fs-5'></i>
+                                    </button>
+                                    <button style="font-weight:bold;" type="button"
+                                            class=" list-group-item d-flex text-success justify-content-between align-items-center bg-transparent "
+                                            data-bs-toggle="modal" data-bs-target="#sendEmailModal">
+                                        Send Email <i class='bx bx-mail-send fs-5'></i>
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div><!--end row-->
-        </div>
+                </div><!--end row-->
+            </div>
     </section>
     <!--start product details-->
 
