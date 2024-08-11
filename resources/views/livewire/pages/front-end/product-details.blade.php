@@ -113,38 +113,38 @@ new #[Layout('layouts.front-end')] class extends Component {
                     <div class="product-images">
                         <div class="product-zoom-images">
                             <div class="row row-cols-2 g-3">
-{{--                                @if($productVariation->images()->isNotEmpty())--}}
-{{--                                    @if(count($productVariation->images()) > 1)--}}
-{{--                                        @foreach($productVariation->images() as $image)--}}
-{{--                                            <div class="col">--}}
-{{--                                                <div class="img-thumb-container overflow-hidden position-relative"--}}
-{{--                                                     data-fancybox="gallery">--}}
-{{--                                                    <img src="{{ asset('storage/' . $image->image_url) }}"--}}
-{{--                                                         class="img-fluid"--}}
-{{--                                                         alt="">--}}
-{{--                                                </div>--}}
-{{--                                            </div>--}}
-{{--                                        @endforeach--}}
-{{--                                    @else--}}
-{{--                                        @foreach($productVariation->images() as $image)--}}
-{{--                                            <div class="col-12">--}}
-{{--                                                <div class="img-thumb-container overflow-hidden position-relative"--}}
-{{--                                                     data-fancybox="gallery">--}}
-{{--                                                    <img src="{{ asset('storage/' . $image->image_url) }}"--}}
-{{--                                                         class="img-fluid"--}}
-{{--                                                         alt="">--}}
-{{--                                                </div>--}}
-{{--                                            </div>--}}
-{{--                                        @endforeach--}}
-{{--                                    @endif--}}
-{{--                                @else--}}
-{{--                                    <div class="col-12">--}}
-{{--                                        <div class="img-thumb-container overflow-hidden position-relative"--}}
-{{--                                             data-fancybox="gallery">--}}
-{{--                                            <img src="{{ asset('front-end-assets/images/categories/wall_to_wall_carpets.png') }}" class="image-fluid card-img-top" alt="No image available">--}}
-{{--                                        </div>--}}
-{{--                                    </div>--}}
-{{--                                @endif--}}
+                                @if($productVariation->images()->isNotEmpty())
+                                    @if(count($productVariation->images()) > 1)
+                                        @foreach($productVariation->images() as $image)
+                                            <div class="col">
+                                                <div class="img-thumb-container overflow-hidden position-relative"
+                                                     data-fancybox="gallery">
+                                                    <img src="{{ asset('storage/' . $image->image_url) }}"
+                                                         class="img-fluid"
+                                                         alt="">
+                                                </div>
+                                            </div>
+                                        @endforeach
+                                    @else
+                                        @foreach($productVariation->images() as $image)
+                                            <div class="col-12">
+                                                <div class="img-thumb-container overflow-hidden position-relative"
+                                                     data-fancybox="gallery">
+                                                    <img src="{{ asset('storage/' . $image->image_url) }}"
+                                                         class="img-fluid"
+                                                         alt="">
+                                                </div>
+                                            </div>
+                                        @endforeach
+                                    @endif
+                                @else
+                                    <div class="col-12">
+                                        <div class="img-thumb-container overflow-hidden position-relative"
+                                             data-fancybox="gallery">
+                                            <img src="{{ asset('front-end-assets/images/categories/wall_to_wall_carpets.png') }}" class="image-fluid card-img-top" alt="No image available">
+                                        </div>
+                                    </div>
+                                @endif
                             </div><!--end row-->
                         </div>
                     </div>
