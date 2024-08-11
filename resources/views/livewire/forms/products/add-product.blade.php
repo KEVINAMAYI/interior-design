@@ -81,38 +81,16 @@ new class extends Component {
             ]);
 
             //save product variation images
-            if (!empty($this->images)) {
-                foreach ($this->images as $image) {
-                    // Generate a unique name for the image
-                    $name = time() . '-' . $image->getClientOriginalName();
+            foreach ($this->images as $image) {
+                // Generate a unique name for the image
+                $name = time() . '-' . $image->getClientOriginalName();
+                $path = $image->storeAs('product_variation_images', $name, 'public');
 
-                    // Store the image temporarily
-                    $tempFilePath = $image->storeAs('product_variation_images/tmp', $name, 'public');
-
-                    // Define the final destination path
-                    $destinationPath = 'product_variation_images/' . $name;
-
-                    try {
-                        // Attempt to move the file from temp to the final destination
-                        if (Storage::disk('public')->move($tempFilePath, $destinationPath)) {
-                            Log::info('File moved successfully to: ' . $destinationPath);
-
-                            // Store the image path in the database
-                            ProductVariationImage::create([
-                                'product_variation_id' => $productVariation->id,
-                                'image_url' => $destinationPath,
-                            ]);
-                        } else {
-                            Log::error('Failed to move the file: ' . $name);
-                            // You might want to handle the failure here (e.g., retry, inform the user, etc.)
-                        }
-                    } catch (\Exception $e) {
-                        Log::error('Error moving file: ' . $e->getMessage());
-                        // Handle the exception as needed
-                    }
-                }
-            } else {
-                Log::warning('No images provided for the product variation.');
+                // Store the image path in the database
+                ProductVariationImage::create([
+                    'product_variation_id' => $productVariation->id,
+                    'image_url' => $path,
+                ]);
             }
 
 
