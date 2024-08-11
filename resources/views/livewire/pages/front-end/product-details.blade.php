@@ -141,9 +141,7 @@ new #[Layout('layouts.front-end')] class extends Component {
                                     <div class="col-12">
                                         <div class="img-thumb-container overflow-hidden position-relative"
                                              data-fancybox="gallery">
-                                            <img src="{{ asset('storage/' . $image->image_url) }}"
-                                                 class="img-fluid"
-                                                 alt="">
+                                            <img src="{{ asset('front-end-assets/images/categories/wall_to_wall_carpets.png') }}" class="image-fluid card-img-top" alt="No image available">
                                         </div>
                                     </div>
                                 @endif
