@@ -13,3 +13,11 @@ Route::get('/storage-link', function () {
     Artisan::call('storage:link');
 })->name('storage-link');
 
+//clear cache
+Route::get('/clear-cache',function (){
+    Artisan::call('config:clear');
+    Artisan::call('route:clear');
+    Artisan::call('view:clear');
+    Artisan::call('cache:clear');
+});
+
