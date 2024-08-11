@@ -16,6 +16,8 @@ use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Attributes\On;
 use Livewire\Volt\Component;
 use Livewire\WithFileUploads;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Log;
 
 new class extends Component {
 
@@ -80,17 +82,35 @@ new class extends Component {
                 'price' => $this->price,
             ]);
 
-            //save product variation images
-            foreach ($this->images as $image) {
-                // Generate a unique name for the image
-                $name = time() . '-' . $image->getClientOriginalName();
-                $path = $image->storeAs('product_variation_images', $name, 'public');
+            if (!empty($this->images)) {
+                foreach ($this->images as $image) {
+                    // Generate a unique name for the image
+                    $name = time() . '-' . $image->getClientOriginalName();
 
-                // Store the image path in the database
-                ProductVariationImage::create([
-                    'product_variation_id' => $productVariation->id,
-                    'image_url' => $path,
-                ]);
+                    // Get the temporary file path directly from the Livewire component
+                    $tempFilePath = $image->getRealPath();
+
+                    // Define the final destination path
+                    $destinationPath = 'product_variation_images/' . $name;
+
+                    try {
+                        // Move the file from the temporary location to the desired location
+                        Storage::disk('public')->put($destinationPath, file_get_contents($tempFilePath));
+
+                        Log::info('File moved successfully to: ' . $destinationPath);
+
+                        // Store the image path in the database
+                        ProductVariationImage::create([
+                            'product_variation_id' => $productVariation->id,
+                            'image_url' => $destinationPath,
+                        ]);
+                    } catch (\Exception $e) {
+                        Log::error('Error moving file: ' . $e->getMessage());
+                        // Handle the exception as needed
+                    }
+                }
+            } else {
+                Log::warning('No images provided for the product variation.');
             }
 
 
@@ -231,7 +251,7 @@ new class extends Component {
                     <div class="row">
                         <div wire:ignore class="mb-4 col-lg-12">
                             <label for="selling_tags" class="form-label">Shopping Tags</label>
-                            <select  id="tags" class="form-control selling_tags" wire:model="selling_tags_ids" multiple>
+                            <select id="tags" class="form-control selling_tags" wire:model="selling_tags_ids" multiple>
                                 @foreach($selling_tags as $selling_tag)
                                     <option value="{{ $selling_tag->id }}">{{ $selling_tag->name }}</option>
                                 @endforeach
@@ -244,7 +264,8 @@ new class extends Component {
                     <div class="row">
                         <div class="mb-4 col-lg-12">
                             <label for="images" class="form-label">Images</label>
-                            <input accept="image/*" required class="form-control" wire:model="images" id="images" type="file"
+                            <input accept="image/*" required class="form-control" wire:model="images" id="images"
+                                   type="file"
                                    autocomplete="images" multiple>
                             @error('images.*')
                             <p class="text-danger text-xs pt-1">{{ $message }}</p>
