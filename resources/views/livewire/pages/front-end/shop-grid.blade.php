@@ -419,7 +419,7 @@ new #[Layout('layouts.front-end')] class extends Component {
                                                 <div class="card border shadow-none">
                                                     <div class="position-relative overflow-hidden">
                                                         <a href="{{ route('front-end.product-details',$product_variation->id) }}">
-                                                            @if($product_variation->images()->count() > 0 && !empty($product_variation->images()[0]->image_url))
+                                                            @if($product_variation->images()->isNotEmpty())
                                                                 <img src="{{ asset('storage/' . $product_variation->images()[0]->image_url) }}"
                                                                      class="card-img-top"
                                                                      alt="{{ $product_variation->name }}">
@@ -452,7 +452,7 @@ new #[Layout('layouts.front-end')] class extends Component {
                                                 <div class="card border shadow-none">
                                                     <div class="position-relative overflow-hidden">
                                                         <a href="{{ route('front-end.product-details', $product_variation->id) }}">
-                                                            @if($product_variation->images()->count() > 0 && !empty($product_variation->images()[0]->image_url))
+                                                            @if($product_variation->images()->isNotEmpty())
                                                                 <img src="{{ asset('storage/' . $product_variation->images()[0]->image_url) }}"
                                                                      class="card-img-top"
                                                                      alt="{{ $product_variation->name }}">
