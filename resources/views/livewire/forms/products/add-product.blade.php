@@ -87,32 +87,20 @@ new class extends Component {
                     // Generate a unique name for the image
                     $name = time() . '-' . $image->getClientOriginalName();
 
-                    // Define the destination path inside the public/product_variation_images folder
-                    $destinationPath = public_path('product_variation_images/' . $name);
-
                     // Get the temporary file path directly from the Livewire component
                     $tempFilePath = $image->getRealPath();
 
+                    // Define the final destination path inside the public/product_variation_images folder
+                    $destinationPath = public_path('product_variation_images/' . $name);
+
                     try {
                         // Ensure the directory exists
-                        $directoryPath = public_path('product_variation_images');
-                        if (!is_dir($directoryPath)) {
-                            if (!mkdir($directoryPath, 0755, true)) {
-                                throw new \Exception('Failed to create directory: ' . $directoryPath);
-                            }
+                        if (!is_dir(public_path('product_variation_images'))) {
+                            mkdir(public_path('product_variation_images'), 0755, true);
                         }
 
-                        // Read the file content from the temporary location
-                        $fileContent = file_get_contents($tempFilePath);
-                        if ($fileContent === false) {
-                            throw new \Exception('Failed to read file content from: ' . $tempFilePath);
-                        }
-
-                        // Write the file content to the destination path
-                        $result = file_put_contents($destinationPath, $fileContent);
-                        if ($result === false) {
-                            throw new \Exception('Failed to write file to: ' . $destinationPath);
-                        }
+                        // Move the file from the temporary location to the desired location
+                        file_put_contents($destinationPath, file_get_contents($tempFilePath));
 
                         Log::info('File moved successfully to: ' . $destinationPath);
 
@@ -129,6 +117,7 @@ new class extends Component {
             } else {
                 Log::warning('No images provided for the product variation.');
             }
+
 
 
             DB::commit();
