@@ -84,54 +84,28 @@ new class extends Component {
 
             if (!empty($this->images)) {
                 foreach ($this->images as $image) {
-                    // Generate a unique name for the image
-                    $name = time() . '-' . $image->getClientOriginalName();
-
-                    // Define the destination path inside the public/product_variation_images folder
-                    $destinationPath = public_path('product_variation_images/' . $name);
-
-                    // Get the temporary file path directly from the Livewire component
-                    $tempFilePath = $image->getRealPath();
-
                     try {
-                        // Ensure the directory exists
-                        $directoryPath = public_path('product_variation_images');
-                        if (!is_dir($directoryPath)) {
-                            if (!mkdir($directoryPath, 0755, true)) {
-                                throw new \Exception('Failed to create directory: ' . $directoryPath);
-                            }
-                        }
+                        // Generate a unique name for the image
+                        $name = time() . '-' . $image->getClientOriginalName();
 
-                        // Read the file content from the temporary location
-                        $fileContent = file_get_contents($tempFilePath);
-                        if ($fileContent === false) {
-                            throw new \Exception('Failed to read file content from: ' . $tempFilePath);
-                        }
+                        // Store the image in the 'public/product_variation_images' directory using Livewire's storeAs method
+                        $path = $image->storeAs('product_variation_images', $name, 'public');
 
-                        // Write the file content to the destination path
-                        $result = file_put_contents($destinationPath, $fileContent);
-                        if ($result === false) {
-                            throw new \Exception('Failed to write file to: ' . $destinationPath);
-                        }
-
-                        Log::info('File moved successfully to: ' . $destinationPath);
+                        Log::info('File stored successfully at: ' . $path);
 
                         // Store the image path in the database
                         ProductVariationImage::create([
                             'product_variation_id' => $productVariation->id,
-                            'image_url' => 'product_variation_images/' . $name,
+                            'image_url' => $path,
                         ]);
                     } catch (\Exception $e) {
-                        Log::error('Error moving file: ' . $e->getMessage());
+                        Log::error('Error storing file: ' . $e->getMessage());
                         // Handle the exception as needed
                     }
                 }
             } else {
                 Log::warning('No images provided for the product variation.');
             }
-
-
-
 
             DB::commit();
             $this->reset(['category_id', 'name', 'description', 'variation_id', 'price', 'images']);
