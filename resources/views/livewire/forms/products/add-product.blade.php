@@ -84,33 +84,22 @@ new class extends Component {
 
             if (!empty($this->images)) {
                 foreach ($this->images as $image) {
-                    // Generate a unique name for the image
-                    $name = time() . '-' . $image->getClientOriginalName();
-
-                    // Get the temporary file path directly from the Livewire component
-                    $tempFilePath = $image->getRealPath();
-
-                    // Define the final destination path inside the public/product_variation_images folder
-                    $destinationPath = public_path('product_variation_images/' . $name);
-
                     try {
-                        // Ensure the directory exists
-                        if (!is_dir(public_path('product_variation_images'))) {
-                            mkdir(public_path('product_variation_images'), 0755, true);
-                        }
+                        // Generate a unique name for the image
+                        $name = time() . '-' . $image->getClientOriginalName();
 
-                        // Move the file from the temporary location to the desired location
-                        file_put_contents($destinationPath, file_get_contents($tempFilePath));
+                        // Store the image in the 'public/product_variation_images' directory using Livewire's storeAs method
+                        $path = $image->storeAs('product_variation_images', $name, 'public');
 
-                        Log::info('File moved successfully to: ' . $destinationPath);
+                        Log::info('File stored successfully at: ' . $path);
 
                         // Store the image path in the database
                         ProductVariationImage::create([
                             'product_variation_id' => $productVariation->id,
-                            'image_url' => 'product_variation_images/' . $name,
+                            'image_url' => $path,
                         ]);
                     } catch (\Exception $e) {
-                        Log::error('Error moving file: ' . $e->getMessage());
+                        Log::error('Error storing file: ' . $e->getMessage());
                         // Handle the exception as needed
                     }
                 }
