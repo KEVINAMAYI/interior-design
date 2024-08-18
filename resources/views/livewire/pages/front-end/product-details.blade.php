@@ -422,9 +422,13 @@ new #[Layout('layouts.front-end')] class extends Component {
                             <div class="card">
                                 <div class="position-relative overflow-hidden">
                                     <a href="{{ route('front-end.product-details',$product_variation->id) }}">
-                                        <img src="{{ asset('storage/' . $product_variation->images()[0]->image_url) }}"
-                                             class="card-img-top"
-                                             alt="...">
+                                        @if($product_variation->images()->isNotEmpty())
+                                            <img src="{{ asset('storage/' . $product_variation->images()[0]->image_url) }}"
+                                                 class="card-img-top"
+                                                 alt="{{ $product_variation->name }}">
+                                        @else
+                                            <img src="{{ asset('front-end-assets/images/categories/wall_to_wall_carpets.png') }}" class="card-img-top" alt="No image available">
+                                        @endif
                                     </a>
                                 </div>
                                 <div class="card-body">
