@@ -277,7 +277,7 @@ new #[Layout('layouts.front-end')] class extends Component {
                                                         ? ''
                                                         : str_replace('_', ' ', $product_variation->variation()->name) . '-' . $product_variation->variation()->value;
 
-                                                    $fullProductName = $variationText . ' ' . $product->name;
+                                                    $fullProductName = $product->name.' '.$variationText;
                                                     $productDetailsUrl = route('front-end.product-details', $product_variation->id);
 
                                                     // Message text with product name and line break
