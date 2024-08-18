@@ -237,11 +237,14 @@ new #[Layout('layouts.front-end')] class extends Component {
                                         <div class="position-relative overflow-hidden">
                                             <a href="{{ route('front-end.product-details',$product_variation->id) }}">
                                                 @if($product_variation->images()->isNotEmpty())
-                                                    <img src="{{ asset('storage/' . $product_variation->images()[0]->image_url) }}"
-                                                         class="card-img-top"
-                                                         alt="{{ $product_variation->name }}">
+                                                    <img
+                                                        src="{{ asset('storage/' . $product_variation->images()[0]->image_url) }}"
+                                                        class="card-img-top"
+                                                        alt="{{ $product_variation->name }}">
                                                 @else
-                                                    <img src="{{ asset('front-end-assets/images/categories/wall_to_wall_carpets.png') }}" class="card-img-top" alt="No image available">
+                                                    <img
+                                                        src="{{ asset('front-end-assets/images/categories/wall_to_wall_carpets.png') }}"
+                                                        class="card-img-top" alt="No image available">
                                                 @endif
                                             </a>
                                         </div>
@@ -267,6 +270,30 @@ new #[Layout('layouts.front-end')] class extends Component {
                                                 class="product-price d-flex align-items-center justify-content-start gap-2 mt-2">
                                                 <div class="h6 fw-bold">KES {{ $product_variation->price }}</div>
                                             </div>
+
+                                            <div style="width:60%;">
+                                                @php
+                                                    $variationText = empty($product_variation->variation())
+                                                        ? ''
+                                                        : str_replace('_', ' ', $product_variation->variation()->name) . '-' . $product_variation->variation()->value;
+
+                                                    $fullProductName = $variationText . ' ' . $product->name;
+                                                    $productDetailsUrl = route('front-end.product-details', $product_variation->id);
+
+                                                    // Message text with product name
+                                                    $whatsappMessage = 'Hello, I want to purchase: *' . $fullProductName . '*';
+                                                    // Append URL separately
+                                                    $whatsappMessage .= '\nHere is the product link: ' . $productDetailsUrl;
+                                                @endphp
+
+                                                <a target="_blank"
+                                                   style="background-color:green; border-radius:20px; font-weight:bold;"
+                                                   href="https://api.whatsapp.com/send?phone=254798692688&text={{ urlencode($whatsappMessage) }}"
+                                                   class="d-flex text-white justify-content-between align-items-center btn btn-success">
+                                                    <i class='bx bxl-whatsapp fs-5'></i> Quick Buy
+                                                </a>
+
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -283,11 +310,14 @@ new #[Layout('layouts.front-end')] class extends Component {
                                         <div class="position-relative overflow-hidden">
                                             <a href="{{ route('front-end.product-details', $product_variation->id) }}">
                                                 @if($product_variation->images()->isNotEmpty())
-                                                    <img src="{{ asset('storage/' . $product_variation->images()[0]->image_url) }}"
-                                                         class="card-img-top"
-                                                         alt="{{ $product_variation->name }}">
+                                                    <img
+                                                        src="{{ asset('storage/' . $product_variation->images()[0]->image_url) }}"
+                                                        class="card-img-top"
+                                                        alt="{{ $product_variation->name }}">
                                                 @else
-                                                    <img src="{{ asset('front-end-assets/images/categories/wall_to_wall_carpets.png') }}" class="card-img-top" alt="No image available">
+                                                    <img
+                                                        src="{{ asset('front-end-assets/images/categories/wall_to_wall_carpets.png') }}"
+                                                        class="card-img-top" alt="No image available">
                                                 @endif
                                             </a>
                                         </div>
@@ -329,11 +359,14 @@ new #[Layout('layouts.front-end')] class extends Component {
                                         <div class="position-relative overflow-hidden">
                                             <a href="{{ route('front-end.product-details',$product_variation->id) }}">
                                                 @if($product_variation->images()->isNotEmpty())
-                                                    <img src="{{ asset('storage/' . $product_variation->images()[0]->image_url) }}"
-                                                         class="card-img-top"
-                                                         alt="{{ $product_variation->name }}">
+                                                    <img
+                                                        src="{{ asset('storage/' . $product_variation->images()[0]->image_url) }}"
+                                                        class="card-img-top"
+                                                        alt="{{ $product_variation->name }}">
                                                 @else
-                                                    <img src="{{ asset('front-end-assets/images/categories/wall_to_wall_carpets.png') }}" class="card-img-top" alt="No image available">
+                                                    <img
+                                                        src="{{ asset('front-end-assets/images/categories/wall_to_wall_carpets.png') }}"
+                                                        class="card-img-top" alt="No image available">
                                                 @endif
                                             </a>
                                         </div>
@@ -375,11 +408,14 @@ new #[Layout('layouts.front-end')] class extends Component {
                                         <div class="position-relative overflow-hidden">
                                             <a href="{{ route('front-end.product-details',$product_variation->id) }}">
                                                 @if($product_variation->images()->isNotEmpty())
-                                                    <img src="{{ asset('storage/' . $product_variation->images()[0]->image_url) }}"
-                                                         class="card-img-top"
-                                                         alt="{{ $product_variation->name }}">
+                                                    <img
+                                                        src="{{ asset('storage/' . $product_variation->images()[0]->image_url) }}"
+                                                        class="card-img-top"
+                                                        alt="{{ $product_variation->name }}">
                                                 @else
-                                                    <img src="{{ asset('front-end-assets/images/categories/wall_to_wall_carpets.png') }}" class="card-img-top" alt="No image available">
+                                                    <img
+                                                        src="{{ asset('front-end-assets/images/categories/wall_to_wall_carpets.png') }}"
+                                                        class="card-img-top" alt="No image available">
                                                 @endif
                                             </a>
                                         </div>
@@ -421,11 +457,14 @@ new #[Layout('layouts.front-end')] class extends Component {
                                         <div class="position-relative overflow-hidden">
                                             <a href="{{ route('front-end.product-details',$product_variation->id) }}">
                                                 @if($product_variation->images()->isNotEmpty())
-                                                    <img src="{{ asset('storage/' . $product_variation->images()[0]->image_url) }}"
-                                                         class="card-img-top"
-                                                         alt="{{ $product_variation->name }}">
+                                                    <img
+                                                        src="{{ asset('storage/' . $product_variation->images()[0]->image_url) }}"
+                                                        class="card-img-top"
+                                                        alt="{{ $product_variation->name }}">
                                                 @else
-                                                    <img src="{{ asset('front-end-assets/images/categories/wall_to_wall_carpets.png') }}" class="card-img-top" alt="No image available">
+                                                    <img
+                                                        src="{{ asset('front-end-assets/images/categories/wall_to_wall_carpets.png') }}"
+                                                        class="card-img-top" alt="No image available">
                                                 @endif
                                             </a>
                                         </div>
