@@ -40,6 +40,8 @@ new #[Layout('layouts.front-end')] class extends Component {
         $this->similar_product = Product::where('id', $product_variation->product->id)->first();
         $this->productVariation = $product_variation;
         $this->getRatingsData($product_variation->id);
+
+
     }
 
 
@@ -258,9 +260,17 @@ new #[Layout('layouts.front-end')] class extends Component {
                     <div class="card mt-5 shadow-none mb-3 mb-lg-0 border-3 border-success">
                         <div class="card-body">
                             <div class="list-group list-group-flush">
+                                @php
+                                       $fullProductName = $productVariation->product->name;
+                                       $productDetailsUrl = route('front-end.product-details', $productVariation->id);
+
+                                       // Message text with product name and line break
+                                       $whatsappMessage = 'Hello, I want to purchase: *' . $fullProductName . '*';
+                                       // Append URL on a new line using %0A
+                                       $whatsappMessage .= '. Here is the product link: ' . $productDetailsUrl;
+                                @endphp
                                 <a target="_blank" style="font-weight:bold;"
-                                   href="https://api.whatsapp.com/send?phone=254798692688"
-                                   class="list-group-item d-flex  text-success  justify-content-between align-items-center bg-orange">WhatsApp
+                                   href="https://api.whatsapp.com/send?phone=254798692688&text={{ urlencode($whatsappMessage) }}"                                   class="list-group-item d-flex  text-success  justify-content-between align-items-center bg-orange">WhatsApp
                                     <i class='bx bxl-whatsapp fs-5'></i></a>
                                 <a style="font-weight:bold;" href="tel:+254798692688"
                                    class="list-group-item text-success d-flex justify-content-between align-items-center bg-transparent">Call
@@ -423,7 +433,7 @@ new #[Layout('layouts.front-end')] class extends Component {
                                             @php
                                                 $variationText = empty($product_variation->variation())
                                                     ? ''
-                                                    : str_replace('_', ' ', $product_variation->variation()->name) . '-' . $product_variation->variation()->value;
+                                                    : str_replace('_', ' ', $product_variation->variation()->name) . ' - ' . $product_variation->variation()->value;
 
                                                 $fullProductName = $similar_product->name.' '.$variationText;
                                                 $productDetailsUrl = route('front-end.product-details', $product_variation->id);
