@@ -251,7 +251,7 @@ new #[Layout('layouts.front-end')] class extends Component {
                                         <div class="card-body">
                                             <div class="d-flex align-items-center justify-content-between">
                                                 <div class="">
-                                                    <p class="mb-1 product-short-name">{{ strtoupper( $product->name) }}</p>
+                                                    <p style="font-weight:bold; color:black;"  class="mb-1 product-short-name">{{ strtoupper( $product->name) }}</p>
                                                     <h6 class="mb-1"> {{ empty($product_variation->variation()) ? '' :  str_replace('_',' ',$product_variation->variation()->name).'-'.$product_variation->variation()->value }}</h6>
                                                 </div>
                                                 <div class="icon-wishlist">
@@ -269,29 +269,28 @@ new #[Layout('layouts.front-end')] class extends Component {
                                             <div
                                                 class="product-price d-flex align-items-center justify-content-start gap-2 mt-2">
                                                 <div class="h6 fw-bold">KES {{ $product_variation->price }}</div>
-                                            </div>
+                                                <div  style="width:60%;">
+                                                    @php
+                                                        $variationText = empty($product_variation->variation())
+                                                            ? ''
+                                                            : str_replace('_', ' ', $product_variation->variation()->name) . '-' . $product_variation->variation()->value;
 
-                                            <div style="width:60%;">
-                                                @php
-                                                    $variationText = empty($product_variation->variation())
-                                                        ? ''
-                                                        : str_replace('_', ' ', $product_variation->variation()->name) . '-' . $product_variation->variation()->value;
+                                                        $fullProductName = $product->name.' '.$variationText;
+                                                        $productDetailsUrl = route('front-end.product-details', $product_variation->id);
 
-                                                    $fullProductName = $product->name.' '.$variationText;
-                                                    $productDetailsUrl = route('front-end.product-details', $product_variation->id);
+                                                        // Message text with product name and line break
+                                                        $whatsappMessage = 'Hello, I want to purchase: *' . $fullProductName . '*';
+                                                        // Append URL on a new line using %0A
+                                                        $whatsappMessage .= '. Here is the product link: ' . $productDetailsUrl;
+                                                    @endphp
 
-                                                    // Message text with product name and line break
-                                                    $whatsappMessage = 'Hello, I want to purchase: *' . $fullProductName . '*';
-                                                    // Append URL on a new line using %0A
-                                                    $whatsappMessage .= '. Here is the product link: ' . $productDetailsUrl;
-                                                @endphp
-
-                                                <a target="_blank"
-                                                   style="background-color:green; border-radius:20px; font-weight:bold;"
-                                                   href="https://api.whatsapp.com/send?phone=254795704301&text={{ urlencode($whatsappMessage) }}"
-                                                   class="d-flex text-white justify-content-between align-items-center btn btn-success">
-                                                    <i class='bx bxl-whatsapp fs-5'></i> Quick Buy
-                                                </a>
+                                                    <a target="_blank"
+                                                       style="background-color:green; border-radius: 20px !important; font-weight:bold;"
+                                                       href="https://api.whatsapp.com/send?phone=254798692688&text={{ urlencode($whatsappMessage) }}"
+                                                       class="d-flex text-white  justify-content-between align-items-center btn btn-success">
+                                                        <i class='bx bxl-whatsapp fs-5'></i> Quick Buy
+                                                    </a>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -323,7 +322,7 @@ new #[Layout('layouts.front-end')] class extends Component {
                                         <div class="card-body">
                                             <div class="d-flex align-items-center justify-content-between">
                                                 <div class="">
-                                                    <p class="mb-1 product-short-name">{{ strtoupper( $product->name) }}</p>
+                                                    <p  style="font-weight:bold; color:black;" class="mb-1 product-short-name">{{ strtoupper( $product->name) }}</p>
                                                     <h6 class="mb-1"> {{ empty($product_variation->variation()) ? '' :  str_replace('_',' ',$product_variation->variation()->name).'-'.$product_variation->variation()->value }}</h6>
                                                 </div>
                                                 <div class="icon-wishlist">
@@ -341,6 +340,32 @@ new #[Layout('layouts.front-end')] class extends Component {
                                             <div
                                                 class="product-price d-flex align-items-center justify-content-start gap-2 mt-2">
                                                 <div class="h6 fw-bold">KES {{ $product_variation->price }}</div>
+                                                <div
+                                                    class="product-price d-flex align-items-center justify-content-start gap-2 mt-2">
+                                                    <div class="h6 fw-bold">KES {{ $product_variation->price }}</div>
+                                                    <div  style="width:60%;">
+                                                        @php
+                                                            $variationText = empty($product_variation->variation())
+                                                                ? ''
+                                                                : str_replace('_', ' ', $product_variation->variation()->name) . '-' . $product_variation->variation()->value;
+
+                                                            $fullProductName = $product->name.' '.$variationText;
+                                                            $productDetailsUrl = route('front-end.product-details', $product_variation->id);
+
+                                                            // Message text with product name and line break
+                                                            $whatsappMessage = 'Hello, I want to purchase: *' . $fullProductName . '*';
+                                                            // Append URL on a new line using %0A
+                                                            $whatsappMessage .= '. Here is the product link: ' . $productDetailsUrl;
+                                                        @endphp
+
+                                                        <a target="_blank"
+                                                           style="background-color:green; border-radius: 20px !important; font-weight:bold;"
+                                                           href="https://api.whatsapp.com/send?phone=254798692688&text={{ urlencode($whatsappMessage) }}"
+                                                           class="d-flex text-white  justify-content-between align-items-center btn btn-success">
+                                                            <i class='bx bxl-whatsapp fs-5'></i> Quick Buy
+                                                        </a>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -372,7 +397,7 @@ new #[Layout('layouts.front-end')] class extends Component {
                                         <div class="card-body">
                                             <div class="d-flex align-items-center justify-content-between">
                                                 <div class="">
-                                                    <p class="mb-1 product-short-name">{{ strtoupper( $product->name) }}</p>
+                                                    <p style="font-weight:bold; color:black;"  class="mb-1 product-short-name">{{ strtoupper( $product->name) }}</p>
                                                     <h6 class="mb-1"> {{ empty($product_variation->variation()) ? '' :  str_replace('_',' ',$product_variation->variation()->name).'-'.$product_variation->variation()->value }}</h6>
                                                 </div>
                                                 <div class="icon-wishlist">
@@ -390,6 +415,32 @@ new #[Layout('layouts.front-end')] class extends Component {
                                             <div
                                                 class="product-price d-flex align-items-center justify-content-start gap-2 mt-2">
                                                 <div class="h6 fw-bold">KES {{ $product_variation->price }}</div>
+                                                <div
+                                                    class="product-price d-flex align-items-center justify-content-start gap-2 mt-2">
+                                                    <div class="h6 fw-bold">KES {{ $product_variation->price }}</div>
+                                                    <div  style="width:60%;">
+                                                        @php
+                                                            $variationText = empty($product_variation->variation())
+                                                                ? ''
+                                                                : str_replace('_', ' ', $product_variation->variation()->name) . '-' . $product_variation->variation()->value;
+
+                                                            $fullProductName = $product->name.' '.$variationText;
+                                                            $productDetailsUrl = route('front-end.product-details', $product_variation->id);
+
+                                                            // Message text with product name and line break
+                                                            $whatsappMessage = 'Hello, I want to purchase: *' . $fullProductName . '*';
+                                                            // Append URL on a new line using %0A
+                                                            $whatsappMessage .= '. Here is the product link: ' . $productDetailsUrl;
+                                                        @endphp
+
+                                                        <a target="_blank"
+                                                           style="background-color:green; border-radius: 20px !important; font-weight:bold;"
+                                                           href="https://api.whatsapp.com/send?phone=254798692688&text={{ urlencode($whatsappMessage) }}"
+                                                           class="d-flex text-white  justify-content-between align-items-center btn btn-success">
+                                                            <i class='bx bxl-whatsapp fs-5'></i> Quick Buy
+                                                        </a>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -421,7 +472,7 @@ new #[Layout('layouts.front-end')] class extends Component {
                                         <div class="card-body">
                                             <div class="d-flex align-items-center justify-content-between">
                                                 <div class="">
-                                                    <p class="mb-1 product-short-name">{{ strtoupper( $product->name) }}</p>
+                                                    <p style="font-weight:bold; color:black;"  class="mb-1 product-short-name">{{ strtoupper( $product->name) }}</p>
                                                     <h6 class="mb-1"> {{ empty($product_variation->variation()) ? '' :  str_replace('_',' ',$product_variation->variation()->name).'-'.$product_variation->variation()->value }}</h6>
                                                 </div>
                                                 <div class="icon-wishlist">
@@ -439,6 +490,32 @@ new #[Layout('layouts.front-end')] class extends Component {
                                             <div
                                                 class="product-price d-flex align-items-center justify-content-start gap-2 mt-2">
                                                 <div class="h6 fw-bold">KES {{ $product_variation->price }}</div>
+                                                <div
+                                                    class="product-price d-flex align-items-center justify-content-start gap-2 mt-2">
+                                                    <div class="h6 fw-bold">KES {{ $product_variation->price }}</div>
+                                                    <div  style="width:60%;">
+                                                        @php
+                                                            $variationText = empty($product_variation->variation())
+                                                                ? ''
+                                                                : str_replace('_', ' ', $product_variation->variation()->name) . '-' . $product_variation->variation()->value;
+
+                                                            $fullProductName = $product->name.' '.$variationText;
+                                                            $productDetailsUrl = route('front-end.product-details', $product_variation->id);
+
+                                                            // Message text with product name and line break
+                                                            $whatsappMessage = 'Hello, I want to purchase: *' . $fullProductName . '*';
+                                                            // Append URL on a new line using %0A
+                                                            $whatsappMessage .= '. Here is the product link: ' . $productDetailsUrl;
+                                                        @endphp
+
+                                                        <a target="_blank"
+                                                           style="background-color:green; border-radius: 20px !important; font-weight:bold;"
+                                                           href="https://api.whatsapp.com/send?phone=254798692688&text={{ urlencode($whatsappMessage) }}"
+                                                           class="d-flex text-white  justify-content-between align-items-center btn btn-success">
+                                                            <i class='bx bxl-whatsapp fs-5'></i> Quick Buy
+                                                        </a>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -470,7 +547,7 @@ new #[Layout('layouts.front-end')] class extends Component {
                                         <div class="card-body">
                                             <div class="d-flex align-items-center justify-content-between">
                                                 <div class="">
-                                                    <p class="mb-1 product-short-name">{{ strtoupper( $product->name) }}</p>
+                                                    <p style="font-weight:bold; color:black;"  class="mb-1  product-short-name">{{ strtoupper( $product->name) }}</p>
                                                     <h6 class="mb-1"> {{ empty($product_variation->variation()) ? '' :  str_replace('_',' ',$product_variation->variation()->name).'-'.$product_variation->variation()->value }}</h6>
                                                 </div>
                                                 <div class="icon-wishlist">
@@ -488,6 +565,32 @@ new #[Layout('layouts.front-end')] class extends Component {
                                             <div
                                                 class="product-price d-flex align-items-center justify-content-start gap-2 mt-2">
                                                 <div class="h6 fw-bold">KES {{ $product_variation->price }}</div>
+                                                <div
+                                                    class="product-price d-flex align-items-center justify-content-start gap-2 mt-2">
+                                                    <div class="h6 fw-bold">KES {{ $product_variation->price }}</div>
+                                                    <div  style="width:60%;">
+                                                        @php
+                                                            $variationText = empty($product_variation->variation())
+                                                                ? ''
+                                                                : str_replace('_', ' ', $product_variation->variation()->name) . '-' . $product_variation->variation()->value;
+
+                                                            $fullProductName = $product->name.' '.$variationText;
+                                                            $productDetailsUrl = route('front-end.product-details', $product_variation->id);
+
+                                                            // Message text with product name and line break
+                                                            $whatsappMessage = 'Hello, I want to purchase: *' . $fullProductName . '*';
+                                                            // Append URL on a new line using %0A
+                                                            $whatsappMessage .= '. Here is the product link: ' . $productDetailsUrl;
+                                                        @endphp
+
+                                                        <a target="_blank"
+                                                           style="background-color:green; border-radius: 20px !important; font-weight:bold;"
+                                                           href="https://api.whatsapp.com/send?phone=254798692688&text={{ urlencode($whatsappMessage) }}"
+                                                           class="d-flex text-white  justify-content-between align-items-center btn btn-success">
+                                                            <i class='bx bxl-whatsapp fs-5'></i> Quick Buy
+                                                        </a>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>

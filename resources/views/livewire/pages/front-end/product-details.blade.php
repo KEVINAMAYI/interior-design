@@ -141,7 +141,9 @@ new #[Layout('layouts.front-end')] class extends Component {
                                     <div class="col-12">
                                         <div class="img-thumb-container overflow-hidden position-relative"
                                              data-fancybox="gallery">
-                                            <img src="{{ asset('front-end-assets/images/categories/wall_to_wall_carpets.png') }}" class="image-fluid card-img-top" alt="No image available">
+                                            <img
+                                                src="{{ asset('front-end-assets/images/categories/wall_to_wall_carpets.png') }}"
+                                                class="image-fluid card-img-top" alt="No image available">
                                         </div>
                                     </div>
                                 @endif
@@ -294,13 +296,6 @@ new #[Layout('layouts.front-end')] class extends Component {
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" data-bs-toggle="tab" href="#tags">
-                            <div class="d-flex align-items-center">
-                                <div class="tab-title text-uppercase fw-500">Tags</div>
-                            </div>
-                        </a>
-                    </li>
-                    <li class="nav-item">
                         <a class="nav-link active" data-bs-toggle="tab" href="#reviews">
                             <div class="d-flex align-items-center">
                                 <div class="tab-title text-uppercase fw-500">({{ count($product_ratings) }}) Reviews
@@ -311,38 +306,7 @@ new #[Layout('layouts.front-end')] class extends Component {
                 </ul>
                 <div class="tab-content pt-3">
                     <div class="tab-pane fade" id="discription">
-                        <p>Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown
-                            aliqua, retro synth master cleanse. Mustache cliche tempor, williamsburg carles vegan
-                            helvetica. Reprehenderit butcher retro keffiyeh dreamcatcher synth. Cosby sweater eu banh
-                            mi, qui irure terry richardson ex squid. Aliquip placeat salvia cillum iphone. Seitan
-                            aliquip quis cardigan american apparel, butcher voluptate nisi.</p>
-                        <ul>
-                            <li>Not just for commute</li>
-                            <li>Branded tongue and cuff</li>
-                            <li>Super fast and amazing</li>
-                            <li>Lorem sed do eiusmod tempor</li>
-                        </ul>
-                        <p class="mb-1">Cosby sweater eu banh mi, qui irure terry richardson ex squid. Aliquip placeat
-                            salvia cillum iphone.</p>
-                        <p class="mb-1">Seitan aliquip quis cardigan american apparel, butcher voluptate nisi.</p>
-                    </div>
-                    <div class="tab-pane fade" id="tags">
-                        <div class="tags-box d-flex flex-wrap gap-2">
-                            <a href="javascript:;" class="btn btn-ecomm btn-outline-dark">Cloths</a>
-                            <a href="javascript:;" class="btn btn-ecomm btn-outline-dark">Electronis</a>
-                            <a href="javascript:;" class="btn btn-ecomm btn-outline-dark">Furniture</a>
-                            <a href="javascript:;" class="btn btn-ecomm btn-outline-dark">Sports</a>
-                            <a href="javascript:;" class="btn btn-ecomm btn-outline-dark">Men Wear</a>
-                            <a href="javascript:;" class="btn btn-ecomm btn-outline-dark">Women Wear</a>
-                            <a href="javascript:;" class="btn btn-ecomm btn-outline-dark">Laptops</a>
-                            <a href="javascript:;" class="btn btn-ecomm btn-outline-dark">Formal Shirts</a>
-                            <a href="javascript:;" class="btn btn-ecomm btn-outline-dark">Topwear</a>
-                            <a href="javascript:;" class="btn btn-ecomm btn-outline-dark">Headphones</a>
-                            <a href="javascript:;" class="btn btn-ecomm btn-outline-dark">Bottom Wear</a>
-                            <a href="javascript:;" class="btn btn-ecomm btn-outline-dark">Bags</a>
-                            <a href="javascript:;" class="btn btn-ecomm btn-outline-dark">Sofa</a>
-                            <a href="javascript:;" class="btn btn-ecomm btn-outline-dark">Shoes</a>
-                        </div>
+                        <p>{{ $productVariation->product->description }}</p>
                     </div>
                     <div class="tab-pane fade show active" id="reviews">
                         <div class="row">
@@ -423,11 +387,14 @@ new #[Layout('layouts.front-end')] class extends Component {
                                 <div class="position-relative overflow-hidden">
                                     <a href="{{ route('front-end.product-details',$product_variation->id) }}">
                                         @if($product_variation->images()->isNotEmpty())
-                                            <img src="{{ asset('storage/' . $product_variation->images()[0]->image_url) }}"
-                                                 class="card-img-top"
-                                                 alt="{{ $product_variation->name }}">
+                                            <img
+                                                src="{{ asset('storage/' . $product_variation->images()[0]->image_url) }}"
+                                                class="card-img-top"
+                                                alt="{{ $product_variation->name }}">
                                         @else
-                                            <img src="{{ asset('front-end-assets/images/categories/wall_to_wall_carpets.png') }}" class="card-img-top" alt="No image available">
+                                            <img
+                                                src="{{ asset('front-end-assets/images/categories/wall_to_wall_carpets.png') }}"
+                                                class="card-img-top" alt="No image available">
                                         @endif
                                     </a>
                                 </div>
@@ -452,6 +419,28 @@ new #[Layout('layouts.front-end')] class extends Component {
                                     <div
                                         class="product-price d-flex align-items-center justify-content-start gap-2 mt-2">
                                         <div class="h6 fw-bold">KES {{ $product_variation->price }}</div>
+                                        <div style="width:60%;">
+                                            @php
+                                                $variationText = empty($product_variation->variation())
+                                                    ? ''
+                                                    : str_replace('_', ' ', $product_variation->variation()->name) . '-' . $product_variation->variation()->value;
+
+                                                $fullProductName = $similar_product->name.' '.$variationText;
+                                                $productDetailsUrl = route('front-end.product-details', $product_variation->id);
+
+                                                // Message text with product name and line break
+                                                $whatsappMessage = 'Hello, I want to purchase: *' . $fullProductName . '*';
+                                                // Append URL on a new line using %0A
+                                                $whatsappMessage .= '. Here is the product link: ' . $productDetailsUrl;
+                                            @endphp
+
+                                            <a target="_blank"
+                                               style="background-color:green; border-radius: 20px !important; font-weight:bold;"
+                                               href="https://api.whatsapp.com/send?phone=254798692688&text={{ urlencode($whatsappMessage) }}"
+                                               class="d-flex text-white  justify-content-between align-items-center btn btn-success">
+                                                <i class='bx bxl-whatsapp fs-5'></i> Quick Buy
+                                            </a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
