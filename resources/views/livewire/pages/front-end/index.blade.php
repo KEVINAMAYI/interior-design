@@ -283,12 +283,12 @@ new #[Layout('layouts.front-end')] class extends Component {
                                                     // Message text with product name and line break
                                                     $whatsappMessage = 'Hello, I want to purchase: *' . $fullProductName . '*';
                                                     // Append URL on a new line using %0A
-                                                    $whatsappMessage .= '%0AHere is the product link: ' . $productDetailsUrl;
+                                                    $whatsappMessage .= '. Here is the product link: ' . $productDetailsUrl;
                                                 @endphp
 
                                                 <a target="_blank"
                                                    style="background-color:green; border-radius:20px; font-weight:bold;"
-                                                   href="https://api.whatsapp.com/send?phone=254798692688&text={{ urlencode($whatsappMessage) }}"
+                                                   href="https://api.whatsapp.com/send?phone=254795704301&text={{ urlencode($whatsappMessage) }}"
                                                    class="d-flex text-white justify-content-between align-items-center btn btn-success">
                                                     <i class='bx bxl-whatsapp fs-5'></i> Quick Buy
                                                 </a>
