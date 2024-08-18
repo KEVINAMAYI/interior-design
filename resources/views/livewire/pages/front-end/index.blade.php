@@ -288,7 +288,7 @@ new #[Layout('layouts.front-end')] class extends Component {
 
                                                 <a target="_blank"
                                                    style="background-color:green; border-radius:20px; font-weight:bold;"
-                                                   href="https://api.whatsapp.com/send?phone=254798692688&text={{ urlencode($whatsappMessage) }}"
+                                                   href="https://api.whatsapp.com/send?phone=254795704301&text={{ urlencode($whatsappMessage) }}"
                                                    class="d-flex text-white justify-content-between align-items-center btn btn-success">
                                                     <i class='bx bxl-whatsapp fs-5'></i> Quick Buy
                                                 </a>
