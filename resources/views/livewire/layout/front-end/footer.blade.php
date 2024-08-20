@@ -22,11 +22,9 @@ new class extends Component {
                 <div class="footer-widget-6">
                     <img class="mb-3" height="60" src="front-end-assets/images/gsm_logo_transparent.png">
                     <h5 class="mb-3 fw-bold">About Us</h5>
-                    <p class="mb-2">There are many variations of passages of Lorem Ipsum available, but the majority
-                        have suffered alteration in some form, by injected humour, or randomised words which don't look
-                        even slightly believable.</p>
+                    <p class="mb-2">GSM Interiors Ltd is an interior design company dealing with a wide range of Flooring solutions, Home & office decor, artificial flowers and artificial plants.</p>
 
-                    <a class="link-dark" href="javascript:;">Read More</a>
+                    <a style="text-decoration:none;" class="btn btn-success" wire:navigate href="{{ route('front-end.about-us') }}">Read More</a>
                 </div>
             </div>
             <div class="col">
@@ -57,11 +55,9 @@ new class extends Component {
                 <div class="footer-widget-9">
                     <h5 class="mb-3 fw-bold">Follow Us</h5>
                     <div class="social-link d-flex align-items-center gap-2">
-                        <a href="javascript:;"><i class="bi bi-facebook"></i></a>
-                        <a href="javascript:;"><i class="bi bi-twitter"></i></a>
-                        <a href="javascript:;"><i class="bi bi-linkedin"></i></a>
-                        <a href="javascript:;"><i class="bi bi-youtube"></i></a>
-                        <a href="javascript:;"><i class="bi bi-instagram"></i></a>
+                        <a target="_blank" href="https://www.facebook.com/profile.php?id=100083292944712"><i class="bi bi-facebook"></i></a>
+                        <a target="_blank" href="https://www.tiktok.com/@gsm_interiors_ltd?_t=8p0SeihePRe&_r=1"><i class="bi bi-tiktok"></i></a>
+                        <a target="_blank" href="https://www.instagram.com/gsminteriorsltd?igsh=MWc4YWhteHRiY3MwaA=="><i class="bi bi-instagram"></i></a>
                     </div>
                     <div class="mb-3 mt-3">
                         <h5 class="mb-0 fw-bold">Email</h5>
