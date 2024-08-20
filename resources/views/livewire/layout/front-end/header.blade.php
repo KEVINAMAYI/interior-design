@@ -93,9 +93,6 @@ new class extends Component {
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('front-end.search') }}"><i class="bi bi-search"></i></a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{{ route('front-end.wishlist') }}"><i class="bi bi-suit-heart"></i></a>
-            </li>
         </ul>
     </nav>
 </header>
