@@ -92,7 +92,7 @@ new #[Layout('layouts.front-end')] class extends Component {
                     <div class="card rounded-0 shadow-none w-100">
                         <div class="card-body">
                             <img src="front-end-assets/images/icons/delivery.webp" width="60" alt="">
-                            <h5 class="my-3 fw-bold">Delivery and Returns</h5>
+                            <h5 class="my-3 fw-bold">Delivery</h5>
                             <p class="mb-0">Delivery times are just estimates. GSM Interiors Ltd, however, places great
                                 attention to fast, efficient and convenient delivery of our products and services to
                                 match client's expectations.</p>

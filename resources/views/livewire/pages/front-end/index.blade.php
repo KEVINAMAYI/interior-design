@@ -123,19 +123,8 @@ new #[Layout('layouts.front-end')] class extends Component {
                         <div class="fs-1 text-content"><i class='bx bx-taxi'></i>
                         </div>
                         <div class="info-box-content ps-3">
-                            <h6 class="mb-0 fw-bold">FREE SHIPPING &amp; RETURN</h6>
-                            <p class="mb-0">Free shipping on all orders over $49</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col">
-                    <div class="d-flex align-items-center justify-content-center p-3 border">
-                        <div class="fs-1 text-content"><i class='bx bx-dollar-circle'></i>
-                        </div>
-                        <div class="info-box-content ps-3">
-                            <h6 class="mb-0 fw-bold">MONEY BACK GUARANTEE</h6>
-                            <p class="mb-0">100% money back guarantee</p>
+                            <h6 class="mb-0 fw-bold">DELIVERY</h6>
+                            <p class="mb-0">Fast, Efficient and Convenient.</p>
                         </div>
                     </div>
                 </div>
@@ -146,6 +135,16 @@ new #[Layout('layouts.front-end')] class extends Component {
                         <div class="info-box-content ps-3">
                             <h6 class="mb-0 fw-bold">ONLINE SUPPORT 24/7</h6>
                             <p class="mb-0">Awesome Support for 24/7 Days</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="d-flex align-items-center justify-content-center p-3 border">
+                        <div class="fs-1 text-content"><i class='bx bx-network-chart'></i>
+                        </div>
+                        <div class="info-box-content ps-3">
+                            <h6 class="mb-0 fw-bold">QUALITY</h6>
+                            <p class="mb-0">Great Quality guaranteed.</p>
                         </div>
                     </div>
                 </div>
@@ -666,59 +665,42 @@ new #[Layout('layouts.front-end')] class extends Component {
         <div class="container">
             <div class="text-center pb-3">
                 <h3 class="mb-0 h3 fw-bold">What We Offer!</h3>
-                <p class="mb-0 text-capitalize">The purpose of lorem ipsum</p>
             </div>
-            <div class="row row-cols-1 row-cols-lg-4 g-4">
-                <div class="col d-flex">
-                    <div class="card depth border-0 rounded-0 border-bottom border-primary border-3 w-100">
-                        <div class="card-body text-center">
-                            <div class="h1 fw-bold my-2 text-primary">
-                                <i class="bi bi-truck"></i>
+            <div class="container py-4">
+                <div class="row row-cols-1 row-cols-lg-3 g-4">
+                    <div class="col">
+                        <div class="d-flex align-items-center justify-content-center p-3 border">
+                            <div class="fs-1 text-content"><i class='bx bx-taxi'></i>
                             </div>
-                            <h5 class="fw-bold">Free Delivery</h5>
-                            <p class="mb-0">Nor again is there anyone who loves or pursues or desires to obtain pain of
-                                itself.</p>
+                            <div class="info-box-content ps-3">
+                                <h6 class="mb-0 fw-bold">DELIVERY</h6>
+                                <p class="mb-0">Fast, Efficient and Convenient.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="d-flex align-items-center justify-content-center p-3 border">
+                            <div class="fs-1 text-content"><i class='bx bx-support'></i>
+                            </div>
+                            <div class="info-box-content ps-3">
+                                <h6 class="mb-0 fw-bold">ONLINE SUPPORT 24/7</h6>
+                                <p class="mb-0">Awesome Support for 24/7 Days</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="d-flex align-items-center justify-content-center p-3 border">
+                            <div class="fs-1 text-content"><i class='bx bx-network-chart'></i>
+                            </div>
+                            <div class="info-box-content ps-3">
+                                <h6 class="mb-0 fw-bold">QUALITY</h6>
+                                <p class="mb-0">Great Quality guaranteed.</p>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="col d-flex">
-                    <div class="card depth border-0 rounded-0 border-bottom border-danger border-3 w-100">
-                        <div class="card-body text-center">
-                            <div class="h1 fw-bold my-2 text-danger">
-                                <i class="bi bi-credit-card"></i>
-                            </div>
-                            <h5 class="fw-bold">Secure Payment</h5>
-                            <p class="mb-0">Nor again is there anyone who loves or pursues or desires to obtain pain of
-                                itself.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col d-flex">
-                    <div class="card depth border-0 rounded-0 border-bottom border-success border-3 w-100">
-                        <div class="card-body text-center">
-                            <div class="h1 fw-bold my-2 text-success">
-                                <i class="bi bi-minecart-loaded"></i>
-                            </div>
-                            <h5 class="fw-bold">Free Returns</h5>
-                            <p class="mb-0">Nor again is there anyone who loves or pursues or desires to obtain pain of
-                                itself.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col d-flex">
-                    <div class="card depth border-0 rounded-0 border-bottom border-warning border-3 w-100">
-                        <div class="card-body text-center">
-                            <div class="h1 fw-bold my-2 text-warning">
-                                <i class="bi bi-headset"></i>
-                            </div>
-                            <h5 class="fw-bold">24/7 Support</h5>
-                            <p class="mb-0">Nor again is there anyone who loves or pursues or desires to obtain pain of
-                                itself.</p>
-                        </div>
-                    </div>
-                </div>
+                <!--end row-->
             </div>
-            <!--end row-->
         </div>
     </section>
     <!--end features-->
