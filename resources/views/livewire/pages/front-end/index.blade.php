@@ -341,7 +341,6 @@ new #[Layout('layouts.front-end')] class extends Component {
                                                 <div class="h6 fw-bold">KES {{ $product_variation->price }}</div>
                                                 <div
                                                     class="product-price d-flex align-items-center justify-content-start gap-2 mt-2">
-                                                    <div class="h6 fw-bold">KES {{ $product_variation->price }}</div>
                                                     <div  style="width:60%;">
                                                         @php
                                                             $variationText = empty($product_variation->variation())
@@ -416,7 +415,6 @@ new #[Layout('layouts.front-end')] class extends Component {
                                                 <div class="h6 fw-bold">KES {{ $product_variation->price }}</div>
                                                 <div
                                                     class="product-price d-flex align-items-center justify-content-start gap-2 mt-2">
-                                                    <div class="h6 fw-bold">KES {{ $product_variation->price }}</div>
                                                     <div  style="width:60%;">
                                                         @php
                                                             $variationText = empty($product_variation->variation())
@@ -491,7 +489,6 @@ new #[Layout('layouts.front-end')] class extends Component {
                                                 <div class="h6 fw-bold">KES {{ $product_variation->price }}</div>
                                                 <div
                                                     class="product-price d-flex align-items-center justify-content-start gap-2 mt-2">
-                                                    <div class="h6 fw-bold">KES {{ $product_variation->price }}</div>
                                                     <div  style="width:60%;">
                                                         @php
                                                             $variationText = empty($product_variation->variation())
@@ -566,7 +563,6 @@ new #[Layout('layouts.front-end')] class extends Component {
                                                 <div class="h6 fw-bold">KES {{ $product_variation->price }}</div>
                                                 <div
                                                     class="product-price d-flex align-items-center justify-content-start gap-2 mt-2">
-                                                    <div class="h6 fw-bold">KES {{ $product_variation->price }}</div>
                                                     <div  style="width:60%;">
                                                         @php
                                                             $variationText = empty($product_variation->variation())
