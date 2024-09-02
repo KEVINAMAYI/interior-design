@@ -68,6 +68,10 @@ new class extends Component {
                         <p class="mb-0 font-13">0798692688</p>
                     </div>
                 </div>
+                <div style="border:2px solid black; padding:10px;" class="address mt-3 mb-3">
+                    <h5 class="mb-2 fw-bold">Address</h5>
+                    <p class="mb-0 font-12">Nairobi CBD Odeon, along Taveta Road, Taveta Court Building shop 305/306</p>
+                </div>
             </div>
         </div><!--end row-->
         <div class="my-5"></div>
