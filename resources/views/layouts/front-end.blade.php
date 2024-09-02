@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!--favicon-->
-    <link rel="icon" href="front-end-assets/images/favicon-32x32.webp" type="image/webp"/>
+    <link rel="icon" href="front-end-assets/images/gsm_logo_transparent.png"/>
 
     <!-- Scripts -->
     @vite('resources/css/front-end.css')
@@ -33,7 +33,8 @@
     <!-- init js -->
     @stack('css')
 
-    <title>Shopingo - eCommerce HTML Template</title>
+   <title>GSM Interior LTD</title>
+
 </head>
 
 <body>
