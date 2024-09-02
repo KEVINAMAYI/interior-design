@@ -50,7 +50,7 @@ new class extends Component {
             'price' => 'required',
             'variation_id' => 'required',
             'category_id' => 'required',
-            'images.*' => 'required|image|max:2048',
+            'images.*' => 'required|image',
 
         ];
     }
