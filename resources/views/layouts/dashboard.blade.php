@@ -34,7 +34,7 @@
 <div class="rightbar-overlay"></div>
 
 <script src="dashboard/libs/jquery/jquery.min.js"></script>
-<script data-navigate-once src="dashboard/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="dashboard/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src="dashboard/libs/metismenu/metisMenu.min.js"></script>
 <script src="dashboard/libs/simplebar/simplebar.min.js"></script>
 <script src="dashboard/libs/node-waves/waves.min.js"></script>
@@ -111,7 +111,6 @@
 
         // Initialize DataTables on first load
         initializeAllDataTables();
-
 
     });
 </script>
