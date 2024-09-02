@@ -50,8 +50,7 @@
 <script src="dashboard/libs/admin-resources/jquery.vectormap/jquery-jvectormap-1.2.2.min.js"></script>
 <script src="dashboard/libs/admin-resources/jquery.vectormap/maps/jquery-jvectormap-world-mill-en.js"></script>
 
-<!-- dashboard init -->
-<script src="dashboard/js/pages/dashboard.init.js"></script>
+
 
 <script src="dashboard/libs/dropzone/min/dropzone.min.js"></script>
 
@@ -78,46 +77,45 @@
 <script src="dashboard/js/app.js"></script>
 
 <script data-navigate-once>
-    $(document).ready(function () {
+    document.addEventListener("DOMContentLoaded", function () {
+        function initializeDataTable(selector) {
+            // Destroy the DataTable instance if it exists
+            if ($.fn.DataTable.isDataTable(selector)) {
+                $(selector).DataTable().destroy();
+            }
+
+            // Initialize the DataTable
+            $(selector).DataTable({
+                lengthChange: false,
+                buttons: ["copy", "excel", "pdf", "colvis"]
+            }).buttons().container().appendTo($(selector + "_wrapper .col-md-6:eq(0)"));
+
+            // Apply select styling
+            $(".dataTables_length select").addClass("form-select form-select-sm");
+        }
+
+        function initializeAllDataTables() {
+            initializeDataTable("#categories_table");
+            initializeDataTable("#products_table");
+            initializeDataTable("#staff_table");
+            initializeDataTable("#variations_table");
+            initializeDataTable("#roles_table");
+            initializeDataTable("#deals_table");
+            initializeDataTable("#customers_table");
+        }
+
+        // Initialize DataTables after Livewire navigation
         document.addEventListener("livewire:navigated", function () {
-            $("#categories_table").DataTable({
-                lengthChange: !1,
-                buttons: ["copy", "excel", "pdf", "colvis"]
-            }).buttons().container().appendTo("#categories_table_wrapper .col-md-6:eq(0)"), $(".dataTables_length select").addClass("form-select form-select-sm")
+            initializeAllDataTables();
+        });
 
-            $("#products_table").DataTable({
-                lengthChange: !1,
-                buttons: ["copy", "excel", "pdf", "colvis"]
-            }).buttons().container().appendTo("#products_table_wrapper .col-md-6:eq(0)"), $(".dataTables_length select").addClass("form-select form-select-sm")
+        // Initialize DataTables on first load
+        initializeAllDataTables();
 
-            $("#staff_table").DataTable({
-                lengthChange: !1,
-                buttons: ["copy", "excel", "pdf", "colvis"]
-            }).buttons().container().appendTo("#staff_table_wrapper .col-md-6:eq(0)"), $(".dataTables_length select").addClass("form-select form-select-sm")
 
-            $("#variations_table").DataTable({
-                lengthChange: !1,
-                buttons: ["copy", "excel", "pdf", "colvis"]
-            }).buttons().container().appendTo("#variations_table_wrapper .col-md-6:eq(0)"), $(".dataTables_length select").addClass("form-select form-select-sm")
-
-            $("#roles_table").DataTable({
-                lengthChange: !1,
-                buttons: ["copy", "excel", "pdf", "colvis"]
-            }).buttons().container().appendTo("#roless_table_wrapper .col-md-6:eq(0)"), $(".dataTables_length select").addClass("form-select form-select-sm")
-
-            $("#deals_table").DataTable({
-                lengthChange: !1,
-                buttons: ["copy", "excel", "pdf", "colvis"]
-            }).buttons().container().appendTo("#dealss_table_wrapper .col-md-6:eq(0)"), $(".dataTables_length select").addClass("form-select form-select-sm")
-
-            $("#customers_table").DataTable({
-                lengthChange: !1,
-                buttons: ["copy", "excel", "pdf", "colvis"]
-            }).buttons().container().appendTo("#customers_table_wrapper .col-md-6:eq(0)"), $(".dataTables_length select").addClass("form-select form-select-sm")
-
-        })
     });
 </script>
+
 
 <!-- init js -->
 @stack('js')

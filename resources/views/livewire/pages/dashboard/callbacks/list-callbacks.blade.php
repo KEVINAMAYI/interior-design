@@ -2,16 +2,44 @@
 
 use App\Models\CallBack;
 use App\Models\Customer;
+use Illuminate\Support\Facades\DB;
+use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Attributes\Layout;
+use Livewire\Attributes\On;
 use Livewire\Volt\Component;
 
 new #[Layout('layouts.dashboard')] class extends Component {
 
-    public function with()
+    use LivewireAlert;
+
+    public $callbacks = [];
+
+    public function mount(){
+        $this->getCallBacks();
+    }
+
+
+    public function getCallBacks(){
+        $this->callbacks = CallBack::all();
+    }
+
+
+    #[On('delete-callback')]
+    public function deleteCallBack($category_id)
     {
-        return [
-            'callbacks' => CallBack::all()
-        ];
+        DB::beginTransaction();
+        try {
+
+            CallBack::find($category_id)->delete();
+            DB::commit();
+
+            $this->getCallBacks();
+            $this->alert('success', 'Callback deleted successfully');
+
+        } catch (Exception $exception) {
+            DB::rollBack();
+            $this->alert('error', $exception->getMessage());
+        }
     }
 
 }; ?>
@@ -51,16 +79,24 @@ new #[Layout('layouts.dashboard')] class extends Component {
                                                 <td>{{ $callback->last_name }}</td>
                                                 <td>{{ $callback->phone_number }}</td>
                                                 <td>
-                                                    <span class="badge btn-rounded badge-pill {{ $callback->status === 'pending' ? 'bg-warning' :'bg-success'}} ">
+                                                    <span
+                                                        class="badge btn-rounded badge-pill {{ $callback->status === 'pending' ? 'bg-warning' :'bg-success'}} ">
                                                     {{ $callback->status }}
                                                 </span>
                                                 </td>
                                                 <td>
                                                     <div class="btn-group">
-                                                        <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Action <i class="mdi mdi-chevron-down"></i></button>
+                                                        <button type="button" class="btn btn-primary dropdown-toggle"
+                                                                data-bs-toggle="dropdown" aria-expanded="false">Action
+                                                            <i class="mdi mdi-chevron-down"></i></button>
                                                         <div class="dropdown-menu">
-                                                            <a class="dropdown-item" href="#"> <i class="mdi mdi-pencil-box font-size-16"></i> Update status</a>
-                                                            <a class="dropdown-item" href="#"> <i class="mdi mdi-trash-can font-size-16"></i> Delete</a>
+                                                            <a class="dropdown-item" href="#"> <i
+                                                                    class="mdi mdi-pencil-box font-size-16"></i> Update
+                                                                status</a>
+                                                            <button data-id="{{ $callback->id }}"
+                                                                    class="deleteCallBack dropdown-item"><i
+                                                                    class="mdi mdi-trash-can font-size-16"></i> Delete
+                                                            </button>
                                                         </div>
                                                     </div>
                                                 </td>
@@ -74,10 +110,19 @@ new #[Layout('layouts.dashboard')] class extends Component {
                     </div>
                 </div>
             </div>
-
         </div>
-
     </div><!-- end row-->
-
 </div><!-- end row -->
+@push('js')
+    <script>
+        document.addEventListener("livewire:navigated", function () {
+             $(document).on('click', '.deleteCallBack', function () {
+                let clickedID = $(this).data('id');
+
+                console.log(clickedID)
+                Livewire.dispatch('delete-callback', {category_id: clickedID});
+            })
+        });
+    </script>
+@endpush
 
