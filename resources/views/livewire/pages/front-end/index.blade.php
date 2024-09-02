@@ -599,7 +599,7 @@ new #[Layout('layouts.front-end')] class extends Component {
                             <div class="card-body text-center">
                                 <h5 class="card-title">Curtain Rods</h5>
                                 <p class="card-text">Get Wonderful offers and make your house shine</p>
-                                <a href="javascript:;" class="btn btn-dark btn-ecomm">SHOP NOW</a>
+                                <a  href="{{ route('front-end.shop-grid',['category_id' => 3,'product_id' => 0]) }}" class="btn btn-dark btn-ecomm">SHOP NOW</a>
                             </div>
                         </div>
                     </div>
@@ -611,7 +611,7 @@ new #[Layout('layouts.front-end')] class extends Component {
                                 <h5 class="card-title">Carpets</h5>
                                 <p class="card-text">Wall to Wall Carpets and Artifical Carpets at wonderful prices on
                                     sale</p>
-                                <a href="javascript:;" class="btn btn-dark btn-ecomm">SHOP NOW</a>
+                                <a href="{{ route('front-end.shop-grid',['category_id' => 1,'product_id' => 0]) }}" class="btn btn-dark btn-ecomm">SHOP NOW</a>
                             </div>
                         </div>
                     </div>
@@ -622,7 +622,7 @@ new #[Layout('layouts.front-end')] class extends Component {
                                     <h5 class="card-title text-white">Summer Sale</h5>
                                     <p class="card-text text-uppercase fs-1 lh-1 mt-3 mb-2 text-white">Up to 30% off</p>
                                     <p class="card-text fs-5 text-white">On Top Interior Design Brands</p><a
-                                        href="javascript:;" style="color:white;" class="btn btn-white btn-ecomm">SHOP BY
+                                        href="{{ route('front-end.shop-grid',['category_id' => 0,'product_id' => 0]) }}" style="color:white;" class="btn btn-white btn-ecomm">SHOP BY
                                         CATEGORY</a>
                                 </div>
                             </div>
@@ -633,7 +633,7 @@ new #[Layout('layouts.front-end')] class extends Component {
                             <img src="front-end-assets/images/categories/wall_decor.png" class="img-fluid" alt="...">
                             <div style="padding-top:40px;" class="card-body text-center">
                                 <h5 class="card-title fs-2 fw-bold text-uppercase">Wall Decor</h5>
-                                <a href="javascript:;" class="btn btn-dark btn-ecomm">HURRY UP!</a>
+                                <a href="{{ route('front-end.shop-grid',['category_id' => 4,'product_id' => 0]) }}" class="btn btn-dark btn-ecomm">HURRY UP!</a>
                             </div>
                         </div>
                     </div>
