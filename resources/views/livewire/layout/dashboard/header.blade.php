@@ -23,7 +23,7 @@ new class extends Component {
         <div class="d-flex">
             <!-- LOGO -->
             <div class="navbar-brand-box">
-                <a href="index.html" class="logo logo-dark">
+                <a href="{{ route('front-end.index') }}" class="logo logo-dark">
                                 <span class="logo-sm">
                                     <img src="front-end-assets/images/gsm_logo_transparent.png" alt="" height="40">
                                 </span>
@@ -32,7 +32,7 @@ new class extends Component {
                                 </span>
                 </a>
 
-                <a href="index.html" class="logo logo-light">
+                <a href="{{ route('front-end.index') }}" class="logo logo-light">
                                 <span class="logo-sm">
                                     <img src="front-end-assets/images/gsm_logo_transparent.png" alt="" height="40">
                                 </span>
