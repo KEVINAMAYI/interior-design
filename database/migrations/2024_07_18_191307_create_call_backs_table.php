@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('first_name');
             $table->string('last_name');
             $table->string('phone_number');
-            $table->string('status')->default('pending');
+            $table->enum('status',['pending','completed'])->default('pending');
             $table->timestamps();
         });
     }

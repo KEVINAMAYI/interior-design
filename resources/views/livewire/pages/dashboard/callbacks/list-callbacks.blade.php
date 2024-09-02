@@ -13,14 +13,39 @@ new #[Layout('layouts.dashboard')] class extends Component {
     use LivewireAlert;
 
     public $callbacks = [];
+    public $status = 'pending';
+    public $callback_id = '';
 
-    public function mount(){
+    public function mount()
+    {
         $this->getCallBacks();
     }
 
 
-    public function getCallBacks(){
+    public function getCallBacks()
+    {
         $this->callbacks = CallBack::all();
+    }
+
+
+    #[On('update-status')]
+    public function updateStatus($category_id, $status)
+    {
+        DB::beginTransaction();
+        try {
+
+            CallBack::find($category_id)->update([
+                'status' => $status
+            ]);
+            DB::commit();
+
+            $this->getCallBacks();
+            $this->alert('success', 'Status updated successfully');
+
+        } catch (Exception $exception) {
+            DB::rollBack();
+            $this->alert('error', $exception->getMessage());
+        }
     }
 
 
@@ -90,9 +115,11 @@ new #[Layout('layouts.dashboard')] class extends Component {
                                                                 data-bs-toggle="dropdown" aria-expanded="false">Action
                                                             <i class="mdi mdi-chevron-down"></i></button>
                                                         <div class="dropdown-menu">
-                                                            <a class="dropdown-item" href="#"> <i
+                                                            <button class="updateCallBack dropdown-item"
+                                                                    data-id="{{ $callback->id }}"><i
                                                                     class="mdi mdi-pencil-box font-size-16"></i> Update
-                                                                status</a>
+                                                                status
+                                                            </button>
                                                             <button data-id="{{ $callback->id }}"
                                                                     class="deleteCallBack dropdown-item"><i
                                                                     class="mdi mdi-trash-can font-size-16"></i> Delete
@@ -112,16 +139,63 @@ new #[Layout('layouts.dashboard')] class extends Component {
             </div>
         </div>
     </div><!-- end row-->
+
+    <div wire:ignore.self class="modal fade" id="callBackModal" tabindex="-1" aria-labelledby="callBackModalLabel"
+         aria-hidden="true">
+        <form>
+            <div class="modal-dialog modal-md">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="callBackModalLabel">Update Status</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row ">
+                            <div class="col-md-12 col-sm-12">
+                                <div style="padding-left:15px;" class="mb-3 row col-lg-12">
+                                    <input type="hidden" id="callback_id" value="">
+                                    <select id="status_val" class="form-select">
+                                        <option value="pending">Pending</option>
+                                        <option value="completed">Completed</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save changes</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
 </div><!-- end row -->
+
 @push('js')
     <script>
         document.addEventListener("livewire:navigated", function () {
-             $(document).on('click', '.deleteCallBack', function () {
+            $(document).on('click', '.deleteCallBack', function () {
                 let clickedID = $(this).data('id');
-
                 console.log(clickedID)
                 Livewire.dispatch('delete-callback', {category_id: clickedID});
             })
+
+            $(document).on('click', '.updateCallBack', function () {
+                let clickedID = $(this).data('id');
+                $('#callback_id').val(clickedID);
+                $('#callBackModal').modal('show');
+            })
+
+            // Handle form submission
+            $('#callBackModal form').on('submit', function (event) {
+                event.preventDefault(); // Prevent the default form submission
+                let clickedID = $('#callback_id').val();
+                let status = $('#status_val').val();
+                Livewire.dispatch('update-status', {category_id: clickedID, status: status});
+            });
+
         });
     </script>
 @endpush
