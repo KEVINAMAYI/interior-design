@@ -26,7 +26,7 @@ new class extends Component {
         return [
             'first_name' => 'required',
             'last_name' => 'required',
-            'email' => 'required|unique:staff',
+            'email' => 'required|unique:users',
             'phone_number' => 'required|unique:staff',
             'user_name' => 'required',
             'password' => 'required',
