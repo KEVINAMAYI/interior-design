@@ -25,19 +25,19 @@ new class extends Component {
             <div class="navbar-brand-box">
                 <a href="index.html" class="logo logo-dark">
                                 <span class="logo-sm">
-                                    <img src="dashboard/images/logo-sm.svg" alt="" height="24">
+                                    <img src="front-end-assets/images/gsm_logo_transparent.png" alt="" height="40">
                                 </span>
                     <span class="logo-lg">
-                                    <img src="dashboard/images/logo-sm.svg" alt="" height="24"> <span class="logo-txt">Minia</span>
+                                    <img src="front-end-assets/images/gsm_logo_transparent.png" alt="" height="40"> <span class="logo-txt">GSM</span>
                                 </span>
                 </a>
 
                 <a href="index.html" class="logo logo-light">
                                 <span class="logo-sm">
-                                    <img src="dashboard/images/logo-sm.svg" alt="" height="24">
+                                    <img src="front-end-assets/images/gsm_logo_transparent.png" alt="" height="40">
                                 </span>
                     <span class="logo-lg">
-                                    <img src="dashboard/images/logo-sm.svg" alt="" height="24"> <span class="logo-txt">Minia</span>
+                                    <img src="front-end-assets/images/gsm_logo_transparent.png" alt="" height="40"> <span class="logo-txt">GSM</span>
                                 </span>
                 </a>
             </div>
