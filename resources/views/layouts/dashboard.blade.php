@@ -61,7 +61,7 @@
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <!-- data tables -->
-<script data-navigate-once src="dashboard/libs/datatables.net/js/jquery.dataTables.min.js"></script>
+<script  src="dashboard/libs/datatables.net/js/jquery.dataTables.min.js"></script>
 <script data-navigate-once src="dashboard/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
 
 <!-- data tables buttons -->
