@@ -29,6 +29,9 @@ Route::middleware(['auth', 'verified'])->prefix('dashboard')->name('dashboard.')
     Volt::route('add-category', 'pages.dashboard.product-categories.add-product-category')
         ->name('add-category');
 
+    Volt::route('edit-category/{category_id}', 'pages.dashboard.product-categories.edit-product-category')
+        ->name('edit-category');
+
     /**
      * Variations Routes
      */
