@@ -77,44 +77,79 @@
 <script src="dashboard/js/app.js"></script>
 
 <script data-navigate-once>
-    document.addEventListener("DOMContentLoaded", function () {
-        function initializeDataTable(selector) {
-            // Destroy the DataTable instance if it exists
-            if ($.fn.DataTable.isDataTable(selector)) {
-                $(selector).DataTable().destroy();
-            }
-
-            // Initialize the DataTable
-            $(selector).DataTable({
-                lengthChange: false,
-                buttons: ["copy", "excel", "pdf", "colvis"]
-            }).buttons().container().appendTo($(selector + "_wrapper .col-md-6:eq(0)"));
-
-            // Apply select styling
-            $(".dataTables_length select").addClass("form-select form-select-sm");
+    document.addEventListener("livewire:navigated", function () {
+        // Destroy any existing DataTable instances to avoid reinitialization conflicts
+        if ($.fn.dataTable.isDataTable("#categories_table")) {
+            $("#categories_table").DataTable().destroy();
+        }
+        if ($.fn.dataTable.isDataTable("#products_table")) {
+            $("#products_table").DataTable().destroy();
+        }
+        if ($.fn.dataTable.isDataTable("#staff_table")) {
+            $("#staff_table").DataTable().destroy();
+        }
+        if ($.fn.dataTable.isDataTable("#variations_table")) {
+            $("#variations_table").DataTable().destroy();
+        }
+        if ($.fn.dataTable.isDataTable("#roles_table")) {
+            $("#roles_table").DataTable().destroy();
+        }
+        if ($.fn.dataTable.isDataTable("#deals_table")) {
+            $("#deals_table").DataTable().destroy();
+        }
+        if ($.fn.dataTable.isDataTable("#customers_table")) {
+            $("#customers_table").DataTable().destroy();
+        }
+        if ($.fn.dataTable.isDataTable("#customers_table")) {
+            $("#callbacks_table").DataTable().destroy();
         }
 
-        function initializeAllDataTables() {
-            initializeDataTable("#categories_table");
-            initializeDataTable("#products_table");
-            initializeDataTable("#staff_table");
-            initializeDataTable("#variations_table");
-            initializeDataTable("#roles_table");
-            initializeDataTable("#deals_table");
-            initializeDataTable("#customers_table");
-            initializeDataTable("#callbacks_table");
-        }
+        // Reinitialize DataTables after destruction
+        $("#categories_table").DataTable({
+            lengthChange: false,
+            buttons: ["copy", "excel", "pdf", "colvis"]
+        }).buttons().container().appendTo("#categories_table_wrapper .col-md-6:eq(0)");
 
-        // Initialize DataTables after Livewire navigation
-        document.addEventListener("livewire:navigated", function () {
-            initializeAllDataTables();
-        });
+        $("#products_table").DataTable({
+            lengthChange: false,
+            buttons: ["copy", "excel", "pdf", "colvis"]
+        }).buttons().container().appendTo("#products_table_wrapper .col-md-6:eq(0)");
 
-        // Initialize DataTables on first load
-        initializeAllDataTables();
+        $("#staff_table").DataTable({
+            lengthChange: false,
+            buttons: ["copy", "excel", "pdf", "colvis"]
+        }).buttons().container().appendTo("#staff_table_wrapper .col-md-6:eq(0)");
 
+        $("#variations_table").DataTable({
+            lengthChange: false,
+            buttons: ["copy", "excel", "pdf", "colvis"]
+        }).buttons().container().appendTo("#variations_table_wrapper .col-md-6:eq(0)");
+
+        $("#roles_table").DataTable({
+            lengthChange: false,
+            buttons: ["copy", "excel", "pdf", "colvis"]
+        }).buttons().container().appendTo("#roless_table_wrapper .col-md-6:eq(0)");
+
+        $("#deals_table").DataTable({
+            lengthChange: false,
+            buttons: ["copy", "excel", "pdf", "colvis"]
+        }).buttons().container().appendTo("#dealss_table_wrapper .col-md-6:eq(0)");
+
+        $("#customers_table").DataTable({
+            lengthChange: false,
+            buttons: ["copy", "excel", "pdf", "colvis"]
+        }).buttons().container().appendTo("#customers_table_wrapper .col-md-6:eq(0)");
+
+        $("#callbacks_table").DataTable({
+            lengthChange: false,
+            buttons: ["copy", "excel", "pdf", "colvis"]
+        }).buttons().container().appendTo("#customers_table_wrapper .col-md-6:eq(0)");
+
+        // Apply the select style after initializing DataTables
+        $(".dataTables_length select").addClass("form-select form-select-sm");
     });
 </script>
+
 
 
 <!-- init js -->
