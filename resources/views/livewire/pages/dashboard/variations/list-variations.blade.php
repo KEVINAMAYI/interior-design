@@ -117,15 +117,14 @@ new #[Layout('layouts.dashboard')] class extends Component {
 @push('js')
     <script>
         document.addEventListener("livewire:navigated", function () {
-            $(document).on('click', '.deleteVariation', function () {
+            $(document).off('click.deleteVariation').on('click.deleteVariation', '.deleteVariation', function () {
                 let clickedID = $(this).data('id');
                 console.log(clickedID);
 
-                if (confirm("Are you sure ?")) {
+                if (confirm("Are you sure?")) {
                     Livewire.dispatch('delete-variation', {variation_id: clickedID});
                 }
             });
-
         });
     </script>
 @endpush
