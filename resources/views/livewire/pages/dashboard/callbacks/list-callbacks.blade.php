@@ -29,12 +29,13 @@ new #[Layout('layouts.dashboard')] class extends Component {
 
 
     #[On('update-status')]
-    public function updateStatus($category_id, $status)
+    public function updateStatus($callback_id, $status)
     {
         DB::beginTransaction();
         try {
 
-            CallBack::find($category_id)->update([
+
+            CallBack::find($callback_id)->update([
                 'status' => $status
             ]);
             DB::commit();
@@ -50,14 +51,17 @@ new #[Layout('layouts.dashboard')] class extends Component {
 
 
     #[On('delete-callback')]
-    public function deleteCallBack($category_id)
+    public function deleteCallBack($callback_id)
     {
         DB::beginTransaction();
         try {
-            $callback = CallBack::find($category_id);
+
+            $this->getCallBacks();
+
+            $callback = CallBack::find($callback_id);
 
             if (!$callback) {
-                throw new Exception("Callback with ID $category_id not found.");
+                throw new Exception("Callback with ID $callback_id not found.");
             }
 
             $callback->delete();
@@ -185,7 +189,7 @@ new #[Layout('layouts.dashboard')] class extends Component {
             $(document).on('click', '.deleteCallBack', function () {
                 let clickedID = $(this).data('id');
                 console.log(clickedID)
-                Livewire.dispatch('delete-callback', {category_id: clickedID});
+                Livewire.dispatch('delete-callback', {callback_id : clickedID});
             })
 
             $(document).on('click', '.updateCallBack', function () {
@@ -199,7 +203,7 @@ new #[Layout('layouts.dashboard')] class extends Component {
                 event.preventDefault(); // Prevent the default form submission
                 let clickedID = $('#callback_id').val();
                 let status = $('#status_val').val();
-                Livewire.dispatch('update-status', {category_id: clickedID, status: status});
+                Livewire.dispatch('update-status', {callback_id: clickedID, status: status});
             });
 
         });

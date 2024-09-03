@@ -1,16 +1,51 @@
 <?php
 
 use App\Models\Category;
+use Illuminate\Support\Facades\DB;
+use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Attributes\Layout;
+use Livewire\Attributes\On;
 use Livewire\Volt\Component;
 
 new #[Layout('layouts.dashboard')] class extends Component {
 
-    public function with()
+    use LivewireAlert;
+
+    public $categories;
+
+    public function mount()
     {
-        return [
-            'categories' => Category::all()
-        ];
+        $this->getCategories();
+    }
+
+    public function getCategories(){
+        $this->categories = Category::all();
+    }
+
+    #[On('delete-category')]
+    public function deleteCategory($category_id)
+    {
+        DB::beginTransaction();
+        try {
+
+            $this->getCategories();
+
+            $category = Category::find($category_id);
+
+            if (!$category) {
+                throw new Exception("Category with ID $category_id not found.");
+            }
+
+            $category->delete();
+            DB::commit();
+
+            $this->getCategories();
+            $this->alert('success', 'Category deleted successfully');
+
+        } catch (Exception $exception) {
+            DB::rollBack();
+            $this->alert('error', $exception->getMessage());
+        }
     }
 
 }; ?>
@@ -53,7 +88,7 @@ new #[Layout('layouts.dashboard')] class extends Component {
                                                         <div class="dropdown-menu">
                                                             <a class="dropdown-item" href="#"> <i class="mdi mdi-eye font-size-16"></i> View</a>
                                                             <a class="dropdown-item" wire:navigate href="{{ route('dashboard.edit-category',$category->id) }}"> <i class="mdi mdi-pencil font-size-16"></i> Edit </a>
-                                                            <a class="dropdown-item" href="#"> <i class="mdi mdi-trash-can font-size-16"></i> Delete</a>
+                                                            <a style="cursor:pointer;" class="dropdown-item deleteCategory" data-id="{{ $category->id }}"> <i class="mdi mdi-trash-can font-size-16"></i> Delete</a>
                                                         </div>
                                                     </div>
                                                 </td>
@@ -73,4 +108,19 @@ new #[Layout('layouts.dashboard')] class extends Component {
     </div><!-- end row-->
 
 </div><!-- end row -->
+@push('js')
+    <script>
+        document.addEventListener("livewire:navigated", function () {
+            $(document).on('click', '.deleteCategory', function () {
+                let clickedID = $(this).data('id');
+                console.log(clickedID);
+
+                if (confirm("Products under this category will be deleted !!")) {
+                    Livewire.dispatch('delete-category', {category_id: clickedID});
+                }
+            });
+
+        });
+    </script>
+@endpush
 
