@@ -78,13 +78,5 @@ Route::middleware(['auth', 'verified'])->prefix('dashboard')->name('dashboard.')
     Volt::route('add-role', 'pages.dashboard.roles.add-role')
         ->name('add-role');
 
-    /**
-     * Deals Routes
-     */
-    Volt::route('list-deals', 'pages.dashboard.deals.list-deals')
-        ->name('list-deals');
-
-    Volt::route('add-deal', 'pages.dashboard.deals.add-deal')
-        ->name('add-deal');
 
 });
