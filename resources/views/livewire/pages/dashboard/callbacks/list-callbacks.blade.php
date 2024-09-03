@@ -54,8 +54,13 @@ new #[Layout('layouts.dashboard')] class extends Component {
     {
         DB::beginTransaction();
         try {
+            $callback = CallBack::find($category_id);
 
-            CallBack::find($category_id)->delete();
+            if (!$callback) {
+                throw new Exception("Callback with ID $category_id not found.");
+            }
+
+            $callback->delete();
             DB::commit();
 
             $this->getCallBacks();
@@ -66,6 +71,7 @@ new #[Layout('layouts.dashboard')] class extends Component {
             $this->alert('error', $exception->getMessage());
         }
     }
+
 
 }; ?>
 

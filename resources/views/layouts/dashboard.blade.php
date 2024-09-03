@@ -33,8 +33,8 @@
 <!-- Right bar overlay-->
 <div class="rightbar-overlay"></div>
 
-<script src="dashboard/libs/jquery/jquery.min.js"></script>
-<script src="dashboard/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script data-navigate-once  src="dashboard/libs/jquery/jquery.min.js"></script>
+<script data-navigate-once  src="dashboard/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src="dashboard/libs/metismenu/metisMenu.min.js"></script>
 <script src="dashboard/libs/simplebar/simplebar.min.js"></script>
 <script src="dashboard/libs/node-waves/waves.min.js"></script>
@@ -65,7 +65,7 @@
 <script src="dashboard/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
 
 <!-- data tables buttons -->
-<script src="dashboard/libs/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+<script  src="dashboard/libs/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
 <script src="dashboard/libs/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js"></script>
 <script src="dashboard/libs/jszip/jszip.min.js"></script>
 <script src="dashboard/libs/pdfmake/build/pdfmake.min.js"></script>
