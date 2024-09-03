@@ -79,6 +79,10 @@
 <script data-navigate-once>
     document.addEventListener("DOMContentLoaded", function () {
         function initializeDataTable(selector) {
+            // Destroy the DataTable instance if it exists
+            if ($.fn.DataTable.isDataTable(selector)) {
+                $(selector).DataTable().destroy();
+            }
 
             // Initialize the DataTable
             $(selector).DataTable({
