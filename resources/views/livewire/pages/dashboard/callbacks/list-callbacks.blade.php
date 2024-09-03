@@ -87,7 +87,7 @@ new #[Layout('layouts.dashboard')] class extends Component {
                                     </h4>
                                 </div>
                                 <div class="card-body p-4">
-                                    <table id="customers_table" class="table table-bordered dt-responsive nowrap w-100">
+                                    <table id="callbacks_table" class="table table-bordered dt-responsive nowrap w-100">
                                         <thead>
                                         <tr>
                                             <th>FirstName</th>

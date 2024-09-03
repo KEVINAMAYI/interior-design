@@ -102,6 +102,7 @@
             initializeDataTable("#roles_table");
             initializeDataTable("#deals_table");
             initializeDataTable("#customers_table");
+            initializeDataTable("#callbacks_table");
         }
 
         // Initialize DataTables after Livewire navigation
