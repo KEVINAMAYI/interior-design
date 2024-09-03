@@ -41,6 +41,9 @@ Route::middleware(['auth', 'verified'])->prefix('dashboard')->name('dashboard.')
     Volt::route('add-variation', 'pages.dashboard.variations.add-variation')
         ->name('add-variation');
 
+    Volt::route('edit-variation/{variation_id}', 'pages.dashboard.variations.edit-variation')
+        ->name('edit-variation');
+
     /**
      * Staff Routes
      */

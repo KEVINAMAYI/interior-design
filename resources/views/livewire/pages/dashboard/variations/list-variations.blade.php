@@ -1,16 +1,52 @@
 <?php
 
 use App\Models\Variation;
+use Illuminate\Support\Facades\DB;
+use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Attributes\Layout;
+use Livewire\Attributes\On;
 use Livewire\Volt\Component;
 
 new #[Layout('layouts.dashboard')] class extends Component {
 
-    public function with()
+    use LivewireAlert;
+
+    public $variations;
+
+    public function mount()
     {
-        return [
-            'variations' => Variation::all()
-        ];
+        $this->getVariations();
+    }
+
+    public function getVariations()
+    {
+        $this->variations = Variation::all();
+    }
+
+    #[On('delete-variation')]
+    public function deleteVariation($variation_id)
+    {
+        DB::beginTransaction();
+        try {
+
+            $this->getVariations();
+
+            $variation = Variation::find($variation_id);
+
+            if (!$variation) {
+                throw new Exception("Variation with ID $variation_id not found.");
+            }
+
+            $variation->delete();
+            DB::commit();
+
+            $this->getVariations();
+            $this->alert('success', 'Variation deleted successfully');
+
+        } catch (Exception $exception) {
+            DB::rollBack();
+            $this->alert('error', $exception->getMessage());
+        }
     }
 
 }; ?>
@@ -50,11 +86,18 @@ new #[Layout('layouts.dashboard')] class extends Component {
                                                 <td>{{ $variation->value }}</td>
                                                 <td>
                                                     <div class="btn-group">
-                                                        <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Action <i class="mdi mdi-chevron-down"></i></button>
+                                                        <button type="button" class="btn btn-primary dropdown-toggle"
+                                                                data-bs-toggle="dropdown" aria-expanded="false">Action
+                                                            <i class="mdi mdi-chevron-down"></i></button>
                                                         <div class="dropdown-menu">
-                                                            <a class="dropdown-item" href="#"> <i class="mdi mdi-eye font-size-16"></i> View</a>
-                                                            <a class="dropdown-item" href="#"> <i class="mdi mdi-pencil font-size-16"></i> Edit </a>
-                                                            <a class="dropdown-item" href="#"> <i class="mdi mdi-trash-can font-size-16"></i> Delete</a>
+                                                            <a class="dropdown-item" wire:navigate
+                                                               href="{{ route('dashboard.edit-variation',$variation->id) }}">
+                                                                <i class="mdi mdi-pencil font-size-16"></i> Edit </a>
+                                                            <a style="cursor:pointer;"
+                                                               class="dropdown-item deleteVariation"
+                                                               data-id="{{ $variation->id }}"> <i
+                                                                    class="mdi mdi-trash-can font-size-16"></i>
+                                                                Delete</a>
                                                         </div>
                                                     </div>
                                                 </td>
@@ -71,4 +114,18 @@ new #[Layout('layouts.dashboard')] class extends Component {
         </div>
     </div><!-- end row-->
 </div><!-- end row -->
+@push('js')
+    <script>
+        document.addEventListener("livewire:navigated", function () {
+            $(document).on('click', '.deleteVariation', function () {
+                let clickedID = $(this).data('id');
+                console.log(clickedID);
 
+                if (confirm("Are you sure ?")) {
+                    Livewire.dispatch('delete-variation', {variation_id: clickedID});
+                }
+            });
+
+        });
+    </script>
+@endpush

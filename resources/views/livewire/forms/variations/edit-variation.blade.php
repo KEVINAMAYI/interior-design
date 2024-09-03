@@ -16,6 +16,7 @@ new class extends Component {
     public $name;
     public $type;
     public $value;
+    public $variation;
 
     public function rules()
     {
@@ -26,29 +27,38 @@ new class extends Component {
         ];
     }
 
+
+    public function mount($variation_id)
+    {
+        $this->variation = Variation::find($variation_id);
+        $this->name = $this->variation->name;
+        $this->type = $this->variation->type;
+        $this->value = $this->variation->value;
+
+    }
+
     /**
-     * Add Variations.
+     * Edit Variations.
      */
-    public function createVariation()
+    public function updateVariation()
     {
         $this->validate();
 
         DB::beginTransaction();
         try {
 
-            Variation::create([
+            $this->variation->update([
                 'name' => $this->name,
                 'type' => $this->type,
                 'value' => $this->value
             ]);
 
             DB::commit();
-            $this->reset();
-            $this->alert('success','Variation created successfully');
+            $this->alert('success', 'Variation updated successfully');
 
         } catch (Exception $exception) {
             DB::rollBack();
-            $this->alert('error',$exception->getMessage());
+            $this->alert('error', $exception->getMessage());
         }
     }
 
@@ -59,12 +69,12 @@ new class extends Component {
     <div class="card">
         <div class="card-header">
             <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">
-                {{ __('Add Variation') }}
+                {{ __('Edit Variation') }}
             </h2>
         </div>
         <div class="card-body p-4">
             <div class="row">
-                <form wire:submit="createVariation" class="mt-6 space-y-6">
+                <form wire:submit="updateVariation" class="mt-6 space-y-6">
                     <div class="row">
                         <div class="mb-4 col-lg-6">
                             <label for="name" class="form-label">Name</label>
@@ -99,7 +109,7 @@ new class extends Component {
                             @enderror
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-outline-secondary waves-effect">Add Variation</button>
+                    <button type="submit" class="btn btn-outline-secondary waves-effect">Update Variation</button>
                 </form>
             </div>
         </div>
