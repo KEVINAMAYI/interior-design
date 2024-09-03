@@ -61,8 +61,8 @@
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <!-- data tables -->
-<script  src="dashboard/libs/datatables.net/js/jquery.dataTables.min.js"></script>
-<script data-navigate-once src="dashboard/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
+<script src="dashboard/libs/datatables.net/js/jquery.dataTables.min.js"></script>
+<script src="dashboard/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
 
 <!-- data tables buttons -->
 <script src="dashboard/libs/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
@@ -79,20 +79,15 @@
 <script data-navigate-once>
     document.addEventListener("DOMContentLoaded", function () {
         function initializeDataTable(selector) {
-            // Check if the DataTable is already initialized
-            const existingTable = $.fn.DataTable.isDataTable(selector);
-
-            if (existingTable) {
-                // Destroy the existing DataTable instance before reinitialization
-                $(selector).DataTable().clear().destroy();
+            // Destroy the DataTable instance if it exists
+            if ($.fn.DataTable.isDataTable(selector)) {
+                $(selector).DataTable().destroy();
             }
 
             // Initialize the DataTable
             $(selector).DataTable({
                 lengthChange: false,
-                buttons: ["copy", "excel", "pdf", "colvis"],
-                // Consider using a deferRender for better performance on large datasets
-                deferRender: true
+                buttons: ["copy", "excel", "pdf", "colvis"]
             }).buttons().container().appendTo($(selector + "_wrapper .col-md-6:eq(0)"));
 
             // Apply select styling
@@ -117,9 +112,9 @@
 
         // Initialize DataTables on first load
         initializeAllDataTables();
+
     });
 </script>
-
 
 
 <!-- init js -->
