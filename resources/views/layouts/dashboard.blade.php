@@ -79,15 +79,20 @@
 <script data-navigate-once>
     document.addEventListener("DOMContentLoaded", function () {
         function initializeDataTable(selector) {
-            // Destroy the DataTable instance if it exists
-            if ($.fn.DataTable.isDataTable(selector)) {
-                $(selector).DataTable().destroy();
+            // Check if the DataTable is already initialized
+            const existingTable = $.fn.DataTable.isDataTable(selector);
+
+            if (existingTable) {
+                // Destroy the existing DataTable instance before reinitialization
+                $(selector).DataTable().clear().destroy();
             }
 
             // Initialize the DataTable
             $(selector).DataTable({
                 lengthChange: false,
-                buttons: ["copy", "excel", "pdf", "colvis"]
+                buttons: ["copy", "excel", "pdf", "colvis"],
+                // Consider using a deferRender for better performance on large datasets
+                deferRender: true
             }).buttons().container().appendTo($(selector + "_wrapper .col-md-6:eq(0)"));
 
             // Apply select styling
@@ -112,9 +117,9 @@
 
         // Initialize DataTables on first load
         initializeAllDataTables();
-
     });
 </script>
+
 
 
 <!-- init js -->
