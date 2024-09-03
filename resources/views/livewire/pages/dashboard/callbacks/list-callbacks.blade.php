@@ -86,7 +86,6 @@ new #[Layout('layouts.dashboard')] class extends Component {
             <!-- start page title -->
             <div class="row">
                 <livewire:layout.dashboard.site-map page="List-CallBacks"/>
-
                 <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
                     <div class="max-w-xl">
                         <div class="row">
