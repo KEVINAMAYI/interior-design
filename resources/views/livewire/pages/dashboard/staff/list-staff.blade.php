@@ -52,8 +52,7 @@ new #[Layout('layouts.dashboard')] class extends Component {
                                                     <div class="btn-group">
                                                         <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Action <i class="mdi mdi-chevron-down"></i></button>
                                                         <div class="dropdown-menu">
-                                                            <a class="dropdown-item" href="#"> <i class="mdi mdi-eye font-size-16"></i> View</a>
-                                                            <a class="dropdown-item" href="#"> <i class="mdi mdi-pencil font-size-16"></i> Edit </a>
+                                                            <a class="dropdown-item" wire:navigate href="{{ route('dashboard.edit-staff',$staff->user->id) }}"> <i class="mdi mdi-pencil font-size-16"></i> Edit </a>
                                                             <a class="dropdown-item" href="#"> <i class="mdi mdi-trash-can font-size-16"></i> Delete</a>
                                                         </div>
                                                     </div>

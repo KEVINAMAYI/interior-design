@@ -124,28 +124,6 @@ new class extends Component {
                 </li>
                 <li>
                     <a href="javascript: void(0);" class="has-arrow">
-                        <i data-feather="user-check"></i>
-                        <span data-key="t-apps">Customers</span>
-                    </a>
-                    <ul class="sub-menu" aria-expanded="false">
-                        <li>
-                            <a wire:navigate href="{{ route('dashboard.list-customers') }}">
-                                <i data-feather="list"></i>
-                                <span data-key="t-calendar">List Customers</span>
-                            </a>
-                        </li>
-
-                        <li>
-                            <a wire:navigate href="{{ route('dashboard.add-customer') }}">
-                                <i data-feather="plus-circle"></i>
-                                <span data-key="t-chat">Add Customer</span>
-                            </a>
-                        </li>
-
-                    </ul>
-                </li>
-                <li>
-                    <a href="javascript: void(0);" class="has-arrow">
                         <i data-feather="phone"></i>
                         <span data-key="t-apps">CallBacks</span>
                     </a>
