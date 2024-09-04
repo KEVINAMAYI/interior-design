@@ -97,7 +97,7 @@ new #[Layout('layouts.dashboard')] class extends Component {
                                                                     data-bs-toggle="dropdown" aria-expanded="false">
                                                                 Action <i class="mdi mdi-chevron-down"></i></button>
                                                             <div class="dropdown-menu">
-                                                                <a class="dropdown-item" href="#"> <i
+                                                                <a class="dropdown-item" wire:navigate href="{{ route('dashboard.edit-product',$product_variation->id) }}"> <i
                                                                         class="mdi mdi-pencil font-size-16"></i> Edit
                                                                 </a>
                                                                 <button class="dropdown-item deleteProduct"

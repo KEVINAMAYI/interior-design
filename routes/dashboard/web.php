@@ -20,6 +20,10 @@ Route::middleware(['auth', 'verified'])->prefix('dashboard')->name('dashboard.')
     Volt::route('add-product', 'pages.dashboard.products.add-product')
         ->name('add-product');
 
+    Volt::route('edit-product/{product_variation_id}', 'pages.dashboard.products.edit-product')
+        ->name('edit-product');
+
+
     /**
      * Product Categories Routes
      */
