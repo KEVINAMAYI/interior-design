@@ -1,15 +1,56 @@
 <?php
 
 use App\Models\Staff;
+use Illuminate\Support\Facades\DB;
+use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Attributes\Layout;
+use Livewire\Attributes\On;
 use Livewire\Volt\Component;
 
 new #[Layout('layouts.dashboard')] class extends Component {
-    public function with()
+
+    use LivewireAlert;
+
+    public $staffs;
+
+    public function mount()
     {
-        return [
-            'staffs' => Staff::all()
-        ];
+        $this->getStaff();
+    }
+
+
+    public function getStaff()
+    {
+        $this->staffs = Staff::all();
+    }
+
+
+    #[On('delete-staff')]
+    public function deleteVariation($staff_id)
+    {
+        DB::beginTransaction();
+        try {
+
+            $this->getStaff();
+
+            $staff = Staff::find($staff_id);
+
+            if (!$staff) {
+                throw new Exception("Staff with ID $staff_id not found.");
+            }
+
+            $staff->delete();
+            $staff->user->delete();
+
+            DB::commit();
+
+            $this->getStaff();
+            $this->alert('success', 'Staff deleted successfully');
+
+        } catch (Exception $exception) {
+            DB::rollBack();
+            $this->alert('error', $exception->getMessage());
+        }
     }
 
 }; ?>
@@ -50,10 +91,17 @@ new #[Layout('layouts.dashboard')] class extends Component {
                                                 <td>{{ $staff->user->email }}</td>
                                                 <td>
                                                     <div class="btn-group">
-                                                        <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Action <i class="mdi mdi-chevron-down"></i></button>
+                                                        <button type="button" class="btn btn-primary dropdown-toggle"
+                                                                data-bs-toggle="dropdown" aria-expanded="false">Action
+                                                            <i class="mdi mdi-chevron-down"></i></button>
                                                         <div class="dropdown-menu">
-                                                            <a class="dropdown-item" wire:navigate href="{{ route('dashboard.edit-staff',$staff->user->id) }}"> <i class="mdi mdi-pencil font-size-16"></i> Edit </a>
-                                                            <a class="dropdown-item" href="#"> <i class="mdi mdi-trash-can font-size-16"></i> Delete</a>
+                                                            <a class="dropdown-item" wire:navigate
+                                                               href="{{ route('dashboard.edit-staff',$staff->user->id) }}">
+                                                                <i class="mdi mdi-pencil font-size-16"></i> Edit </a>
+                                                            <a style="cursor:pointer;" class="dropdown-item deleteStaff"
+                                                               data-id="{{ $staff->id }}"> <i
+                                                                    class="mdi mdi-trash-can font-size-16"></i>
+                                                                Delete</a>
                                                         </div>
                                                     </div>
                                                 </td>
@@ -68,10 +116,21 @@ new #[Layout('layouts.dashboard')] class extends Component {
                 </div>
 
             </div>
-
         </div>
-
     </div><!-- end row-->
-
 </div><!-- end row -->
+@push('js')
+    <script>
+        document.addEventListener("livewire:navigated", function () {
+            $(document).off('click.deleteStaff').on('click.deleteStaff', '.deleteStaff', function () {
+                let clickedID = $(this).data('id');
+                console.log(clickedID);
+
+                if (confirm("Are you sure?")) {
+                    Livewire.dispatch('delete-staff', {staff_id: clickedID});
+                }
+            });
+        });
+    </script>
+@endpush
 
