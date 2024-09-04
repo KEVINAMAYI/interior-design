@@ -1,9 +1,29 @@
 <?php
 
+use App\Models\CallBack;
+use App\Models\Category;
+use App\Models\Product;
+use App\Models\Staff;
 use Livewire\Attributes\Layout;
 use Livewire\Volt\Component;
 
 new #[Layout('layouts.dashboard')] class extends Component {
+
+    public $product_count;
+    public $categories_count;
+    public $staff_count;
+    public $pending_callbacks_counts;
+    public $completed_callbacks_counts;
+
+    public function mount(){
+        $this->product_count = Product::count();
+        $this->categories_count = Category::count();
+        $this->staff_count = Staff::count();
+        $this->pending_callbacks_counts = CallBack::where('status','pending')->count();
+        $this->completed_callbacks_counts = CallBack::where('status','completed')->count();
+    }
+
+
 }; ?>
 
 <div class="main-content">
@@ -22,14 +42,14 @@ new #[Layout('layouts.dashboard')] class extends Component {
                         <div class="card-body">
                             <div class="row align-items-center">
                                 <div class="col-6">
-                                    <span class="text-muted mb-3 lh-1 d-block text-truncate">Products</span>
+                                    <span class="text-muted mb-3 lh-1 d-block">Products</span>
                                     <h4 class="mb-3">
-                                        <span class="counter-value" data-target="865">0</span>k
+                                        <span >{{ $product_count  }}</span>
                                     </h4>
                                 </div>
 
                                 <div class="col-6">
-                                    <div id="mini-chart1" data-colors='["#5156be"]' class="apex-charts mb-2"></div>
+                                    <i style="color:black;"  data-feather="grid"></i>
                                 </div>
                             </div>
                         </div><!-- end card body -->
@@ -43,13 +63,13 @@ new #[Layout('layouts.dashboard')] class extends Component {
                         <div class="card-body">
                             <div class="row align-items-center">
                                 <div class="col-6">
-                                    <span class="text-muted mb-3 lh-1 d-block text-truncate">Users</span>
+                                    <span class="text-muted mb-3 lh-1 d-block">Categories</span>
                                     <h4 class="mb-3">
-                                        <span class="counter-value" data-target="200">0</span>
+                                        <span >{{ $categories_count  }}</span>
                                     </h4>
                                 </div>
                                 <div class="col-6">
-                                    <div id="mini-chart2" data-colors='["#5156be"]' class="apex-charts mb-2"></div>
+                                    <i style="color:purple;"  data-feather="list"></i>
                                 </div>
                             </div>
                         </div><!-- end card body -->
@@ -63,13 +83,13 @@ new #[Layout('layouts.dashboard')] class extends Component {
                         <div class="card-body">
                             <div class="row align-items-center">
                                 <div class="col-6">
-                                    <span class="text-muted mb-3 lh-1 d-block text-truncate">Leads</span>
+                                    <span class="text-muted mb-3 lh-1 d-block">Staff</span>
                                     <h4 class="mb-3">
-                                        $<span class="counter-value" data-target="400">0</span>M
+                                        <span >{{ $staff_count  }}</span>
                                     </h4>
                                 </div>
                                 <div class="col-6">
-                                    <div id="mini-chart3" data-colors='["#5156be"]' class="apex-charts mb-2"></div>
+                                    <i style="color:orange;"  data-feather="users"></i>
                                 </div>
                             </div>
                         </div><!-- end card body -->
@@ -83,13 +103,33 @@ new #[Layout('layouts.dashboard')] class extends Component {
                         <div class="card-body">
                             <div class="row align-items-center">
                                 <div class="col-6">
-                                    <span class="text-muted mb-3 lh-1 d-block text-truncate">Product Categories</span>
+                                    <span class="text-muted mb-3 lh-1 d-block">Pending Callbacks</span>
                                     <h4 class="mb-3">
-                                        <span class="counter-value" data-target="100">0</span>%
+                                        <span >{{ $pending_callbacks_counts  }}</span>
                                     </h4>
                                 </div>
                                 <div class="col-6">
-                                    <div id="mini-chart4" data-colors='["#5156be"]' class="apex-charts mb-2"></div>
+                                    <i style="color:red;"  data-feather="phone"></i>
+                                </div>
+                            </div>
+                        </div><!-- end card body -->
+                    </div><!-- end card -->
+                </div><!-- end col -->
+
+                <div class="col-xl-3 col-md-6">
+                    <!-- card -->
+                    <div class="card card-h-100">
+                        <!-- card body -->
+                        <div class="card-body">
+                            <div class="row align-items-center">
+                                <div class="col-6">
+                                    <span class="text-muted mb-3 lh-1 d-block">Completed Callbacks</span>
+                                    <h4 class="mb-3">
+                                        <span >{{ $completed_callbacks_counts  }}</span>
+                                    </h4>
+                                </div>
+                                <div class="col-6">
+                                    <i style="color:green;" data-feather="phone"></i>
                                 </div>
                             </div>
                         </div><!-- end card body -->
