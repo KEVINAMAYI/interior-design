@@ -124,6 +124,28 @@ new class extends Component {
                 </li>
                 <li>
                     <a href="javascript: void(0);" class="has-arrow">
+                        <i data-feather="award"></i>
+                        <span data-key="t-apps">Portfolio</span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li>
+                            <a wire:navigate href="{{ route('dashboard.list-portfolio') }}">
+                                <i data-feather="list"></i>
+                                <span data-key="t-calendar">List Portfolio</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a wire:navigate href="{{ route('dashboard.add-portfolio') }}">
+                                <i data-feather="plus-circle"></i>
+                                <span data-key="t-chat">Add Portfolio</span>
+                            </a>
+                        </li>
+
+                    </ul>
+                </li>
+                <li>
+                    <a href="javascript: void(0);" class="has-arrow">
                         <i data-feather="phone"></i>
                         <span data-key="t-apps">CallBacks</span>
                     </a>

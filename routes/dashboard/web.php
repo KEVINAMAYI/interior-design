@@ -62,6 +62,19 @@ Route::middleware(['auth', 'verified'])->prefix('dashboard')->name('dashboard.')
 
 
     /**
+     * Portfolio Routes
+     */
+    Volt::route('list-portfolio', 'pages.dashboard.portfolio.list-portfolio')
+        ->name('list-portfolio');
+
+    Volt::route('add-portfolio', 'pages.dashboard.portfolio.add-portfolio')
+        ->name('add-portfolio');
+
+    Volt::route('edit-portfolio/{portfolio_id}', 'pages.dashboard.portfolio.edit-portfolio')
+        ->name('edit-portfolio');
+
+
+    /**
      * CallBacks Routes
      */
     Volt::route('list-callbacks', 'pages.dashboard.callbacks.list-callbacks')

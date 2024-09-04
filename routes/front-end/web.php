@@ -28,6 +28,6 @@ Route::name('front-end.')->group(function () {
     Volt::route('search', 'pages.front-end.search')
         ->name('search');
 
-    Volt::route('thank-you', 'pages.front-end.thank-you')
-        ->name('thank-you');
+    Volt::route('portfolio', 'pages.front-end.portfolio')
+        ->name('portfolio');
 });
