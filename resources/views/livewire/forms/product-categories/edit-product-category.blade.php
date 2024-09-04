@@ -61,7 +61,7 @@ new class extends Component {
     <div class="card">
         <div class="card-header">
             <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">
-                {{ __('Add Category') }}
+                {{ __('Edit Category') }}
             </h2>
         </div>
         <div class="card-body p-4">
