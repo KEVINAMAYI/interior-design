@@ -5,25 +5,43 @@ use App\Models\ProductVariation;
 use Illuminate\Support\Facades\DB;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Attributes\Layout;
+use Livewire\Attributes\On;
 use Livewire\Volt\Component;
 
 new #[Layout('layouts.dashboard')] class extends Component {
 
     use LivewireAlert;
 
-    public function with()
+    public $products;
+
+    public function mount()
     {
-        return [
-            'products' => Product::with('product_variations')->get()
-        ];
+        $this->getProducts();
     }
 
+    public function getProducts()
+    {
+        $this->products = Product::with('product_variations')->get();
+    }
+
+    #[On('delete-product')]
     public function deleteProduct($product_id)
     {
+        DB::beginTransaction();
         try {
-            DB::beginTransaction();
-            Product::where('id', $product_id)->delete();
+
+            $this->getProducts();
+
+            $product = ProductVariation::find($product_id);
+
+            if (!$product) {
+                throw new Exception("Category with ID $product_id not found.");
+            }
+
+            $product->delete();
             DB::commit();
+
+            $this->getProducts();
             $this->alert('success', 'Product Deleted Successfully');
 
         } catch (Exception $exception) {
@@ -80,12 +98,10 @@ new #[Layout('layouts.dashboard')] class extends Component {
                                                                 Action <i class="mdi mdi-chevron-down"></i></button>
                                                             <div class="dropdown-menu">
                                                                 <a class="dropdown-item" href="#"> <i
-                                                                        class="mdi mdi-eye font-size-16"></i> View</a>
-                                                                <a class="dropdown-item" href="#"> <i
                                                                         class="mdi mdi-pencil font-size-16"></i> Edit
                                                                 </a>
-                                                                <button class="dropdown-item"
-                                                                        wire:click="deleteProduct({{ $product->id }})">
+                                                                <button class="dropdown-item deleteProduct"
+                                                                        data-id="{{ $product_variation->id }}">
                                                                     <i class="mdi mdi-trash-can font-size-16"></i>
                                                                     Delete
                                                                 </button>
@@ -103,10 +119,22 @@ new #[Layout('layouts.dashboard')] class extends Component {
                     </div>
                 </div>
             </div>
-
         </div>
-
     </div><!-- end row-->
-
 </div><!-- end row -->
+@push('js')
+    <script>
+        document.addEventListener("livewire:navigated", function () {
+            $(document).on('click', '.deleteProduct', function () {
+                let clickedID = $(this).data('id');
+                console.log(clickedID);
+
+                if (confirm("Are you sure ?")) {
+                    Livewire.dispatch('delete-product', {product_id: clickedID});
+                }
+            });
+
+        });
+    </script>
+@endpush
 
