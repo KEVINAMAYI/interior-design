@@ -33,7 +33,7 @@
     <!-- init js -->
     @stack('css')
 
-   <title>GSM Interior LTD</title>
+    <title>GSM Interior LTD</title>
 
 </head>
 
@@ -63,6 +63,23 @@
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 
+<!--Start of Tawk.to Script-->
+<script data-navigate-once>
+    $(document).ready(function () {
+        document.addEventListener("livewire:navigated", function () {
+            var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
+            (function () {
+                var s1 = document.createElement("script"), s0 = document.getElementsByTagName("script")[0];
+                s1.async = true;
+                s1.src = 'https://embed.tawk.to/66d8b66dea492f34bc0dbe56/1i6v8h7t3';
+                s1.charset = 'UTF-8';
+                s1.setAttribute('crossorigin', '*');
+                s0.parentNode.insertBefore(s1, s0);
+            })();
+        })
+    });
+</script>
+<!--End of Tawk.to Script-->
 
 
 <!-- init js -->
