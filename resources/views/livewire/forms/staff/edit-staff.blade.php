@@ -144,7 +144,7 @@ new class extends Component {
                             @enderror
                         </div>
                         <div class="mb-4 col-lg-6">
-                            <label for="password" class="form-label">New Password (If Left Blank, the use will retain
+                            <label for="password" class="form-label">New Password (If Left Blank, the user will retain
                                 the initial password)</label>
                             <input wire:model="password" id="password" class="form-control" type="text"
                                    autofocus autocomplete="name">
