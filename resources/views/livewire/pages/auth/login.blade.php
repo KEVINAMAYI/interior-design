@@ -31,13 +31,13 @@ new #[Layout('layouts.guest')] class extends Component {
         <div class="d-flex flex-column h-100">
             <div class="mb-4 mb-md-5 text-center">
                 <a href="index.html" class="d-block auth-logo">
-                    <img src="assets/images/logo-sm.svg" alt="" height="28"> <span class="logo-txt">Minia</span>
+                    <img width="100"  src="front-end-assets/images/gsm_logo_transparent.png"   alt="" height="90">
                 </a>
             </div>
             <div class="auth-content my-auto">
                 <div class="text-center">
                     <h5 class="mb-0">Welcome Back !</h5>
-                    <p class="text-muted mt-2">Sign in to continue to Minia.</p>
+                    <p class="text-muted mt-2">Sign in to continue to GSM Dashboard.</p>
                 </div>
                 <form wire:submit="login">
                     <div class="mb-3">
@@ -50,11 +50,6 @@ new #[Layout('layouts.guest')] class extends Component {
                         <div class="d-flex align-items-start">
                             <div class="flex-grow-1">
                                 <label class="form-label">Password</label>
-                            </div>
-                            <div class="flex-shrink-0">
-                                <div class="">
-                                    <a href="auth-recoverpw.html" class="text-muted">Forgot password?</a>
-                                </div>
                             </div>
                         </div>
 
@@ -83,17 +78,11 @@ new #[Layout('layouts.guest')] class extends Component {
                         <button class="btn btn-primary w-100 waves-effect waves-light" type="submit">Log In</button>
                     </div>
                 </form>
-
-                <div class="mt-5 text-center">
-                    <p class="text-muted mb-0">Don't have an account ? <a href="auth-register.html"
-                                                                          class="text-primary fw-semibold"> Signup
-                            now </a></p>
-                </div>
             </div>
             <div class="mt-4 mt-md-5 text-center">
                 <p class="mb-0">©
                     <script>document.write(new Date().getFullYear())</script>
-                    Minia . Crafted with <i class="mdi mdi-heart text-danger"></i> by Themesbrand
+                    GSM . Crafted with <i class="mdi mdi-heart text-danger"></i> by Techqast
                 </p>
             </div>
         </div>
