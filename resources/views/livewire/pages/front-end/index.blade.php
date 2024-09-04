@@ -30,11 +30,11 @@ new #[Layout('layouts.front-end')] class extends Component {
 
     public function getProductsByTag($products, $tag)
     {
-
         return $products->whereHas('tags', function ($q) use ($tag) {
             $q->where('slug', 'like', $tag);
-        })->get();
+        })->inRandomOrder()->get();
     }
+
 
 }; ?>
 
