@@ -84,7 +84,7 @@ new class extends Component {
 
                         </div>
                         <div class="mb-3 col-lg-6">
-                            <label for="example-search-input" class="form-label">Search</label>
+                            <label for="email" class="form-label">Email</label>
                             <input class="form-control" wire:model="email" id="email" name="email" type="email"
                                    autocomplete="username">
                             <x-input-error class="mt-2" :messages="$errors->get('email')"/>
