@@ -89,7 +89,7 @@ new class extends Component {
                 <form wire:submit="createPortfolio" class="mt-6 space-y-6">
                     <div class="row">
                         <div class="mb-4 col-lg-12">
-                            <label for="name" class="form-label">Name</label>
+                            <label for="name" class="form-label">Client Name</label>
                             <input class="form-control" wire:model="name" id="email" type="text"
                                    autocomplete="name">
                             @error('name')
@@ -98,7 +98,7 @@ new class extends Component {
                     </div>
                     <div class="row">
                         <div class="mb-4 col-lg-12">
-                            <label for="description" class="form-label">Description</label>
+                            <label for="description" class="form-label">Job Description</label>
                             <textarea style="width:100%" wire:model="description" id="" cols="50" rows="5"></textarea>
                             @error('description')
                             <p class="text-danger text-xs pt-1"> {{ $message }} </p>
