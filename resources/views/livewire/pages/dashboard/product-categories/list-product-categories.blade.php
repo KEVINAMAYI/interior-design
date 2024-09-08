@@ -50,6 +50,24 @@ new #[Layout('layouts.dashboard')] class extends Component {
 
 }; ?>
 
+@push('css')
+    <style>
+        .description-column {
+            max-width: 200px; /* Adjust the width as per your design */
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .description-column.wrap {
+            white-space: normal;
+            word-break: break-word;
+        }
+
+    </style>
+@endpush
+
+
 <div class="main-content">
 
     <div class="page-content">
@@ -81,7 +99,7 @@ new #[Layout('layouts.dashboard')] class extends Component {
                                         @foreach($categories as $category)
                                             <tr>
                                                 <td>{{ $category->name }}</td>
-                                                <td>{{ $category->description }}</td>
+                                                <td class="description-column">{{ $category->description }}</td>
                                                 <td>
                                                     <div class="btn-group">
                                                         <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Action <i class="mdi mdi-chevron-down"></i></button>
