@@ -53,7 +53,6 @@ new class extends Component {
             'variation_id' => 'required',
             'category_id' => 'required',
             'images.*' => 'required|image',
-
         ];
     }
 
@@ -103,8 +102,9 @@ new class extends Component {
                 'product_id' => $product->id,
                 'variation_id' => $this->variation_id,
                 'price' => $this->price,
-                'discount_percentage' => $this->discountPercentage
+                'discount_percentage' => !empty($this->discountPercentage) ? $this->discountPercentage : 0
             ]);
+
 
             if (!empty($this->images)) {
                 foreach ($this->images as $image) {
@@ -133,7 +133,7 @@ new class extends Component {
 
 
             DB::commit();
-            $this->reset(['category_id', 'name', 'description', 'variation_id', 'price', 'images','discountPercentage']);
+            $this->reset(['category_id', 'name', 'description', 'variation_id', 'price', 'discountPercentage','images']);
             $this->alert('success', 'Product created successfully');
             $this->dispatch('productCreated');
 

@@ -165,10 +165,18 @@ new #[Layout('layouts.front-end')] class extends Component {
                             </div>
                         </div>
                         <hr>
+
                         <div class="product-price d-flex align-items-center gap-3">
                             <div class="h4 fw-bold">KES {{ $productVariation->price }}</div>
+                            @if($productVariation->discount_percentage != 0)
+                                @php
+                                    $originalPrice = $productVariation->price / (1 - ($productVariation->discount_percentage / 100));
+                                @endphp
+                                <div class="h5 fw-light text-muted text-decoration-line-through">{{ number_format($originalPrice, 2) }}</div>
+                                <div class="h4 fw-bold text-danger">({{ $productVariation->discount_percentage }}% off)</div>
+                            @endif
                         </div>
-                        <p class="fw-bold mb-0 mt-1 text-success">exclusive of Value Added Tax (VAT)</p>
+                        <p class="fw-bold mb-0 mt-1 text-success">Exclusive of Value Added Tax (VAT)</p>
                         <hr class="my-3">
                         <div class="product-info">
                             <h6 class="fw-bold mb-3">Product Details</h6>
@@ -426,6 +434,20 @@ new #[Layout('layouts.front-end')] class extends Component {
                                         <i class="bx bxs-star text-warning"></i>
                                         <i class="bx bxs-star text-warning"></i>
                                     </div>
+                                    @if($product_variation->discount_percentage != 0)
+                                        @php
+                                            $originalPrice = $product_variation->price / (1 - ($product_variation->discount_percentage / 100));
+                                        @endphp
+                                        <div style="margin-bottom:-2px;"
+                                             class="d-flex align-items-center gap-3">
+                                            <div class="h6 fw-light text-muted text-decoration-line-through">
+                                                {{ number_format($originalPrice, 2) }}
+                                            </div>
+                                            <div class="h6 fw-bold text-danger">
+                                                ({{ $product_variation->discount_percentage }}% off)
+                                            </div>
+                                        </div>
+                                    @endif
                                     <div
                                         class="product-price d-flex align-items-center justify-content-start gap-2 mt-2">
                                         <div class="h6 fw-bold">KES {{ $product_variation->price }}</div>

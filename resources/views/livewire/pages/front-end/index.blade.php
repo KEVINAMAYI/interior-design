@@ -250,7 +250,8 @@ new #[Layout('layouts.front-end')] class extends Component {
                                         <div class="card-body">
                                             <div class="d-flex align-items-center justify-content-between">
                                                 <div class="">
-                                                    <p style="font-weight:bold; color:black;"  class="mb-1 product-short-name">{{ strtoupper( $product->name) }}</p>
+                                                    <p style="font-weight:bold; color:black;"
+                                                       class="mb-1 product-short-name">{{ strtoupper( $product->name) }}</p>
                                                     <h6 class="mb-1"> {{ empty($product_variation->variation()) ? '' :  str_replace('_',' ',$product_variation->variation()->name).'-'.$product_variation->variation()->value }}</h6>
                                                 </div>
                                                 <div class="icon-wishlist">
@@ -265,10 +266,24 @@ new #[Layout('layouts.front-end')] class extends Component {
                                                 <i class="bx bxs-star text-warning"></i>
                                                 <i class="bx bxs-star text-warning"></i>
                                             </div>
+                                            @if($product_variation->discount_percentage != 0)
+                                                @php
+                                                    $originalPrice = $product_variation->price / (1 - ($product_variation->discount_percentage / 100));
+                                                @endphp
+                                                <div style="margin-bottom:-2px;"
+                                                     class="d-flex align-items-center gap-3">
+                                                    <div class="h6 fw-light text-muted text-decoration-line-through">
+                                                        {{ number_format($originalPrice, 2) }}
+                                                    </div>
+                                                    <div class="h6 fw-bold text-danger">
+                                                        ({{ $product_variation->discount_percentage }}% off)
+                                                    </div>
+                                                </div>
+                                            @endif
                                             <div
-                                                class="product-price d-flex align-items-center justify-content-start gap-2 mt-2">
+                                                class="product-price d-flex align-items-center justify-content-start gap-2">
                                                 <div class="h6 fw-bold">KES {{ $product_variation->price }}</div>
-                                                <div  style="width:60%;">
+                                                <div style="width:60%;">
                                                     @php
                                                         $variationText = empty($product_variation->variation())
                                                             ? ''
@@ -321,7 +336,8 @@ new #[Layout('layouts.front-end')] class extends Component {
                                         <div class="card-body">
                                             <div class="d-flex align-items-center justify-content-between">
                                                 <div class="">
-                                                    <p  style="font-weight:bold; color:black;" class="mb-1 product-short-name">{{ strtoupper( $product->name) }}</p>
+                                                    <p style="font-weight:bold; color:black;"
+                                                       class="mb-1 product-short-name">{{ strtoupper( $product->name) }}</p>
                                                     <h6 class="mb-1"> {{ empty($product_variation->variation()) ? '' :  str_replace('_',' ',$product_variation->variation()->name).'-'.$product_variation->variation()->value }}</h6>
                                                 </div>
                                                 <div class="icon-wishlist">
@@ -336,10 +352,24 @@ new #[Layout('layouts.front-end')] class extends Component {
                                                 <i class="bx bxs-star text-warning"></i>
                                                 <i class="bx bxs-star text-warning"></i>
                                             </div>
+                                            @if($product_variation->discount_percentage != 0)
+                                                @php
+                                                    $originalPrice = $product_variation->price / (1 - ($product_variation->discount_percentage / 100));
+                                                @endphp
+                                                <div style="margin-bottom:-2px;"
+                                                     class="d-flex align-items-center gap-3">
+                                                    <div class="h6 fw-light text-muted text-decoration-line-through">
+                                                        {{ number_format($originalPrice, 2) }}
+                                                    </div>
+                                                    <div class="h6 fw-bold text-danger">
+                                                        ({{ $product_variation->discount_percentage }}% off)
+                                                    </div>
+                                                </div>
+                                            @endif
                                             <div
                                                 class="product-price d-flex align-items-center justify-content-start gap-2 mt-2">
                                                 <div class="h6 fw-bold">KES {{ $product_variation->price }}</div>
-                                                <div  style="width:60%;">
+                                                <div style="width:60%;">
                                                     @php
                                                         $variationText = empty($product_variation->variation())
                                                             ? ''
@@ -392,7 +422,8 @@ new #[Layout('layouts.front-end')] class extends Component {
                                         <div class="card-body">
                                             <div class="d-flex align-items-center justify-content-between">
                                                 <div class="">
-                                                    <p style="font-weight:bold; color:black;"  class="mb-1 product-short-name">{{ strtoupper( $product->name) }}</p>
+                                                    <p style="font-weight:bold; color:black;"
+                                                       class="mb-1 product-short-name">{{ strtoupper( $product->name) }}</p>
                                                     <h6 class="mb-1"> {{ empty($product_variation->variation()) ? '' :  str_replace('_',' ',$product_variation->variation()->name).'-'.$product_variation->variation()->value }}</h6>
                                                 </div>
                                                 <div class="icon-wishlist">
@@ -407,10 +438,24 @@ new #[Layout('layouts.front-end')] class extends Component {
                                                 <i class="bx bxs-star text-warning"></i>
                                                 <i class="bx bxs-star text-warning"></i>
                                             </div>
+                                            @if($product_variation->discount_percentage != 0)
+                                                @php
+                                                    $originalPrice = $product_variation->price / (1 - ($product_variation->discount_percentage / 100));
+                                                @endphp
+                                                <div style="margin-bottom:-2px;"
+                                                     class="d-flex align-items-center gap-3">
+                                                    <div class="h6 fw-light text-muted text-decoration-line-through">
+                                                        {{ number_format($originalPrice, 2) }}
+                                                    </div>
+                                                    <div class="h6 fw-bold text-danger">
+                                                        ({{ $product_variation->discount_percentage }}% off)
+                                                    </div>
+                                                </div>
+                                            @endif
                                             <div
                                                 class="product-price d-flex align-items-center justify-content-start gap-2 mt-2">
                                                 <div class="h6 fw-bold">KES {{ $product_variation->price }}</div>
-                                                <div  style="width:60%;">
+                                                <div style="width:60%;">
                                                     @php
                                                         $variationText = empty($product_variation->variation())
                                                             ? ''
@@ -463,7 +508,8 @@ new #[Layout('layouts.front-end')] class extends Component {
                                         <div class="card-body">
                                             <div class="d-flex align-items-center justify-content-between">
                                                 <div class="">
-                                                    <p style="font-weight:bold; color:black;"  class="mb-1 product-short-name">{{ strtoupper( $product->name) }}</p>
+                                                    <p style="font-weight:bold; color:black;"
+                                                       class="mb-1 product-short-name">{{ strtoupper( $product->name) }}</p>
                                                     <h6 class="mb-1"> {{ empty($product_variation->variation()) ? '' :  str_replace('_',' ',$product_variation->variation()->name).'-'.$product_variation->variation()->value }}</h6>
                                                 </div>
                                                 <div class="icon-wishlist">
@@ -478,10 +524,24 @@ new #[Layout('layouts.front-end')] class extends Component {
                                                 <i class="bx bxs-star text-warning"></i>
                                                 <i class="bx bxs-star text-warning"></i>
                                             </div>
+                                            @if($product_variation->discount_percentage != 0)
+                                                @php
+                                                    $originalPrice = $product_variation->price / (1 - ($product_variation->discount_percentage / 100));
+                                                @endphp
+                                                <div style="margin-bottom:-2px;"
+                                                     class="d-flex align-items-center gap-3">
+                                                    <div class="h6 fw-light text-muted text-decoration-line-through">
+                                                        {{ number_format($originalPrice, 2) }}
+                                                    </div>
+                                                    <div class="h6 fw-bold text-danger">
+                                                        ({{ $product_variation->discount_percentage }}% off)
+                                                    </div>
+                                                </div>
+                                            @endif
                                             <div
                                                 class="product-price d-flex align-items-center justify-content-start gap-2 mt-2">
                                                 <div class="h6 fw-bold">KES {{ $product_variation->price }}</div>
-                                                <div  style="width:60%;">
+                                                <div style="width:60%;">
                                                     @php
                                                         $variationText = empty($product_variation->variation())
                                                             ? ''
@@ -534,7 +594,8 @@ new #[Layout('layouts.front-end')] class extends Component {
                                         <div class="card-body">
                                             <div class="d-flex align-items-center justify-content-between">
                                                 <div class="">
-                                                    <p style="font-weight:bold; color:black;"  class="mb-1  product-short-name">{{ strtoupper( $product->name) }}</p>
+                                                    <p style="font-weight:bold; color:black;"
+                                                       class="mb-1  product-short-name">{{ strtoupper( $product->name) }}</p>
                                                     <h6 class="mb-1"> {{ empty($product_variation->variation()) ? '' :  str_replace('_',' ',$product_variation->variation()->name).'-'.$product_variation->variation()->value }}</h6>
                                                 </div>
                                                 <div class="icon-wishlist">
@@ -549,10 +610,24 @@ new #[Layout('layouts.front-end')] class extends Component {
                                                 <i class="bx bxs-star text-warning"></i>
                                                 <i class="bx bxs-star text-warning"></i>
                                             </div>
+                                            @if($product_variation->discount_percentage != 0)
+                                                @php
+                                                    $originalPrice = $product_variation->price / (1 - ($product_variation->discount_percentage / 100));
+                                                @endphp
+                                                <div style="margin-bottom:-2px;"
+                                                     class="d-flex align-items-center gap-3">
+                                                    <div class="h6 fw-light text-muted text-decoration-line-through">
+                                                        {{ number_format($originalPrice, 2) }}
+                                                    </div>
+                                                    <div class="h6 fw-bold text-danger">
+                                                        ({{ $product_variation->discount_percentage }}% off)
+                                                    </div>
+                                                </div>
+                                            @endif
                                             <div
                                                 class="product-price d-flex align-items-center justify-content-start gap-2 mt-2">
                                                 <div class="h6 fw-bold">KES {{ $product_variation->price }}</div>
-                                                <div  style="width:60%;">
+                                                <div style="width:60%;">
                                                     @php
                                                         $variationText = empty($product_variation->variation())
                                                             ? ''
@@ -599,7 +674,8 @@ new #[Layout('layouts.front-end')] class extends Component {
                             <div class="card-body text-center">
                                 <h5 class="card-title">Curtain Rods</h5>
                                 <p class="card-text">Get Wonderful offers and make your house shine</p>
-                                <a  href="{{ route('front-end.shop-grid',['category_id' => 3,'product_id' => 0]) }}" class="btn btn-dark btn-ecomm">SHOP NOW</a>
+                                <a href="{{ route('front-end.shop-grid',['category_id' => 3,'product_id' => 0]) }}"
+                                   class="btn btn-dark btn-ecomm">SHOP NOW</a>
                             </div>
                         </div>
                     </div>
@@ -611,7 +687,8 @@ new #[Layout('layouts.front-end')] class extends Component {
                                 <h5 class="card-title">Carpets</h5>
                                 <p class="card-text">Wall to Wall Carpets and Artifical Carpets at wonderful prices on
                                     sale</p>
-                                <a href="{{ route('front-end.shop-grid',['category_id' => 1,'product_id' => 0]) }}" class="btn btn-dark btn-ecomm">SHOP NOW</a>
+                                <a href="{{ route('front-end.shop-grid',['category_id' => 1,'product_id' => 0]) }}"
+                                   class="btn btn-dark btn-ecomm">SHOP NOW</a>
                             </div>
                         </div>
                     </div>
@@ -622,7 +699,8 @@ new #[Layout('layouts.front-end')] class extends Component {
                                     <h5 class="card-title text-white">Summer Sale</h5>
                                     <p class="card-text text-uppercase fs-1 lh-1 mt-3 mb-2 text-white">Up to 30% off</p>
                                     <p class="card-text fs-5 text-white">On Top Interior Design Brands</p><a
-                                        href="{{ route('front-end.shop-grid',['category_id' => 0,'product_id' => 0]) }}" style="color:white;" class="btn btn-white btn-ecomm">SHOP BY
+                                        href="{{ route('front-end.shop-grid',['category_id' => 0,'product_id' => 0]) }}"
+                                        style="color:white;" class="btn btn-white btn-ecomm">SHOP BY
                                         CATEGORY</a>
                                 </div>
                             </div>
@@ -633,7 +711,8 @@ new #[Layout('layouts.front-end')] class extends Component {
                             <img src="front-end-assets/images/categories/wall_decor.png" class="img-fluid" alt="...">
                             <div style="padding-top:40px;" class="card-body text-center">
                                 <h5 class="card-title fs-2 fw-bold text-uppercase">Wall Decor</h5>
-                                <a href="{{ route('front-end.shop-grid',['category_id' => 4,'product_id' => 0]) }}" class="btn btn-dark btn-ecomm">HURRY UP!</a>
+                                <a href="{{ route('front-end.shop-grid',['category_id' => 4,'product_id' => 0]) }}"
+                                   class="btn btn-dark btn-ecomm">HURRY UP!</a>
                             </div>
                         </div>
                     </div>

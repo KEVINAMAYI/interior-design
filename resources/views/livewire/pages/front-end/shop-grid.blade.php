@@ -431,7 +431,21 @@ new #[Layout('layouts.front-end')] class extends Component {
                                                     <div class="card-body border-top">
                                                         <h5 class="mb-0 fw-bold product-short-title">{{ $product->name }} </h5>
                                                         <h6 class="mb-1"> {{ empty($product_variation->variation()) ? '' :  str_replace('_',' ',$product_variation->variation()->name).'-'.$product_variation->variation()->value }}</h6>
-                                                        <div class="product-price d-flex align-items-center gap-2 mt-2">
+                                                        @if($product_variation->discount_percentage != 0)
+                                                            @php
+                                                                $originalPrice = $product_variation->price / (1 - ($product_variation->discount_percentage / 100));
+                                                            @endphp
+                                                            <div style="margin-bottom:-2px;"
+                                                                 class="d-flex align-items-center gap-3">
+                                                                <div class="h6 fw-light text-muted text-decoration-line-through">
+                                                                    {{ number_format($originalPrice, 2) }}
+                                                                </div>
+                                                                <div class="h6 fw-bold text-danger">
+                                                                    ({{ $product_variation->discount_percentage }}% off)
+                                                                </div>
+                                                            </div>
+                                                        @endif
+                                                        <div class="product-price d-flex align-items-center gap-2">
                                                             <div class="h6 fw-bold">
                                                                 KES {{ $product_variation->price }}
                                                             </div>
@@ -480,8 +494,21 @@ new #[Layout('layouts.front-end')] class extends Component {
                                                     <div class="card-body border-top">
                                                         <h5 class="mb-0 fw-bold product-short-title">{{ $product->name }} </h5>
                                                         <h6 class="mb-1"> {{ empty($product_variation->variation()) ? '' :  str_replace('_',' ',$product_variation->variation()->name).'-'.$product_variation->variation()->value }}</h6>
-                                                        {{--                                                    <p class="mb-0 product-short-name">{{ $product->description }}</p>--}}
-                                                        <div class="product-price d-flex align-items-center gap-2 mt-2">
+                                                        @if($product_variation->discount_percentage != 0)
+                                                            @php
+                                                                $originalPrice = $product_variation->price / (1 - ($product_variation->discount_percentage / 100));
+                                                            @endphp
+                                                            <div style="margin-bottom:-2px;"
+                                                                 class="d-flex align-items-center gap-3">
+                                                                <div class="h6 fw-light text-muted text-decoration-line-through">
+                                                                    {{ number_format($originalPrice, 2) }}
+                                                                </div>
+                                                                <div class="h6 fw-bold text-danger">
+                                                                    ({{ $product_variation->discount_percentage }}% off)
+                                                                </div>
+                                                            </div>
+                                                        @endif
+                                                        <div class="product-price d-flex align-items-center gap-2">
                                                             <div class="h6 fw-bold">
                                                                 KES {{ $product_variation->price }}
                                                             </div>
