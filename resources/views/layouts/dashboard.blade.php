@@ -15,6 +15,8 @@
     <!-- Scripts -->
     @vite('resources/css/dashboard.css')
 
+    @stack('css')
+
 </head>
 
 <body>

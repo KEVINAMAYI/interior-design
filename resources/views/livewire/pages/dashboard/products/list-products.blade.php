@@ -53,6 +53,34 @@ new #[Layout('layouts.dashboard')] class extends Component {
 
 }; ?>
 
+@push('css')
+    <style>
+        .description-column {
+            max-width: 200px; /* Adjust the width as per your design */
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .description-column.wrap {
+            white-space: normal;
+            word-break: break-word;
+        }
+
+        .name-column {
+            max-width: 100px; /* Adjust the width as per your design */
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .name-column.wrap {
+            white-space: normal;
+            word-break: break-word;
+        }
+    </style>
+@endpush
+
 <div class="main-content">
 
     <div class="page-content">
@@ -70,49 +98,54 @@ new #[Layout('layouts.dashboard')] class extends Component {
                                     </h4>
                                 </div>
                                 <div class="card-body p-4">
-                                    <table id="products_table" class="table table-bordered dt-responsive nowrap w-100">
-                                        <thead>
-                                        <tr>
-                                            <th>Name</th>
-                                            <th>Description</th>
-                                            <th>Category</th>
-                                            <th>Variation</th>
-                                            <th>Price</th>
-                                            <th>Action</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        @foreach($products as $product)
-                                            @foreach($product->product_variations as $product_variation)
-                                                <tr>
-                                                    <td>{{ strtoupper($product->name) }}</td>
-                                                    <td style="word-wrap: break-word; white-space: normal;">{{ $product->description }}</td>
-                                                    <td>{{ $product->category->name }}</td>
-                                                    <td>{{ empty($product_variation->variation()) ? 'None' :  $product_variation->variation()->name.'-'.$product_variation->variation()->value }}</td>
-                                                    <td>{{ $product_variation->price }}</td>
-                                                    <td>
-                                                        <div class="btn-group">
-                                                            <button type="button"
-                                                                    class="btn btn-primary dropdown-toggle"
-                                                                    data-bs-toggle="dropdown" aria-expanded="false">
-                                                                Action <i class="mdi mdi-chevron-down"></i></button>
-                                                            <div class="dropdown-menu">
-                                                                <a class="dropdown-item" wire:navigate href="{{ route('dashboard.edit-product',$product_variation->id) }}"> <i
-                                                                        class="mdi mdi-pencil font-size-16"></i> Edit
-                                                                </a>
-                                                                <button class="dropdown-item deleteProduct"
-                                                                        data-id="{{ $product_variation->id }}">
-                                                                    <i class="mdi mdi-trash-can font-size-16"></i>
-                                                                    Delete
+                                    <div class="table-responsive">
+                                        <table id="products_table"
+                                               class="table table-bordered dt-responsive nowrap w-100">
+                                            <thead>
+                                            <tr>
+                                                <th>Name</th>
+                                                <th>Description</th>
+                                                <th>Category</th>
+                                                <th>Variation</th>
+                                                <th>Price</th>
+                                                <th>Action</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            @foreach($products as $product)
+                                                @foreach($product->product_variations as $product_variation)
+                                                    <tr>
+                                                        <td class="name-column">{{ strtoupper($product->name) }}</td>
+                                                        <td class="description-column">{{ $product->description }}</td>
+                                                        <td>{{ $product->category->name }}</td>
+                                                        <td>{{ empty($product_variation->variation()) ? 'None' :  $product_variation->variation()->name.'-'.$product_variation->variation()->value }}</td>
+                                                        <td>{{ $product_variation->price }}</td>
+                                                        <td>
+                                                            <div class="btn-group">
+                                                                <button type="button"
+                                                                        class="btn btn-primary dropdown-toggle"
+                                                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                                                    Action <i class="mdi mdi-chevron-down"></i>
                                                                 </button>
+                                                                <div class="dropdown-menu">
+                                                                    <a class="dropdown-item" wire:navigate
+                                                                       href="{{ route('dashboard.edit-product', $product_variation->id) }}">
+                                                                        <i class="mdi mdi-pencil font-size-16"></i> Edit
+                                                                    </a>
+                                                                    <button class="dropdown-item deleteProduct"
+                                                                            data-id="{{ $product_variation->id }}">
+                                                                        <i class="mdi mdi-trash-can font-size-16"></i>
+                                                                        Delete
+                                                                    </button>
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                    </td>
-                                                </tr>
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
                                             @endforeach
-                                        @endforeach
-                                        </tbody>
-                                    </table>
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div>
                             </div>
                         </div>
