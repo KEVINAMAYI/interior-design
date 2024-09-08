@@ -78,6 +78,18 @@ new #[Layout('layouts.dashboard')] class extends Component {
             white-space: normal;
             word-break: break-word;
         }
+
+        .variation-column {
+            max-width: 100px; /* Adjust the width as per your design */
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .variation-column.wrap {
+            white-space: normal;
+            word-break: break-word;
+        }
     </style>
 @endpush
 
@@ -118,7 +130,7 @@ new #[Layout('layouts.dashboard')] class extends Component {
                                                         <td class="name-column">{{ strtoupper($product->name) }}</td>
                                                         <td class="description-column">{{ $product->description }}</td>
                                                         <td>{{ $product->category->name }}</td>
-                                                        <td>{{ empty($product_variation->variation()) ? 'None' :  $product_variation->variation()->name.'-'.$product_variation->variation()->value }}</td>
+                                                        <td class="variation-column " >{{ empty($product_variation->variation()) ? 'None' :  $product_variation->variation()->name.'-'.$product_variation->variation()->value }}</td>
                                                         <td>{{ $product_variation->price }}</td>
                                                         <td>
                                                             <div class="btn-group">
