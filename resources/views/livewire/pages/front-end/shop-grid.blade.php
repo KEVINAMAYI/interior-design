@@ -388,7 +388,7 @@ new #[Layout('layouts.front-end')] class extends Component {
                         <div class="card rounded-0">
                             <div class="card-body p-2">
                                 <div class="d-flex align-items-center justify-content-between bg-light p-2">
-                                    <div class="product-count">{{ $totalVariations }}</div>
+                                    <div class="product-count">{{ $totalVariations }}  Items Found</div>
                                     <div class="view-type hstack gap-2 d-none d-xl-flex">
                                         <p class="mb-0">Grid</p>
                                         <div>
