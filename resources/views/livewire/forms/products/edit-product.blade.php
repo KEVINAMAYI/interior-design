@@ -33,7 +33,9 @@ new class extends Component {
     public $variation_id;
     public $product_variation;
     public $images = [];
-
+    public $discountVisible = false;
+    public $discountPercentage;
+    public $discountedPrice;
 
     public function mount($product_variation_id)
     {
@@ -43,6 +45,7 @@ new class extends Component {
         $this->category_id = $this->product_variation->product->category_id;
         $this->variation_id = $this->product_variation->variation_id;
         $this->price = $this->product_variation->price;
+        $this->discountPercentage = $this->product_variation->discount_percentage;
 
         $this->variations = Variation::all();
         $this->selling_tags = Tag::all();
@@ -68,6 +71,27 @@ new class extends Component {
         ];
     }
 
+
+    // This will be triggered when the discount percentage is updated
+    public function updatedDiscountPercentage()
+    {
+        $this->calculateDiscountedPrice();
+    }
+
+
+    public function showDiscountInput()
+    {
+        $this->discountVisible = true;
+    }
+
+    public function calculateDiscountedPrice()
+    {
+        if ($this->discountPercentage && $this->price) {
+            $this->discountedPrice = $this->price - ($this->price * ($this->discountPercentage / 100));
+            $this->price = $this->discountedPrice;
+        }
+    }
+
     /**
      * Add product and the product variation
      */
@@ -86,6 +110,7 @@ new class extends Component {
                 'product_id' => $this->product_variation->product->id,
                 'variation_id' => $this->variation_id,
                 'price' => $this->price,
+                'discount_percentage' => !empty($this->discountPercentage) ? $this->discountPercentage : 0
             ]);
 
 
@@ -119,7 +144,7 @@ new class extends Component {
 
 
             DB::commit();
-            $this->reset(['category_id', 'name', 'description', 'variation_id', 'price', 'images']);
+            $this->reset(['category_id', 'name', 'description', 'variation_id', 'price', 'discountPercentage', 'images']);
             $this->alert('success', 'Product updated successfully');
             $this->dispatch('productUpdated');
 
@@ -242,17 +267,33 @@ new class extends Component {
                             <p class="text-danger text-xs pt-1"> {{ $message }} </p>
                             @enderror                        </div>
 
-                        <div class="mb-4 col-lg-6">
+                        <div class="mb-4 col-lg-4">
                             <label for="price" class="form-label">Price</label>
                             <input class="form-control" wire:model="price" id="price" type="text"
                                    autocomplete="price">
                             @error('price')
                             <p class="text-danger text-xs pt-1"> {{ $message }} </p>
-                            @enderror                        </div>
+                            @enderror
+                        </div>
+                        <div style="padding-top:30px;" class="col-lg-2">
+                            <button type="button" class="btn btn-primary" wire:click="showDiscountInput">Edit Discount
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        @if($discountVisible)
+                            <div class="mb-4 col-lg-12">
+                                <label for="discount" class="form-label">Discount Percentage</label>
+                                <input class="form-control" wire:model.live="discountPercentage" id="discount"
+                                       type="text" autocomplete="discount">
+                            </div>
+                        @endif
                     </div>
                     <div class="row">
                         <div wire:ignore class="mb-4 col-lg-12">
-                            <label for="selling_tags" class="form-label">Shopping Tags <span style="font-size:11px; color:red;">(Selected Tags will replace the old Tags)</span></label>
+                            <label for="selling_tags" class="form-label">Shopping Tags <span
+                                    style="font-size:11px; color:red;">(Selected Tags will replace the old Tags)</span></label>
                             <select id="tags" class="form-control selling_tags" wire:model="selling_tags_ids" multiple>
                                 @foreach($selling_tags as $selling_tag)
                                     <option value="{{ $selling_tag->id }}">{{ $selling_tag->name }}</option>
