@@ -50,9 +50,9 @@ new class extends Component {
                 $name = time() . '-' . $this->image->getClientOriginalName();
                 $path = $this->image->storeAs('categories', $name, 'public');
 
+                dd($path);
+
                 $this->category->update([
-                    'name' => $this->name,
-                    'description' => $this->description,
                     'image_url' => $path
                 ]);
 
