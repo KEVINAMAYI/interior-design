@@ -783,8 +783,17 @@ new #[Layout('layouts.front-end')] class extends Component {
                         <div class="card">
                             <div class="position-relative overflow-hidden">
                                 <a href="{{ route('front-end.shop-grid',['category_id' => $category->id,'product_id' => 0]) }}">
-                                    <img src="{{ $category->image_url }}" class="card-img-top"
-                                         alt="...">
+                                    @if( !empty($category->image_url) )
+                                        <img
+                                            src="{{ asset('storage/' .$category->image_url) }}"
+                                            class="card-img-top"
+                                            alt="...">
+                                    @else
+                                        <img
+                                            src="front-end-assets/images/categories/artificial_grass_carpets.png"                                            class="card-img-top"
+                                            alt="...">
+                                    @endif
+
                                 </a>
                             </div>
                             <div class="card-body">

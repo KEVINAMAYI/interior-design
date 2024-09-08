@@ -4,16 +4,19 @@ use App\Models\Category;
 use Illuminate\Support\Facades\DB;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Volt\Component;
+use Livewire\WithFileUploads;
 
 new class extends Component {
 
-    use LivewireAlert;
+    use WithFileUploads,LivewireAlert;
 
     public $name;
     public $description;
     public $category;
+    public $image;
 
-    public function mount($category_id){
+    public function mount($category_id)
+    {
         $this->category = Category::find($category_id);
         $this->name = $this->category->name;
         $this->description = $this->category->description;
@@ -42,6 +45,18 @@ new class extends Component {
                 'name' => $this->name,
                 'description' => $this->description,
             ]);
+
+            if (!empty($this->image)) {
+                $name = time() . '-' . $this->image->getClientOriginalName();
+                $path = $this->image->storeAs('categories', $name, 'public');
+
+                $this->category->update([
+                    'name' => $this->name,
+                    'description' => $this->description,
+                    'image_url' => $path
+                ]);
+
+            }
 
             DB::commit();
             $this->alert('success', 'Category updated successfully');
@@ -84,6 +99,18 @@ new class extends Component {
                                       cols="50" rows="5"></textarea>
                             @error('description')
                             <p class="text-danger text-xs pt-1"> {{ $message }} </p>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="mb-4 col-lg-12">
+                            <label for="image" class="form-label">Image <span
+                                    style="font-size:11px; color:red;">(Selected Image will replace the old Image)</span></label>
+                            <input accept="image/*"  class="form-control" wire:model="image" id="image"
+                                   type="file"
+                                   autocomplete="image">
+                            @error('image')
+                            <p class="text-danger text-xs pt-1">{{ $message }}</p>
                             @enderror
                         </div>
                     </div>

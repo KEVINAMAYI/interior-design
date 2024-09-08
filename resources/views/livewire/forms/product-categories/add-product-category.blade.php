@@ -4,19 +4,22 @@ use App\Models\Category;
 use Illuminate\Support\Facades\DB;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Volt\Component;
+use Livewire\WithFileUploads;
 
 new class extends Component {
 
-    use LivewireAlert;
+    use WithFileUploads,LivewireAlert;
 
     public $name;
     public $description;
+    public $image;
 
     public function rules()
     {
         return [
             'name' => 'required',
-            'description' => 'required'
+            'description' => 'required',
+            'image' => 'required'
         ];
     }
 
@@ -28,17 +31,22 @@ new class extends Component {
     {
         $this->validate();
 
+        $name = time() . '-' . $this->image->getClientOriginalName();
+        $path = $this->image->storeAs('categories', $name, 'public');
+
+
         DB::beginTransaction();
         try {
 
             Category::create([
                 'name' => $this->name,
                 'description' => $this->description,
-                'slug' => $this->generateSlug()
+                'slug' => $this->generateSlug(),
+                'image_url' => $path
             ]);
 
             DB::commit();
-            $this->reset();
+            $this->reset(['name','description','image']);
             $this->alert('success', 'Category created successfully');
 
         } catch (Exception $exception) {
@@ -83,6 +91,17 @@ new class extends Component {
                                       cols="50" rows="5"></textarea>
                             @error('description')
                             <p class="text-danger text-xs pt-1"> {{ $message }} </p>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="mb-4 col-lg-12">
+                            <label for="image" class="form-label">Image</label>
+                            <input accept="image/*"  class="form-control" wire:model="image" id="image"
+                                   type="file"
+                                   autocomplete="image">
+                            @error('image')
+                            <p class="text-danger text-xs pt-1">{{ $message }}</p>
                             @enderror
                         </div>
                     </div>
