@@ -25,7 +25,7 @@ new #[Layout('layouts.front-end')] class extends Component {
         $this->best_seller_products = $this->getProductsByTag($products, 'best_seller');
         $this->trending_products = $this->getProductsByTag($products, 'trending');
         $this->special_offer_products = $this->getProductsByTag($products, 'special_offer');
-        $this->categories = Category::all();
+        $this->categories = Category::inRandomOrder()->get();
     }
 
     public function getProductsByTag($products, $tag)

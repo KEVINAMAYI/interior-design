@@ -28,8 +28,8 @@ new #[Layout('layouts.front-end')] class extends Component {
      */
     public function mount($category_id, $product_id)
     {
-        $this->categories = Category::all();
-        $this->products = Product::with('product_variations')->get();
+        $this->categories = Category::inRandomOrder()->get();
+        $this->products = Product::with('product_variations')->inRandomOrder()->get();
 
         if ($category_id != 0) {
             $this->category_id = $category_id;
@@ -91,7 +91,7 @@ new #[Layout('layouts.front-end')] class extends Component {
         $products = $this->applyVariationFilter($products);
         $products = $this->applyPriceFilter($products);
 
-        $this->products = $products->get();
+        $this->products = $products->inRandomOrder()->get();
     }
 
     /**
@@ -130,7 +130,7 @@ new #[Layout('layouts.front-end')] class extends Component {
                 $q->where('variation_id', $this->variation_id);
             });
 
-            $this->specific_variations = ProductVariation::where('id', $this->variation_id)->get();
+            $this->specific_variations = ProductVariation::where('id', $this->variation_id)->inRandomOrder()->get();
         }
 
         return $query;
