@@ -46,8 +46,16 @@ new #[Layout('layouts.front-end')] class extends Component {
                         <div class="col">
                             <div class="card">
                                 <a href="javascript:;">
-                                    <img src="{{ $category->image_url }}"
-                                         class="card-img-top border-bottom bg-dark-1" alt="...">
+                                    @if( !empty($category->image_url) )
+                                        <img
+                                            src="{{ asset('storage/' .$category->image_url) }}"
+                                            class="card-img-top"
+                                            alt="...">
+                                    @else
+                                        <img
+                                            src="front-end-assets/images/categories/artificial_grass_carpets.png"                                            class="card-img-top"
+                                            alt="...">
+                                    @endif
                                 </a>
                                 <div class="list-group list-group-flush">
                                     <a href="javascript:;" class="list-group-item bg-transparent">
