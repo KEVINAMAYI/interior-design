@@ -84,7 +84,7 @@ new #[Layout('layouts.front-end')] class extends Component {
      */
     public function filter()
     {
-        $products = Product::orderBy('created_at', 'desc');
+        $products = Product::query();
 
         $products = $this->applyCategoryFilter($products);
         $products = $this->applySubCategoryFilter($products);
