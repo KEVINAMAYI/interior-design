@@ -32,7 +32,9 @@ new class extends Component {
     public $selling_tags_ids = [];
     public $variation_id;
     public $images = [];
-
+    public $discountVisible = false;
+    public $discountPercentage;
+    public $discountedPrice;
 
     public function mount()
     {
@@ -62,6 +64,27 @@ new class extends Component {
         ];
     }
 
+    // This will be triggered when the discount percentage is updated
+    public function updatedDiscountPercentage()
+    {
+        $this->calculateDiscountedPrice();
+    }
+
+
+
+    public function showDiscountInput()
+    {
+        $this->discountVisible = true;
+    }
+
+    public function calculateDiscountedPrice()
+    {
+        if ($this->discountPercentage && $this->price) {
+            $this->discountedPrice = $this->price - ($this->price * ($this->discountPercentage / 100));
+            $this->price = $this->discountedPrice;
+        }
+    }
+
     /**
      * Add product and the product variation
      */
@@ -80,6 +103,7 @@ new class extends Component {
                 'product_id' => $product->id,
                 'variation_id' => $this->variation_id,
                 'price' => $this->price,
+                'discount_percentage' => $this->discountPercentage
             ]);
 
             if (!empty($this->images)) {
@@ -108,9 +132,8 @@ new class extends Component {
             }
 
 
-
             DB::commit();
-            $this->reset(['category_id', 'name', 'description', 'variation_id', 'price', 'images']);
+            $this->reset(['category_id', 'name', 'description', 'variation_id', 'price', 'images','discountPercentage']);
             $this->alert('success', 'Product created successfully');
             $this->dispatch('productCreated');
 
@@ -235,14 +258,28 @@ new class extends Component {
                             <p class="text-danger text-xs pt-1"> {{ $message }} </p>
                             @enderror                        </div>
 
-                        <div class="mb-4 col-lg-6">
+                        <div class="mb-4 col-lg-4">
                             <label for="price" class="form-label">Price</label>
                             <input class="form-control" wire:model="price" id="price" type="text"
                                    autocomplete="price">
                             @error('price')
                             <p class="text-danger text-xs pt-1"> {{ $message }} </p>
-                            @enderror                        </div>
+                            @enderror
+                        </div>
+                        <div style="padding-top:30px;" class="col-lg-2">
+                            <button type="button" class="btn btn-primary" wire:click="showDiscountInput">Add Discount</button>
+                        </div>
                     </div>
+
+                    <div class="row">
+                        @if($discountVisible)
+                            <div class="mb-4 col-lg-12">
+                                <label for="discount" class="form-label">Discount Percentage</label>
+                                <input class="form-control" wire:model.live="discountPercentage" id="discount" type="text" autocomplete="discount">
+                            </div>
+                        @endif
+                    </div>
+
                     <div class="row">
                         <div wire:ignore class="mb-4 col-lg-12">
                             <label for="selling_tags" class="form-label">Shopping Tags</label>
