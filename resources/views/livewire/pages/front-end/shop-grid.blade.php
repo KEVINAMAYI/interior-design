@@ -21,6 +21,7 @@ new #[Layout('layouts.front-end')] class extends Component {
     public $upper_price;
     public $useSpecificVariations = false;
     public $specific_variations;
+    public $totalVariations;
 
     /**
      * On mount, initialize categories and products,
@@ -38,6 +39,9 @@ new #[Layout('layouts.front-end')] class extends Component {
             }
             $this->filter();
         }
+
+        $this->totalVariations = ProductVariation::whereIn('product_id', $this->products->pluck('id'))->count();
+
     }
 
     /**
@@ -90,6 +94,9 @@ new #[Layout('layouts.front-end')] class extends Component {
         $products = $this->applySubCategoryFilter($products);
         $products = $this->applyVariationFilter($products);
         $products = $this->applyPriceFilter($products);
+
+        $this->totalVariations = ProductVariation::whereIn('product_id', $products->pluck('id'))->count();
+
 
         $this->products = $products->inRandomOrder()->get();
     }
@@ -381,7 +388,7 @@ new #[Layout('layouts.front-end')] class extends Component {
                         <div class="card rounded-0">
                             <div class="card-body p-2">
                                 <div class="d-flex align-items-center justify-content-between bg-light p-2">
-                                    <div class="product-count">657 Items Found</div>
+                                    <div class="product-count">{{ $totalVariations }}</div>
                                     <div class="view-type hstack gap-2 d-none d-xl-flex">
                                         <p class="mb-0">Grid</p>
                                         <div>
