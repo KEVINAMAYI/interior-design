@@ -50,8 +50,6 @@ new class extends Component {
                 $name = time() . '-' . $this->image->getClientOriginalName();
                 $path = $this->image->storeAs('categories', $name, 'public');
 
-                dd($path);
-
                 $this->category->update([
                     'image_url' => $path
                 ]);
@@ -59,6 +57,7 @@ new class extends Component {
             }
 
             DB::commit();
+            $this->reset(['image']);
             $this->alert('success', 'Category updated successfully');
 
 
