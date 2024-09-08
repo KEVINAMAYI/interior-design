@@ -364,8 +364,8 @@ new #[Layout('layouts.front-end')] class extends Component {
                                                         <div wire:loading.remove class="form-check">
                                                             <input class="form-check-input variation" type="checkbox"
                                                                    value="{{ $variation->id }}"
-                                                                   id="chekColor1">
-                                                            <label class="form-check-label" for="chekColor1">
+                                                                   id="variation">
+                                                            <label class="form-check-label" for="variation">
                                                                 <span>{{ $variation->value }}</span>
                                                             </label>
                                                         </div>
@@ -388,7 +388,7 @@ new #[Layout('layouts.front-end')] class extends Component {
                         <div class="card rounded-0">
                             <div class="card-body p-2">
                                 <div class="d-flex align-items-center justify-content-between bg-light p-2">
-                                    <div class="product-count">{{ $totalVariations }}  Items Found</div>
+                                    <div class="product-count">{{ $totalVariations }} Items Found</div>
                                     <form>
                                         <div class="input-group">
                                             <span
@@ -417,11 +417,14 @@ new #[Layout('layouts.front-end')] class extends Component {
                                                     <div class="position-relative overflow-hidden">
                                                         <a href="{{ route('front-end.product-details',$product_variation->id) }}">
                                                             @if($product_variation->images()->isNotEmpty())
-                                                                <img src="{{ asset('storage/' . $product_variation->images()[0]->image_url) }}"
-                                                                     class="card-img-top"
-                                                                     alt="{{ $product_variation->name }}">
+                                                                <img
+                                                                    src="{{ asset('storage/' . $product_variation->images()[0]->image_url) }}"
+                                                                    class="card-img-top"
+                                                                    alt="{{ $product_variation->name }}">
                                                             @else
-                                                                <img src="{{ asset('front-end-assets/images/categories/wall_to_wall_carpets.png') }}" class="card-img-top" alt="No image available">
+                                                                <img
+                                                                    src="{{ asset('front-end-assets/images/categories/wall_to_wall_carpets.png') }}"
+                                                                    class="card-img-top" alt="No image available">
                                                             @endif
                                                         </a>
                                                     </div>
@@ -434,7 +437,8 @@ new #[Layout('layouts.front-end')] class extends Component {
                                                             @endphp
                                                             <div style="margin-bottom:-2px;"
                                                                  class="d-flex align-items-center gap-3">
-                                                                <div class="h6 fw-light text-muted text-decoration-line-through">
+                                                                <div
+                                                                    class="h6 fw-light text-muted text-decoration-line-through">
                                                                     {{ number_format($originalPrice, 2) }}
                                                                 </div>
                                                                 <div class="h6 fw-bold text-danger">
@@ -446,7 +450,7 @@ new #[Layout('layouts.front-end')] class extends Component {
                                                             <div class="h6 fw-bold">
                                                                 KES {{ $product_variation->price }}
                                                             </div>
-                                                            <div  style="width:60%;">
+                                                            <div style="width:60%;">
                                                                 @php
                                                                     $variationText = empty($product_variation->variation())
                                                                         ? ''
@@ -480,11 +484,14 @@ new #[Layout('layouts.front-end')] class extends Component {
                                                     <div class="position-relative overflow-hidden">
                                                         <a href="{{ route('front-end.product-details', $product_variation->id) }}">
                                                             @if($product_variation->images()->isNotEmpty())
-                                                                <img src="{{ asset('storage/' . $product_variation->images()[0]->image_url) }}"
-                                                                     class="card-img-top"
-                                                                     alt="{{ $product_variation->name }}">
+                                                                <img
+                                                                    src="{{ asset('storage/' . $product_variation->images()[0]->image_url) }}"
+                                                                    class="card-img-top"
+                                                                    alt="{{ $product_variation->name }}">
                                                             @else
-                                                                <img src="{{ asset('front-end-assets/images/categories/wall_to_wall_carpets.png') }}" class="card-img-top" alt="No image available">
+                                                                <img
+                                                                    src="{{ asset('front-end-assets/images/categories/wall_to_wall_carpets.png') }}"
+                                                                    class="card-img-top" alt="No image available">
                                                             @endif
                                                         </a>
                                                     </div>
@@ -497,7 +504,8 @@ new #[Layout('layouts.front-end')] class extends Component {
                                                             @endphp
                                                             <div style="margin-bottom:-2px;"
                                                                  class="d-flex align-items-center gap-3">
-                                                                <div class="h6 fw-light text-muted text-decoration-line-through">
+                                                                <div
+                                                                    class="h6 fw-light text-muted text-decoration-line-through">
                                                                     {{ number_format($originalPrice, 2) }}
                                                                 </div>
                                                                 <div class="h6 fw-bold text-danger">
@@ -509,7 +517,7 @@ new #[Layout('layouts.front-end')] class extends Component {
                                                             <div class="h6 fw-bold">
                                                                 KES {{ $product_variation->price }}
                                                             </div>
-                                                            <div  style="width:60%;">
+                                                            <div style="width:60%;">
                                                                 @php
                                                                     $variationText = empty($product_variation->variation())
                                                                         ? ''
@@ -579,21 +587,26 @@ new #[Layout('layouts.front-end')] class extends Component {
                 $('.category').on('click', function () {
                     if ($(this).prop('checked')) {
                         $('.category').not(this).prop('checked', false);
+                        $('.subcategory').prop('checked', false);
+                        $('.variation').prop('checked', false);
                         Livewire.dispatch('update-category-id', {category_id: $(this).val()});
                     }
                 });
 
                 $(document).on('click', '.subcategory', function () {
-                    $('.subcategory').not(this).prop('checked', false);
-                    Livewire.dispatch('update-sub-category-id', {sub_category_id: $(this).val()});
+                    if ($(this).prop('checked')) {
+                        $('.subcategory').not(this).prop('checked', false);
+                        $('.variation').prop('checked', false);
+                        Livewire.dispatch('update-sub-category-id', {sub_category_id: $(this).val()});
+                    }
                 });
 
                 $(document).on('click', '.variation', function () {
-                    console.log($(this).val());
-                    $('.variation').not(this).prop('checked', false);
-                    Livewire.dispatch('update-variation-id', {variation_id: $(this).val()});
+                    if ($(this).prop('checked')) {
+                        $('.variation').not(this).prop('checked', false);
+                        Livewire.dispatch('update-variation-id', {variation_id: $(this).val()});
+                    }
                 });
-
             });
         });
     </script>
