@@ -22,6 +22,8 @@ new #[Layout('layouts.front-end')] class extends Component {
     public $useSpecificVariations = false;
     public $specific_variations;
     public $totalVariations;
+    public $filterBy = '';
+
 
     /**
      * On mount, initialize categories and products,
@@ -83,30 +85,53 @@ new #[Layout('layouts.front-end')] class extends Component {
         }
     }
 
+
     /**
      * Filters displayed products based on category, subcategory, variation, price, etc.
      */
     public function filter()
     {
-        $products = Product::query();
+        $productsQuery = Product::query();
+        $productsQuery = $this->applyCategoryFilter($productsQuery);
+        $productsQuery = $this->applySubCategoryFilter($productsQuery);
+        $productsQuery = $this->applyVariationFilter($productsQuery);
+        $productsQuery = $this->applyPriceFilter($productsQuery);
 
-        $products = $this->applyCategoryFilter($products);
-        $products = $this->applySubCategoryFilter($products);
-        $products = $this->applyVariationFilter($products);
-        $products = $this->applyPriceFilter($products);
+        // Apply random order only if filterBy is not 'asc_price' or 'desc_price'
+        if ($this->filterBy !== 'asc_price' && $this->filterBy !== 'desc_price') {
+            $productsQuery->inRandomOrder();
+        }
 
-        $this->totalVariations = ProductVariation::whereIn('product_id', $products->pluck('id'))->count();
+        if ($this->filterBy === 'new') {
+            if ($this->filterBy === 'new') {
+                $productsQuery->join('product_variations', 'products.id', '=', 'product_variations.product_id')
+                    ->where('product_variations.created_at', '>=', now()->subHours(24))
+                    ->select('products.*')
+                    ->distinct();
+            }
+        }
+
+        // Get the products and their IDs
+        $products = $productsQuery->get();
+        $productIds = $products->pluck('id');
+
+        $this->totalVariations = ProductVariation::whereIn('product_id', $productIds)->count();
 
 
-        $this->products = $products->inRandomOrder()->get();
+        if ($this->filterBy === 'discounted') {
+            $this->totalVariations = ProductVariation::where('discount_percentage', '!=', 0)->count();
+        }
+
+        $this->products = $products;
     }
+
 
     /**
      * Apply category filter.
      */
     private function applyCategoryFilter($query)
     {
-        if ($this->category_id != 'all') {
+        if (($this->category_id != 'all') && ($this->category_id != 0)) {
             $query->where('category_id', $this->category_id);
         }
 
@@ -118,7 +143,7 @@ new #[Layout('layouts.front-end')] class extends Component {
      */
     private function applySubCategoryFilter($query)
     {
-        if ($this->sub_category_id != 'all') {
+        if (($this->sub_category_id != 'all') && ($this->sub_category_id != 0)) {
             $query->where('id', $this->sub_category_id);
         }
 
@@ -148,6 +173,7 @@ new #[Layout('layouts.front-end')] class extends Component {
      */
     private function applyPriceFilter($query)
     {
+
         if ($this->lower_price || $this->upper_price) {
             $query->whereHas('product_variations', function ($q) {
                 if ($this->lower_price) {
@@ -157,6 +183,24 @@ new #[Layout('layouts.front-end')] class extends Component {
                     $q->where('price', '<=', $this->upper_price);
                 }
             });
+        }
+
+        if ($this->filterBy == 'asc_price') {
+            $query->with(['product_variations' => function ($q) {
+                $q->orderBy('price', 'asc');
+            }]);
+        }
+
+        if ($this->filterBy == 'desc_price') {
+            $query->with(['product_variations' => function ($q) {
+                $q->orderBy('price', 'desc');
+            }]);
+        }
+
+        if ($this->filterBy == 'discounted') {
+            $query->with(['product_variations' => function ($q) {
+                $q->where('discount_percentage', '!=', 0);
+            }]);
         }
 
         return $query;
@@ -393,13 +437,13 @@ new #[Layout('layouts.front-end')] class extends Component {
                                         <div class="input-group">
                                             <span
                                                 class="input-group-text bg-transparent rounded-0 border-0">Sort By</span>
-                                            <select class="form-select rounded-0">
-                                                <option selected>Whats'New</option>
-                                                <option value="1">Popularity</option>
-                                                <option value="2">Better Discount</option>
-                                                <option value="3">Price : Hight to Low</option>
-                                                <option value="4">Price : Low to Hight</option>
-                                                <option value="5">Custom Rating</option>
+                                            <select wire:change="filter" wire:model="filterBy"
+                                                    class="form-select rounded-0">
+                                                <option selected value="">All Products</option>
+                                                <option value="new">New Products</option>
+                                                <option value="discounted">Discounted</option>
+                                                <option value="desc_price">Price : Hight to Low</option>
+                                                <option value="asc_price">Price : Low to Hight</option>
                                             </select>
                                         </div>
                                     </form>
