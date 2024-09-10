@@ -164,7 +164,16 @@ new #[Layout('layouts.front-end')] class extends Component {
                             class="card rounded-0 shadow-none {{ $category->id % 2 == 0 ? 'bg-primary' : 'bg-warning' }} bg-opacity-25">
                             <div class="row g-0 align-items-center">
                                 <div class="col">
-                                    <img src="{{ $category->image_url }}" class="img-fluid" alt=""/>
+                                    @if( !empty($category->image_url) )
+                                        <img
+                                            src="{{ asset('storage/' .$category->image_url) }}"
+                                            class="card-img-top"
+                                            alt="...">
+                                    @else
+                                        <img
+                                            src="front-end-assets/images/categories/artificial_grass_carpets.png"                                            class="card-img-top"
+                                            alt="...">
+                                    @endif
                                 </div>
                                 <div class="col">
                                     <div class="card-body">
