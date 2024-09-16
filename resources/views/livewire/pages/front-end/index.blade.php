@@ -60,7 +60,8 @@ new #[Layout('layouts.front-end')] class extends Component {
                                 <h1 class="h1 text-white fw-bold">GSM Interior LTD</h1>
                                 <h3 class="h3 fw-light text-white fw-bold">Quality and Perfection</h3>
                                 <div class=""><a style="background-color: rgb(237,126,39); font-weight:bold;"
-                                                 class="btn btn-lg text-white  mt-3 btn-ecomm" href="{{ route('front-end.shop-grid',['category_id' => 0,'product_id' => 0]) }}">Shop
+                                                 class="btn btn-lg text-white  mt-3 btn-ecomm"
+                                                 href="{{ route('front-end.shop-grid',['category_id' => 0,'product_id' => 0]) }}">Shop
                                         Now</a>
                                 </div>
                             </div>
@@ -77,7 +78,9 @@ new #[Layout('layouts.front-end')] class extends Component {
                                 <h1 class="h1 text-white fw-bold">Carpets</h1>
                                 <h3 class="h3 text-white fw-bold">Wall to Wall & Artificial</h3>
                                 <a style="background-color: rgb(237,126,39); font-weight:bold;"
-                                   class="btn btn-lg text-white   mt-2 btn-ecomm" href="{{ route('front-end.shop-grid',['category_id' => 0,'product_id' => 0]) }}">Shop Now</a>
+                                   class="btn btn-lg text-white   mt-2 btn-ecomm"
+                                   href="{{ route('front-end.shop-grid',['category_id' => 0,'product_id' => 0]) }}">Shop
+                                    Now</a>
                             </div>
                         </div>
                         <div class="col">
@@ -91,7 +94,9 @@ new #[Layout('layouts.front-end')] class extends Component {
                             <div class="">
                                 <h1 class="h1 text-white fw-bold">Curtain Rods</h1>
                                 <a style="background-color: rgb(237,126,39); font-weight:bold;"
-                                   class="btn btn-lg text-white  mt-2 btn-ecomm" href="{{ route('front-end.shop-grid',['category_id' => 0,'product_id' => 0]) }}">Shop Now</a>
+                                   class="btn btn-lg text-white  mt-2 btn-ecomm"
+                                   href="{{ route('front-end.shop-grid',['category_id' => 0,'product_id' => 0]) }}">Shop
+                                    Now</a>
                             </div>
                         </div>
                         <div class="col">
@@ -171,7 +176,8 @@ new #[Layout('layouts.front-end')] class extends Component {
                                             alt="...">
                                     @else
                                         <img
-                                            src="front-end-assets/images/categories/artificial_grass_carpets.png"                                            class="card-img-top"
+                                            src="front-end-assets/images/categories/artificial_grass_carpets.png"
+                                            class="card-img-top"
                                             alt="...">
                                     @endif
                                 </div>
@@ -309,7 +315,11 @@ new #[Layout('layouts.front-end')] class extends Component {
 
                                                     <a target="_blank"
                                                        style="background-color:green; border-radius: 20px !important; font-weight:bold;"
+                                                       @if(($product->category_id == '4') || ($product->category_id == '5'))
+                                                       href="https://api.whatsapp.com/send?phone=254796052958&text={{ urlencode($whatsappMessage) }}"
+                                                       @else
                                                        href="https://api.whatsapp.com/send?phone=254798692688&text={{ urlencode($whatsappMessage) }}"
+                                                       @endif
                                                        class="d-flex text-white  justify-content-between align-items-center btn btn-success">
                                                         <i class='bx bxl-whatsapp fs-5'></i> Quick Buy
                                                     </a>
@@ -395,8 +405,11 @@ new #[Layout('layouts.front-end')] class extends Component {
 
                                                     <a target="_blank"
                                                        style="background-color:green; border-radius: 20px !important; font-weight:bold;"
+                                                       @if(($product->category_id == '4') || ($product->category_id == '5'))
+                                                       href="https://api.whatsapp.com/send?phone=254796052958&text={{ urlencode($whatsappMessage) }}"
+                                                       @else
                                                        href="https://api.whatsapp.com/send?phone=254798692688&text={{ urlencode($whatsappMessage) }}"
-                                                       class="d-flex text-white  justify-content-between align-items-center btn btn-success">
+                                                       @endif                                                       class="d-flex text-white  justify-content-between align-items-center btn btn-success">
                                                         <i class='bx bxl-whatsapp fs-5'></i> Quick Buy
                                                     </a>
                                                 </div>
@@ -481,8 +494,11 @@ new #[Layout('layouts.front-end')] class extends Component {
 
                                                     <a target="_blank"
                                                        style="background-color:green; border-radius: 20px !important; font-weight:bold;"
+                                                       @if(($product->category_id == '4') || ($product->category_id == '5'))
+                                                       href="https://api.whatsapp.com/send?phone=254796052958&text={{ urlencode($whatsappMessage) }}"
+                                                       @else
                                                        href="https://api.whatsapp.com/send?phone=254798692688&text={{ urlencode($whatsappMessage) }}"
-                                                       class="d-flex text-white  justify-content-between align-items-center btn btn-success">
+                                                       @endif                                                       class="d-flex text-white  justify-content-between align-items-center btn btn-success">
                                                         <i class='bx bxl-whatsapp fs-5'></i> Quick Buy
                                                     </a>
                                                 </div>
@@ -567,7 +583,11 @@ new #[Layout('layouts.front-end')] class extends Component {
 
                                                     <a target="_blank"
                                                        style="background-color:green; border-radius: 20px !important; font-weight:bold;"
+                                                       @if(($product->category_id == '4') || ($product->category_id == '5'))
+                                                       href="https://api.whatsapp.com/send?phone=254796052958&text={{ urlencode($whatsappMessage) }}"
+                                                       @else
                                                        href="https://api.whatsapp.com/send?phone=254798692688&text={{ urlencode($whatsappMessage) }}"
+                                                       @endif
                                                        class="d-flex text-white  justify-content-between align-items-center btn btn-success">
                                                         <i class='bx bxl-whatsapp fs-5'></i> Quick Buy
                                                     </a>
@@ -653,8 +673,11 @@ new #[Layout('layouts.front-end')] class extends Component {
 
                                                     <a target="_blank"
                                                        style="background-color:green; border-radius: 20px !important; font-weight:bold;"
-                                                       href="https://api.whatsapp.com/send?phone=254798692688&text={{ urlencode($whatsappMessage) }}"
-                                                       class="d-flex text-white  justify-content-between align-items-center btn btn-success">
+                                                       @if(($product->category_id == '4') || ($product->category_id == '5'))
+                                                           href="https://api.whatsapp.com/send?phone=254796052958&text={{ urlencode($whatsappMessage) }}"
+                                                       @else
+                                                          href="https://api.whatsapp.com/send?phone=254798692688&text={{ urlencode($whatsappMessage) }}"
+                                                       @endif                                                       class="d-flex text-white  justify-content-between align-items-center btn btn-success">
                                                         <i class='bx bxl-whatsapp fs-5'></i> Quick Buy
                                                     </a>
                                                 </div>
@@ -799,7 +822,8 @@ new #[Layout('layouts.front-end')] class extends Component {
                                             alt="...">
                                     @else
                                         <img
-                                            src="front-end-assets/images/categories/artificial_grass_carpets.png"                                            class="card-img-top"
+                                            src="front-end-assets/images/categories/artificial_grass_carpets.png"
+                                            class="card-img-top"
                                             alt="...">
                                     @endif
 

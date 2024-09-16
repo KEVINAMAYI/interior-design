@@ -173,7 +173,6 @@ new #[Layout('layouts.front-end')] class extends Component {
      */
     private function applyPriceFilter($query)
     {
-
         if ($this->lower_price || $this->upper_price) {
             $query->whereHas('product_variations', function ($q) {
                 if ($this->lower_price) {
@@ -511,8 +510,11 @@ new #[Layout('layouts.front-end')] class extends Component {
 
                                                                 <a target="_blank"
                                                                    style="background-color:green; border-radius: 20px !important; font-weight:bold;"
-                                                                   href="https://api.whatsapp.com/send?phone=254798692688&text={{ urlencode($whatsappMessage) }}"
-                                                                   class="d-flex text-white  justify-content-between align-items-center btn btn-success">
+                                                                   @if(($product->category_id == '4') || ($product->category_id == '5'))
+                                                                      href="https://api.whatsapp.com/send?phone=254796052958&text={{ urlencode($whatsappMessage) }}"
+                                                                   @else
+                                                                     href="https://api.whatsapp.com/send?phone=254798692688&text={{ urlencode($whatsappMessage) }}"
+                                                                   @endif                                                                   class="d-flex text-white  justify-content-between align-items-center btn btn-success">
                                                                     <i class='bx bxl-whatsapp fs-5'></i> Quick Buy
                                                                 </a>
                                                             </div>
@@ -578,8 +580,11 @@ new #[Layout('layouts.front-end')] class extends Component {
 
                                                                 <a target="_blank"
                                                                    style="background-color:green; border-radius: 20px !important; font-weight:bold;"
-                                                                   href="https://api.whatsapp.com/send?phone=254798692688&text={{ urlencode($whatsappMessage) }}"
-                                                                   class="d-flex text-white  justify-content-between align-items-center btn btn-success">
+                                                                   @if(($product->category_id == '4') || ($product->category_id == '5'))
+                                                                     href="https://api.whatsapp.com/send?phone=254796052958&text={{ urlencode($whatsappMessage) }}"
+                                                                   @else
+                                                                      href="https://api.whatsapp.com/send?phone=254798692688&text={{ urlencode($whatsappMessage) }}"
+                                                                   @endif                                                                   class="d-flex text-white  justify-content-between align-items-center btn btn-success">
                                                                     <i class='bx bxl-whatsapp fs-5'></i> Quick Buy
                                                                 </a>
                                                             </div>

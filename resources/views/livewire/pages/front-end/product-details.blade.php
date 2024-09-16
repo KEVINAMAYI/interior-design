@@ -172,8 +172,11 @@ new #[Layout('layouts.front-end')] class extends Component {
                                 @php
                                     $originalPrice = $productVariation->price / (1 - ($productVariation->discount_percentage / 100));
                                 @endphp
-                                <div class="h5 fw-light text-muted text-decoration-line-through">{{ number_format($originalPrice, 2) }}</div>
-                                <div class="h4 fw-bold text-danger">({{ $productVariation->discount_percentage }}% off)</div>
+                                <div
+                                    class="h5 fw-light text-muted text-decoration-line-through">{{ number_format($originalPrice, 2) }}</div>
+                                <div class="h4 fw-bold text-danger">({{ $productVariation->discount_percentage }}%
+                                    off)
+                                </div>
                             @endif
                         </div>
                         <p class="fw-bold mb-0 mt-1 text-success">Exclusive of Value Added Tax (VAT)</p>
@@ -269,16 +272,21 @@ new #[Layout('layouts.front-end')] class extends Component {
                         <div class="card-body">
                             <div class="list-group list-group-flush">
                                 @php
-                                       $fullProductName = $productVariation->product->name;
-                                       $productDetailsUrl = route('front-end.product-details', $productVariation->id);
+                                    $fullProductName = $productVariation->product->name;
+                                    $productDetailsUrl = route('front-end.product-details', $productVariation->id);
 
-                                       // Message text with product name and line break
-                                       $whatsappMessage = 'Hello, I want to purchase: *' . $fullProductName . '*';
-                                       // Append URL on a new line using %0A
-                                       $whatsappMessage .= '. Here is the product link: ' . $productDetailsUrl;
+                                    // Message text with product name and line break
+                                    $whatsappMessage = 'Hello, I want to purchase: *' . $fullProductName . '*';
+                                    // Append URL on a new line using %0A
+                                    $whatsappMessage .= '. Here is the product link: ' . $productDetailsUrl;
                                 @endphp
                                 <a target="_blank" style="font-weight:bold;"
-                                   href="https://api.whatsapp.com/send?phone=254798692688&text={{ urlencode($whatsappMessage) }}"                                   class="list-group-item d-flex  text-success  justify-content-between align-items-center bg-orange">WhatsApp
+                                   @if(($productVariation->product->category_id == '4') || ($productVariation->product->category_id == '5'))
+                                   href="https://api.whatsapp.com/send?phone=254796052958&text={{ urlencode($whatsappMessage) }}"
+                                   @else
+                                   href="https://api.whatsapp.com/send?phone=254798692688&text={{ urlencode($whatsappMessage) }}"
+                                   @endif
+                                   class="list-group-item d-flex  text-success  justify-content-between align-items-center bg-orange">WhatsApp
                                     <i class='bx bxl-whatsapp fs-5'></i></a>
                                 <a style="font-weight:bold;" href="tel:+254798692688"
                                    class="list-group-item text-success d-flex justify-content-between align-items-center bg-transparent">Call
@@ -468,7 +476,11 @@ new #[Layout('layouts.front-end')] class extends Component {
 
                                             <a target="_blank"
                                                style="background-color:green; border-radius: 20px !important; font-weight:bold;"
-                                               href="https://api.whatsapp.com/send?phone=254798692688&text={{ urlencode($whatsappMessage) }}"
+                                               @if(($product_variation->product->category_id == '4') || ($product_variation->product->category_id == '5'))
+                                                href="https://api.whatsapp.com/send?phone=254796052958&text={{ urlencode($whatsappMessage) }}"
+                                               @else
+                                                href="https://api.whatsapp.com/send?phone=254798692688&text={{ urlencode($whatsappMessage) }}"
+                                               @endif
                                                class="d-flex text-white  justify-content-between align-items-center btn btn-success">
                                                 <i class='bx bxl-whatsapp fs-5'></i> Quick Buy
                                             </a>
