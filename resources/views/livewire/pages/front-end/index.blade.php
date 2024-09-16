@@ -8,9 +8,6 @@ use Livewire\Volt\Component;
 new #[Layout('layouts.front-end')] class extends Component {
 
 
-    public $featured_products;
-    public $new_arrival_products;
-    public $latest_products;
     public $best_seller_products;
     public $trending_products;
     public $special_offer_products;
@@ -19,8 +16,6 @@ new #[Layout('layouts.front-end')] class extends Component {
     public function mount()
     {
         $products = Product::query();
-        $this->new_arrival_products = $this->getProductsByTag($products, 'new_arrivals');
-        $this->latest_products = $this->getProductsByTag($products, 'latest_products');
         $this->best_seller_products = $this->getProductsByTag($products, 'best_seller');
         $this->trending_products = $this->getProductsByTag($products, 'trending');
         $this->special_offer_products = $this->getProductsByTag($products, 'special_offer');
@@ -208,25 +203,14 @@ new #[Layout('layouts.front-end')] class extends Component {
                     <div class="product-tab-menu table-responsive">
                         <ul class="nav nav-pills flex-nowrap" id="pills-tab" role="tablist">
                             <li class="nav-item" role="presentation">
-                                <button class="nav-link active" data-bs-toggle="pill" data-bs-target="#featured"
-                                        type="button">Featured
+                                <button class="nav-link" data-bs-toggle="pill" data-bs-target="#trending"
+                                        type="button">Trending
                                 </button>
                             </li>
                             <li class="nav-item" role="presentation">
-                                <button class="nav-link" data-bs-toggle="pill" data-bs-target="#new-arrival"
-                                        type="button">New
-                                    Arrival
-                                </button>
-                            </li>
-                            <li class="nav-item" role="presentation">
-                                <button class="nav-link" data-bs-toggle="pill" data-bs-target="#best-sellar"
+                                <button class="nav-link" data-bs-toggle="pill" data-bs-target="#best-seller"
                                         type="button">Best
                                     Seller
-                                </button>
-                            </li>
-                            <li class="nav-item" role="presentation">
-                                <button class="nav-link" data-bs-toggle="pill" data-bs-target="#trending-product"
-                                        type="button">Trending
                                 </button>
                             </li>
                             <li class="nav-item" role="presentation">
@@ -241,9 +225,9 @@ new #[Layout('layouts.front-end')] class extends Component {
             </div>
             <hr>
             <div class="tab-content tabular-product">
-                <div class="tab-pane fade show active" id="featured">
+                <div class="tab-pane fade show active" id="trending">
                     <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-4 row-cols-xxl-5 g-4">
-                        @foreach($featured_products as $product)
+                        @foreach($trending_products as $product)
                             @foreach($product->product_variations as $product_variation)
                                 <div class="col">
                                     <div class="card">
@@ -343,9 +327,9 @@ new #[Layout('layouts.front-end')] class extends Component {
                         @endforeach
                     </div>
                 </div>
-                <div class="tab-pane fade show" id="new-arrival">
+                <div class="tab-pane fade show" id="best-seller">
                     <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-4 row-cols-xxl-5 g-4">
-                        @foreach($new_arrival_products as $product)
+                        @foreach($best_seller_products as $product)
                             @foreach($product->product_variations as $product_variation)
                                 <div class="col">
                                     <div class="card">
@@ -434,213 +418,6 @@ new #[Layout('layouts.front-end')] class extends Component {
                                                        @else
                                                        href="https://api.whatsapp.com/send?phone=254798692688&text={{ urlencode($whatsappMessage) }}"
                                                        @endif                                                       class="d-flex text-white  justify-content-between align-items-center btn btn-success">
-                                                        <i class='bx bxl-whatsapp fs-5'></i> Quick Buy
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            @endforeach
-                        @endforeach
-                    </div>
-                </div>
-                <div class="tab-pane fade" id="best-sellar">
-                    <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-4 row-cols-xxl-5 g-4">
-                        @foreach($best_seller_products as $product)
-                            @foreach($product->product_variations as $product_variation)
-                                <div class="col">
-                                    <div class="card">
-                                        <div class="position-relative overflow-hidden">
-                                            <a href="{{ route('front-end.product-details',$product_variation->id) }}">
-                                                @if($product_variation->images()->isNotEmpty())
-                                                    <img
-                                                        src="{{ asset('storage/' . $product_variation->images()[0]->image_url) }}"
-                                                        class="card-img-top"
-                                                        alt="{{ $product_variation->name }}">
-                                                @else
-                                                    <img
-                                                        src="{{ asset('front-end-assets/images/categories/wall_to_wall_carpets.png') }}"
-                                                        class="card-img-top" alt="No image available">
-                                                @endif
-                                            </a>
-                                        </div>
-                                        <div class="card-body">
-                                            <div class="d-flex align-items-center justify-content-between">
-                                                <div class="">
-                                                    <p style="font-weight:bold; color:black;"
-                                                       class="mb-1 product-short-name">{{ strtoupper( $product->name) }}</p>
-                                                    @if(!empty($product_variation->variation()))
-                                                        @if($product_variation->variation()->name == 'other')
-                                                            <h6 class="mb-1"> {{ $product_variation->custom_variation }}</h6>
-                                                        @else
-                                                            <h6 class="mb-1"> {{ empty($product_variation->variation()) ? '' :  str_replace('_',' ',$product_variation->variation()->name).'-'.$product_variation->variation()->value }}</h6>
-                                                        @endif
-                                                    @endif
-                                                </div>
-                                                <div class="icon-wishlist">
-                                                    <a href="{{ route('front-end.product-details',$product_variation->id) }}"><i
-                                                            class="bx bx-heart"></i></a>
-                                                </div>
-                                            </div>
-                                            <div class="cursor-pointer rating mt-2">
-                                                <i class="bx bxs-star text-warning"></i>
-                                                <i class="bx bxs-star text-warning"></i>
-                                                <i class="bx bxs-star text-warning"></i>
-                                                <i class="bx bxs-star text-warning"></i>
-                                                <i class="bx bxs-star text-warning"></i>
-                                            </div>
-                                            @if($product_variation->discount_percentage != 0)
-                                                @php
-                                                    $originalPrice = $product_variation->price / (1 - ($product_variation->discount_percentage / 100));
-                                                @endphp
-                                                <div style="margin-bottom:-2px;"
-                                                     class="d-flex align-items-center gap-3">
-                                                    <div class="h6 fw-light text-muted text-decoration-line-through">
-                                                        {{ number_format($originalPrice, 2) }}
-                                                    </div>
-                                                    <div class="h6 fw-bold text-danger">
-                                                        ({{ $product_variation->discount_percentage }}% off)
-                                                    </div>
-                                                </div>
-                                            @endif
-                                            <div
-                                                class="product-price d-flex align-items-center justify-content-start gap-2 mt-2">
-                                                <div class="h6 fw-bold">KES {{ $product_variation->price }}</div>
-                                                <div style="width:60%;">
-                                                    @php
-
-                                                        $variationText = '';
-
-                                                         if(!empty($product_variation->variation())){
-
-                                                        $variationText = str_replace('_', ' ', $product_variation->variation()->name) . '-' . $product_variation->variation()->value;
-
-                                                             if($product_variation->variation() == 'other'){
-                                                                $variationText = $product_variation->custom_variation;
-                                                              }
-
-                                                        }
-                                                       $fullProductName = $product->name.' '.$variationText;
-                                                       $productDetailsUrl = route('front-end.product-details', $product_variation->id);
-
-                                                       // Message text with product name and line break
-                                                       $whatsappMessage = 'Hello, I want to purchase: *' . $fullProductName . '*';
-                                                       // Append URL on a new line using %0A
-                                                       $whatsappMessage .= '. Here is the product link: ' . $productDetailsUrl;
-                                                    @endphp
-
-                                                    <a target="_blank"
-                                                       style="background-color:green; border-radius: 20px !important; font-weight:bold;"
-                                                       @if(($product->category_id == '4') || ($product->category_id == '5'))
-                                                       href="https://api.whatsapp.com/send?phone=254796052958&text={{ urlencode($whatsappMessage) }}"
-                                                       @else
-                                                       href="https://api.whatsapp.com/send?phone=254798692688&text={{ urlencode($whatsappMessage) }}"
-                                                       @endif                                                       class="d-flex text-white  justify-content-between align-items-center btn btn-success">
-                                                        <i class='bx bxl-whatsapp fs-5'></i> Quick Buy
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            @endforeach
-                        @endforeach
-                    </div>
-                </div>
-                <div class="tab-pane fade" id="trending-product">
-                    <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-4 row-cols-xxl-5 g-4">
-                        @foreach($trending_products as $product)
-                            @foreach($product->product_variations as $product_variation)
-                                <div class="col">
-                                    <div class="card">
-                                        <div class="position-relative overflow-hidden">
-                                            <a href="{{ route('front-end.product-details',$product_variation->id) }}">
-                                                @if($product_variation->images()->isNotEmpty())
-                                                    <img
-                                                        src="{{ asset('storage/' . $product_variation->images()[0]->image_url) }}"
-                                                        class="card-img-top"
-                                                        alt="{{ $product_variation->name }}">
-                                                @else
-                                                    <img
-                                                        src="{{ asset('front-end-assets/images/categories/wall_to_wall_carpets.png') }}"
-                                                        class="card-img-top" alt="No image available">
-                                                @endif
-                                            </a>
-                                        </div>
-                                        <div class="card-body">
-                                            <div class="d-flex align-items-center justify-content-between">
-                                                <div class="">
-                                                    <p style="font-weight:bold; color:black;"
-                                                       class="mb-1 product-short-name">{{ strtoupper( $product->name) }}</p>
-                                                    @if(!empty($product_variation->variation()))
-                                                        @if($product_variation->variation()->name == 'other')
-                                                            <h6 class="mb-1"> {{ $product_variation->custom_variation }}</h6>
-                                                        @else
-                                                            <h6 class="mb-1"> {{ empty($product_variation->variation()) ? '' :  str_replace('_',' ',$product_variation->variation()->name).'-'.$product_variation->variation()->value }}</h6>
-                                                        @endif
-                                                    @endif
-                                                </div>
-                                                <div class="icon-wishlist">
-                                                    <a href="{{ route('front-end.product-details',$product_variation->id) }}"><i
-                                                            class="bx bx-heart"></i></a>
-                                                </div>
-                                            </div>
-                                            <div class="cursor-pointer rating mt-2">
-                                                <i class="bx bxs-star text-warning"></i>
-                                                <i class="bx bxs-star text-warning"></i>
-                                                <i class="bx bxs-star text-warning"></i>
-                                                <i class="bx bxs-star text-warning"></i>
-                                                <i class="bx bxs-star text-warning"></i>
-                                            </div>
-                                            @if($product_variation->discount_percentage != 0)
-                                                @php
-                                                    $originalPrice = $product_variation->price / (1 - ($product_variation->discount_percentage / 100));
-                                                @endphp
-                                                <div style="margin-bottom:-2px;"
-                                                     class="d-flex align-items-center gap-3">
-                                                    <div class="h6 fw-light text-muted text-decoration-line-through">
-                                                        {{ number_format($originalPrice, 2) }}
-                                                    </div>
-                                                    <div class="h6 fw-bold text-danger">
-                                                        ({{ $product_variation->discount_percentage }}% off)
-                                                    </div>
-                                                </div>
-                                            @endif
-                                            <div
-                                                class="product-price d-flex align-items-center justify-content-start gap-2 mt-2">
-                                                <div class="h6 fw-bold">KES {{ $product_variation->price }}</div>
-                                                <div style="width:60%;">
-                                                    @php
-
-                                                        $variationText = '';
-
-                                                            if(!empty($product_variation->variation())){
-
-                                                            $variationText = str_replace('_', ' ', $product_variation->variation()->name) . '-' . $product_variation->variation()->value;
-
-                                                                 if($product_variation->variation() == 'other'){
-                                                                    $variationText = $product_variation->custom_variation;
-                                                                  }
-
-                                                            }
-                                                           $fullProductName = $product->name.' '.$variationText;
-                                                           $productDetailsUrl = route('front-end.product-details', $product_variation->id);
-
-                                                           // Message text with product name and line break
-                                                           $whatsappMessage = 'Hello, I want to purchase: *' . $fullProductName . '*';
-                                                           // Append URL on a new line using %0A
-                                                           $whatsappMessage .= '. Here is the product link: ' . $productDetailsUrl;
-                                                    @endphp
-
-                                                    <a target="_blank"
-                                                       style="background-color:green; border-radius: 20px !important; font-weight:bold;"
-                                                       @if(($product->category_id == '4') || ($product->category_id == '5'))
-                                                       href="https://api.whatsapp.com/send?phone=254796052958&text={{ urlencode($whatsappMessage) }}"
-                                                       @else
-                                                       href="https://api.whatsapp.com/send?phone=254798692688&text={{ urlencode($whatsappMessage) }}"
-                                                       @endif
-                                                       class="d-flex text-white  justify-content-between align-items-center btn btn-success">
                                                         <i class='bx bxl-whatsapp fs-5'></i> Quick Buy
                                                     </a>
                                                 </div>
