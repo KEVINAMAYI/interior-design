@@ -8,6 +8,8 @@ use Livewire\Volt\Component;
 new #[Layout('layouts.front-end')] class extends Component {
 
 
+    public $featured_products;
+    public $new_arrival_products;
     public $latest_products;
     public $best_seller_products;
     public $trending_products;
@@ -17,8 +19,8 @@ new #[Layout('layouts.front-end')] class extends Component {
     public function mount()
     {
         $products = Product::query();
-        $this->best_seller_products = $this->getProductsByTag($products, 'best_seller');
         $this->trending_products = $this->getProductsByTag($products, 'trending');
+        $this->best_seller_products = $this->getProductsByTag($products, 'best_seller');
         $this->special_offer_products = $this->getProductsByTag($products, 'special_offer');
         $this->categories = Category::inRandomOrder()->get();
     }
@@ -214,6 +216,7 @@ new #[Layout('layouts.front-end')] class extends Component {
                                     Seller
                                 </button>
                             </li>
+
                             <li class="nav-item" role="presentation">
                                 <button class="nav-link" data-bs-toggle="pill" data-bs-target="#special-offer"
                                         type="button">Special
@@ -330,7 +333,7 @@ new #[Layout('layouts.front-end')] class extends Component {
                         @endforeach
                     </div>
                 </div>
-                <div class="tab-pane fade " id="best-sellar">
+                <div class="tab-pane fade" id="best-sellar">
                     <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-4 row-cols-xxl-5 g-4">
                         @foreach($best_seller_products as $product)
                             @foreach($product->product_variations as $product_variation)
