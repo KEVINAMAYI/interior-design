@@ -63,26 +63,12 @@ new class extends Component {
         ];
     }
 
-    // This will be triggered when the discount percentage is updated
-    public function updatedDiscountPercentage()
-    {
-        $this->calculateDiscountedPrice();
-    }
-
-
 
     public function showDiscountInput()
     {
         $this->discountVisible = true;
     }
 
-    public function calculateDiscountedPrice()
-    {
-        if ($this->discountPercentage && $this->price) {
-            $this->discountedPrice = $this->price - ($this->price * ($this->discountPercentage / 100));
-            $this->price = $this->discountedPrice;
-        }
-    }
 
     /**
      * Add product and the product variation
@@ -94,15 +80,26 @@ new class extends Component {
         DB::beginTransaction();
         try {
 
+            if ($this->discountedPrice) {
+                if ($this->discountedPrice <= $this->price) {
+                    $this->discountPercentage = round((($this->price - $this->discountedPrice) / $this->price) * 100, 2);
+                    $this->price = $this->discountedPrice;
+                } else {
+                    throw new \Exception('Discounted Price cannot be greater than Old price');
+                }
+            }
+
             $product = $this->createProduct();
             $this->saveProductTags($product);
+
 
             //create product variation for the created product
             $productVariation = ProductVariation::create([
                 'product_id' => $product->id,
                 'variation_id' => $this->variation_id,
                 'price' => $this->price,
-                'discount_percentage' => !empty($this->discountPercentage) ? $this->discountPercentage : 0
+                'discount_percentage' => !empty($this->discountPercentage) ? $this->discountPercentage : 0,
+                'discounted_price' => !empty($this->discountedPrice) ? $this->discountedPrice : null
             ]);
 
 
@@ -133,7 +130,7 @@ new class extends Component {
 
 
             DB::commit();
-            $this->reset(['category_id', 'name', 'description', 'variation_id', 'price', 'discountPercentage','images']);
+            $this->reset(['category_id', 'name', 'description', 'variation_id', 'price', 'discountedPrice', 'images']);
             $this->alert('success', 'Product created successfully');
             $this->dispatch('productCreated');
 
@@ -259,23 +256,26 @@ new class extends Component {
                             @enderror                        </div>
 
                         <div class="mb-4 col-lg-4">
-                            <label for="price" class="form-label">Price</label>
-                            <input class="form-control" wire:model="price" id="price" type="text"
+                            <label for="price" class="form-label">Price (KES)</label>
+                            <input class="form-control" wire:model="price" id="price" type="number"
                                    autocomplete="price">
                             @error('price')
                             <p class="text-danger text-xs pt-1"> {{ $message }} </p>
                             @enderror
                         </div>
                         <div style="padding-top:30px;" class="col-lg-2">
-                            <button type="button" class="btn btn-primary" wire:click="showDiscountInput">Add Discount</button>
+                            <button type="button" class="btn btn-primary" wire:click="showDiscountInput">Add Discount
+                            </button>
                         </div>
                     </div>
 
                     <div class="row">
                         @if($discountVisible)
                             <div class="mb-4 col-lg-12">
-                                <label for="discount" class="form-label">Discount Percentage</label>
-                                <input class="form-control" wire:model.live="discountPercentage" id="discount" type="text" autocomplete="discount">
+                                <label for="discountPrice" class="form-label">New Discounted Price (KES)<span
+                                        style="font-size:11px; color:red;"> (This price will be used as the selling price)</span></label>
+                                <input class="form-control" wire:model.live="discountedPrice" id="discountPrice"
+                                       type="number" autocomplete="discount">
                             </div>
                         @endif
                     </div>

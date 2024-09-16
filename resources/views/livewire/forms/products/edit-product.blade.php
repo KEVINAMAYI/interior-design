@@ -46,6 +46,7 @@ new class extends Component {
         $this->variation_id = $this->product_variation->variation_id;
         $this->price = $this->product_variation->price;
         $this->discountPercentage = $this->product_variation->discount_percentage;
+        $this->discountedPrice = !empty($this->product_variation->discount_price) ? $this->product_variation->discount_price : $this->product_variation->price;
 
         $this->variations = Variation::all();
         $this->selling_tags = Tag::all();
@@ -72,25 +73,11 @@ new class extends Component {
     }
 
 
-    // This will be triggered when the discount percentage is updated
-    public function updatedDiscountPercentage()
-    {
-        $this->calculateDiscountedPrice();
-    }
-
-
     public function showDiscountInput()
     {
         $this->discountVisible = true;
     }
 
-    public function calculateDiscountedPrice()
-    {
-        if ($this->discountPercentage && $this->price) {
-            $this->discountedPrice = $this->price - ($this->price * ($this->discountPercentage / 100));
-            $this->price = $this->discountedPrice;
-        }
-    }
 
     /**
      * Add product and the product variation
@@ -102,6 +89,15 @@ new class extends Component {
         DB::beginTransaction();
         try {
 
+            if ($this->discountedPrice) {
+                if ($this->discountedPrice <= $this->price) {
+                    $this->discountPercentage = round((($this->price - $this->discountedPrice) / $this->price) * 100, 2);
+                    $this->price = $this->discountedPrice;
+                } else {
+                    throw new \Exception('Discounted Price cannot be greater than Old price');
+                }
+            }
+
             $this->updateProduct();
             $this->saveProductTags($this->product_variation->product);
 
@@ -110,7 +106,9 @@ new class extends Component {
                 'product_id' => $this->product_variation->product->id,
                 'variation_id' => $this->variation_id,
                 'price' => $this->price,
-                'discount_percentage' => !empty($this->discountPercentage) ? $this->discountPercentage : 0
+                'discount_percentage' => !empty($this->discountPercentage) ? $this->discountPercentage : 0,
+                'discounted_price' => !empty($this->discountedPrice) ? $this->discountedPrice : null
+
             ]);
 
 
@@ -268,7 +266,7 @@ new class extends Component {
                             @enderror                        </div>
 
                         <div class="mb-4 col-lg-4">
-                            <label for="price" class="form-label">Price</label>
+                            <label for="price" class="form-label">Old Price</label>
                             <input class="form-control" wire:model="price" id="price" type="text"
                                    autocomplete="price">
                             @error('price')
@@ -284,12 +282,14 @@ new class extends Component {
                     <div class="row">
                         @if($discountVisible)
                             <div class="mb-4 col-lg-12">
-                                <label for="discount" class="form-label">Discount Percentage</label>
-                                <input class="form-control" wire:model.live="discountPercentage" id="discount"
-                                       type="text" autocomplete="discount">
+                                <label for="discountPrice" class="form-label">New Discounted Price (KES)<span
+                                        style="font-size:11px; color:red;"> (This price will be used as the selling price)</span></label>
+                                <input class="form-control" wire:model.live="discountedPrice" id="discountPrice"
+                                       type="number" autocomplete="discount">
                             </div>
                         @endif
                     </div>
+
                     <div class="row">
                         <div wire:ignore class="mb-4 col-lg-12">
                             <label for="selling_tags" class="form-label">Shopping Tags <span
