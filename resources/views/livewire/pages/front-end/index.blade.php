@@ -8,8 +8,6 @@ use Livewire\Volt\Component;
 new #[Layout('layouts.front-end')] class extends Component {
 
 
-    public $featured_products;
-    public $new_arrival_products;
     public $latest_products;
     public $best_seller_products;
     public $trending_products;
