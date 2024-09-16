@@ -17,6 +17,7 @@ return new class extends Migration
             $table->foreignId('product_id')->constrained()->cascadeOnDelete();
             $table->float('price')->nullable();
             $table->float('discounted_price')->nullable();
+            $table->longText('custom_variation')->nullable();
             $table->float('discount_percentage')->default(0);
             $table->timestamps();
         });

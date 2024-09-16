@@ -33,8 +33,10 @@ new class extends Component {
     public $variation_id;
     public $images = [];
     public $discountVisible = false;
+    public $customVariationVisible = false;
     public $discountPercentage;
     public $discountedPrice;
+    public $customVariation;
 
     public function mount()
     {
@@ -63,6 +65,15 @@ new class extends Component {
         ];
     }
 
+
+    public function checkCustomVariation()
+    {
+        if ($this->variation_id === '16') {
+            $this->customVariationVisible = true;
+        } else {
+            $this->customVariationVisible = false;
+        }
+    }
 
     public function showDiscountInput()
     {
@@ -99,7 +110,8 @@ new class extends Component {
                 'variation_id' => $this->variation_id,
                 'price' => $this->price,
                 'discount_percentage' => !empty($this->discountPercentage) ? $this->discountPercentage : 0,
-                'discounted_price' => !empty($this->discountedPrice) ? $this->discountedPrice : null
+                'discounted_price' => !empty($this->discountedPrice) ? $this->discountedPrice : null,
+                'custom_variation' => !empty($this->customVariation) ? $this->customVariation : null
             ]);
 
 
@@ -244,7 +256,8 @@ new class extends Component {
                     <div class="row">
                         <div class="mb-4 col-lg-6">
                             <label for="variation_id" class="form-label">Variations</label>
-                            <select id="variation_id" wire:model="variation_id" class="form-select">
+                            <select id="variation_id" wire:change="checkCustomVariation" wire:model="variation_id"
+                                    class="form-select">
                                 <option>Select</option>
                                 @foreach($variations as $variation)
                                     <option
@@ -267,6 +280,16 @@ new class extends Component {
                             <button type="button" class="btn btn-primary" wire:click="showDiscountInput">Add Discount
                             </button>
                         </div>
+                    </div>
+
+                    <div class="row">
+                        @if($customVariationVisible)
+                            <div class="mb-4 col-lg-12">
+                                <label for="customVariation" class="form-label">Custom Variation</label>
+                                <input class="form-control" wire:model.live="customVariation" id="customVariation"
+                                       type="text" autocomplete="customVariation">
+                            </div>
+                        @endif
                     </div>
 
                     <div class="row">
