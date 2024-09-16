@@ -473,7 +473,13 @@ new #[Layout('layouts.front-end')] class extends Component {
                                                     </div>
                                                     <div class="card-body border-top">
                                                         <h5 class="mb-0 fw-bold product-short-title">{{ $product->name }} </h5>
-                                                        <h6 class="mb-1"> {{ empty($product_variation->variation()) ? '' :  str_replace('_',' ',$product_variation->variation()->name).'-'.$product_variation->variation()->value }}</h6>
+                                                        @if(!empty($product_variation->variation()))
+                                                            @if($product_variation->variation()->name == 'other')
+                                                                <h6 class="mb-1"> {{ $product_variation->custom_variation }}</h6>
+                                                            @else
+                                                                <h6 class="mb-1"> {{ empty($product_variation->variation()) ? '' :  str_replace('_',' ',$product_variation->variation()->name).'-'.$product_variation->variation()->value }}</h6>
+                                                            @endif
+                                                        @endif
                                                         @if($product_variation->discount_percentage != 0)
                                                             @php
                                                                 $originalPrice = $product_variation->price / (1 - ($product_variation->discount_percentage / 100));
@@ -495,9 +501,14 @@ new #[Layout('layouts.front-end')] class extends Component {
                                                             </div>
                                                             <div style="width:60%;">
                                                                 @php
-                                                                    $variationText = empty($product_variation->variation())
-                                                                        ? ''
-                                                                        : str_replace('_', ' ', $product_variation->variation()->name) . '-' . $product_variation->variation()->value;
+                                                                    $variationText = '';
+
+                                                                     if(!empty($product_variation->variation())){
+                                                                         $variationText = str_replace('_', ' ', $product_variation->variation()->name) . '-' . $product_variation->variation()->value;
+                                                                           if($product_variation->variation() == 'other'){
+                                                                             $variationText = $product_variation->custom_variation;
+                                                                           }
+                                                                      }
 
                                                                     $fullProductName = $product->name.' '.$variationText;
                                                                     $productDetailsUrl = route('front-end.product-details', $product_variation->id);
@@ -511,9 +522,9 @@ new #[Layout('layouts.front-end')] class extends Component {
                                                                 <a target="_blank"
                                                                    style="background-color:green; border-radius: 20px !important; font-weight:bold;"
                                                                    @if(($product->category_id == '4') || ($product->category_id == '5'))
-                                                                      href="https://api.whatsapp.com/send?phone=254796052958&text={{ urlencode($whatsappMessage) }}"
+                                                                   href="https://api.whatsapp.com/send?phone=254796052958&text={{ urlencode($whatsappMessage) }}"
                                                                    @else
-                                                                     href="https://api.whatsapp.com/send?phone=254798692688&text={{ urlencode($whatsappMessage) }}"
+                                                                   href="https://api.whatsapp.com/send?phone=254798692688&text={{ urlencode($whatsappMessage) }}"
                                                                    @endif                                                                   class="d-flex text-white  justify-content-between align-items-center btn btn-success">
                                                                     <i class='bx bxl-whatsapp fs-5'></i> Quick Buy
                                                                 </a>
@@ -543,7 +554,15 @@ new #[Layout('layouts.front-end')] class extends Component {
                                                     </div>
                                                     <div class="card-body border-top">
                                                         <h5 class="mb-0 fw-bold product-short-title">{{ $product->name }} </h5>
-                                                        <h6 class="mb-1"> {{ empty($product_variation->variation()) ? '' :  str_replace('_',' ',$product_variation->variation()->name).'-'.$product_variation->variation()->value }}</h6>
+
+                                                        @if(!empty($product_variation->variation()))
+                                                            @if($product_variation->variation()->name == 'other')
+                                                                <h6 class="mb-1"> {{ $product_variation->custom_variation }}</h6>
+                                                            @else
+                                                                <h6 class="mb-1"> {{ empty($product_variation->variation()) ? '' :  str_replace('_',' ',$product_variation->variation()->name).'-'.$product_variation->variation()->value }}</h6>
+                                                            @endif
+                                                        @endif
+
                                                         @if($product_variation->discount_percentage != 0)
                                                             @php
                                                                 $originalPrice = $product_variation->price / (1 - ($product_variation->discount_percentage / 100));
@@ -565,9 +584,15 @@ new #[Layout('layouts.front-end')] class extends Component {
                                                             </div>
                                                             <div style="width:60%;">
                                                                 @php
-                                                                    $variationText = empty($product_variation->variation())
-                                                                        ? ''
-                                                                        : str_replace('_', ' ', $product_variation->variation()->name) . '-' . $product_variation->variation()->value;
+
+                                                                    $variationText = '';
+
+                                                                     if(!empty($product_variation->variation())){
+                                                                          $variationText = str_replace('_', ' ', $product_variation->variation()->name) . '-' . $product_variation->variation()->value;
+                                                                            if($product_variation->variation() == 'other'){
+                                                                              $variationText = $product_variation->custom_variation;
+                                                                            }
+                                                                       }
 
                                                                     $fullProductName = $product->name.' '.$variationText;
                                                                     $productDetailsUrl = route('front-end.product-details', $product_variation->id);
@@ -581,9 +606,9 @@ new #[Layout('layouts.front-end')] class extends Component {
                                                                 <a target="_blank"
                                                                    style="background-color:green; border-radius: 20px !important; font-weight:bold;"
                                                                    @if(($product->category_id == '4') || ($product->category_id == '5'))
-                                                                     href="https://api.whatsapp.com/send?phone=254796052958&text={{ urlencode($whatsappMessage) }}"
+                                                                   href="https://api.whatsapp.com/send?phone=254796052958&text={{ urlencode($whatsappMessage) }}"
                                                                    @else
-                                                                      href="https://api.whatsapp.com/send?phone=254798692688&text={{ urlencode($whatsappMessage) }}"
+                                                                   href="https://api.whatsapp.com/send?phone=254798692688&text={{ urlencode($whatsappMessage) }}"
                                                                    @endif                                                                   class="d-flex text-white  justify-content-between align-items-center btn btn-success">
                                                                     <i class='bx bxl-whatsapp fs-5'></i> Quick Buy
                                                                 </a>
@@ -602,21 +627,21 @@ new #[Layout('layouts.front-end')] class extends Component {
                             </div><!--end row-->
                         </div>
                         <hr class="my-4">
-{{--                        <div class="product-pagination">--}}
-{{--                            <nav>--}}
-{{--                                <ul class="pagination justify-content-center">--}}
-{{--                                    <li class="page-item disabled">--}}
-{{--                                        <a class="page-link">Previous</a>--}}
-{{--                                    </li>--}}
-{{--                                    <li class="page-item active"><a class="page-link" href="javascript:;">1</a></li>--}}
-{{--                                    <li class="page-item"><a class="page-link" href="javascript:;">2</a></li>--}}
-{{--                                    <li class="page-item"><a class="page-link" href="javascript:;">3</a></li>--}}
-{{--                                    <li class="page-item">--}}
-{{--                                        <a class="page-link" href="javascript:;">Next</a>--}}
-{{--                                    </li>--}}
-{{--                                </ul>--}}
-{{--                            </nav>--}}
-{{--                        </div>--}}
+                        {{--                        <div class="product-pagination">--}}
+                        {{--                            <nav>--}}
+                        {{--                                <ul class="pagination justify-content-center">--}}
+                        {{--                                    <li class="page-item disabled">--}}
+                        {{--                                        <a class="page-link">Previous</a>--}}
+                        {{--                                    </li>--}}
+                        {{--                                    <li class="page-item active"><a class="page-link" href="javascript:;">1</a></li>--}}
+                        {{--                                    <li class="page-item"><a class="page-link" href="javascript:;">2</a></li>--}}
+                        {{--                                    <li class="page-item"><a class="page-link" href="javascript:;">3</a></li>--}}
+                        {{--                                    <li class="page-item">--}}
+                        {{--                                        <a class="page-link" href="javascript:;">Next</a>--}}
+                        {{--                                    </li>--}}
+                        {{--                                </ul>--}}
+                        {{--                            </nav>--}}
+                        {{--                        </div>--}}
 
                     </div>
                 </div>

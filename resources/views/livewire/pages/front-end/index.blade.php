@@ -267,7 +267,13 @@ new #[Layout('layouts.front-end')] class extends Component {
                                                 <div class="">
                                                     <p style="font-weight:bold; color:black;"
                                                        class="mb-1 product-short-name">{{ strtoupper( $product->name) }}</p>
-                                                    <h6 class="mb-1"> {{ empty($product_variation->variation()) ? '' :  str_replace('_',' ',$product_variation->variation()->name).'-'.$product_variation->variation()->value }}</h6>
+                                                    @if(!empty($product_variation->variation()))
+                                                        @if($product_variation->variation()->name == 'other')
+                                                            <h6 class="mb-1"> {{ $product_variation->custom_variation }}</h6>
+                                                        @else
+                                                            <h6 class="mb-1"> {{ empty($product_variation->variation()) ? '' :  str_replace('_',' ',$product_variation->variation()->name).'-'.$product_variation->variation()->value }}</h6>
+                                                        @endif
+                                                    @endif
                                                 </div>
                                                 <div class="icon-wishlist">
                                                     <a href="{{ route('front-end.product-details',$product_variation->id) }}"><i
@@ -300,17 +306,23 @@ new #[Layout('layouts.front-end')] class extends Component {
                                                 <div class="h6 fw-bold">KES {{ $product_variation->price }}</div>
                                                 <div style="width:60%;">
                                                     @php
-                                                        $variationText = empty($product_variation->variation())
-                                                            ? ''
-                                                            : str_replace('_', ' ', $product_variation->variation()->name) . '-' . $product_variation->variation()->value;
 
-                                                        $fullProductName = $product->name.' '.$variationText;
-                                                        $productDetailsUrl = route('front-end.product-details', $product_variation->id);
+                                                          $variationText = '';
 
-                                                        // Message text with product name and line break
-                                                        $whatsappMessage = 'Hello, I want to purchase: *' . $fullProductName . '*';
-                                                        // Append URL on a new line using %0A
-                                                        $whatsappMessage .= '. Here is the product link: ' . $productDetailsUrl;
+                                                            if(!empty($product_variation->variation())){
+                                                              $variationText = str_replace('_', ' ', $product_variation->variation()->name) . '-' . $product_variation->variation()->value;
+                                                                   if($product_variation->variation() == 'other'){
+                                                                      $variationText = $product_variation->custom_variation;
+                                                                    }
+                                                              }
+
+                                                             $fullProductName = $product->name.' '.$variationText;
+                                                             $productDetailsUrl = route('front-end.product-details', $product_variation->id);
+
+                                                             // Message text with product name and line break
+                                                             $whatsappMessage = 'Hello, I want to purchase: *' . $fullProductName . '*';
+                                                             // Append URL on a new line using %0A
+                                                             $whatsappMessage .= '. Here is the product link: ' . $productDetailsUrl;
                                                     @endphp
 
                                                     <a target="_blank"
@@ -357,7 +369,13 @@ new #[Layout('layouts.front-end')] class extends Component {
                                                 <div class="">
                                                     <p style="font-weight:bold; color:black;"
                                                        class="mb-1 product-short-name">{{ strtoupper( $product->name) }}</p>
-                                                    <h6 class="mb-1"> {{ empty($product_variation->variation()) ? '' :  str_replace('_',' ',$product_variation->variation()->name).'-'.$product_variation->variation()->value }}</h6>
+                                                    @if(!empty($product_variation->variation()))
+                                                        @if($product_variation->variation()->name == 'other')
+                                                            <h6 class="mb-1"> {{ $product_variation->custom_variation }}</h6>
+                                                        @else
+                                                            <h6 class="mb-1"> {{ empty($product_variation->variation()) ? '' :  str_replace('_',' ',$product_variation->variation()->name).'-'.$product_variation->variation()->value }}</h6>
+                                                        @endif
+                                                    @endif
                                                 </div>
                                                 <div class="icon-wishlist">
                                                     <a href="{{ route('front-end.product-details',$product_variation->id) }}"><i
@@ -390,10 +408,17 @@ new #[Layout('layouts.front-end')] class extends Component {
                                                 <div class="h6 fw-bold">KES {{ $product_variation->price }}</div>
                                                 <div style="width:60%;">
                                                     @php
-                                                        $variationText = empty($product_variation->variation())
-                                                            ? ''
-                                                            : str_replace('_', ' ', $product_variation->variation()->name) . '-' . $product_variation->variation()->value;
+                                                        $variationText = '';
 
+                                                         if(!empty($product_variation->variation())){
+
+                                                           $variationText = str_replace('_', ' ', $product_variation->variation()->name) . '-' . $product_variation->variation()->value;
+
+                                                              if($product_variation->variation() == 'other'){
+                                                                 $variationText = $product_variation->custom_variation;
+                                                               }
+
+                                                         }
                                                         $fullProductName = $product->name.' '.$variationText;
                                                         $productDetailsUrl = route('front-end.product-details', $product_variation->id);
 
@@ -446,7 +471,13 @@ new #[Layout('layouts.front-end')] class extends Component {
                                                 <div class="">
                                                     <p style="font-weight:bold; color:black;"
                                                        class="mb-1 product-short-name">{{ strtoupper( $product->name) }}</p>
-                                                    <h6 class="mb-1"> {{ empty($product_variation->variation()) ? '' :  str_replace('_',' ',$product_variation->variation()->name).'-'.$product_variation->variation()->value }}</h6>
+                                                    @if(!empty($product_variation->variation()))
+                                                        @if($product_variation->variation()->name == 'other')
+                                                            <h6 class="mb-1"> {{ $product_variation->custom_variation }}</h6>
+                                                        @else
+                                                            <h6 class="mb-1"> {{ empty($product_variation->variation()) ? '' :  str_replace('_',' ',$product_variation->variation()->name).'-'.$product_variation->variation()->value }}</h6>
+                                                        @endif
+                                                    @endif
                                                 </div>
                                                 <div class="icon-wishlist">
                                                     <a href="{{ route('front-end.product-details',$product_variation->id) }}"><i
@@ -479,17 +510,25 @@ new #[Layout('layouts.front-end')] class extends Component {
                                                 <div class="h6 fw-bold">KES {{ $product_variation->price }}</div>
                                                 <div style="width:60%;">
                                                     @php
-                                                        $variationText = empty($product_variation->variation())
-                                                            ? ''
-                                                            : str_replace('_', ' ', $product_variation->variation()->name) . '-' . $product_variation->variation()->value;
 
-                                                        $fullProductName = $product->name.' '.$variationText;
-                                                        $productDetailsUrl = route('front-end.product-details', $product_variation->id);
+                                                        $variationText = '';
 
-                                                        // Message text with product name and line break
-                                                        $whatsappMessage = 'Hello, I want to purchase: *' . $fullProductName . '*';
-                                                        // Append URL on a new line using %0A
-                                                        $whatsappMessage .= '. Here is the product link: ' . $productDetailsUrl;
+                                                         if(!empty($product_variation->variation())){
+
+                                                        $variationText = str_replace('_', ' ', $product_variation->variation()->name) . '-' . $product_variation->variation()->value;
+
+                                                             if($product_variation->variation() == 'other'){
+                                                                $variationText = $product_variation->custom_variation;
+                                                              }
+
+                                                        }
+                                                       $fullProductName = $product->name.' '.$variationText;
+                                                       $productDetailsUrl = route('front-end.product-details', $product_variation->id);
+
+                                                       // Message text with product name and line break
+                                                       $whatsappMessage = 'Hello, I want to purchase: *' . $fullProductName . '*';
+                                                       // Append URL on a new line using %0A
+                                                       $whatsappMessage .= '. Here is the product link: ' . $productDetailsUrl;
                                                     @endphp
 
                                                     <a target="_blank"
@@ -535,7 +574,13 @@ new #[Layout('layouts.front-end')] class extends Component {
                                                 <div class="">
                                                     <p style="font-weight:bold; color:black;"
                                                        class="mb-1 product-short-name">{{ strtoupper( $product->name) }}</p>
-                                                    <h6 class="mb-1"> {{ empty($product_variation->variation()) ? '' :  str_replace('_',' ',$product_variation->variation()->name).'-'.$product_variation->variation()->value }}</h6>
+                                                    @if(!empty($product_variation->variation()))
+                                                        @if($product_variation->variation()->name == 'other')
+                                                            <h6 class="mb-1"> {{ $product_variation->custom_variation }}</h6>
+                                                        @else
+                                                            <h6 class="mb-1"> {{ empty($product_variation->variation()) ? '' :  str_replace('_',' ',$product_variation->variation()->name).'-'.$product_variation->variation()->value }}</h6>
+                                                        @endif
+                                                    @endif
                                                 </div>
                                                 <div class="icon-wishlist">
                                                     <a href="{{ route('front-end.product-details',$product_variation->id) }}"><i
@@ -568,17 +613,25 @@ new #[Layout('layouts.front-end')] class extends Component {
                                                 <div class="h6 fw-bold">KES {{ $product_variation->price }}</div>
                                                 <div style="width:60%;">
                                                     @php
-                                                        $variationText = empty($product_variation->variation())
-                                                            ? ''
-                                                            : str_replace('_', ' ', $product_variation->variation()->name) . '-' . $product_variation->variation()->value;
 
-                                                        $fullProductName = $product->name.' '.$variationText;
-                                                        $productDetailsUrl = route('front-end.product-details', $product_variation->id);
+                                                        $variationText = '';
 
-                                                        // Message text with product name and line break
-                                                        $whatsappMessage = 'Hello, I want to purchase: *' . $fullProductName . '*';
-                                                        // Append URL on a new line using %0A
-                                                        $whatsappMessage .= '. Here is the product link: ' . $productDetailsUrl;
+                                                            if(!empty($product_variation->variation())){
+
+                                                            $variationText = str_replace('_', ' ', $product_variation->variation()->name) . '-' . $product_variation->variation()->value;
+
+                                                                 if($product_variation->variation() == 'other'){
+                                                                    $variationText = $product_variation->custom_variation;
+                                                                  }
+
+                                                            }
+                                                           $fullProductName = $product->name.' '.$variationText;
+                                                           $productDetailsUrl = route('front-end.product-details', $product_variation->id);
+
+                                                           // Message text with product name and line break
+                                                           $whatsappMessage = 'Hello, I want to purchase: *' . $fullProductName . '*';
+                                                           // Append URL on a new line using %0A
+                                                           $whatsappMessage .= '. Here is the product link: ' . $productDetailsUrl;
                                                     @endphp
 
                                                     <a target="_blank"
@@ -625,7 +678,13 @@ new #[Layout('layouts.front-end')] class extends Component {
                                                 <div class="">
                                                     <p style="font-weight:bold; color:black;"
                                                        class="mb-1  product-short-name">{{ strtoupper( $product->name) }}</p>
-                                                    <h6 class="mb-1"> {{ empty($product_variation->variation()) ? '' :  str_replace('_',' ',$product_variation->variation()->name).'-'.$product_variation->variation()->value }}</h6>
+                                                    @if(!empty($product_variation->variation()))
+                                                        @if($product_variation->variation()->name == 'other')
+                                                            <h6 class="mb-1"> {{ $product_variation->custom_variation }}</h6>
+                                                        @else
+                                                            <h6 class="mb-1"> {{ empty($product_variation->variation()) ? '' :  str_replace('_',' ',$product_variation->variation()->name).'-'.$product_variation->variation()->value }}</h6>
+                                                        @endif
+                                                    @endif
                                                 </div>
                                                 <div class="icon-wishlist">
                                                     <a href="{{ route('front-end.product-details',$product_variation->id) }}"><i
@@ -658,25 +717,34 @@ new #[Layout('layouts.front-end')] class extends Component {
                                                 <div class="h6 fw-bold">KES {{ $product_variation->price }}</div>
                                                 <div style="width:60%;">
                                                     @php
-                                                        $variationText = empty($product_variation->variation())
-                                                            ? ''
-                                                            : str_replace('_', ' ', $product_variation->variation()->name) . '-' . $product_variation->variation()->value;
 
-                                                        $fullProductName = $product->name.' '.$variationText;
-                                                        $productDetailsUrl = route('front-end.product-details', $product_variation->id);
+                                                        $variationText = '';
 
-                                                        // Message text with product name and line break
-                                                        $whatsappMessage = 'Hello, I want to purchase: *' . $fullProductName . '*';
-                                                        // Append URL on a new line using %0A
-                                                        $whatsappMessage .= '. Here is the product link: ' . $productDetailsUrl;
+                                                            if(!empty($product_variation->variation())){
+
+                                                             $variationText = str_replace('_', ' ', $product_variation->variation()->name) . '-' . $product_variation->variation()->value;
+
+                                                                  if($product_variation->variation() == 'other'){
+                                                                     $variationText = $product_variation->custom_variation;
+                                                                   }
+
+                                                             }
+
+                                                                $fullProductName = $product->name.' '.$variationText;
+                                                                $productDetailsUrl = route('front-end.product-details', $product_variation->id);
+
+                                                                // Message text with product name and line break
+                                                                $whatsappMessage = 'Hello, I want to purchase: *' . $fullProductName . '*';
+                                                                // Append URL on a new line using %0A
+                                                                $whatsappMessage .= '. Here is the product link: ' . $productDetailsUrl;
                                                     @endphp
 
                                                     <a target="_blank"
                                                        style="background-color:green; border-radius: 20px !important; font-weight:bold;"
                                                        @if(($product->category_id == '4') || ($product->category_id == '5'))
-                                                           href="https://api.whatsapp.com/send?phone=254796052958&text={{ urlencode($whatsappMessage) }}"
+                                                       href="https://api.whatsapp.com/send?phone=254796052958&text={{ urlencode($whatsappMessage) }}"
                                                        @else
-                                                          href="https://api.whatsapp.com/send?phone=254798692688&text={{ urlencode($whatsappMessage) }}"
+                                                       href="https://api.whatsapp.com/send?phone=254798692688&text={{ urlencode($whatsappMessage) }}"
                                                        @endif                                                       class="d-flex text-white  justify-content-between align-items-center btn btn-success">
                                                         <i class='bx bxl-whatsapp fs-5'></i> Quick Buy
                                                     </a>
