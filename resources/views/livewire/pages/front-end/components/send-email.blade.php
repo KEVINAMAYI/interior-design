@@ -39,7 +39,7 @@ new class extends Component {
                 'subject' => 'Product Inquiry'
             ];
 
-            Mail::to('gsminterior08@gmail.com')->send(new ContactRequested($data));
+            Mail::to('info@gsminteriors.co.ke')->send(new ContactRequested($data));
             $this->reset();
             $this->dispatch('close-modal');
             $this->alert('success', 'Email was send successfully, will get back as soon as possible');

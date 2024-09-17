@@ -38,7 +38,7 @@ new #[Layout('layouts.front-end')] class extends Component {
                 'subject' => 'Inquiry'
             ];
 
-            Mail::to('gsminterior08@gmail.com')->send(new ContactRequested($data));
+            Mail::to('info@gsminteriors.co.ke')->send(new ContactRequested($data));
             $this->reset();
             $this->alert('success', 'Email was send successfully, will get back as soon as possible');
 
