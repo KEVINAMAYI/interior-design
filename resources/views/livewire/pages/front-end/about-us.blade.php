@@ -69,12 +69,8 @@ new #[Layout('layouts.front-end')] class extends Component {
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-6">
+                        <div class="col-12">
                             <img src="front-end-assets/images/sliders/s_1.png" class="card-img-top"
-                                 alt="...">
-                        </div>
-                        <div class="col-6">
-                            <img src="front-end-assets/images/sliders/s_6.png" class="card-img-top"
                                  alt="...">
                         </div>
                     </div>
