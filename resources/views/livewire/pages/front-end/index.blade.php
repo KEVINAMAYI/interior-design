@@ -312,14 +312,14 @@ new #[Layout('layouts.front-end')] class extends Component {
                                                     @endphp
 
                                                     <a target="_blank"
-                                                       style="background-color:green; border-radius: 20px !important; font-weight:bold;"
+                                                       style="background-color:green; border-radius: 30px !important; font-size:13px; font-weight:bold;"
                                                        @if(($product->category_id == '4') || ($product->category_id == '5'))
                                                        href="https://api.whatsapp.com/send?phone=254796052958&text={{ urlencode($whatsappMessage) }}"
                                                        @else
                                                        href="https://api.whatsapp.com/send?phone=254798692688&text={{ urlencode($whatsappMessage) }}"
                                                        @endif
                                                        class="d-flex text-white  justify-content-between align-items-center btn btn-success">
-                                                        <i class='bx bxl-whatsapp fs-5'></i> Quick Buy
+                                                        <i class='bx bxl-whatsapp fs-5'></i> Buy on WhatsApp
                                                     </a>
                                                 </div>
                                             </div>
@@ -415,13 +415,13 @@ new #[Layout('layouts.front-end')] class extends Component {
                                                     @endphp
 
                                                     <a target="_blank"
-                                                       style="background-color:green; border-radius: 20px !important; font-weight:bold;"
+                                                       style="font-size:13px;  background-color:green; border-radius: 30px !important; font-weight:bold;"
                                                        @if(($product->category_id == '4') || ($product->category_id == '5'))
                                                        href="https://api.whatsapp.com/send?phone=254796052958&text={{ urlencode($whatsappMessage) }}"
                                                        @else
                                                        href="https://api.whatsapp.com/send?phone=254798692688&text={{ urlencode($whatsappMessage) }}"
                                                        @endif                                                       class="d-flex text-white  justify-content-between align-items-center btn btn-success">
-                                                        <i class='bx bxl-whatsapp fs-5'></i> Quick Buy
+                                                        <i class='bx bxl-whatsapp fs-5'></i>Buy on WhatsApp
                                                     </a>
                                                 </div>
                                             </div>
@@ -519,13 +519,13 @@ new #[Layout('layouts.front-end')] class extends Component {
                                                     @endphp
 
                                                     <a target="_blank"
-                                                       style="background-color:green; border-radius: 20px !important; font-weight:bold;"
+                                                       style="font-size:13px; background-color:green; border-radius: 30px !important; font-weight:bold;"
                                                        @if(($product->category_id == '4') || ($product->category_id == '5'))
                                                        href="https://api.whatsapp.com/send?phone=254796052958&text={{ urlencode($whatsappMessage) }}"
                                                        @else
                                                        href="https://api.whatsapp.com/send?phone=254798692688&text={{ urlencode($whatsappMessage) }}"
                                                        @endif                                                       class="d-flex text-white  justify-content-between align-items-center btn btn-success">
-                                                        <i class='bx bxl-whatsapp fs-5'></i> Quick Buy
+                                                        <i class='bx bxl-whatsapp fs-5'></i>Buy on WhatsApp
                                                     </a>
                                                 </div>
                                             </div>
