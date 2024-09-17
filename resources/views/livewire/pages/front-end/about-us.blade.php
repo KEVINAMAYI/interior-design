@@ -162,8 +162,7 @@ new #[Layout('layouts.front-end')] class extends Component {
                                 <div class="phone mb-3">
                                     <h5 class="mb-0 fw-bold">Phone</h5>
                                     <p class="mb-0 font-13">0798692688</p>
-                                </div>
-                                <hr>
+                                </div><hr>
                                 <div class="email mb-3">
                                     <h5 class="mb-0 fw-bold">Email</h5>
                                     <p class="mb-0 font-13">info@gsminteriors.co.ke</p>
