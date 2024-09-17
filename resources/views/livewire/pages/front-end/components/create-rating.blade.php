@@ -108,7 +108,9 @@ new class extends Component {
                     @enderror
                 </div>
                 <div class="d-grid">
-                    <button type="submit" class="btn btn-dark btn-ecomm">Submit a Review
+                    <button type="submit" class="btn btn-dark btn-ecomm">
+                        <span wire:loading.remove>Submit a Review</span>
+                        <span wire:loading>Loading...</span>
                     </button>
                 </div>
             </div>

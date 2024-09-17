@@ -28,7 +28,9 @@ new class extends Component {
         </p>
     </header>
     <form wire:submit="deleteUser" class="p-6">
-        <button type="submit" class="btn btn-outline-danger waves-effect">Delete Account
+        <button type="submit" class="btn btn-outline-danger waves-effect">
+            <span wire:loading.remove>Delete Account</span>
+            <span wire:loading>Loading...</span>
         </button>
     </form>
 </section>

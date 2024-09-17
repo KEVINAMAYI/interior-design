@@ -120,7 +120,10 @@ new class extends Component {
                             <p class="text-danger text-xs pt-1"> {{ $message }} </p>
                             @enderror                            </div>
                     </div>
-                    <button type="submit" class="btn btn-outline-secondary waves-effect">Add Role</button>
+                    <button type="submit" class="btn btn-outline-secondary waves-effect">
+                        <span wire:loading.remove>Add Role</span>
+                        <span wire:loading>Loading...</span>
+                    </button>
                 </form>
             </div>
         </div>

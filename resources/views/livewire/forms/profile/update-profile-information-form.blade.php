@@ -108,7 +108,10 @@ new class extends Component {
                             @endif
                         </div>
                     @endif
-                    <button type="submit" class="btn btn-outline-secondary waves-effect">Update Profile</button>
+                    <button type="submit" class="btn btn-outline-secondary waves-effect">
+                        <span wire:loading.remove>Update Profile</span>
+                        <span wire:loading>Loading...</span>
+                    </button>
                     <x-action-message class="me-3" on="profile-updated">
                         {{ __('Saved.') }}
                     </x-action-message>

@@ -72,7 +72,10 @@ new class extends Component {
                             <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2"/>
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-outline-secondary waves-effect">Update Password</button>
+                    <button type="submit" class="btn btn-outline-secondary waves-effect">
+                        <span wire:loading.remove>Update Password</span>
+                        <span wire:loading>Loading...</span>
+                    </button>
                     <x-action-message class="me-3" on="password-updated">
                         {{ __('Saved.') }}
                     </x-action-message>

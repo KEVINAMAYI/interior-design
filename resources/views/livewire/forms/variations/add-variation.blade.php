@@ -99,7 +99,10 @@ new class extends Component {
                             @enderror
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-outline-secondary waves-effect">Add Variation</button>
+                    <button type="submit" class="btn btn-outline-secondary waves-effect">
+                        <span wire:loading.remove>Add Variation</span>
+                        <span wire:loading>Loading...</span>
+                    </button>
                 </form>
             </div>
         </div>
