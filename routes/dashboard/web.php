@@ -91,4 +91,11 @@ Route::middleware(['auth', 'verified'])->prefix('dashboard')->name('dashboard.')
         ->name('add-role');
 
 
+    /**
+     * Carousel Routes
+     */
+    Volt::route('upload-carousel-images', 'pages.dashboard.carousel')
+        ->name('carousel');
+
+
 });

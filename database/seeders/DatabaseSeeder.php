@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\Customer;
 use App\Models\Staff;
 use App\Models\User;
+
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -29,7 +30,8 @@ class DatabaseSeeder extends Seeder
             ProductSeeder::class,
             StaffSeeder::class,
             RoleSeeder::class,
-            PermissionSeeder::class
+            PermissionSeeder::class,
+            CarouselSeeder::class
         ]);
     }
 }

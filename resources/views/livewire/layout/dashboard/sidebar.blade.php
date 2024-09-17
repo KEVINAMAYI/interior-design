@@ -102,6 +102,20 @@ new class extends Component {
                 </li>
                 <li>
                     <a href="javascript: void(0);" class="has-arrow">
+                        <i data-feather="image"></i>
+                        <span data-key="t-apps">Carousel</span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li>
+                            <a wire:navigate href="{{ route('dashboard.carousel') }}">
+                                <i data-feather="list"></i>
+                                <span data-key="t-calendar">Upload Images</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="javascript: void(0);" class="has-arrow">
                         <i data-feather="users"></i>
                         <span data-key="t-apps">Staff</span>
                     </a>

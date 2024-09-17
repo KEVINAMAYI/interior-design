@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Carousel;
 use App\Models\Category;
 use App\Models\Product;
 use Livewire\Attributes\Layout;
@@ -12,6 +13,7 @@ new #[Layout('layouts.front-end')] class extends Component {
     public $trending_products;
     public $special_offer_products;
     public $categories;
+    public $carousel;
 
     public function mount()
     {
@@ -20,6 +22,7 @@ new #[Layout('layouts.front-end')] class extends Component {
         $this->trending_products = $this->getProductsByTag($products, 'trending');
         $this->special_offer_products = $this->getProductsByTag($products, 'special_offer');
         $this->categories = Category::inRandomOrder()->get();
+        $this->carousel = Carousel::first();
     }
 
     public function getProductsByTag($products, $tag)
@@ -60,8 +63,8 @@ new #[Layout('layouts.front-end')] class extends Component {
                                 </div>
                             </div>
                         </div>
-                        <div class="col">
-                            <img src="front-end-assets/images/sliders/s_1.png" class="img-fluid" alt="...">
+                        <div style=" padding:10px; padding-right:20px;" class="col">
+                            <img  src="{{ asset('storage/' .$carousel->image_url_1) }}" class="img-fluid" alt="...">
                         </div>
                     </div>
                 </div>
@@ -77,8 +80,8 @@ new #[Layout('layouts.front-end')] class extends Component {
                                     Now</a>
                             </div>
                         </div>
-                        <div class="col">
-                            <img src="front-end-assets/images/sliders/s_5.png" class="img-fluid" alt="...">
+                        <div style="padding:10px; padding-right:20px;" class="col">
+                            <img src="{{ asset('storage/' .$carousel->image_url_2) }}" class="img-fluid" alt="...">
                         </div>
                     </div>
                 </div>
@@ -93,8 +96,8 @@ new #[Layout('layouts.front-end')] class extends Component {
                                     Now</a>
                             </div>
                         </div>
-                        <div class="col">
-                            <img src="front-end-assets/images/sliders/s_3.png" class="img-fluid" alt="...">
+                        <div style="padding:10px; padding-right:20px;" class="col">
+                            <img src="{{ asset('storage/' .$carousel->image_url_3) }}" class="img-fluid" alt="...">
                         </div>
                     </div>
                 </div>
