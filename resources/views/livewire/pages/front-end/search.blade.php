@@ -16,7 +16,7 @@ new #[Layout('layouts.front-end')] class extends Component {
     {
         return [
             'categories' => Category::all(),
-            'search_products' => Product::with(['category', 'product_variations'])->get()
+            'search_products' => Product::with(['category', 'product_variations'])->take(20)->get()
         ];
     }
 
