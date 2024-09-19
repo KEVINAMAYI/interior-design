@@ -15,15 +15,6 @@ new class extends Component {
     public $image_2;
     public $image_3;
 
-    public function rules()
-    {
-        return [
-            'image_1' => 'required',
-            'image_2' => 'required',
-            'image_3' => 'required'
-        ];
-    }
-
 
     public function uploadCarouseImages(): void
     {
@@ -115,9 +106,6 @@ new class extends Component {
                             <input accept="image/*" class="form-control" wire:model="image_1" id="image"
                                    type="file"
                                    autocomplete="image">
-                            @error('image_1')
-                            <p class="text-danger text-xs pt-1">{{ $message }}</p>
-                            @enderror
                         </div>
                     </div>
                     <div class="row">
@@ -126,9 +114,6 @@ new class extends Component {
                             <input accept="image/*" class="form-control" wire:model="image_2" id="image"
                                    type="file"
                                    autocomplete="image">
-                            @error('image_2')
-                            <p class="text-danger text-xs pt-1">{{ $message }}</p>
-                            @enderror
                         </div>
                     </div>
                     <div class="row">
@@ -137,9 +122,6 @@ new class extends Component {
                             <input accept="image/*" class="form-control" wire:model="image_3" id="image"
                                    type="file"
                                    autocomplete="image">
-                            @error('image_3')
-                            <p class="text-danger text-xs pt-1">{{ $message }}</p>
-                            @enderror
                         </div>
                     </div>
                     <button type="submit" class="btn btn-outline-secondary waves-effect">
