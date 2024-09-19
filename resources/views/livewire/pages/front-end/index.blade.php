@@ -36,16 +36,47 @@ new #[Layout('layouts.front-end')] class extends Component {
 }; ?>
 @push('css')
     <style>
+        /* Improved gradient with subtle blending and animation */
         .image-gradient {
             position: absolute;
             top: 0;
             left: 0;
-            width: 100%;
+            width: 80%; /* Match the image width */
             height: 100%;
-            background: linear-gradient(140deg, rgba(0,0,0,0.3), rgba(237,126,39,0.5)); /* Gradient blend */
             z-index: 1;
-            pointer-events: none; /* Allow interactions to pass through */
-            border-radius: 10px; /* Same as the image */
+            border-radius: 10px;
+            pointer-events: none;
+            animation: gradientMove 3s ease-in-out infinite;
+        }
+
+        /* Animation for the gradient movement */
+        @keyframes gradientMove {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        /* Image scaling animation */
+        #carousel-image {
+            animation: imageZoom 15s ease-in-out infinite;
+        }
+
+        @keyframes imageZoom {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+            100% {
+                transform: scale(1);
+            }
         }
     </style>
 @endpush
@@ -77,30 +108,44 @@ new #[Layout('layouts.front-end')] class extends Component {
                                 </div>
                             </div>
                         </div>
-                        <div style=" padding:10px; padding-right:20px;" class="col">
-                            <img style="border-radius: 10px; width: 80%; height:500px; box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.1);"  src="{{ asset('storage/' .$carousel->image_url_1) }}" class="img-fluid" alt="...">
-                            <div class="image-gradient"></div> <!-- Gradient Overlay -->
+                        <!-- Image Section with Gradient Overlay -->
+                        <div class="col position-relative">
+                            <img id="carousel-image"
+                                 style="border-radius: 10px; width: 80%; height: 500px; object-fit: cover; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); z-index: 2;"
+                                 src="{{ asset('storage/' .$carousel->image_url_1) }}"
+                                 class="img-fluid"
+                                 alt="...">
+                            <!-- Gradient Overlay -->
+                            <div class="image-gradient"></div>
                         </div>
                     </div>
                 </div>
-                <div style="padding-bottom:10px;" class="carousel-item bg-purple">
+                <div style="padding-bottom:10px;" class="carousel-item bg-purple position-relative">
                     <div class="row d-flex align-items-center">
+                        <!-- Text Section -->
                         <div class="col d-none d-lg-flex justify-content-center">
-                            <div class="px-3">
+                            <div class="px-3 text-white position-relative z-index-2">
                                 <h1 class="h1 text-white fw-bold">Carpets</h1>
                                 <h3 class="h3 text-white fw-bold">Wall to Wall & Artificial</h3>
                                 <a style="background-color: rgb(237,126,39); font-weight:bold;"
-                                   class="btn btn-lg text-white   mt-2 btn-ecomm"
+                                   class="btn btn-lg text-white mt-2 btn-ecomm"
                                    href="{{ route('front-end.shop-grid',['category_id' => 0,'product_id' => 0]) }}">Shop
                                     Now</a>
                             </div>
                         </div>
-                        <div style="padding:10px; padding-right:20px;" class="col">
-                            <img style="border-radius: 10px;  width: 80%; height:500px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);" src="{{ asset('storage/' .$carousel->image_url_2) }}" class="img-fluid" alt="...">
-                            <div class="image-gradient"></div> <!-- Gradient Overlay -->
+                        <!-- Image Section with Gradient Overlay -->
+                        <div class="col position-relative">
+                            <img id="carousel-image"
+                                 style="border-radius: 10px; width: 80%; height: 500px; object-fit: cover; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); z-index: 2;"
+                                 src="{{ asset('storage/' .$carousel->image_url_2) }}"
+                                 class="img-fluid"
+                                 alt="...">
+                            <!-- Gradient Overlay -->
+                            <div class="image-gradient"></div>
                         </div>
                     </div>
                 </div>
+
                 <div style="padding-bottom:10px;" class="carousel-item bg-yellow">
                     <div class="row d-flex align-items-center">
                         <div class="col d-none d-lg-flex justify-content-center">
@@ -112,9 +157,15 @@ new #[Layout('layouts.front-end')] class extends Component {
                                     Now</a>
                             </div>
                         </div>
-                        <div style="padding:10px; padding-right:20px;" class="col">
-                            <img style="border-radius: 10px;  width: 80%; height:500px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);" src="{{ asset('storage/' .$carousel->image_url_3) }}" class="img-fluid" alt="...">
-                            <div class="image-gradient"></div> <!-- Gradient Overlay -->
+                        <!-- Image Section with Gradient Overlay -->
+                        <div class="col position-relative">
+                            <img id="carousel-image"
+                                 style="border-radius: 10px; width: 80%; height: 500px; object-fit: cover; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); z-index: 2;"
+                                 src="{{ asset('storage/' .$carousel->image_url_3) }}"
+                                 class="img-fluid"
+                                 alt="...">
+                            <!-- Gradient Overlay -->
+                            <div class="image-gradient"></div>
                         </div>
                     </div>
                 </div>
@@ -266,81 +317,83 @@ new #[Layout('layouts.front-end')] class extends Component {
                                             </a>
                                         </div>
                                         <div class="card-body">
-                                            <a style="text-decoration:none;" href="{{ route('front-end.product-details',$product_variation->id) }}">
-                                            <div class="d-flex align-items-center justify-content-between">
-                                                <div class="">
-                                                    <p style="font-weight:bold; color:black;"
-                                                       class="mb-1 product-short-name">{{ strtoupper( $product->name) }}</p>
-                                                    @if(!empty($product_variation->variation()))
-                                                        @if($product_variation->variation()->name == 'other')
-                                                            <h6 class="mb-1"> {{ $product_variation->custom_variation }}</h6>
-                                                        @else
-                                                            <h6 class="mb-1"> {{ empty($product_variation->variation()) ? '' :  str_replace('_',' ',$product_variation->variation()->name).'-'.$product_variation->variation()->value }}</h6>
+                                            <a style="text-decoration:none;"
+                                               href="{{ route('front-end.product-details',$product_variation->id) }}">
+                                                <div class="d-flex align-items-center justify-content-between">
+                                                    <div class="">
+                                                        <p style="font-weight:bold; color:black;"
+                                                           class="mb-1 product-short-name">{{ strtoupper( $product->name) }}</p>
+                                                        @if(!empty($product_variation->variation()))
+                                                            @if($product_variation->variation()->name == 'other')
+                                                                <h6 class="mb-1"> {{ $product_variation->custom_variation }}</h6>
+                                                            @else
+                                                                <h6 class="mb-1"> {{ empty($product_variation->variation()) ? '' :  str_replace('_',' ',$product_variation->variation()->name).'-'.$product_variation->variation()->value }}</h6>
+                                                            @endif
                                                         @endif
-                                                    @endif
-                                                </div>
-                                                <div class="icon-wishlist">
-                                                    <a href="{{ route('front-end.product-details',$product_variation->id) }}"><i
-                                                            class="bx bx-heart"></i></a>
-                                                </div>
-                                            </div>
-                                            <div class="cursor-pointer rating mt-2">
-                                                <i class="bx bxs-star text-warning"></i>
-                                                <i class="bx bxs-star text-warning"></i>
-                                                <i class="bx bxs-star text-warning"></i>
-                                                <i class="bx bxs-star text-warning"></i>
-                                                <i class="bx bxs-star text-warning"></i>
-                                            </div>
-                                            @if($product_variation->discount_percentage != 0)
-                                                @php
-                                                    $originalPrice = $product_variation->price / (1 - ($product_variation->discount_percentage / 100));
-                                                @endphp
-                                                <div style="margin-bottom:-2px;"
-                                                     class="d-flex align-items-center gap-3">
-                                                    <div class="h6 fw-light text-muted text-decoration-line-through">
-                                                        {{ number_format($originalPrice, 2) }}
                                                     </div>
-                                                    <div class="h6 fw-bold text-danger">
-                                                        ({{ $product_variation->discount_percentage }}% off)
+                                                    <div class="icon-wishlist">
+                                                        <a href="{{ route('front-end.product-details',$product_variation->id) }}"><i
+                                                                class="bx bx-heart"></i></a>
                                                     </div>
                                                 </div>
-                                            @endif
-                                            <div
-                                                class="product-price d-flex align-items-center justify-content-start gap-2">
-                                                <div class="h6 fw-bold">KES {{ $product_variation->price }}</div>
-                                                <div style="width:60%;">
+                                                <div class="cursor-pointer rating mt-2">
+                                                    <i class="bx bxs-star text-warning"></i>
+                                                    <i class="bx bxs-star text-warning"></i>
+                                                    <i class="bx bxs-star text-warning"></i>
+                                                    <i class="bx bxs-star text-warning"></i>
+                                                    <i class="bx bxs-star text-warning"></i>
+                                                </div>
+                                                @if($product_variation->discount_percentage != 0)
                                                     @php
-
-                                                          $variationText = '';
-
-                                                            if(!empty($product_variation->variation())){
-                                                              $variationText = str_replace('_', ' ', $product_variation->variation()->name) . '-' . $product_variation->variation()->value;
-                                                                   if($product_variation->variation() == 'other'){
-                                                                      $variationText = $product_variation->custom_variation;
-                                                                    }
-                                                              }
-
-                                                             $fullProductName = $product->name.' '.$variationText;
-                                                             $productDetailsUrl = route('front-end.product-details', $product_variation->id);
-
-                                                             // Message text with product name and line break
-                                                             $whatsappMessage = 'Hello, I want to purchase: *' . $fullProductName . '*';
-                                                             // Append URL on a new line using %0A
-                                                             $whatsappMessage .= '. Here is the product link: ' . $productDetailsUrl;
+                                                        $originalPrice = $product_variation->price / (1 - ($product_variation->discount_percentage / 100));
                                                     @endphp
+                                                    <div style="margin-bottom:-2px;"
+                                                         class="d-flex align-items-center gap-3">
+                                                        <div
+                                                            class="h6 fw-light text-muted text-decoration-line-through">
+                                                            {{ number_format($originalPrice, 2) }}
+                                                        </div>
+                                                        <div class="h6 fw-bold text-danger">
+                                                            ({{ $product_variation->discount_percentage }}% off)
+                                                        </div>
+                                                    </div>
+                                                @endif
+                                                <div
+                                                    class="product-price d-flex align-items-center justify-content-start gap-2">
+                                                    <div class="h6 fw-bold">KES {{ $product_variation->price }}</div>
+                                                    <div style="width:60%;">
+                                                        @php
 
-                                                    <a target="_blank"
-                                                       style="background-color:green; border-radius: 30px !important; font-size:13px; font-weight:bold;"
-                                                       @if(($product->category_id == '4') || ($product->category_id == '5'))
-                                                       href="https://api.whatsapp.com/send?phone=254796052958&text={{ urlencode($whatsappMessage) }}"
-                                                       @else
-                                                       href="https://api.whatsapp.com/send?phone=254798692688&text={{ urlencode($whatsappMessage) }}"
-                                                       @endif
-                                                       class="d-flex text-white  justify-content-between align-items-center btn btn-success">
-                                                        <i class='bx bxl-whatsapp fs-5'></i> Buy on WhatsApp
-                                                    </a>
+                                                            $variationText = '';
+
+                                                              if(!empty($product_variation->variation())){
+                                                                $variationText = str_replace('_', ' ', $product_variation->variation()->name) . '-' . $product_variation->variation()->value;
+                                                                     if($product_variation->variation() == 'other'){
+                                                                        $variationText = $product_variation->custom_variation;
+                                                                      }
+                                                                }
+
+                                                               $fullProductName = $product->name.' '.$variationText;
+                                                               $productDetailsUrl = route('front-end.product-details', $product_variation->id);
+
+                                                               // Message text with product name and line break
+                                                               $whatsappMessage = 'Hello, I want to purchase: *' . $fullProductName . '*';
+                                                               // Append URL on a new line using %0A
+                                                               $whatsappMessage .= '. Here is the product link: ' . $productDetailsUrl;
+                                                        @endphp
+
+                                                        <a target="_blank"
+                                                           style="background-color:green; border-radius: 30px !important; font-size:13px; font-weight:bold;"
+                                                           @if(($product->category_id == '4') || ($product->category_id == '5'))
+                                                           href="https://api.whatsapp.com/send?phone=254796052958&text={{ urlencode($whatsappMessage) }}"
+                                                           @else
+                                                           href="https://api.whatsapp.com/send?phone=254798692688&text={{ urlencode($whatsappMessage) }}"
+                                                           @endif
+                                                           class="d-flex text-white  justify-content-between align-items-center btn btn-success">
+                                                            <i class='bx bxl-whatsapp fs-5'></i> Buy on WhatsApp
+                                                        </a>
+                                                    </div>
                                                 </div>
-                                            </div>
                                             </a>
                                         </div>
                                     </div>
@@ -370,82 +423,84 @@ new #[Layout('layouts.front-end')] class extends Component {
                                             </a>
                                         </div>
                                         <div class="card-body">
-                                            <a style="text-decoration:none;" href="{{ route('front-end.product-details',$product_variation->id) }}">
-                                            <div class="d-flex align-items-center justify-content-between">
-                                                <div class="">
-                                                    <p style="font-weight:bold; color:black;"
-                                                       class="mb-1 product-short-name">{{ strtoupper( $product->name) }}</p>
-                                                    @if(!empty($product_variation->variation()))
-                                                        @if($product_variation->variation()->name == 'other')
-                                                            <h6 class="mb-1"> {{ $product_variation->custom_variation }}</h6>
-                                                        @else
-                                                            <h6 class="mb-1"> {{ empty($product_variation->variation()) ? '' :  str_replace('_',' ',$product_variation->variation()->name).'-'.$product_variation->variation()->value }}</h6>
+                                            <a style="text-decoration:none;"
+                                               href="{{ route('front-end.product-details',$product_variation->id) }}">
+                                                <div class="d-flex align-items-center justify-content-between">
+                                                    <div class="">
+                                                        <p style="font-weight:bold; color:black;"
+                                                           class="mb-1 product-short-name">{{ strtoupper( $product->name) }}</p>
+                                                        @if(!empty($product_variation->variation()))
+                                                            @if($product_variation->variation()->name == 'other')
+                                                                <h6 class="mb-1"> {{ $product_variation->custom_variation }}</h6>
+                                                            @else
+                                                                <h6 class="mb-1"> {{ empty($product_variation->variation()) ? '' :  str_replace('_',' ',$product_variation->variation()->name).'-'.$product_variation->variation()->value }}</h6>
+                                                            @endif
                                                         @endif
-                                                    @endif
-                                                </div>
-                                                <div class="icon-wishlist">
-                                                    <a href="{{ route('front-end.product-details',$product_variation->id) }}"><i
-                                                            class="bx bx-heart"></i></a>
-                                                </div>
-                                            </div>
-                                            <div class="cursor-pointer rating mt-2">
-                                                <i class="bx bxs-star text-warning"></i>
-                                                <i class="bx bxs-star text-warning"></i>
-                                                <i class="bx bxs-star text-warning"></i>
-                                                <i class="bx bxs-star text-warning"></i>
-                                                <i class="bx bxs-star text-warning"></i>
-                                            </div>
-                                            @if($product_variation->discount_percentage != 0)
-                                                @php
-                                                    $originalPrice = $product_variation->price / (1 - ($product_variation->discount_percentage / 100));
-                                                @endphp
-                                                <div style="margin-bottom:-2px;"
-                                                     class="d-flex align-items-center gap-3">
-                                                    <div class="h6 fw-light text-muted text-decoration-line-through">
-                                                        {{ number_format($originalPrice, 2) }}
                                                     </div>
-                                                    <div class="h6 fw-bold text-danger">
-                                                        ({{ $product_variation->discount_percentage }}% off)
+                                                    <div class="icon-wishlist">
+                                                        <a href="{{ route('front-end.product-details',$product_variation->id) }}"><i
+                                                                class="bx bx-heart"></i></a>
                                                     </div>
                                                 </div>
-                                            @endif
-                                            <div
-                                                class="product-price d-flex align-items-center justify-content-start gap-2 mt-2">
-                                                <div class="h6 fw-bold">KES {{ $product_variation->price }}</div>
-                                                <div style="width:60%;">
+                                                <div class="cursor-pointer rating mt-2">
+                                                    <i class="bx bxs-star text-warning"></i>
+                                                    <i class="bx bxs-star text-warning"></i>
+                                                    <i class="bx bxs-star text-warning"></i>
+                                                    <i class="bx bxs-star text-warning"></i>
+                                                    <i class="bx bxs-star text-warning"></i>
+                                                </div>
+                                                @if($product_variation->discount_percentage != 0)
                                                     @php
-                                                        $variationText = '';
-
-                                                         if(!empty($product_variation->variation())){
-
-                                                           $variationText = str_replace('_', ' ', $product_variation->variation()->name) . '-' . $product_variation->variation()->value;
-
-                                                              if($product_variation->variation() == 'other'){
-                                                                 $variationText = $product_variation->custom_variation;
-                                                               }
-
-                                                         }
-                                                        $fullProductName = $product->name.' '.$variationText;
-                                                        $productDetailsUrl = route('front-end.product-details', $product_variation->id);
-
-                                                        // Message text with product name and line break
-                                                        $whatsappMessage = 'Hello, I want to purchase: *' . $fullProductName . '*';
-                                                        // Append URL on a new line using %0A
-                                                        $whatsappMessage .= '. Here is the product link: ' . $productDetailsUrl;
+                                                        $originalPrice = $product_variation->price / (1 - ($product_variation->discount_percentage / 100));
                                                     @endphp
+                                                    <div style="margin-bottom:-2px;"
+                                                         class="d-flex align-items-center gap-3">
+                                                        <div
+                                                            class="h6 fw-light text-muted text-decoration-line-through">
+                                                            {{ number_format($originalPrice, 2) }}
+                                                        </div>
+                                                        <div class="h6 fw-bold text-danger">
+                                                            ({{ $product_variation->discount_percentage }}% off)
+                                                        </div>
+                                                    </div>
+                                                @endif
+                                                <div
+                                                    class="product-price d-flex align-items-center justify-content-start gap-2 mt-2">
+                                                    <div class="h6 fw-bold">KES {{ $product_variation->price }}</div>
+                                                    <div style="width:60%;">
+                                                        @php
+                                                            $variationText = '';
 
-                                                    <a target="_blank"
-                                                       style="font-size:13px;  background-color:green; border-radius: 30px !important; font-weight:bold;"
-                                                       @if(($product->category_id == '4') || ($product->category_id == '5'))
-                                                       href="https://api.whatsapp.com/send?phone=254796052958&text={{ urlencode($whatsappMessage) }}"
-                                                       @else
-                                                       href="https://api.whatsapp.com/send?phone=254798692688&text={{ urlencode($whatsappMessage) }}"
-                                                       @endif                                                       class="d-flex text-white  justify-content-between align-items-center btn btn-success">
-                                                        <i class='bx bxl-whatsapp fs-5'></i>Buy on WhatsApp
-                                                    </a>
+                                                             if(!empty($product_variation->variation())){
+
+                                                               $variationText = str_replace('_', ' ', $product_variation->variation()->name) . '-' . $product_variation->variation()->value;
+
+                                                                  if($product_variation->variation() == 'other'){
+                                                                     $variationText = $product_variation->custom_variation;
+                                                                   }
+
+                                                             }
+                                                            $fullProductName = $product->name.' '.$variationText;
+                                                            $productDetailsUrl = route('front-end.product-details', $product_variation->id);
+
+                                                            // Message text with product name and line break
+                                                            $whatsappMessage = 'Hello, I want to purchase: *' . $fullProductName . '*';
+                                                            // Append URL on a new line using %0A
+                                                            $whatsappMessage .= '. Here is the product link: ' . $productDetailsUrl;
+                                                        @endphp
+
+                                                        <a target="_blank"
+                                                           style="font-size:13px;  background-color:green; border-radius: 30px !important; font-weight:bold;"
+                                                           @if(($product->category_id == '4') || ($product->category_id == '5'))
+                                                           href="https://api.whatsapp.com/send?phone=254796052958&text={{ urlencode($whatsappMessage) }}"
+                                                           @else
+                                                           href="https://api.whatsapp.com/send?phone=254798692688&text={{ urlencode($whatsappMessage) }}"
+                                                           @endif                                                       class="d-flex text-white  justify-content-between align-items-center btn btn-success">
+                                                            <i class='bx bxl-whatsapp fs-5'></i>Buy on WhatsApp
+                                                        </a>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                          </a>
+                                            </a>
                                         </div>
                                     </div>
                                 </div>
@@ -474,83 +529,85 @@ new #[Layout('layouts.front-end')] class extends Component {
                                             </a>
                                         </div>
                                         <div class="card-body">
-                                            <a style="text-decoration:none;" href="{{ route('front-end.product-details',$product_variation->id) }}">
-                                            <div class="d-flex align-items-center justify-content-between">
-                                                <div class="">
-                                                    <p style="font-weight:bold; color:black;"
-                                                       class="mb-1  product-short-name">{{ strtoupper( $product->name) }}</p>
-                                                    @if(!empty($product_variation->variation()))
-                                                        @if($product_variation->variation()->name == 'other')
-                                                            <h6 class="mb-1"> {{ $product_variation->custom_variation }}</h6>
-                                                        @else
-                                                            <h6 class="mb-1"> {{ empty($product_variation->variation()) ? '' :  str_replace('_',' ',$product_variation->variation()->name).'-'.$product_variation->variation()->value }}</h6>
+                                            <a style="text-decoration:none;"
+                                               href="{{ route('front-end.product-details',$product_variation->id) }}">
+                                                <div class="d-flex align-items-center justify-content-between">
+                                                    <div class="">
+                                                        <p style="font-weight:bold; color:black;"
+                                                           class="mb-1  product-short-name">{{ strtoupper( $product->name) }}</p>
+                                                        @if(!empty($product_variation->variation()))
+                                                            @if($product_variation->variation()->name == 'other')
+                                                                <h6 class="mb-1"> {{ $product_variation->custom_variation }}</h6>
+                                                            @else
+                                                                <h6 class="mb-1"> {{ empty($product_variation->variation()) ? '' :  str_replace('_',' ',$product_variation->variation()->name).'-'.$product_variation->variation()->value }}</h6>
+                                                            @endif
                                                         @endif
-                                                    @endif
-                                                </div>
-                                                <div class="icon-wishlist">
-                                                    <a href="{{ route('front-end.product-details',$product_variation->id) }}"><i
-                                                            class="bx bx-heart"></i></a>
-                                                </div>
-                                            </div>
-                                            <div class="cursor-pointer rating mt-2">
-                                                <i class="bx bxs-star text-warning"></i>
-                                                <i class="bx bxs-star text-warning"></i>
-                                                <i class="bx bxs-star text-warning"></i>
-                                                <i class="bx bxs-star text-warning"></i>
-                                                <i class="bx bxs-star text-warning"></i>
-                                            </div>
-                                            @if($product_variation->discount_percentage != 0)
-                                                @php
-                                                    $originalPrice = $product_variation->price / (1 - ($product_variation->discount_percentage / 100));
-                                                @endphp
-                                                <div style="margin-bottom:-2px;"
-                                                     class="d-flex align-items-center gap-3">
-                                                    <div class="h6 fw-light text-muted text-decoration-line-through">
-                                                        {{ number_format($originalPrice, 2) }}
                                                     </div>
-                                                    <div class="h6 fw-bold text-danger">
-                                                        ({{ $product_variation->discount_percentage }}% off)
+                                                    <div class="icon-wishlist">
+                                                        <a href="{{ route('front-end.product-details',$product_variation->id) }}"><i
+                                                                class="bx bx-heart"></i></a>
                                                     </div>
                                                 </div>
-                                            @endif
-                                            <div
-                                                class="product-price d-flex align-items-center justify-content-start gap-2 mt-2">
-                                                <div class="h6 fw-bold">KES {{ $product_variation->price }}</div>
-                                                <div style="width:60%;">
+                                                <div class="cursor-pointer rating mt-2">
+                                                    <i class="bx bxs-star text-warning"></i>
+                                                    <i class="bx bxs-star text-warning"></i>
+                                                    <i class="bx bxs-star text-warning"></i>
+                                                    <i class="bx bxs-star text-warning"></i>
+                                                    <i class="bx bxs-star text-warning"></i>
+                                                </div>
+                                                @if($product_variation->discount_percentage != 0)
                                                     @php
-
-                                                        $variationText = '';
-
-                                                            if(!empty($product_variation->variation())){
-
-                                                             $variationText = str_replace('_', ' ', $product_variation->variation()->name) . '-' . $product_variation->variation()->value;
-
-                                                                  if($product_variation->variation() == 'other'){
-                                                                     $variationText = $product_variation->custom_variation;
-                                                                   }
-
-                                                             }
-
-                                                                $fullProductName = $product->name.' '.$variationText;
-                                                                $productDetailsUrl = route('front-end.product-details', $product_variation->id);
-
-                                                                // Message text with product name and line break
-                                                                $whatsappMessage = 'Hello, I want to purchase: *' . $fullProductName . '*';
-                                                                // Append URL on a new line using %0A
-                                                                $whatsappMessage .= '. Here is the product link: ' . $productDetailsUrl;
+                                                        $originalPrice = $product_variation->price / (1 - ($product_variation->discount_percentage / 100));
                                                     @endphp
+                                                    <div style="margin-bottom:-2px;"
+                                                         class="d-flex align-items-center gap-3">
+                                                        <div
+                                                            class="h6 fw-light text-muted text-decoration-line-through">
+                                                            {{ number_format($originalPrice, 2) }}
+                                                        </div>
+                                                        <div class="h6 fw-bold text-danger">
+                                                            ({{ $product_variation->discount_percentage }}% off)
+                                                        </div>
+                                                    </div>
+                                                @endif
+                                                <div
+                                                    class="product-price d-flex align-items-center justify-content-start gap-2 mt-2">
+                                                    <div class="h6 fw-bold">KES {{ $product_variation->price }}</div>
+                                                    <div style="width:60%;">
+                                                        @php
 
-                                                    <a target="_blank"
-                                                       style="font-size:13px; background-color:green; border-radius: 30px !important; font-weight:bold;"
-                                                       @if(($product->category_id == '4') || ($product->category_id == '5'))
-                                                       href="https://api.whatsapp.com/send?phone=254796052958&text={{ urlencode($whatsappMessage) }}"
-                                                       @else
-                                                       href="https://api.whatsapp.com/send?phone=254798692688&text={{ urlencode($whatsappMessage) }}"
-                                                       @endif                                                       class="d-flex text-white  justify-content-between align-items-center btn btn-success">
-                                                        <i class='bx bxl-whatsapp fs-5'></i>Buy on WhatsApp
-                                                    </a>
+                                                            $variationText = '';
+
+                                                                if(!empty($product_variation->variation())){
+
+                                                                 $variationText = str_replace('_', ' ', $product_variation->variation()->name) . '-' . $product_variation->variation()->value;
+
+                                                                      if($product_variation->variation() == 'other'){
+                                                                         $variationText = $product_variation->custom_variation;
+                                                                       }
+
+                                                                 }
+
+                                                                    $fullProductName = $product->name.' '.$variationText;
+                                                                    $productDetailsUrl = route('front-end.product-details', $product_variation->id);
+
+                                                                    // Message text with product name and line break
+                                                                    $whatsappMessage = 'Hello, I want to purchase: *' . $fullProductName . '*';
+                                                                    // Append URL on a new line using %0A
+                                                                    $whatsappMessage .= '. Here is the product link: ' . $productDetailsUrl;
+                                                        @endphp
+
+                                                        <a target="_blank"
+                                                           style="font-size:13px; background-color:green; border-radius: 30px !important; font-weight:bold;"
+                                                           @if(($product->category_id == '4') || ($product->category_id == '5'))
+                                                           href="https://api.whatsapp.com/send?phone=254796052958&text={{ urlencode($whatsappMessage) }}"
+                                                           @else
+                                                           href="https://api.whatsapp.com/send?phone=254798692688&text={{ urlencode($whatsappMessage) }}"
+                                                           @endif                                                       class="d-flex text-white  justify-content-between align-items-center btn btn-success">
+                                                            <i class='bx bxl-whatsapp fs-5'></i>Buy on WhatsApp
+                                                        </a>
+                                                    </div>
                                                 </div>
-                                            </div>
                                             </a>
                                         </div>
                                     </div>
