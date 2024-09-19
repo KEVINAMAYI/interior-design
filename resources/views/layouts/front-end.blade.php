@@ -23,9 +23,11 @@
         * {
             font-family: Poppins, serif;
         }
-
         .btn {
             border-radius: 0 !important;
+        }
+        img {
+            pointer-events: none;
         }
 
     </style>
