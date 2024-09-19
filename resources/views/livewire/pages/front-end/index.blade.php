@@ -95,7 +95,7 @@ new #[Layout('layouts.front-end')] class extends Component {
                 <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="4"></button>
             </div>
             <div class="carousel-inner">
-                <div style="padding-bottom:10px; padding-top:10px;" class="carousel-item active bg-primary">
+                <div  class="carousel-item active bg-primary">
                     <div class="row d-flex align-items-center">
                         <div class="col d-none d-lg-flex justify-content-center">
                             <div class="">
@@ -113,11 +113,10 @@ new #[Layout('layouts.front-end')] class extends Component {
                             <img id="carousel-image"
                                  style="clip-path: polygon(15% 0%, 100% 0%, 85% 100%, 0% 100%);
                                          border-radius: 10px;
-                                         width: 100%;
-                                         height: 100%;
+                                         width: 80%;
+                                         height: 500px;
                                          object-fit: cover;
-                                         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);"
-                                 src="{{ asset('storage/' .$carousel->image_url_1) }}"
+                                         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);"                                 src="{{ asset('storage/' .$carousel->image_url_1) }}"
                                  class="img-fluid"
                                  alt="...">
                             <!-- Gradient Overlay -->
@@ -125,7 +124,7 @@ new #[Layout('layouts.front-end')] class extends Component {
                         </div>
                     </div>
                 </div>
-                <div style="padding-bottom:10px; padding-top:10px;" class="carousel-item bg-purple position-relative">
+                <div class="carousel-item bg-purple position-relative">
                     <div class="row d-flex align-items-center">
                         <!-- Text Section -->
                         <div class="col d-none d-lg-flex justify-content-center">
@@ -143,11 +142,10 @@ new #[Layout('layouts.front-end')] class extends Component {
                             <img id="carousel-image"
                                  style="clip-path: polygon(15% 0%, 100% 0%, 85% 100%, 0% 100%);
                                          border-radius: 10px;
-                                         width: 100%;
-                                         height: 100%;
+                                         width: 80%;
+                                         height: 500px;
                                          object-fit: cover;
-                                         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);"
-                                 src="{{ asset('storage/' .$carousel->image_url_2) }}"
+                                         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);"                                  src="{{ asset('storage/' .$carousel->image_url_2) }}"
                                  class="img-fluid"
                                  alt="...">
                             <!-- Gradient Overlay -->
@@ -156,7 +154,7 @@ new #[Layout('layouts.front-end')] class extends Component {
                     </div>
                 </div>
 
-                <div style="padding-bottom:10px; padding-top:10px;" class="carousel-item bg-yellow">
+                <div class="carousel-item bg-yellow">
                     <div class="row d-flex align-items-center">
                         <div class="col d-none d-lg-flex justify-content-center">
                             <div class="">
@@ -172,11 +170,10 @@ new #[Layout('layouts.front-end')] class extends Component {
                             <img id="carousel-image"
                                  style="clip-path: polygon(15% 0%, 100% 0%, 85% 100%, 0% 100%);
                                          border-radius: 10px;
-                                         width: 100%;
-                                         height: 100%;
+                                         width: 80%;
+                                         height: 500px;
                                          object-fit: cover;
-                                         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);"
-                                 src="{{ asset('storage/' .$carousel->image_url_3) }}"
+                                         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);"                                  src="{{ asset('storage/' .$carousel->image_url_3) }}"
                                  class="img-fluid"
                                  alt="...">
                             <!-- Gradient Overlay -->
