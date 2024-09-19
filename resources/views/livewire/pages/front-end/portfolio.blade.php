@@ -75,8 +75,8 @@ new #[Layout('layouts.front-end')] class extends Component {
         <div class="container my-5">
             <div class="row">
                 <!-- Client Work 1 -->
-                <div class="col-md-4 mb-4">
-                    @foreach($portfolios as $portfolio)
+                @foreach($portfolios as $portfolio)
+                    <div class="col-md-4 mb-4">
                         <div class="card">
                             <img src="{{ asset('storage/' . $portfolio->image_url) }}" class="card-img-top"
                                  alt="Client Work Image">
@@ -85,8 +85,8 @@ new #[Layout('layouts.front-end')] class extends Component {
                                 <p class="card-text">{{ $portfolio->description }}</p>
                             </div>
                         </div>
-                    @endforeach
-                </div>
+                    </div>
+                @endforeach
             </div>
         </div>
     </section>
