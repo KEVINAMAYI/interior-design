@@ -34,7 +34,21 @@ new #[Layout('layouts.front-end')] class extends Component {
 
 
 }; ?>
-
+@push('css')
+    <style>
+        .image-gradient {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(140deg, rgba(0,0,0,0.5), rgba(237,126,39,0.5)); /* Gradient blend */
+            z-index: 1;
+            pointer-events: none; /* Allow interactions to pass through */
+            border-radius: 10px; /* Same as the image */
+        }
+    </style>
+@endpush
 <!--start page content-->
 <div class="page-content">
 
@@ -64,7 +78,8 @@ new #[Layout('layouts.front-end')] class extends Component {
                             </div>
                         </div>
                         <div style=" padding:10px; padding-right:20px;" class="col">
-                            <img style="border-radius: 10px; width: 80%; height:500px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);"  src="{{ asset('storage/' .$carousel->image_url_1) }}" class="img-fluid" alt="...">
+                            <img style="border-radius: 10px; width: 80%; height:500px; box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.1);"  src="{{ asset('storage/' .$carousel->image_url_1) }}" class="img-fluid" alt="...">
+                            <div class="image-gradient"></div> <!-- Gradient Overlay -->
                         </div>
                     </div>
                 </div>
@@ -82,6 +97,7 @@ new #[Layout('layouts.front-end')] class extends Component {
                         </div>
                         <div style="padding:10px; padding-right:20px;" class="col">
                             <img style="border-radius: 10px;  width: 80%; height:500px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);" src="{{ asset('storage/' .$carousel->image_url_2) }}" class="img-fluid" alt="...">
+                            <div class="image-gradient"></div> <!-- Gradient Overlay -->
                         </div>
                     </div>
                 </div>
@@ -98,6 +114,7 @@ new #[Layout('layouts.front-end')] class extends Component {
                         </div>
                         <div style="padding:10px; padding-right:20px;" class="col">
                             <img style="border-radius: 10px;  width: 80%; height:500px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);" src="{{ asset('storage/' .$carousel->image_url_3) }}" class="img-fluid" alt="...">
+                            <div class="image-gradient"></div> <!-- Gradient Overlay -->
                         </div>
                     </div>
                 </div>
