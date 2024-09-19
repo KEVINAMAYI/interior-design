@@ -64,7 +64,7 @@ new #[Layout('layouts.front-end')] class extends Component {
                             </div>
                         </div>
                         <div style=" padding:10px; padding-right:20px;" class="col">
-                            <img  src="{{ asset('storage/' .$carousel->image_url_1) }}" class="img-fluid" alt="...">
+                            <img style="border-radius: 10px; max-width:500px; max-height:500px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);"  src="{{ asset('storage/' .$carousel->image_url_1) }}" class="img-fluid" alt="...">
                         </div>
                     </div>
                 </div>
@@ -81,7 +81,7 @@ new #[Layout('layouts.front-end')] class extends Component {
                             </div>
                         </div>
                         <div style="padding:10px; padding-right:20px;" class="col">
-                            <img src="{{ asset('storage/' .$carousel->image_url_2) }}" class="img-fluid" alt="...">
+                            <img style="border-radius: 10px; max-width:500px; max-height:500px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);" src="{{ asset('storage/' .$carousel->image_url_2) }}" class="img-fluid" alt="...">
                         </div>
                     </div>
                 </div>
@@ -97,7 +97,7 @@ new #[Layout('layouts.front-end')] class extends Component {
                             </div>
                         </div>
                         <div style="padding:10px; padding-right:20px;" class="col">
-                            <img src="{{ asset('storage/' .$carousel->image_url_3) }}" class="img-fluid" alt="...">
+                            <img style="border-radius: 10px; max-width:500px; max-height:500px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);" src="{{ asset('storage/' .$carousel->image_url_3) }}" class="img-fluid" alt="...">
                         </div>
                     </div>
                 </div>
