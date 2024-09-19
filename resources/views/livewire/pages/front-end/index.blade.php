@@ -95,7 +95,7 @@ new #[Layout('layouts.front-end')] class extends Component {
                 <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="4"></button>
             </div>
             <div class="carousel-inner">
-                <div style="padding-bottom:10px;" class="carousel-item active bg-primary">
+                <div style="padding-bottom:10px; padding-top:10px;" class="carousel-item active bg-primary">
                     <div class="row d-flex align-items-center">
                         <div class="col d-none d-lg-flex justify-content-center">
                             <div class="">
@@ -120,7 +120,7 @@ new #[Layout('layouts.front-end')] class extends Component {
                         </div>
                     </div>
                 </div>
-                <div style="padding-bottom:10px;" class="carousel-item bg-purple position-relative">
+                <div style="padding-bottom:10px; padding-top:10px;" class="carousel-item bg-purple position-relative">
                     <div class="row d-flex align-items-center">
                         <!-- Text Section -->
                         <div class="col d-none d-lg-flex justify-content-center">
@@ -146,7 +146,7 @@ new #[Layout('layouts.front-end')] class extends Component {
                     </div>
                 </div>
 
-                <div style="padding-bottom:10px;" class="carousel-item bg-yellow">
+                <div style="padding-bottom:10px; padding-top:10px;" class="carousel-item bg-yellow">
                     <div class="row d-flex align-items-center">
                         <div class="col d-none d-lg-flex justify-content-center">
                             <div class="">
