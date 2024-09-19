@@ -249,6 +249,7 @@ new #[Layout('layouts.front-end')] class extends Component {
                                             </a>
                                         </div>
                                         <div class="card-body">
+                                            <a style="text-decoration:none;" href="{{ route('front-end.product-details',$product_variation->id) }}">
                                             <div class="d-flex align-items-center justify-content-between">
                                                 <div class="">
                                                     <p style="font-weight:bold; color:black;"
@@ -323,6 +324,7 @@ new #[Layout('layouts.front-end')] class extends Component {
                                                     </a>
                                                 </div>
                                             </div>
+                                            </a>
                                         </div>
                                     </div>
                                 </div>
@@ -351,6 +353,7 @@ new #[Layout('layouts.front-end')] class extends Component {
                                             </a>
                                         </div>
                                         <div class="card-body">
+                                            <a style="text-decoration:none;" href="{{ route('front-end.product-details',$product_variation->id) }}">
                                             <div class="d-flex align-items-center justify-content-between">
                                                 <div class="">
                                                     <p style="font-weight:bold; color:black;"
@@ -425,6 +428,7 @@ new #[Layout('layouts.front-end')] class extends Component {
                                                     </a>
                                                 </div>
                                             </div>
+                                          </a>
                                         </div>
                                     </div>
                                 </div>
@@ -453,6 +457,7 @@ new #[Layout('layouts.front-end')] class extends Component {
                                             </a>
                                         </div>
                                         <div class="card-body">
+                                            <a style="text-decoration:none;" href="{{ route('front-end.product-details',$product_variation->id) }}">
                                             <div class="d-flex align-items-center justify-content-between">
                                                 <div class="">
                                                     <p style="font-weight:bold; color:black;"
@@ -529,6 +534,7 @@ new #[Layout('layouts.front-end')] class extends Component {
                                                     </a>
                                                 </div>
                                             </div>
+                                            </a>
                                         </div>
                                     </div>
                                 </div>

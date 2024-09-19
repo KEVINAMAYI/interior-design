@@ -472,6 +472,7 @@ new #[Layout('layouts.front-end')] class extends Component {
                                                         </a>
                                                     </div>
                                                     <div class="card-body border-top">
+                                                        <a style="text-decoration:none;" href="{{ route('front-end.product-details',$product_variation->id) }}">
                                                         <h5 class="mb-0 fw-bold product-short-title">{{ $product->name }} </h5>
                                                         @if(!empty($product_variation->variation()))
                                                             @if($product_variation->variation()->name == 'other')
@@ -530,6 +531,7 @@ new #[Layout('layouts.front-end')] class extends Component {
                                                                 </a>
                                                             </div>
                                                         </div>
+                                                        </a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -553,6 +555,8 @@ new #[Layout('layouts.front-end')] class extends Component {
                                                         </a>
                                                     </div>
                                                     <div class="card-body border-top">
+                                                        <a style="text-decoration:none;" href="{{ route('front-end.product-details',$product_variation->id) }}">
+
                                                         <h5 class="mb-0 fw-bold product-short-title">{{ $product->name }} </h5>
 
                                                         @if(!empty($product_variation->variation()))
@@ -614,6 +618,7 @@ new #[Layout('layouts.front-end')] class extends Component {
                                                                 </a>
                                                             </div>
                                                         </div>
+                                                        </a>
                                                     </div>
                                                 </div>
                                             </div>
