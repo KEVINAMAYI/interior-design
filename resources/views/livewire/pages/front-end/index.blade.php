@@ -114,7 +114,7 @@ new #[Layout('layouts.front-end')] class extends Component {
                                  style="clip-path: polygon(15% 0%, 100% 0%, 85% 100%, 0% 100%);
                                           border-radius: 10px;
                                           width: 100%;
-                                          height: 100%;
+                                          height: 500px;
                                           object-fit: cover;
                                           box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
                                           transition: transform 0.3s ease;
@@ -146,7 +146,7 @@ new #[Layout('layouts.front-end')] class extends Component {
                                  style="clip-path: polygon(15% 0%, 100% 0%, 85% 100%, 0% 100%);
                                           border-radius: 10px;
                                           width: 100%;
-                                          height: 100%;
+                                          height: 500px;
                                           object-fit: cover;
                                           box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
                                           transition: transform 0.3s ease;
@@ -181,7 +181,7 @@ new #[Layout('layouts.front-end')] class extends Component {
                                  style="clip-path: polygon(15% 0%, 100% 0%, 85% 100%, 0% 100%);
                                           border-radius: 10px;
                                           width: 100%;
-                                          height: 100%;
+                                          height: 500px;
                                           object-fit: cover;
                                           box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
                                           transition: transform 0.3s ease;
