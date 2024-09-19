@@ -111,7 +111,7 @@ new #[Layout('layouts.dashboard')] class extends Component {
 @push('js')
     <script>
         document.addEventListener("livewire:navigated", function () {
-            $(document).on('click', '.deletePortfolio', function () {
+            $(document).off('click.deletePortfolio').on('click.deletePortfolio', '.deletePortfolio', function () {
                 let clickedID = $(this).data('id');
                 console.log(clickedID);
 
