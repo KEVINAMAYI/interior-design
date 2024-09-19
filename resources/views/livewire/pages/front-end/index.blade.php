@@ -42,10 +42,10 @@ new #[Layout('layouts.front-end')] class extends Component {
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(140deg, rgba(0,0,0,0.5), rgba(237,126,39,0.5)); /* Gradient blend */
+            background: linear-gradient(140deg, rgba(0,0,0,0.7), rgba(237,126,39,0.3)); /* Adjusted Gradient */
             z-index: 1;
-            pointer-events: none; /* Allow interactions to pass through */
-            border-radius: 10px; /* Same as the image */
+            pointer-events: none;
+            border-radius: 10px;
         }
     </style>
 @endpush
