@@ -103,7 +103,7 @@ new #[Layout('layouts.front-end')] class extends Component {
                                 <h3 class="h3 fw-light text-white fw-bold">Wall to Wall & Artificial</h3>
                                 <div class=""><a style="background-color: rgb(237,126,39); font-weight:bold;"
                                                  class="btn btn-lg text-white  mt-3 btn-ecomm"
-                                                 href="{{ route('front-end.shop-grid',['category_id' => 0,'product_id' => 0]) }}">Shop
+                                                 href="{{ route('front-end.shop-grid',['category_id' => 1,'product_id' => 0]) }}">Shop
                                         Now</a>
                                 </div>
                             </div>
@@ -137,7 +137,7 @@ new #[Layout('layouts.front-end')] class extends Component {
                                 <h3 class="h3 text-white fw-bold">Roads & Rails</h3>
                                 <a style="background-color: rgb(237,126,39); font-weight:bold;"
                                    class="btn btn-lg text-white mt-2 btn-ecomm"
-                                   href="{{ route('front-end.shop-grid',['category_id' => 0,'product_id' => 0]) }}">Shop
+                                   href="{{ route('front-end.shop-grid',['category_id' => 7,'product_id' => 0]) }}">Shop
                                     Now</a>
                             </div>
                         </div>
@@ -172,7 +172,7 @@ new #[Layout('layouts.front-end')] class extends Component {
                                 <h1 class="h1 text-white fw-bold">Wall Decor</h1>
                                 <a style="background-color: rgb(237,126,39); font-weight:bold;"
                                    class="btn btn-lg text-white  mt-2 btn-ecomm"
-                                   href="{{ route('front-end.shop-grid',['category_id' => 0,'product_id' => 0]) }}">Shop
+                                   href="{{ route('front-end.shop-grid',['category_id' => 4,'product_id' => 0]) }}">Shop
                                     Now</a>
                             </div>
                         </div>
@@ -204,7 +204,7 @@ new #[Layout('layouts.front-end')] class extends Component {
                                 <h1 class="h1 text-white fw-bold">Artificial Flowers</h1>
                                 <a style="background-color: rgb(237,126,39); font-weight:bold;"
                                    class="btn btn-lg text-white  mt-2 btn-ecomm"
-                                   href="{{ route('front-end.shop-grid',['category_id' => 0,'product_id' => 0]) }}">Shop
+                                   href="{{ route('front-end.shop-grid',['category_id' => 5,'product_id' => 0]) }}">Shop
                                     Now</a>
                             </div>
                         </div>
