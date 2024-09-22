@@ -14,12 +14,11 @@ new class extends Component {
     public $image_1;
     public $image_2;
     public $image_3;
+    public $image_4;
 
 
     public function uploadCarouseImages(): void
     {
-        $this->validate();
-
         $carousel = Carousel::find(1);
 
         // Existing image URLs
@@ -27,6 +26,7 @@ new class extends Component {
             'image_1' => $carousel->image_url_1,
             'image_2' => $carousel->image_url_2,
             'image_3' => $carousel->image_url_3,
+            'image_4' => $carousel->image_url_4,
         ];
 
         // Handle new image uploads
@@ -66,6 +66,19 @@ new class extends Component {
             $existingPaths['image_3'] = $newPath;
         }
 
+
+        if ($this->image_4) {
+            $name = time() . '-' . $this->image_4->getClientOriginalName();
+            $newPath = $this->image_4->storeAs('carousel', $name, 'public');
+
+            // Delete the old image if it exists
+            if ($existingPaths['image_4']) {
+                Storage::disk('public')->delete($existingPaths['image_3']);
+            }
+
+            $existingPaths['image_4'] = $newPath;
+        }
+
         DB::beginTransaction();
         try {
             // Update carousel with new image paths
@@ -73,11 +86,12 @@ new class extends Component {
                 'image_url_1' => $existingPaths['image_1'],
                 'image_url_2' => $existingPaths['image_2'],
                 'image_url_3' => $existingPaths['image_3'],
+                'image_url_4' => $existingPaths['image_4']
             ]);
 
             DB::commit();
             // Reset image inputs
-            $this->reset(['image_1', 'image_2', 'image_3']);
+            $this->reset(['image_1', 'image_2', 'image_3','image_4']);
             $this->alert('success', 'Carousel Images Updated successfully');
 
         } catch (Exception $exception) {
@@ -102,7 +116,7 @@ new class extends Component {
                 <form wire:submit="uploadCarouseImages" class="mt-6 space-y-6">
                     <div class="row">
                         <div class="mb-4 col-lg-12">
-                            <label for="image" class="form-label">Carouse Image 1</label>
+                            <label for="image" class="form-label">Wall to Wall & Artificial Carpets</label>
                             <input accept="image/*" class="form-control" wire:model="image_1" id="image"
                                    type="file"
                                    autocomplete="image">
@@ -110,7 +124,7 @@ new class extends Component {
                     </div>
                     <div class="row">
                         <div class="mb-4 col-lg-12">
-                            <label for="image" class="form-label">Carouse Image 2</label>
+                            <label for="image" class="form-label">Curtain Rails and Rods</label>
                             <input accept="image/*" class="form-control" wire:model="image_2" id="image"
                                    type="file"
                                    autocomplete="image">
@@ -118,8 +132,16 @@ new class extends Component {
                     </div>
                     <div class="row">
                         <div class="mb-4 col-lg-12">
-                            <label for="image" class="form-label">Carouse Image 3</label>
+                            <label for="image" class="form-label">Wall Decor</label>
                             <input accept="image/*" class="form-control" wire:model="image_3" id="image"
+                                   type="file"
+                                   autocomplete="image">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="mb-4 col-lg-12">
+                            <label for="image" class="form-label">Artificial Flowers</label>
+                            <input accept="image/*" class="form-control" wire:model="image_4" id="image"
                                    type="file"
                                    autocomplete="image">
                         </div>

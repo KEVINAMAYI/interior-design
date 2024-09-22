@@ -16,6 +16,7 @@ return new class extends Migration
             $table->text('image_url_1');
             $table->text('image_url_2');
             $table->text('image_url_3');
+            $table->text('image_url_4');
             $table->timestamps();
         });
     }

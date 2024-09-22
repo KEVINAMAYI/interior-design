@@ -17,6 +17,7 @@ class CarouselSeeder extends Seeder
             'image_url_1' => 'carousel/s_1.png',
             'image_url_2' => 'carousel/s_2.png',
             'image_url_3' => 'carousel/s_3.png',
+            'image_url_4' => 'carousel/s_3.png'
         ]);
     }
 }

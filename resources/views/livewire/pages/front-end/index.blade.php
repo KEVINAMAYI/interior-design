@@ -99,8 +99,8 @@ new #[Layout('layouts.front-end')] class extends Component {
                     <div class="row d-flex align-items-center">
                         <div class="col d-none d-lg-flex justify-content-center">
                             <div class="">
-                                <h1 class="h1 text-white fw-bold">GSM Interior LTD</h1>
-                                <h3 class="h3 fw-light text-white fw-bold">Quality and Perfection</h3>
+                                <h1 class="h1 text-white fw-bold">Carpets</h1>
+                                <h3 class="h3 fw-light text-white fw-bold">Wall to Wall & Artificial</h3>
                                 <div class=""><a style="background-color: rgb(237,126,39); font-weight:bold;"
                                                  class="btn btn-lg text-white  mt-3 btn-ecomm"
                                                  href="{{ route('front-end.shop-grid',['category_id' => 0,'product_id' => 0]) }}">Shop
@@ -119,7 +119,8 @@ new #[Layout('layouts.front-end')] class extends Component {
                                           box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
                                           transition: transform 0.3s ease;
                                           border: 3px solid #fff;
-                                          position: relative;"                               src="{{ asset('storage/' .$carousel->image_url_1) }}"
+                                          position: relative;"
+                                          src="{{ asset('storage/' .$carousel->image_url_1) }}"
                                  class="img-fluid"
                                  alt="...">
                             <!-- Gradient Overlay -->
@@ -132,8 +133,8 @@ new #[Layout('layouts.front-end')] class extends Component {
                         <!-- Text Section -->
                         <div class="col d-none d-lg-flex justify-content-center">
                             <div class="px-3 text-white position-relative z-index-2">
-                                <h1 class="h1 text-white fw-bold">Carpets</h1>
-                                <h3 class="h3 text-white fw-bold">Wall to Wall & Artificial</h3>
+                                <h1 class="h1 text-white fw-bold">Curtains Features</h1>
+                                <h3 class="h3 text-white fw-bold">Roads & Rails</h3>
                                 <a style="background-color: rgb(237,126,39); font-weight:bold;"
                                    class="btn btn-lg text-white mt-2 btn-ecomm"
                                    href="{{ route('front-end.shop-grid',['category_id' => 0,'product_id' => 0]) }}">Shop
@@ -168,7 +169,7 @@ new #[Layout('layouts.front-end')] class extends Component {
                     <div class="row d-flex align-items-center">
                         <div class="col d-none d-lg-flex justify-content-center">
                             <div class="">
-                                <h1 class="h1 text-white fw-bold">Curtain Rods</h1>
+                                <h1 class="h1 text-white fw-bold">Wall Decor</h1>
                                 <a style="background-color: rgb(237,126,39); font-weight:bold;"
                                    class="btn btn-lg text-white  mt-2 btn-ecomm"
                                    href="{{ route('front-end.shop-grid',['category_id' => 0,'product_id' => 0]) }}">Shop
@@ -186,7 +187,8 @@ new #[Layout('layouts.front-end')] class extends Component {
                                           box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
                                           transition: transform 0.3s ease;
                                           border: 3px solid #fff;
-                                          position: relative;"                                 src="{{ asset('storage/' .$carousel->image_url_3) }}"
+                                          position: relative;"
+                                          src="{{ asset('storage/' .$carousel->image_url_3) }}"
                                  class="img-fluid"
                                  alt="...">
                             <!-- Gradient Overlay -->
@@ -194,6 +196,39 @@ new #[Layout('layouts.front-end')] class extends Component {
                         </div>
                     </div>
                 </div>
+
+                <div class="carousel-item bg-yellow">
+                    <div class="row d-flex align-items-center">
+                        <div class="col d-none d-lg-flex justify-content-center">
+                            <div class="">
+                                <h1 class="h1 text-white fw-bold">Artificial Flowers</h1>
+                                <a style="background-color: rgb(237,126,39); font-weight:bold;"
+                                   class="btn btn-lg text-white  mt-2 btn-ecomm"
+                                   href="{{ route('front-end.shop-grid',['category_id' => 0,'product_id' => 0]) }}">Shop
+                                    Now</a>
+                            </div>
+                        </div>
+                        <!-- Image Section with Gradient Overlay -->
+                        <div style="padding:15px;" class="col position-relative">
+                            <img id="carousel-image"
+                                 style="clip-path: polygon(15% 0%, 100% 0%, 85% 100%, 0% 100%);
+                                          border-radius: 10px;
+                                          width: 100%;
+                                          height: 500px;
+                                          object-fit: cover;
+                                          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+                                          transition: transform 0.3s ease;
+                                          border: 3px solid #fff;
+                                          position: relative;"
+                                          src="{{ asset('storage/' .$carousel->image_url_4) }}"
+                                 class="img-fluid"
+                                 alt="...">
+                            <!-- Gradient Overlay -->
+                            <div class="image-gradient"></div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
             <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions"
                     data-bs-slide="prev">
