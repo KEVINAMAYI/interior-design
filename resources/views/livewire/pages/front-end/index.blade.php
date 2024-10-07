@@ -35,8 +35,10 @@ new #[Layout('layouts.front-end')] class extends Component {
 
 }; ?>
 @push('css')
-    <style>
-        /* Improved gradient with subtle blending and animation */
+    <link href="https://fonts.googleapis.com/css2?family=Tangerine:wght@700&family=Poppins:wght@300;600&display=swap"
+          rel="stylesheet">
+
+    <style>                                                                                                                                                     /* Improved gradient with subtle blending and animation */
         .image-gradient {
             position: absolute;
             top: 0;
@@ -46,37 +48,6 @@ new #[Layout('layouts.front-end')] class extends Component {
             z-index: 1;
             border-radius: 10px;
             pointer-events: none;
-            animation: gradientMove 3s ease-in-out infinite;
-        }
-
-        /* Animation for the gradient movement */
-        @keyframes gradientMove {
-            0% {
-                background-position: 0% 50%;
-            }
-            50% {
-                background-position: 100% 50%;
-            }
-            100% {
-                background-position: 0% 50%;
-            }
-        }
-
-        /* Image scaling animation */
-        #carousel-image {
-            animation: imageZoom 15s ease-in-out infinite;
-        }
-
-        @keyframes imageZoom {
-            0% {
-                transform: scale(1);
-            }
-            50% {
-                transform: scale(1.05);
-            }
-            100% {
-                transform: scale(1);
-            }
         }
     </style>
 @endpush
@@ -95,111 +66,187 @@ new #[Layout('layouts.front-end')] class extends Component {
                 <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="4"></button>
             </div>
             <div class="carousel-inner">
-                <div  class="carousel-item active bg-primary">
+                <div style="position: relative; height: 100vh;" class="carousel-item active">
                     <div class="row d-flex align-items-center">
-                        <div class="col d-none d-lg-flex justify-content-center">
-                            <div class="">
-                                <h1 class="h1 text-white fw-bold">Carpets</h1>
-                                <h3 class="h3 fw-light text-white fw-bold">Wall to Wall & Artificial</h3>
-                                <div class=""><a style="background-color: rgb(237,126,39); font-weight:bold;"
-                                                 class="btn btn-lg text-white  mt-3 btn-ecomm"
-                                                 href="{{ route('front-end.shop-grid',['category_id' => 1,'product_id' => 0]) }}">Shop
-                                        Now</a>
+                        <!-- Text Section with Floating Content -->
+                        <div class="col d-none d-lg-flex justify-content-start">
+                            <div style="padding: 150px 40px; z-index: 2; position: relative;">
+                                <!-- H1 styled with Tangerine -->
+                                <h1 class="h1  fw-bold" style="font-family: 'Tangerine', cursive;
+                                             font-size: 5rem;
+                                             color: blueviolet; /* Deep Navy Blue */
+                                             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+                                             letter-spacing: 1.5px;
+                                             line-height: 1.2;">
+                                    Carpets
+                                </h1>
+                                <!-- H3 styled with Poppins -->
+                                <h3 class="h3 fw-light  fw-bold" style="font-family: 'Poppins', sans-serif;
+                                                      font-size: 1.8rem;
+                                                      font-weight: 300;
+                                                      color: blueviolet; /* Soft Gray */
+                                                      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+                                                      letter-spacing: 1px;">
+                                    Wall to Wall & Artificial
+                                </h3>
+                                <!-- Button -->
+                                <div>
+                                    <a style="background-color: rgb(237,126,39);
+                  font-family: 'Poppins', sans-serif;
+                  font-weight: 600;
+                  font-size: 1.2rem;
+                  padding: 12px 30px;
+                  letter-spacing: 1px;
+                  border-radius: 50px;
+                  text-transform: uppercase;
+                  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);"
+                                       class="btn btn-lg text-white mt-3 btn-ecomm"
+                                       href="{{ route('front-end.shop-grid', ['category_id' => 1, 'product_id' => 0]) }}">
+                                        Shop Now
+                                    </a>
                                 </div>
                             </div>
                         </div>
-                        <!-- Image Section with Gradient Overlay -->
-                        <div style="padding:15px;" class="col position-relative">
+                        <!-- Fullscreen Image Section -->
+                        <div
+                            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; overflow: hidden;">
                             <img id="carousel-image"
-                                 style="clip-path: polygon(15% 0%, 100% 0%, 85% 100%, 0% 100%);
-                                          border-radius: 10px;
-                                          width: 100%;
-                                          height: 500px;
-                                          object-fit: cover;
-                                          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-                                          transition: transform 0.3s ease;
-                                          border: 3px solid #fff;
-                                          position: relative;"
-                                          src="{{ asset('storage/' .$carousel->image_url_1) }}"
+                                 style="width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0;"
+                                 src="{{ asset('storage/' .$carousel->image_url_1) }}"
                                  class="img-fluid"
                                  alt="...">
-                            <!-- Gradient Overlay -->
-                            <div class="image-gradient"></div>
                         </div>
                     </div>
                 </div>
-                <div class="carousel-item bg-purple position-relative">
+                <div style="position: relative; height: 100vh;" class="carousel-item">
                     <div class="row d-flex align-items-center">
-                        <!-- Text Section -->
-                        <div class="col d-none d-lg-flex justify-content-center">
-                            <div class="px-3 text-white position-relative z-index-2">
-                                <h1 class="h1 text-white fw-bold">Curtains Features</h1>
-                                <h3 class="h3 text-white fw-bold">Roads & Rails</h3>
-                                <a style="background-color: rgb(237,126,39); font-weight:bold;"
-                                   class="btn btn-lg text-white mt-2 btn-ecomm"
-                                   href="{{ route('front-end.shop-grid',['category_id' => 7,'product_id' => 0]) }}">Shop
-                                    Now</a>
+                        <div class="col d-none d-lg-flex justify-content-start">
+                            <div style="padding: 150px 40px; z-index: 2; position: relative;">
+                                <!-- H1 styled with Tangerine -->
+                                <h1 class="h1  fw-bold" style="font-family: 'Tangerine', cursive;
+                                             font-size: 5rem;
+                                             color: blueviolet; /* Deep Navy Blue */
+                                             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+                                             letter-spacing: 1.5px;
+                                             line-height: 1.2;">
+                                    Curtain Features
+                                </h1>
+                                <!-- H3 styled with Poppins -->
+                                <h3 class="h3 fw-light  fw-bold" style="font-family: 'Poppins', sans-serif;
+                                                      font-size: 1.8rem;
+                                                      font-weight: 300;
+                                                      color: blueviolet; /* Soft Gray */
+                                                      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+                                                      letter-spacing: 1px;">
+                                    Rods and Rails
+                                </h3>
+                                <!-- Button -->
+                                <div>
+                                    <a style="background-color: rgb(237,126,39);
+                  font-family: 'Poppins', sans-serif;
+                  font-weight: 600;
+                  font-size: 1.2rem;
+                  padding: 12px 30px;
+                  letter-spacing: 1px;
+                  border-radius: 50px;
+                  text-transform: uppercase;
+                  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);"
+                                       class="btn btn-lg text-white mt-3 btn-ecomm"
+                                       href="{{ route('front-end.shop-grid',['category_id' => 7,'product_id' => 0]) }}">
+                                        Shop Now
+                                    </a>
+                                </div>
                             </div>
                         </div>
-                        <!-- Image Section with Gradient Overlay -->
-                        <div style="padding:15px;" class="col position-relative">
+                        <!-- Fullscreen Image Section -->
+                        <div
+                            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; overflow: hidden;">
                             <img id="carousel-image"
-                                 style="clip-path: polygon(15% 0%, 100% 0%, 85% 100%, 0% 100%);
-                                          border-radius: 10px;
-                                          width: 100%;
-                                          height: 500px;
-                                          object-fit: cover;
-                                          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-                                          transition: transform 0.3s ease;
-                                          border: 3px solid #fff;
-                                          position: relative;"
+                                 style="width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0;"
                                  src="{{ asset('storage/' .$carousel->image_url_2) }}"
                                  class="img-fluid"
-                                 alt="..."
-                                 onmouseover="this.style.transform='scale(1.05)';"
-                                 onmouseout="this.style.transform='scale(1)';">
-
-                            <!-- Gradient Overlay -->
-                            <div class="image-gradient"></div>
+                                 alt="...">
                         </div>
                     </div>
                 </div>
 
-                <div class="carousel-item bg-yellow">
+                <div style="position: relative; height: 100vh;" class="carousel-item">
                     <div class="row d-flex align-items-center">
-                        <div class="col d-none d-lg-flex justify-content-center">
-                            <div class="">
-                                <h1 class="h1 text-white fw-bold">Wall Decor</h1>
-                                <a style="background-color: rgb(237,126,39); font-weight:bold;"
-                                   class="btn btn-lg text-white  mt-2 btn-ecomm"
-                                   href="{{ route('front-end.shop-grid',['category_id' => 4,'product_id' => 0]) }}">Shop
-                                    Now</a>
+
+                        <div class="col d-none d-lg-flex justify-content-start">
+                            <div style="padding: 150px 40px; z-index: 2; position: relative;">
+                                <!-- H1 styled with Tangerine -->
+                                <h1 class="h1  fw-bold" style="font-family: 'Tangerine', cursive;
+                                             font-size: 5rem;
+                                             color: blueviolet; /* Deep Navy Blue */
+                                             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+                                             letter-spacing: 1.5px;
+                                             line-height: 1.2;">
+                                    Wall Decor
+                                </h1>
+                                <div>
+                                    <a style="background-color: rgb(237,126,39);
+                  font-family: 'Poppins', sans-serif;
+                  font-weight: 600;
+                  font-size: 1.2rem;
+                  padding: 12px 30px;
+                  letter-spacing: 1px;
+                  border-radius: 50px;
+                  text-transform: uppercase;
+                  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);"
+                                       class="btn btn-lg text-white mt-3 btn-ecomm"
+                                       href="{{ route('front-end.shop-grid',['category_id' => 4,'product_id' => 0]) }}">
+                                        Shop Now
+                                    </a>
+                                </div>
                             </div>
                         </div>
-                        <!-- Image Section with Gradient Overlay -->
-                        <div style="padding:15px;" class="col position-relative">
+
+                        <div
+                            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; overflow: hidden;">
                             <img id="carousel-image"
-                                 style="clip-path: polygon(15% 0%, 100% 0%, 85% 100%, 0% 100%);
-                                          border-radius: 10px;
-                                          width: 100%;
-                                          height: 500px;
-                                          object-fit: cover;
-                                          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-                                          transition: transform 0.3s ease;
-                                          border: 3px solid #fff;
-                                          position: relative;"
-                                          src="{{ asset('storage/' .$carousel->image_url_3) }}"
+                                 style="width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0;"
+                                 src="{{ asset('storage/' .$carousel->image_url_3) }}"
                                  class="img-fluid"
                                  alt="...">
-                            <!-- Gradient Overlay -->
-                            <div class="image-gradient"></div>
                         </div>
                     </div>
                 </div>
 
-                <div class="carousel-item bg-yellow">
+                <div  style="position: relative; height: 100vh;" class="carousel-item">
                     <div class="row d-flex align-items-center">
                         <div class="col d-none d-lg-flex justify-content-center">
+                            <div class="col d-none d-lg-flex justify-content-start">
+                                <div style="padding: 150px 40px; z-index: 2; position: relative;">
+                                    <!-- H1 styled with Tangerine -->
+                                    <h1 class="h1  fw-bold" style="font-family: 'Tangerine', cursive;
+                                             font-size: 5rem;
+                                             color: blueviolet; /* Deep Navy Blue */
+                                             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+                                             letter-spacing: 1.5px;
+                                             line-height: 1.2;">
+                                        Artificial  Flowers
+                                    </h1>
+                                    <!-- Button -->
+                                    <div>
+                                        <a style="background-color: rgb(237,126,39);
+                  font-family: 'Poppins', sans-serif;
+                  font-weight: 600;
+                  font-size: 1.2rem;
+                  padding: 12px 30px;
+                  letter-spacing: 1px;
+                  border-radius: 50px;
+                  text-transform: uppercase;
+                  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);"
+                                           class="btn btn-lg text-white mt-3 btn-ecomm"
+                                           href="{{ route('front-end.shop-grid',['category_id' => 4,'product_id' => 0]) }}">
+                                            Shop Now
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+
+
                             <div class="">
                                 <h1 class="h1 text-white fw-bold">Artificial Flowers</h1>
                                 <a style="background-color: rgb(237,126,39); font-weight:bold;"
@@ -208,23 +255,14 @@ new #[Layout('layouts.front-end')] class extends Component {
                                     Now</a>
                             </div>
                         </div>
-                        <!-- Image Section with Gradient Overlay -->
-                        <div style="padding:15px;" class="col position-relative">
+
+                        <div
+                            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; overflow: hidden;">
                             <img id="carousel-image"
-                                 style="clip-path: polygon(15% 0%, 100% 0%, 85% 100%, 0% 100%);
-                                          border-radius: 10px;
-                                          width: 100%;
-                                          height: 500px;
-                                          object-fit: cover;
-                                          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-                                          transition: transform 0.3s ease;
-                                          border: 3px solid #fff;
-                                          position: relative;"
-                                          src="{{ asset('storage/' .$carousel->image_url_4) }}"
+                                 style="width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0;"
+                                 src="{{ asset('storage/' .$carousel->image_url_4) }}"
                                  class="img-fluid"
                                  alt="...">
-                            <!-- Gradient Overlay -->
-                            <div class="image-gradient"></div>
                         </div>
                     </div>
                 </div>
