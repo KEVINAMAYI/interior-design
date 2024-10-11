@@ -54,14 +54,14 @@ new #[Layout('layouts.front-end')] class extends Component {
     <section class="py-3 border-bottom border-top d-none d-md-flex bg-light">
         <div class="container">
             <div class="page-breadcrumb d-flex align-items-center">
-                <h3 class="breadcrumb-title pe-3">Portfolio</h3>
+                <h3 class="breadcrumb-title pe-3">Our Projects</h3>
                 <div class="ms-auto">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb mb-0 p-0">
                             <li class=""><a class="text-decoration-none" href="javascript:;">Home <i
                                         class="mx-1 bi bi-chevron-right"></i></a>
                             </li>
-                            <li class=""><a class="text-decoration-none" href="javascript:;">portfolio</a>
+                            <li class=""><a class="text-decoration-none" href="javascript:;">Our projects</a>
                             </li>
                         </ol>
                     </nav>

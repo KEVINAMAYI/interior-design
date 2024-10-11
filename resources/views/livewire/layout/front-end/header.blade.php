@@ -77,7 +77,7 @@ new class extends Component {
                         <a class="nav-link" wire:navigate href="{{ route('front-end.about-us') }}">About</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" wire:navigate href="{{ route('front-end.portfolio') }}">Portfolio</a>
+                        <a class="nav-link" wire:navigate href="{{ route('front-end.portfolio') }}">Our Projects</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" wire:navigate href="{{ route('front-end.contact') }}">Contact</a>
