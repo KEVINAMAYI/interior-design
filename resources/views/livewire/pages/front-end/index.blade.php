@@ -70,6 +70,10 @@ new #[Layout('layouts.front-end')] class extends Component {
             </div>
             <div class="carousel-inner">
 
+                @php
+                    $hasActive = false;  // To track if the 'active' class has been applied
+                @endphp
+
                 @if(!empty($deals))
                     @foreach($deals as $deal)
                         <div style="position: relative; height: 100vh;" class="carousel-item {{ $loop->first ? 'active' : '' }}">
@@ -124,11 +128,14 @@ new #[Layout('layouts.front-end')] class extends Component {
                                 </div>
                             </div>
                         </div>
+                        @php
+                            $hasActive = true;
+                        @endphp
                     @endforeach
                 @endif
 
 
-                <div style="position: relative; height: 100vh;" class="carousel-item">
+                <div style="position: relative; height: 100vh;" class="carousel-item  {{ !$hasActive ? 'active' : '' }}">
                     <div class="row d-flex align-items-center">
                         <!-- Text Section with Floating Content -->
                         <div class="col d-none d-lg-flex justify-content-start">
