@@ -76,7 +76,8 @@ new #[Layout('layouts.front-end')] class extends Component {
 
                 @if(!empty($deals))
                     @foreach($deals as $deal)
-                        <div style="position: relative; height: 100vh;" class="carousel-item {{ $loop->first ? 'active' : '' }}">
+                        <div style="position: relative; height: 100vh;"
+                             class="carousel-item {{ $loop->first ? 'active' : '' }}">
                             <div class="row d-flex align-items-center">
                                 <!-- Text Section with Floating Content -->
                                 <div class="col d-none d-lg-flex justify-content-start">
@@ -135,7 +136,8 @@ new #[Layout('layouts.front-end')] class extends Component {
                 @endif
 
 
-                <div style="position: relative; height: 100vh;" class="carousel-item  {{ !$hasActive ? 'active' : '' }}">
+                <div style="position: relative; height: 100vh;"
+                     class="carousel-item  {{ !$hasActive ? 'active' : '' }}">
                     <div class="row d-flex align-items-center">
                         <!-- Text Section with Floating Content -->
                         <div class="col d-none d-lg-flex justify-content-start">
@@ -818,20 +820,49 @@ new #[Layout('layouts.front-end')] class extends Component {
                             </div>
                         </div>
                     </div>
-                    <div class="col d-flex">
-                        <div class="card bg-black rounded-0 w-100 border-0 shadow-none">
-                            <div class="card-img-overlay text-center top-20">
-                                <div class="border border-white border-2 py-3 bg-dark-3">
-                                    <h5 class="card-title text-white">Summer Sale</h5>
-                                    <p class="card-text text-uppercase fs-1 lh-1 mt-3 mb-2 text-white">Up to 30% off</p>
-                                    <p class="card-text fs-5 text-white">On Top Interior Design Brands</p><a
-                                        href="{{ route('front-end.shop-grid',['category_id' => 0,'product_id' => 0]) }}"
-                                        style="color:white;" class="btn btn-white btn-ecomm">SHOP BY
-                                        CATEGORY</a>
+                    @if($deals && !$deals->isEmpty())
+                        @foreach($deals as $deal)
+                            @if($loop->first)
+                                <div class="col d-flex">
+                                    <div class="card bg-black rounded-0 w-100 border-0 shadow-none">
+                                        <div class="card-img-overlay text-center top-20">
+                                            <div class="border border-white border-2 py-3 bg-dark-3">
+                                                <h5 class="card-title text-white">{{ strtoupper($deal->name) }}</h5>
+                                                <p class="card-text text-uppercase fs-1 lh-1 mt-3 mb-2 text-white">UP TO
+                                                    {{ $deal->discount_off }}% off</p>
+                                                <p class="card-text fs-5 text-white">Enjoy Our Special Offer</p><a
+                                                    href="{{ route('front-end.shop-grid',['category_id' => 0,'product_id' => 0]) }}"
+                                                    style="color:white;" class="btn btn-white btn-ecomm">SHOP NOW</a>
+                                            </div>
+                                            <div>
+                                                <img id=""
+                                                     style="width: 100%; margin-top:10px; border:2px solid white; height: 90%;"
+                                                     src="{{ asset('storage/' .$deal->banner_url) }}"
+                                                     class="img-fluid"
+                                                     alt="...">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endif
+                        @endforeach
+                    @else
+                        <div class="col d-flex">
+                            <div class="card bg-black rounded-0 w-100 border-0 shadow-none">
+                                <div class="card-img-overlay text-center top-20">
+                                    <div class="border border-white border-2 py-3 bg-dark-3">
+                                        <h5 class="card-title text-white">Summer Sale</h5>
+                                        <p class="card-text text-uppercase fs-1 lh-1 mt-3 mb-2 text-white">Up to 30%
+                                            off</p>
+                                        <p class="card-text fs-5 text-white">On Top Interior Design Brands</p><a
+                                            href="{{ route('front-end.shop-grid',['category_id' => 0,'product_id' => 0]) }}"
+                                            style="color:white;" class="btn btn-white btn-ecomm">SHOP BY
+                                            CATEGORY</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    @endif
                     <div class="col d-flex">
                         <div class="card rounded-0 w-100 border-0 shadow-none">
                             <img src="front-end-assets/images/categories/wall_decor.png" class="img-fluid" alt="...">
