@@ -2,6 +2,7 @@
 
 use App\Models\Carousel;
 use App\Models\Category;
+use App\Models\Deal;
 use App\Models\Product;
 use Livewire\Attributes\Layout;
 use Livewire\Volt\Component;
@@ -14,6 +15,7 @@ new #[Layout('layouts.front-end')] class extends Component {
     public $special_offer_products;
     public $categories;
     public $carousel;
+    public $deals;
 
     public function mount()
     {
@@ -23,6 +25,7 @@ new #[Layout('layouts.front-end')] class extends Component {
         $this->special_offer_products = $this->getProductsByTag($products, 'special_offer');
         $this->categories = Category::inRandomOrder()->get();
         $this->carousel = Carousel::first();
+        $this->deals = Deal::all();
     }
 
     public function getProductsByTag($products, $tag)
@@ -66,7 +69,66 @@ new #[Layout('layouts.front-end')] class extends Component {
                 <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="4"></button>
             </div>
             <div class="carousel-inner">
-                <div style="position: relative; height: 100vh;" class="carousel-item active">
+
+                @if(!empty($deals))
+                    @foreach($deals as $deal)
+                        <div style="position: relative; height: 100vh;" class="carousel-item {{ $loop->first ? 'active' : '' }}">
+                            <div class="row d-flex align-items-center">
+                                <!-- Text Section with Floating Content -->
+                                <div class="col d-none d-lg-flex justify-content-start">
+                                    <div style="padding: 150px 40px; z-index: 2; position: relative;">
+                                        <!-- H1 styled with Tangerine -->
+                                        <h1 class="h1  fw-bold" style="font-family: 'Tangerine', cursive;
+                                             font-size: 5rem;
+                                             color: orange; /* Deep Navy Blue */
+                                             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+                                             letter-spacing: 1.5px;
+                                             line-height: 1.2;">
+                                            {{ strtoupper($deal->name) }}
+                                        </h1>
+                                        <!-- H3 styled with Poppins -->
+                                        <h2 class="h3 fw-light  fw-bold" style="font-family: 'Poppins', sans-serif;
+                                                      font-size: 3.4rem;
+                                                      font-weight: 300;
+                                                      color: orange; /* Soft Gray */
+                                                      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+                                                      letter-spacing: 1px;">
+                                            UPTO {{ $deal->discount_off }} % OFF
+                                        </h2>
+                                        <!-- Button -->
+                                        <div>
+                                            <a style="background-color: rgb(237,126,39);
+                  font-family: 'Poppins', sans-serif;
+                  font-weight: 600;
+                  font-size: 1.2rem;
+                  padding: 12px 30px;
+                  letter-spacing: 1px;
+                  border-radius: 50px;
+                  text-transform: uppercase;
+                  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);"
+                                               class="btn btn-lg text-white mt-3 btn-ecomm"
+                                               href="{{ route('front-end.shop-grid', ['category_id' => 1, 'product_id' => 0]) }}">
+                                                Shop Now
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Fullscreen Image Section -->
+                                <div
+                                    style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; overflow: hidden;">
+                                    <img id="carousel-image"
+                                         style="width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0;"
+                                         src="{{ asset('storage/' .$deal->banner_url) }}"
+                                         class="img-fluid"
+                                         alt="...">
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                @endif
+
+
+                <div style="position: relative; height: 100vh;" class="carousel-item">
                     <div class="row d-flex align-items-center">
                         <!-- Text Section with Floating Content -->
                         <div class="col d-none d-lg-flex justify-content-start">
@@ -74,7 +136,7 @@ new #[Layout('layouts.front-end')] class extends Component {
                                 <!-- H1 styled with Tangerine -->
                                 <h1 class="h1  fw-bold" style="font-family: 'Tangerine', cursive;
                                              font-size: 5rem;
-                                             color: blueviolet; /* Deep Navy Blue */
+                                             color: orange; /* Deep Navy Blue */
                                              text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
                                              letter-spacing: 1.5px;
                                              line-height: 1.2;">
@@ -84,7 +146,7 @@ new #[Layout('layouts.front-end')] class extends Component {
                                 <h3 class="h3 fw-light  fw-bold" style="font-family: 'Poppins', sans-serif;
                                                       font-size: 1.8rem;
                                                       font-weight: 300;
-                                                      color: blueviolet; /* Soft Gray */
+                                                      color: orange; /* Soft Gray */
                                                       text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
                                                       letter-spacing: 1px;">
                                     Wall to Wall & Artificial
@@ -125,7 +187,7 @@ new #[Layout('layouts.front-end')] class extends Component {
                                 <!-- H1 styled with Tangerine -->
                                 <h1 class="h1  fw-bold" style="font-family: 'Tangerine', cursive;
                                              font-size: 5rem;
-                                             color: blueviolet; /* Deep Navy Blue */
+                                             color: orange; /* Deep Navy Blue */
                                              text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
                                              letter-spacing: 1.5px;
                                              line-height: 1.2;">
@@ -135,7 +197,7 @@ new #[Layout('layouts.front-end')] class extends Component {
                                 <h3 class="h3 fw-light  fw-bold" style="font-family: 'Poppins', sans-serif;
                                                       font-size: 1.8rem;
                                                       font-weight: 300;
-                                                      color: blueviolet; /* Soft Gray */
+                                                      color: orange; /* Soft Gray */
                                                       text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
                                                       letter-spacing: 1px;">
                                     Rods and Rails
@@ -178,7 +240,7 @@ new #[Layout('layouts.front-end')] class extends Component {
                                 <!-- H1 styled with Tangerine -->
                                 <h1 class="h1  fw-bold" style="font-family: 'Tangerine', cursive;
                                              font-size: 5rem;
-                                             color: blueviolet; /* Deep Navy Blue */
+                                             color: orange; /* Deep Navy Blue */
                                              text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
                                              letter-spacing: 1.5px;
                                              line-height: 1.2;">
@@ -213,7 +275,7 @@ new #[Layout('layouts.front-end')] class extends Component {
                     </div>
                 </div>
 
-                <div  style="position: relative; height: 100vh;" class="carousel-item">
+                <div style="position: relative; height: 100vh;" class="carousel-item">
                     <div class="row d-flex align-items-center">
                         <div class="col d-none d-lg-flex justify-content-center">
                             <div class="col d-none d-lg-flex justify-content-start">
@@ -221,11 +283,11 @@ new #[Layout('layouts.front-end')] class extends Component {
                                     <!-- H1 styled with Tangerine -->
                                     <h1 class="h1  fw-bold" style="font-family: 'Tangerine', cursive;
                                              font-size: 5rem;
-                                             color: blueviolet; /* Deep Navy Blue */
+                                             color: orange; /* Deep Navy Blue */
                                              text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
                                              letter-spacing: 1.5px;
                                              line-height: 1.2;">
-                                        Artificial  Flowers
+                                        Artificial Flowers
                                     </h1>
                                     <!-- Button -->
                                     <div>

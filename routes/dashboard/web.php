@@ -92,6 +92,16 @@ Route::middleware(['auth', 'verified'])->prefix('dashboard')->name('dashboard.')
 
 
     /**
+     * Roles Routes
+     */
+    Volt::route('list-deals', 'pages.dashboard.deals.list-deals')
+        ->name('list-deals');
+
+    Volt::route('add-deal', 'pages.dashboard.deals.add-deal')
+        ->name('add-deal');
+
+
+    /**
      * Carousel Routes
      */
     Volt::route('upload-carousel-images', 'pages.dashboard.carousel')
