@@ -40,7 +40,7 @@ new class extends Component {
                            data-bs-toggle="dropdown">
                             Categories
                         </a>
-                        <div style="max-width: 270px;" class="dropdown-menu dropdown-large-menu">
+                        <div style="max-width: 300px;" class="dropdown-menu dropdown-large-menu">
                             <div class="row">
                                 <div class="col-12 col-xl-5">
                                     <ul class="list-unstyled">
