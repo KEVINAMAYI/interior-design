@@ -50,7 +50,6 @@ new class extends Component {
         return [
             'name' => 'required',
             'description' => 'required',
-            'selling_tags_ids' => 'required',
             'price' => 'required',
             'variation_id' => 'required',
             'category_id' => 'required',
@@ -185,6 +184,11 @@ new class extends Component {
                     'tag_id' => $selling_tags_id
                 ]);
             }
+        } else {
+            ProductTag::create([
+                'product_id' => $product->id,
+                'tag_id' => 1
+            ]);
         }
     }
 
