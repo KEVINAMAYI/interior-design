@@ -107,5 +107,9 @@ Route::middleware(['auth', 'verified'])->prefix('dashboard')->name('dashboard.')
     Volt::route('upload-carousel-images', 'pages.dashboard.carousel')
         ->name('carousel');
 
-
+    /*
+        * Blogs Routes
+    */
+    Volt::route('blogs', 'pages.dashboard.blogs.index')
+        ->name('blogs');
 });

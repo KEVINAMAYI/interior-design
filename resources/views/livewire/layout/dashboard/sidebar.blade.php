@@ -4,7 +4,6 @@ use App\Livewire\Actions\Logout;
 use Livewire\Volt\Component;
 
 new class extends Component {
-
     /**
      * Log the current user out of the application.
      */
@@ -15,7 +14,6 @@ new class extends Component {
         $this->redirect('/', navigate: true);
     }
 };
-
 
 ?>
 
@@ -155,6 +153,12 @@ new class extends Component {
                             </a>
                         </li>
                     </ul>
+                </li>
+                <li>
+                    <a href="{{ route('dashboard.blogs') }}" class="">
+                        <i data-feather="book"></i>
+                        <span data-key="t-apps">Blogs</span>
+                    </a>
                 </li>
                 <li>
                     <a href="javascript: void(0);" class="has-arrow">

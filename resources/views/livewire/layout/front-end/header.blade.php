@@ -77,6 +77,9 @@ new class extends Component {
                         <a class="nav-link" wire:navigate href="{{ route('front-end.about-us') }}">About</a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" wire:navigate href="{{ route('front-end.blogs.index') }}">Blogs</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" wire:navigate href="{{ route('front-end.portfolio') }}">Our Projects</a>
                     </li>
                     <li class="nav-item">
@@ -86,6 +89,11 @@ new class extends Component {
             </div>
         </div>
         <ul class="navbar-nav secondary-menu flex-row">
+            <li class="nav-item">
+                <a class="btn btn-primary btn-sm rounded-pill" target="_blank" href="{{ route('dashboard.index') }}">
+                    Admin Dashboard
+                </a>
+            </li>
             <li class="nav-item">
                 <a class="nav-link dark-mode-icon" href="javascript:;">
                     <div class="mode-icon">

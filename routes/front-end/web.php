@@ -30,4 +30,10 @@ Route::name('front-end.')->group(function () {
 
     Volt::route('portfolio', 'pages.front-end.portfolio')
         ->name('portfolio');
+
+    Volt::route('blogs', 'pages.front-end.blogs.index')
+        ->name('blogs.index');
+
+    Volt::route('blogs/{slug}', 'pages.front-end.blogs.show')
+        ->name('blogs.show');
 });
